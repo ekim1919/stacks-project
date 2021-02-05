@@ -163,7 +163,7 @@ quasi-coherent.
 \end{enumerate}
 Then for $E \in D_\QCoh(\mathcal{O}_X)$
 \begin{enumerate}
-\item $H^i(RF(\tau_{\leq a}E) \to H^i(RF(E))$ is an isomorphism
+\item $H^i(RF(\tau_{\leq a}E)) \to H^i(RF(E))$ is an isomorphism
 for $i \leq a$,
 \item $H^i(RF(E)) \to H^i(RF(\tau_{\geq b - N + 1}E))$ is an isomorphism
 for $i \geq b$,
@@ -271,7 +271,7 @@ Schemes, Lemmas \ref{schemes-lemma-compare-constructions} and
 \ref{schemes-lemma-equivalence-quasi-coherent}). Thus the functors
 $$
 \xymatrix{
-D(A) \ar@<1ex>[r] & D_\QCoh(\mathcal{O}_X) \ar@<1ex>[l]
+D(A) \ar@<1ex>[r] & D(\mathcal{O}_X) \ar@<1ex>[l]
 }
 $$
 are adjoint (by Cohomology, Lemma \ref{cohomology-lemma-adjoint}). In
@@ -509,6 +509,78 @@ above applies.
 \end{proof}
 
 \begin{lemma}
+\label{lemma-acyclicity-lemma}
+Let $f : X \to S$ be a quasi-separated and quasi-compact morphism
+of schemes. Let $\mathcal{F}^\bullet$ be a complex of quasi-coherent
+$\mathcal{O}_X$-modules each of which is right acyclic for $f_*$.
+Then $f_*\mathcal{F}^\bullet$ represents $Rf_*\mathcal{F}^\bullet$
+in $D(\mathcal{O}_S)$.
+\end{lemma}
+
+\begin{proof}
+There is always a canonical map
+$f_*\mathcal{F}^\bullet \to Rf_*\mathcal{F}^\bullet$.
+Our task is to show that this is an isomorphism on cohomology sheaves.
+As the statement is invariant under shifts it suffices to show that
+$H^0(f_*(\mathcal{F}^\bullet)) \to R^0f_*\mathcal{F}^\bullet$
+is an isomorphism. The statement is local on $S$ hence we
+may assume $S$ affine. By
+Lemma \ref{lemma-quasi-coherence-direct-image}
+we have $R^0f_*\mathcal{F}^\bullet = R^0f_*\tau_{\geq -n}\mathcal{F}^\bullet$
+for all sufficiently large $n$. Thus we may assume $\mathcal{F}^\bullet$
+bounded below. As each $\mathcal{F}^n$ is right $f_*$-acyclic by
+assumption we see that $f_*\mathcal{F}^\bullet \to Rf_*\mathcal{F}^\bullet$
+is a quasi-isomorphism by Leray's acyclicity lemma (Derived Categories, Lemma
+\ref{derived-lemma-leray-acyclicity}).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-acyclicity-lemma-global}
+Let $X$ be a quasi-separated and quasi-compact scheme.
+Let $\mathcal{F}^\bullet$ be a complex of quasi-coherent
+$\mathcal{O}_X$-modules each of which is right acyclic for $\Gamma(X, -)$.
+Then $\Gamma(X, \mathcal{F}^\bullet)$ represents
+$R\Gamma(X, \mathcal{F}^\bullet)$ in $D(\Gamma(X, \mathcal{O}_X)$.
+\end{lemma}
+
+\begin{proof}
+Apply Lemma \ref{lemma-acyclicity-lemma} to the canonical morphism
+$X \to \Spec(\Gamma(X, \mathcal{O}_X))$. Some details omitted.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-spectral-sequence}
+Let $X$ be a quasi-separated and quasi-compact scheme. For any object
+$K$ of $D_\QCoh(\mathcal{O}_X)$ the spectral sequence
+$$
+E_2^{i, j} = H^i(X, H^j(K)) \Rightarrow H^{i + j}(X, K)
+$$
+of Cohomology, Example \ref{cohomology-example-spectral-sequence}
+is bounded and converges.
+\end{lemma}
+
+\begin{proof}
+By the construction of the spectral sequence via
+Cohomology, Lemma \ref{cohomology-lemma-spectral-sequence-filtered-object}
+using the filtration given by $\tau_{\leq -p}K$, we see that
+suffices to show that given $n \in \mathbf{Z}$ we have
+$$
+H^n(X, \tau_{\leq -p}K) = 0 \text{ for } p \gg 0
+$$
+and
+$$
+H^n(X, K) = H^n(X, \tau_{\leq -p}K) \text{ for } p \ll 0
+$$
+The first follows from Lemma \ref{lemma-application-nice-K-injective}
+applied with $F = \Gamma(X, -)$ and the bound in
+Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-coherence-higher-direct-images}.
+The second holds whenever
+$-p \leq n$ for any ringed space $(X, \mathcal{O}_X)$ and any
+$K \in D(\mathcal{O}_X)$.
+\end{proof}
+
+\begin{lemma}
 \label{lemma-quasi-coherence-pushforward-direct-sums}
 Let $f : X \to S$ be a quasi-separated and quasi-compact morphism of
 schemes. Then
@@ -555,6 +627,20 @@ Cohomology of Schemes, Lemma \ref{coherent-lemma-colimit-cohomology}.
 \noindent
 In this section we collect some information about pushforward
 along an affine morphism of schemes.
+
+\begin{lemma}
+\label{lemma-pushforward-affine-morphism}
+Let $f : X \to S$ be an affine morphism of schemes. Let $\mathcal{F}^\bullet$
+be a complex of quasi-coherent $\mathcal{O}_X$-modules. Then
+$f_*\mathcal{F}^\bullet = Rf_*\mathcal{F}^\bullet$.
+\end{lemma}
+
+\begin{proof}
+Combine Lemma \ref{lemma-acyclicity-lemma} with
+Cohomology of Schemes, Lemma \ref{coherent-lemma-relative-affine-vanishing}.
+An alternative proof is to work affine locally on $S$
+and use Lemma \ref{lemma-quasi-coherence-pushforward}.
+\end{proof}
 
 \begin{lemma}
 \label{lemma-affine-morphism}
@@ -685,6 +771,552 @@ Morphisms, Lemma \ref{morphisms-lemma-affine-equivalence-modules}.
 
 
 
+\section{Cohomology with support in a closed}
+\label{section-cohomology-support}
+
+\noindent
+We elaborate on the material in Cohomology, Sections
+\ref{cohomology-section-cohomology-support} and
+\ref{cohomology-section-cohomology-support-bis} for schemes
+and quasi-coherent modules.
+
+\begin{definition}
+\label{definition-supported-on}
+Let $X$ be a scheme. Let $E$ be an object of $D(\mathcal{O}_X)$.
+Let $T \subset X$ be a closed subset.
+We say $E$ is {\it supported on $T$} if the
+cohomology sheaves $H^i(E)$ are supported on $T$.
+\end{definition}
+
+\noindent
+We repeat some of the discussion from
+Cohomology, Section \ref{cohomology-section-cohomology-support-bis}
+in the situation of the definition.
+Let $X$ be a scheme. Let $T \subset X$ be a closed subset.
+The category of $\mathcal{O}_X$-modules whose
+support is contained in $T$ is a Serre subcategory of the
+category of all $\mathcal{O}_X$-modules, see
+Homology, Definition \ref{homology-definition-serre-subcategory}
+and
+Modules, Lemma \ref{modules-lemma-support-section-closed}.
+In the following we will denote $D_T(\mathcal{O}_X)$
+the strictly full, saturated triangulated subcategory of
+$D(\mathcal{O}_X)$ consisting of objects supported on $T$, see
+Derived Categories, Section \ref{derived-section-triangulated-sub}.
+
+\medskip\noindent
+In the situation of Definition \ref{definition-supported-on}
+denote $i : T \to X$ the inclusion map. Recall from
+Cohomology, Section \ref{cohomology-section-cohomology-support-bis}
+that in this situation we have a functor
+$R\mathcal{H}_T : D(\mathcal{O}_X) \to D(i^{-1}\mathcal{O}_X)$
+which is right adjoint to $i_* : D(i^{-1}\mathcal{O}_X) \to D(\mathcal{O}_X)$.
+
+\begin{lemma}
+\label{lemma-support-quasi-coherent}
+Let $X$ be a scheme. Let $T \subset X$ be a closed subset such that
+$X \setminus T$ is a retrocompact open of $X$. Let $i : T \to X$ be
+the inclusion.
+\begin{enumerate}
+\item For $E$ in $D_\QCoh(\mathcal{O}_X)$ we have
+$i_*R\mathcal{H}_T(E)$ in $D_{\QCoh, T}(\mathcal{O}_X)$.
+\item The functor
+$i_* \circ R\mathcal{H}_T : D_\QCoh(\mathcal{O}_X) \to
+D_{\QCoh, T}(\mathcal{O}_X)$ is right adjoint to the inclusion functor
+$D_{\QCoh, T}(\mathcal{O}_X) \to D_\QCoh(\mathcal{O}_X)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Set $U = X \setminus T$ and denote $j : U \to X$ the inclusion. By
+Cohomology, Lemma \ref{cohomology-lemma-triangle-sections-with-support-sheaves}
+there is a distinguished triangle
+$$
+i_*R\mathcal{H}_T(E) \to E \to Rj_*(E|_U) \to i_*R\mathcal{H}_Z(E)[1]
+$$
+in $D(\mathcal{O}_X)$. By Lemma \ref{lemma-quasi-coherence-direct-image}
+the complex $Rj_*(E|_U)$ has quasi-coherent cohomology sheaves
+(this is where we use that $U$ is retrocompact in $X$).
+Thus we see that (1) is true. Part (2) follows from this and
+the adjointness of functors in
+Cohomology, Lemma \ref{cohomology-lemma-complexes-with-support-on-closed}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-support-direct-sums}
+Let $X$ be a scheme. Let $T \subset X$ be a closed subset such that
+$X \setminus T$ is a retrocompact open of $X$. Then for a family of
+objects $E_i$, $i \in I$ of $D_\QCoh(\mathcal{O}_X)$ we have
+$R\mathcal{H}_T(\bigoplus E_i) = \bigoplus R\mathcal{H}_T(E_i)$.
+\end{lemma}
+
+\begin{proof}
+Set $U = X \setminus T$ and denote $j : U \to X$ the inclusion. By
+Cohomology, Lemma \ref{cohomology-lemma-triangle-sections-with-support-sheaves}
+there is a distinguished triangle
+$$
+i_*R\mathcal{H}_T(E) \to E \to Rj_*(E|_U) \to i_*R\mathcal{H}_Z(E)[1]
+$$
+in $D(\mathcal{O}_X)$ for any $E$ in $D(\mathcal{O}_X)$. The functor
+$E \mapsto Rj_*(E|_U)$ commutes with direct sums on $D_\QCoh(\mathcal{O}_X)$
+by Lemma \ref{lemma-quasi-coherence-pushforward-direct-sums}.
+It follows that the same is true for the functor $i_* \circ R\mathcal{H}_T$
+(details omitted). Since $i_* : D(i^{-1}\mathcal{O}_X) \to D_T(\mathcal{O}_X)$
+is an equivalence
+(Cohomology, Lemma \ref{cohomology-lemma-complexes-with-support-on-closed})
+we conclude.
+\end{proof}
+
+\begin{remark}
+\label{remark-support-c-equations}
+Let $X$ be a scheme. Let $f_1, \ldots, f_c \in \Gamma(X, \mathcal{O}_X)$.
+Denote $Z \subset X$ the closed subscheme cut out by $f_1, \ldots, f_c$.
+For $0 \leq p < c$ and $1 \leq i_0 < \ldots < i_p \leq c$ we denote
+$U_{i_0 \ldots i_p} \subset X$ the open subscheme where
+$f_{i_0} \ldots f_{i_p}$ is invertible. For any $\mathcal{O}_X$-module
+$\mathcal{F}$ we set
+$$
+\mathcal{F}_{i_0 \ldots i_p} =
+(U_{i_0 \ldots i_p} \to X)_*(\mathcal{F}|_{U_{i_0 \ldots i_p}})
+$$
+In this situation the {\it extended alternating {\v C}ech complex}
+is the complex of $\mathcal{O}_X$-modules
+\begin{equation}
+\label{equation-extended-alternating}
+0 \to \mathcal{F} \to
+\bigoplus\nolimits_{i_0} \mathcal{F}_{i_0} \to
+\ldots \to
+\bigoplus\nolimits_{i_0 < \ldots < i_p} \mathcal{F}_{i_0 \ldots i_p} \to
+\ldots \to \mathcal{F}_{1 \ldots c} \to 0
+\end{equation}
+where $\mathcal{F}$ is put in degree $0$. The maps are constructed as
+follows. Given
+$1 \leq i_0 < \ldots < i_{p + 1} \leq c$ and $0 \leq j \leq p + 1$ we
+have the canonical map
+$$
+\mathcal{F}_{i_0 \ldots \hat i_j \ldots i_{p + 1}} \to
+\mathcal{F}_{i_0 \ldots i_p}
+$$
+coming from the inclusion
+$U_{i_0 \ldots i_p} \subset U_{i_0 \ldots \hat i_j \ldots i_{p + 1}}$.
+The differentials in the extended alternating complex use these
+canonical maps with sign $(-1)^j$.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-extended-alternating-zero}
+With $X$, $f_1, \ldots, f_c \in \Gamma(X, \mathcal{O}_X)$, and
+$\mathcal{F}$ as in Remark \ref{remark-support-c-equations}
+the complex (\ref{equation-extended-alternating}) restricts to an acyclic
+complex over $X \setminus Z$.
+\end{lemma}
+
+\noindent
+We remark that this lemma holds more generally for any
+extended alternating {\v C}ech complex defined as in
+Remark \ref{remark-support-c-equations} starting with a finite
+open covering $X \setminus Z = U_1 \cup \ldots \cup U_c$.
+
+\begin{proof}
+Let $W \subset X \setminus Z$ be an open subset. Evaluating the complex
+of sheaves (\ref{equation-extended-alternating}) on $W$ we obtain the
+complex
+$$
+\mathcal{F}(W) \to \bigoplus\nolimits_{i_0} \mathcal{F}(U_{i_0} \cap W) \to
+\bigoplus\nolimits_{i_0 < i_1} \mathcal{F}(U_{i_0i_1} \cap W) \to \ldots
+$$
+In other words, we obtain the extended ordered {\v C}ech complex
+for the covering $W = \bigcup U_i \cap W$ and the standard
+ordering on $\{1, \ldots, c\}$, see
+Cohomology, Section \ref{cohomology-section-alternating-cech}.
+By Cohomology, Lemma \ref{cohomology-lemma-alternating-cech-trivial}
+this complex is homotopic to zero as soon as $W$ is contained in
+$V(f_i)$ for some $1 \leq i \leq c$. This finishes the proof.
+\end{proof}
+
+\begin{remark}
+\label{remark-extended-alternating-map-to-support}
+Let $X$, $f_1, \ldots, f_c \in \Gamma(X, \mathcal{O}_X)$, and
+$\mathcal{F}$ be as in Remark \ref{remark-support-c-equations}.
+Denote $\mathcal{F}^\bullet$ the complex
+(\ref{equation-extended-alternating}). By
+Lemma \ref{lemma-extended-alternating-zero}
+the cohomology sheaves of $\mathcal{F}^\bullet$
+are supported on $Z$ hence $\mathcal{F}^\bullet$ is an object of
+$D_Z(\mathcal{O}_X)$. On the other hand, the equality
+$\mathcal{F}^0 = \mathcal{F}$ determines a canonical map
+$\mathcal{F}^\bullet \to \mathcal{F}$ in $D(\mathcal{O}_X)$.
+As $i_* \circ R\mathcal{H}_Z$ is a right adjoint to the
+inclusion functor $D_Z(\mathcal{O}_X) \to D(\mathcal{O}_X)$, see
+Cohomology, Lemma \ref{cohomology-lemma-complexes-with-support-on-closed},
+we obtain a canonical commutative diagram
+$$
+\xymatrix{
+\mathcal{F}^\bullet \ar[rd] \ar[rr] & & \mathcal{F} \\
+& i_*R\mathcal{H}_Z(\mathcal{F}) \ar[ru]
+}
+$$
+in $D(\mathcal{O}_X)$ functorial in the $\mathcal{O}_X$-module $\mathcal{F}$.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-extended-alternating-represented}
+With $X$, $f_1, \ldots, f_c \in \Gamma(X, \mathcal{O}_X)$, and
+$\mathcal{F}$ as in Remark \ref{remark-support-c-equations}.
+If $\mathcal{F}$ is quasi-coherent, then the complex
+(\ref{equation-extended-alternating}) represents
+$i_* R\mathcal{H}_Z(\mathcal{F})$ in $D_Z(\mathcal{O}_X)$.
+\end{lemma}
+
+\begin{proof}
+Let us denote $\mathcal{F}^\bullet$ the complex
+(\ref{equation-extended-alternating}).
+The statement of the lemma means that the map
+$\mathcal{F}^\bullet \to i_*R\mathcal{H}_Z(\mathcal{F})$
+of Remark \ref{remark-extended-alternating-map-to-support}
+is an isomorphism. Since $\mathcal{F}^\bullet$ is in
+$D_Z(\mathcal{O}_X)$ (see remark cited), we see that
+$i_*R\mathcal{H}_Z(\mathcal{F}^\bullet) = \mathcal{F}^\bullet$
+by Cohomology, Lemma \ref{cohomology-lemma-complexes-with-support-on-closed}.
+The morphism $U_{i_0 \ldots i_p} \to X$ is affine
+as it is given over affine opens of $X$ by inverting the function
+$f_{i_0} \ldots f_{i_p}$. Thus we see that
+$$
+\mathcal{F}_{i_0 \ldots i_p} =
+(U_{i_0 \ldots i_p} \to X)_*\mathcal{F}|_{U_{i_0 \ldots i_p}} =
+R(U_{i_0 \ldots i_p} \to X)_*\mathcal{F}|_{U_{i_0 \ldots i_p}}
+$$
+by Cohomology of Schemes, Lemma \ref{coherent-lemma-relative-affine-vanishing}
+and the assumption that $\mathcal{F}$ is quasi-coherent. We conclude that
+$R\mathcal{H}_Z(\mathcal{F}_{i_0 \ldots i_p}) = 0$ by Cohomology, Lemma
+\ref{cohomology-lemma-sections-support-in-closed-disjoint-open}.
+Thus $i_*R\mathcal{H}_Z(\mathcal{F}^p) = 0$ for $p > 0$.
+Putting everything together we obtain
+$$
+\mathcal{F}^\bullet = i_*R\mathcal{H}_Z(\mathcal{F}^\bullet) =
+i_*R\mathcal{H}_Z(\mathcal{F})
+$$
+as desired.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-supported-trivial-vanishing}
+Let $X$ be a scheme. Let $T \subset X$ be a closed subset which can
+locally be cut out by at most $c$ elements of the structure sheaf.
+Then $\mathcal{H}^i_Z(\mathcal{F}) = 0$ for $i > c$ and any
+quasi-coherent $\mathcal{O}_X$-module $\mathcal{F}$.
+\end{lemma}
+
+\begin{proof}
+This follows immediately from the local description of
+$R\mathcal{H}_T(\mathcal{F})$ given in
+Lemma \ref{lemma-extended-alternating-represented}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-supported-vanishing}
+Let $X$ be a scheme. Let $T \subset X$ be a closed subset which can
+locally be cut out by a Koszul regular sequence having $c$ elements.
+Then $\mathcal{H}^i_Z(\mathcal{F}) = 0$ for $i \not = c$ for every
+flat, quasi-coherent $\mathcal{O}_X$-module $\mathcal{F}$.
+\end{lemma}
+
+\begin{proof}
+By the description of $R\mathcal{H}_Z(\mathcal{F})$ given in
+Lemma \ref{lemma-extended-alternating-represented} this boils
+down to the following algebra statement: given a ring $R$,
+a Koszul regular sequence $f_1, \ldots, f_c \in R$, and a flat
+$R$-module $M$, the extended alternating {\v C}ech complex
+$M \to \bigoplus\nolimits_{i_0} M_{f_{i_0}} \to
+\bigoplus\nolimits_{i_0 < i_1} M_{f_{i_0}f_{i_1}} \to
+\ldots \to M_{f_1 \ldots f_c}$
+from More on Algebra, Section \ref{more-algebra-section-alternating-cech}
+only has cohomology in degree $c$. By More on Algebra, Lemma
+\ref{more-algebra-lemma-vanishing-extended-alternating-koszul}
+we obtain the desired vanishing for the extended alternating
+{\v C}ech complex of $R$. Since the complex for $M$ is obtained
+by tensoring this with the flat $R$-module $M$
+(More on Algebra, Lemma
+\ref{more-algebra-lemma-extended-alternating-form-module})
+we conclude.
+\end{proof}
+
+\begin{remark}
+\label{remark-supported-map-c-equations}
+With $X$, $f_1, \ldots, f_c \in \Gamma(X, \mathcal{O}_X)$, and
+$\mathcal{F}$ as in Remark \ref{remark-support-c-equations}.
+There is a canonical $\mathcal{O}_X|_Z$-linear map
+$$
+c_{f_1, \ldots, f_c} :
+i^*\mathcal{F}
+\longrightarrow
+\mathcal{H}^c_Z(\mathcal{F})
+$$
+functorial in $\mathcal{F}$. Namely, denoting $\mathcal{F}^\bullet$ the
+extended alternating {\v C}ech complex (\ref{equation-extended-alternating})
+we have the canonical map
+$\mathcal{F}^\bullet \to i_*R\mathcal{H}_Z(\mathcal{F})$
+of Remark \ref{remark-extended-alternating-map-to-support}.
+This determines a canonical map
+$$
+\Coker\left(\bigoplus \mathcal{F}_{1 \ldots \hat i \ldots c} \to
+\mathcal{F}_{1 \ldots c}\right)
+\longrightarrow
+i_*\mathcal{H}^c_Z(\mathcal{F})
+$$
+on cohomology sheaves in degree $c$.
+Given a local section $s$ of $\mathcal{F}$ we can consider the
+local section
+$$
+\frac{s}{f_1 \ldots f_c}
+$$
+of $\mathcal{F}_{1 \ldots c}$. The class of this section in the cokernel
+displayed above depends only on $s$ modulo the image of
+$(f_1, \ldots, f_c) : \mathcal{F}^{\oplus c} \to \mathcal{F}$.
+Since $i_*i^*\mathcal{F}$ is equal to the cokernel of
+$(f_1, \ldots, f_c) : \mathcal{F}^{\oplus c} \to \mathcal{F}$
+we see that we get an $\mathcal{O}_X$-module map
+$i_*i^*\mathcal{F} \to i_*\mathcal{H}_Z^c(\mathcal{F})$.
+As $i_*$ is fully faithful we get the map $c_{f_1, \ldots, f_c}$.
+\end{remark}
+
+\begin{example}
+\label{example-affine-supported-map-c-equations}
+Let $X = \Spec(A)$ be affine, $f_1, \ldots, f_c \in A$, and let
+$\mathcal{F} = \widetilde{M}$ for some $A$-module $M$. The map
+$c_{f_1, \ldots, f_c}$ of Remark \ref{remark-supported-map-c-equations}
+can be described as the map
+$$
+M/(f_1, \ldots, f_c)M
+\longrightarrow
+\Coker\left(
+\bigoplus M_{f_1 \ldots \hat f_i \ldots f_c} \to M_{f_1 \ldots f_c}
+\right)
+$$
+sending the class of $s \in M$ to the class of $s/f_1 \ldots f_c$
+in the cokernel.
+\end{example}
+
+\begin{lemma}
+\label{lemma-supported-map-determinant}
+With $X$, $f_1, \ldots, f_c \in \Gamma(X, \mathcal{O}_X)$, and
+$\mathcal{F}$ as in Remark \ref{remark-support-c-equations}.
+Let $a_{ji} \in \Gamma(X, \mathcal{O}_X)$ for $1 \leq i, j \leq c$
+and set $g_j = \sum_{i = 1, \ldots, c} a_{ji}f_i$. Assume $g_1, \ldots, g_c$
+scheme theoretically cut out $Z$. If $\mathcal{F}$ is quasi-coherent, then
+$$
+c_{f_1, \ldots, f_c} = \det(a_{ji}) c_{g_1, \ldots, g_c}
+$$
+where $c_{f_1, \ldots, f_c}$ and $c_{g_1, \ldots, g_c}$ are as in
+Remark \ref{remark-supported-map-c-equations}.
+\end{lemma}
+
+\begin{proof}
+We will prove that $c_{f_1, \ldots, f_c}(s) =
+\det(a_{ij}) c_{g_1, \ldots, g_c}(s)$ as global sections of
+$\mathcal{H}_Z(\mathcal{F})$ for any $s \in \mathcal{F}(X)$.
+This is sufficient since we then obtain the same result for
+section over any open subscheme of $X$.
+To do this, for $1 \leq i_0 < \ldots < i_p \leq c$
+and $1 \leq j_0 < \ldots < j_q \leq c$ we denote
+$U_{i_0 \ldots i_p} \subset X$,
+$V_{j_0 \ldots j_q} \subset X$, and
+$W_{i_0 \ldots i_p, j_0 \ldots j_q} \subset X$
+the open subscheme where $f_{i_0} \ldots f_{i_p}$ is invertible,
+$g_{j_0} \ldots g_{j_q}$ is invertible, and where
+$f_{i_0} \ldots f_{i_p}g_{j_0} \ldots g_{j_q}$ is invertible.
+We denote $\mathcal{F}_{i_0 \ldots i_p}$,
+resp.\ $\mathcal{F}'_{j_0 \ldots j_q}$
+$\mathcal{F}''_{i_0 \ldots i_p, j_0 \ldots j_q}$
+the pushforward to $X$ of the restriction of $\mathcal{F}$ to
+$U_{i_0 \ldots i_p}$, resp.\ $V_{j_0 \ldots j_q}$,
+resp.\ $W_{i_0 \ldots i_p, j_0 \ldots j_q}$.
+Then we obtain three extended alternating {\v C}ech complexes
+$$
+\mathcal{F}^\bullet :
+\mathcal{F} \to \bigoplus\nolimits_{i_0} \mathcal{F}_{i_0} \to
+\bigoplus\nolimits_{i_0 < i_1} \mathcal{F}_{i_0i_1} \to \ldots
+$$
+and
+$$
+(\mathcal{F}')^\bullet :
+\mathcal{F} \to \bigoplus\nolimits_{j_0} \mathcal{F}'_{j_0} \to
+\bigoplus\nolimits_{j_0 < j_1} \mathcal{F}'_{j_0j_1} \to \ldots
+$$
+and
+$$
+(\mathcal{F}'')^\bullet :
+\mathcal{F} \to
+\bigoplus\nolimits_{i_0} \mathcal{F}_{i_0} \oplus
+\bigoplus\nolimits_{j_0} \mathcal{F}'_{j_0} \to
+\bigoplus\nolimits_{i_0 < i_1} \mathcal{F}_{i_0i_1} \oplus
+\bigoplus\nolimits_{i_0, j_0} \mathcal{F}''_{i_0, j_0} \oplus
+\bigoplus\nolimits_{j_0 < j_1} \mathcal{F}'_{j_0j_1} \to
+\ldots
+$$
+whose differentials are those used in defining
+(\ref{equation-extended-alternating}).
+There are maps of complexes
+$$
+(\mathcal{F}'')^\bullet \to \mathcal{F}^\bullet
+\quad\text{and}\quad
+(\mathcal{F}'')^\bullet \to (\mathcal{F}')^\bullet
+$$
+given by the projection maps on the terms (and hence inducing
+the identity map in degree $0$). Observe that by
+Lemma \ref{lemma-extended-alternating-represented}
+each of these complexes represents
+$i_*R\mathcal{H}_Z(\mathcal{F})$ and these maps
+represent the identity on this object. Thus it suffices
+to find an element
+$$
+\sigma \in H^c((\mathcal{F}'')^\bullet(X))
+$$
+mapping to $c_{f_1, \ldots, f_c}(s)$ and $\det(a_{ji})c_{g_1, \ldots, g_c}(s)$
+by these two maps. It turns out we can explicitly give a cocycle
+for $\sigma$. Namely, we take
+$$
+\sigma_{1 \ldots c} = \frac{s}{f_1 \ldots f_c} \in \mathcal{F}_{1 \ldots c}(X)
+\quad\text{and}\quad
+\sigma'_{1 \ldots c} = \frac{\det(a_{ji})s}{g_1 \ldots g_c} \in
+\mathcal{F}'_{1 \ldots c}(X)
+$$
+and we take
+$$
+\sigma_{i_0 \ldots i_p, j_0 \ldots j_{c - p - 2}} =
+\frac{\lambda(i_0 \ldots i_p, j_0 \ldots j_{c - p - 2})s}%
+{f_{i_0} \ldots f_{i_p}g_{j_0} \ldots g_{j_{c - p - 2}}}
+\in \mathcal{F}''_{i_0 \ldots i_p, j_0 \ldots j_{c - p - 2}}(X)
+$$
+where $\lambda(i_0 \ldots i_p, j_0 \ldots j_{c - p - 2})$
+is the coefficient of $e_1 \wedge \ldots \wedge e_c$ in
+the formal expresssion
+$$
+e_{i_0} \wedge \ldots \wedge e_{i_p} \wedge
+(a_{j_01} e_1 + \ldots + a_{j_0c}e_c) \wedge \ldots \wedge
+(a_{j_{c - p - 2}1} e_1 + \ldots + a_{j_{c - p - 2}c}e_c)
+$$
+To verify that $\sigma$ is a cocycle, we have to show for
+$1 \leq i_0 < \ldots < i_p \leq c$ and
+$1 \leq j_0 < \ldots < j_{c - p - 1} \leq c$
+that we have
+\begin{align*}
+0 & =
+\sum\nolimits_{a = 0, \ldots, p} (-1)^a
+f_{i_a} \lambda(i_0 \ldots \hat i_a \ldots i_p, j_0 \ldots j_{c - p - 1}) \\
+& +
+\sum\nolimits_{b = 0, \ldots, c - p - 1} (-1)^{p + b + 1}g_{j_b}
+\lambda(i_0 \ldots i_p, j_0 \ldots \hat j_b \ldots j_{c - p - 1})
+\end{align*}
+The easiest way to see this is perhaps to argue that the formal expression
+$$
+\xi = e_{i_0} \wedge \ldots \wedge e_{i_p} \wedge
+(a_{j_01} e_1 + \ldots + a_{j_0c}e_c) \wedge \ldots \wedge
+(a_{j_{c - p - 1}1} e_1 + \ldots + a_{j_{c - p - 1}c}e_c)
+$$
+is $0$ as it is an element of the $(c + 1)$st wedge power of the free module
+on $e_1, \ldots, e_c$ and that the expression above is the image of
+$\xi$ under the Koszul differential sending $e_i \to f_i$. Some details
+omitted.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-supported-map-global}
+Let $X$ be a scheme. Let $Z \to X$ be a closed immersion of finite presentation
+whose conormal sheaf $\mathcal{C}_{Z/X}$ is locally free of rank $c$.
+Then there is a canonical map
+$$
+c :
+\wedge^c(\mathcal{C}_{Z/X})^\vee \otimes_{\mathcal{O}_Z} i^*\mathcal{F}
+\longrightarrow
+\mathcal{H}_Z^c(\mathcal{F})
+$$
+functorial in the quasi-coherent module $\mathcal{F}$.
+\end{lemma}
+
+\begin{proof}
+Follows from the construction in
+Remark \ref{remark-supported-map-c-equations}
+and the independence of the choice
+of generators of the ideal sheaf shown in
+Lemma \ref{lemma-supported-map-determinant}.
+Some details omitted.
+\end{proof}
+
+\begin{remark}
+\label{remark-supported-functorial}
+Let $g : X' \to X$ be a morphism of schemes. Let
+$f_1, \ldots, f_c \in \Gamma(X, \mathcal{O}_X)$.
+Set $f'_i = g^\sharp(f_i) \in \Gamma(X', \mathcal{O}_{X'})$.
+Denote $Z \subset X$, resp.\ $Z' \subset X'$ the closed
+subscheme cut out by $f_1, \ldots, f_c$, resp.\ $f'_1, \ldots, f'_c$.
+Then $Z' = Z \times_X X'$. Denote $h : Z' \to Z$ the induced morphism
+of schemes.
+Let $\mathcal{F}$ be an $\mathcal{O}_X$-module.
+Set $\mathcal{F}' = g^*\mathcal{F}$.
+In this setting, if $\mathcal{F}$ is quasi-coherent, then the diagram
+$$
+\xymatrix{
+(i')^{-1}\mathcal{O}_{X'} \otimes_{h^{-1}i^{-1}\mathcal{O}_X}
+h^{-1}\mathcal{H}^c_Z(\mathcal{F}) \ar[r] &
+\mathcal{H}_{Z'}^c(\mathcal{F}') \\
+h^*i^*\mathcal{F} \ar[r] \ar[u]_-{c_{f_1, \ldots, f_c}} &
+(i')^*\mathcal{F}' \ar[u]^-{c_{f'_1, \ldots, f'_c}}
+}
+$$
+is commutative where the top horizonal arrow is
+the map of Cohomology, Remark \ref{cohomology-remark-support-functorial}
+on cohomology sheaves in degree $c$. Namely,
+denote $\mathcal{F}^\bullet$, resp.\ $(\mathcal{F}')^\bullet$
+the extended alternating {\v C}ech complex constructed in
+Remark \ref{remark-support-c-equations}
+using $\mathcal{F}, f_1, \ldots, f_c$,
+resp.\ $\mathcal{F}', f'_1, \ldots, f'_c$.
+Note that $(\mathcal{F}')^\bullet = g^*\mathcal{F}^\bullet$.
+Then, without assuming $\mathcal{F}$ is quasi-coherent, the diagram
+$$
+\xymatrix{
+i'_* L(g|_{Z'})^* R\mathcal{H}_Z(\mathcal{F}) \ar[r] \ar@{=}[d] &
+i'_*R\mathcal{H}_{Z'}(Lg^*\mathcal{F}) \ar[d] \\
+Lg^*i_*R\mathcal{H}_Z(\mathcal{F}) &
+i'_*R\mathcal{H}_{Z'}(\mathcal{F}') \\
+Lg^*(\mathcal{F}^\bullet) \ar[u] \ar[r] &
+(\mathcal{F}')^\bullet \ar[u]
+}
+$$
+is commutative where $g|_{Z'} : (Z', (i')^{-1}\mathcal{O}_{X'}) \to
+(Z, i^{-1}\mathcal{O}_X)$ is the induced morphism of ringed spaces.
+Here the top horizontal arrow is given in
+Cohomology, Remark \ref{cohomology-remark-support-functorial}
+as is the explanation for the equal sign.
+The arrows pointing up are from
+Remark \ref{remark-extended-alternating-map-to-support}.
+The lower horizonal arrow is the map $Lg^*\mathcal{F}^\bullet
+\to g^*\mathcal{F}^\bullet = (\mathcal{F}')^\bullet$ and the arrow
+pointing down is induced by
+$Lg^*\mathcal{F} \to g^*\mathcal{F} = \mathcal{F}'$.
+The diagram commutes because going around the diagram both ways
+we obtain two arrows $Lg^*\mathcal{F}^\bullet \to
+i'_*R\mathcal{H}_{Z'}(\mathcal{F}')$ whose composition with
+$i'_*R\mathcal{H}_{Z'}(\mathcal{F}') \to \mathcal{F}'$
+is the canonical map $Lg^*\mathcal{F}^\bullet \to \mathcal{F}'$.
+Some details omitted. Now the commutativity of the first diagram
+follows by looking at this diagram on cohomology sheaves in degree
+$c$ and using that the construction of the map
+$i^*\mathcal{F} \to
+\Coker(\bigoplus \mathcal{F}_{1 \ldots \hat i \ldots c} \to
+\mathcal{F}_{1 \ldots c})$
+used in Remark \ref{remark-supported-map-c-equations}
+is compatible with pullbacks.
+\end{remark}
+
+
+
+
+
+
+
+
 \section{The coherator}
 \label{section-coherator}
 
@@ -748,26 +1380,7 @@ Hence $f_*$ defines a derived functor
 $f_* : D(\QCoh(\mathcal{O}_X)) \to D(\QCoh(\mathcal{O}_Y))$
 by simply applying $f_*$ to any representative complex, see
 Derived Categories, Lemma \ref{derived-lemma-right-derived-exact-functor}.
-For any complex of $\mathcal{O}_X$-modules
-$\mathcal{F}^\bullet$ there is a canonical map
-$f_*\mathcal{F}^\bullet \to Rf_*\mathcal{F}^\bullet$.
-To finish the proof we show this is a quasi-isomorphism when
-$\mathcal{F}^\bullet$ is a complex with each $\mathcal{F}^n$
-quasi-coherent. As the statement is invariant under shifts it
-suffices to show that
-$H^0(f_*(\mathcal{F}^\bullet)) \to R^0f_*\mathcal{F}^\bullet$
-is an isomorphism. The statement is local on $Y$ hence we
-may assume $Y$ affine. By
-Lemma \ref{lemma-quasi-coherence-direct-image}
-we have $R^0f_*\mathcal{F}^\bullet = R^0f_*\tau_{\geq -n}\mathcal{F}^\bullet$
-for all sufficiently large $n$. Thus we may assume $\mathcal{F}^\bullet$
-bounded below. As each $\mathcal{F}^n$ is $f_*$-acyclic by
-Cohomology of Schemes, Lemma \ref{coherent-lemma-relative-affine-vanishing}
-we see that
-$f_*\mathcal{F}^\bullet \to Rf_*\mathcal{F}^\bullet$
-is a quasi-isomorphism by
-Leray's acyclicity lemma (Derived Categories, Lemma
-\ref{derived-lemma-leray-acyclicity}).
+The diagram commutes by Lemma \ref{lemma-pushforward-affine-morphism}.
 \end{proof}
 
 \begin{lemma}
@@ -858,16 +1471,8 @@ follows from (the proof of)
 Lemma \ref{lemma-affine-compare-bounded}.
 \end{proof}
 
-\begin{definition}
-\label{definition-supported-on}
-Let $X$ be a scheme. Let $E$ be an object of $D(\mathcal{O}_X)$.
-Let $T \subset X$ be a closed subset.
-We say $E$ is {\it supported on $T$} if the
-cohomology sheaves $H^i(E)$ are supported on $T$.
-\end{definition}
-
 \noindent
-With this definition in hand, we are ready to prove a criterion
+At this point we are ready to prove a criterion
 for when the functor $D(\QCoh(\mathcal{O}_X)) \to D_\QCoh(\mathcal{O}_X)$
 is an equivalence.
 
@@ -909,8 +1514,9 @@ E \to i_X(RQ_X(E))
 $$
 are isomorphisms. Consider the hypothesis
 $H_n$: the adjunction maps above are isomorphisms
-whenever $E$ and $i_X(A)$
-are supported on a closed subset of $X$ which
+whenever $E$ and $i_X(A)$ are supported
+(Definition \ref{definition-supported-on})
+on a closed subset of $X$ which
 is contained in the union of $n$ affine opens of $X$.
 We will prove $H_n$ by induction on $n$.
 
@@ -1184,32 +1790,14 @@ it suffices to show that the canonical map
 $$
 f_*\mathcal{I}^\bullet \longrightarrow Rf_*\mathcal{I}^\bullet
 $$
-is an isomorphism in $D(\mathcal{O}_Y)$. To see this it suffices to
-prove the map induces an isomorphism on cohomology sheaves. Pick any
-$m \in \mathbf{Z}$. Let $N = N(X, Y, f)$ be as in
-Lemma \ref{lemma-quasi-coherence-direct-image}.
-Consider the short exact sequence
-$$
-0 \to \sigma_{\geq m - N - 1}\mathcal{I}^\bullet \to
-\mathcal{I}^\bullet \to \sigma_{\leq m - N - 2}\mathcal{I}^\bullet \to 0
-$$
-of complexes of quasi-coherent sheaves on $X$. By
-Lemma \ref{lemma-quasi-coherence-direct-image}
-we see that the cohomology sheaves of
-$Rf_*\sigma_{\leq m - N - 2}\mathcal{I}^\bullet$
-are zero in degrees $\geq m - 1$. Thus we see that
-$R^mf_*\mathcal{I}^\bullet$ is isomorphic to
-$R^mf_*\sigma_{\geq m - N - 1}\mathcal{I}^\bullet$.
-In other words, we may assume that $\mathcal{I}^\bullet$
-is a bounded below complex of injective objects of
-$\QCoh(\mathcal{O}_X)$.
-This follows from
-Leray's acyclicity lemma
-(Derived Categories, Lemma \ref{derived-lemma-leray-acyclicity})
-via
-Cohomology, Lemma \ref{cohomology-lemma-flasque-acyclic-pushforward}
-and
-Lemma \ref{lemma-injective-quasi-coherent-sheaf-Noetherian}.
+is an isomorphism in $D(\mathcal{O}_Y)$. To see this by
+Lemma \ref{lemma-acyclicity-lemma}
+it suffices to show that $\mathcal{I}^n$ is right
+$f_*$-acyclic for all $n \in \mathbf{Z}$.
+This is true because $f_*\mathcal{I}^n$ is flasque by
+Lemma \ref{lemma-injective-quasi-coherent-sheaf-Noetherian}
+and flasque modules are right $f_*$-acyclic by
+Cohomology, Lemma \ref{cohomology-lemma-flasque-acyclic-pushforward}.
 \end{proof}
 
 \begin{proposition}
@@ -2078,6 +2666,8 @@ and there are convergent spectral sequences
 $$
 \Ext^i_A(H^{-j}(K), H^q(L)) \Rightarrow \text{Ext}^{i + j}_A(K, H^q(L))
 $$
+See Injectives, Remarks \ref{injectives-remark-spectral-sequences-ext}
+and \ref{injectives-remark-spectral-sequences-ext-variant}.
 This finishes the proof as the modules $\Ext^p_A(M, N)$
 are finite for finite $A$-modules $M$, $N$ by
 Algebra, Lemma \ref{algebra-lemma-ext-noetherian}.
@@ -2432,6 +3022,39 @@ guarantees that $Rj_*$ maps
 $D^-_\QCoh(\mathcal{O}_U)$ into
 $D^-_\QCoh(\mathcal{O}_X)$
 if $X$ is quasi-compact. Combining these two we obtain the last statement.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-lift-coherent}
+Let $X$ be a Noetherian scheme and let $j : U \to X$ be an open immersion.
+The functor
+$D^b_{\textit{Coh}}(\mathcal{O}_X) \to D^b_{\textit{Coh}}(\mathcal{O}_U)$
+is essentially surjective.
+\end{lemma}
+
+\begin{proof}
+Let $K$ be an object of $D^b_{\textit{Coh}}(\mathcal{O}_U)$.
+By Proposition \ref{proposition-DCoh} we can represent $K$ by a bounded
+complex $\mathcal{F}^\bullet$ of coherent $\mathcal{O}_U$-modules.
+Say $\mathcal{F}^i = 0$ for $i \not \in [a, b]$ for some $a \leq b$.
+Since $j$ is quasi-compact and separated, the terms of the bounded complex
+$j_*\mathcal{F}^\bullet$ are quasi-coherent modules on $X$, see
+Schemes, Lemma \ref{schemes-lemma-push-forward-quasi-coherent}.
+We inductively pick a coherent submodule
+$\mathcal{G}^i \subset j_*\mathcal{F}^i$ as follows.
+For $i = a$ we pick any coherent submodule
+$\mathcal{G}^a \subset j_*\mathcal{F}^a$ whose restriction
+to $U$ is $\mathcal{F}^a$. This is possible by
+Properties, Lemma \ref{properties-lemma-extend}.
+For $i > a$ we first pick any coherent submodule
+$\mathcal{H}^i \subset j_*\mathcal{F}^i$
+whose restriction to $U$ is $\mathcal{F}^i$
+and then we set
+$\mathcal{G}^i = \Im(\mathcal{H}^i \oplus \mathcal{G}^{i - 1}
+\to j_*\mathcal{F}^i)$. It is clear that
+$\mathcal{G}^\bullet \subset j_*\mathcal{F}^\bullet$
+is a bounded complex of coherent $\mathcal{O}_X$-modules
+whose restriction to $U$ is $\mathcal{F}^\bullet$ as desired.
 \end{proof}
 
 \begin{lemma}
@@ -3220,10 +3843,14 @@ is zero. Whence $E$ is zero.
 The following result is an strengthening of
 Theorem \ref{theorem-bondal-van-den-Bergh}
 proved using exactly the same methods.
-Let $T \subset X$ be a closed subset of a scheme $X$.
-Let's denote $D_T(\mathcal{O}_X)$ the strictly full, saturated,
-triangulated subcategory consisting of complexes whose
-cohomology sheaves are supported on $T$.
+Recall that for a closed subset $T$ of a scheme $X$ we denote
+$D_T(\mathcal{O}_X)$ the strictly full, saturated,
+triangulated subcategory of $D(\mathcal{O}_X)$ consisting of objects
+supported on $T$ (Definition \ref{definition-supported-on}).
+We similarly denote $D_{\QCoh, T}(\mathcal{O}_X)$ the strictly full, saturated,
+triangulated subcategory of $D(\mathcal{O}_X)$ consisting of those
+complexes whose cohomology sheaves are quasi-coherent and are suppported
+on $T$.
 
 \begin{lemma}
 \label{lemma-generator-with-support}
@@ -3551,9 +4178,9 @@ The following result is a strengthening of
 Proposition \ref{proposition-compact-is-perfect}.
 Let $T \subset X$ be a closed subset of a scheme $X$. As before
 $D_T(\mathcal{O}_X)$ denotes the strictly full, saturated,
-triangulated subcategory consisting of complexes whose
-cohomology sheaves are supported on $T$. Since taking direct
-sums commutes with taking cohomology sheaves, it follows
+triangulated subcategory of $D(\mathcal{O}_X)$ consisting of objects
+supported on $T$ (Definition \ref{definition-supported-on}).
+Since taking direct sums commutes with taking cohomology sheaves, it follows
 that $D_T(\mathcal{O}_X)$ has direct sums and that they are equal
 to direct sums in $D(\mathcal{O}_X)$.
 
@@ -4668,7 +5295,7 @@ and the assumed tor independence.
 
 
 
-\section{K\"unneth formula}
+\section{K\"unneth formula, II}
 \label{section-kunneth}
 
 \noindent
@@ -4695,15 +5322,31 @@ $Ra_*K \to Ra_*Rp_* Lp^*K = Rf_*Lp^*K$ and
 $Rb_*M \to Rb_*Rq_* Lq^*M = Rf_*Lq^*M$ and then we can use the
 relative cup product (Cohomology, Remark \ref{cohomology-remark-cup-product}).
 
+\medskip\noindent
+Set $A = \Gamma(S, \mathcal{O}_S)$. There is a global K\"unneth map
+\begin{equation}
+\label{equation-kunneth-global}
+R\Gamma(X, K) \otimes_A^\mathbf{L} R\Gamma(Y, M)
+\longrightarrow
+R\Gamma(X \times_S Y,
+Lp^*K \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} Lq^*M)
+\end{equation}
+in $D(A)$. This map is constructed using the pullback maps
+$R\Gamma(X, K) \to R\Gamma(X \times_S Y, Lp^*K)$ and
+$R\Gamma(Y, M) \to R\Gamma(X \times_S Y, Lq^*M)$ and
+the cup product constructed in
+Cohomology, Section \ref{cohomology-section-cup-product}.
+
 \begin{lemma}
 \label{lemma-kunneth}
 In the situation above, if $a$ and $b$ are quasi-compact and quasi-separated
 and $X$ and $Y$ are tor-independent over $S$, then (\ref{equation-kunneth})
 is an isomorphism for $K \in D_\QCoh(\mathcal{O}_X)$ and
-$M \in D_\QCoh(\mathcal{O}_Y)$.
+$M \in D_\QCoh(\mathcal{O}_Y)$. If in addition $S = \Spec(A)$ is affine,
+then the map (\ref{equation-kunneth-global}) is an isomorphism.
 \end{lemma}
 
-\begin{proof}
+\begin{proof}[First proof]
 This follows from the following sequence of isomorphisms
 \begin{align*}
 Rf_*(Lp^*K \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} Lq^*M)
@@ -4722,38 +5365,112 @@ Lemma \ref{lemma-compare-base-change}.  The fourth equality by
 Lemma \ref{lemma-cohomology-base-change}.
 We omit the verification that the composition of these isomorphisms
 is the same as the map (\ref{equation-kunneth}).
+If $S$ is affine, then the source and target of the arrow
+(\ref{equation-kunneth-global}) are the result of applying
+$R\Gamma(S, -)$ to the source and target of (\ref{equation-kunneth})
+and we obtain the final statement; details omitted.
 \end{proof}
 
-\begin{remark}
-\label{remark-silly}
-With $X, Y, S, a, b, p, q, f$ as in the introduction to this section
-suppose we have an $\mathcal{O}_X$-module $\mathcal{F}$ and an
-$\mathcal{O}_Y$-module $\mathcal{G}$. Then we have
-\begin{align*}
-& p^{-1}\mathcal{F} \otimes_{f^{-1}\mathcal{O}_S} q^{-1}\mathcal{G} \\
-& =
-p^{-1}(\mathcal{F} \otimes_{\mathcal{O}_X} \mathcal{O}_X)
-\otimes_{f^{-1}\mathcal{O}_S}
-q^{-1}(\mathcal{O}_Y \otimes_{\mathcal{O}_Y} \mathcal{G}) \\
-& =
-p^{-1}\mathcal{F} \otimes_{p^{-1}\mathcal{O}_X} p^{-1}\mathcal{O}_X
-\otimes_{f^{-1}\mathcal{O}_S}
-q^{-1}\mathcal{O}_Y \otimes_{q^{-1}\mathcal{O}_Y} q^{-1}\mathcal{G} \\
-& =
-p^{-1}\mathcal{F} \otimes_{q^{-1}\mathcal{O}_X}
-\mathcal{O}_{X \times_S Y}
-\otimes_{q^{-1}\mathcal{O}_Y} q^{-1}\mathcal{G}  \\
-& =
-p^{-1}\mathcal{F} \otimes_{q^{-1}\mathcal{O}_X}
-\mathcal{O}_{X \times_S Y}
-\otimes_{\mathcal{O}_{X \times_S Y}}
-\mathcal{O}_{X \times_S Y}
-\otimes_{q^{-1}\mathcal{O}_Y} q^{-1}\mathcal{G}  \\
-& =
-p^*\mathcal{F} \otimes_{\mathcal{O}_{X \times_S Y}} q^*\mathcal{G}
-\end{align*}
-This is occasionally useful.
-\end{remark}
+\begin{proof}[Second proof]
+The construction of the arrow (\ref{equation-kunneth}) is compatible
+with restricting to open subschemes of $S$ as is immediate from the
+construction of the relative cup product. Thus it suffices to prove
+that (\ref{equation-kunneth}) is an isomorphism when $S$ is affine.
+
+\medskip\noindent
+Assume $S = \Spec(A)$ is affine. By Leray we have
+$R\Gamma(S, Rf_*K) = R\Gamma(X, K)$ and similarly for the
+other cases. By Cohomology, Lemma \ref{cohomology-lemma-compose-cup-product}
+the map (\ref{equation-kunneth}) induces the map
+(\ref{equation-kunneth-global}) on taking $R\Gamma(S, -)$.
+On the other hand, by
+Lemmas \ref{lemma-quasi-coherence-direct-image} and
+\ref{lemma-quasi-coherence-tensor-product}
+the source and target of the map
+(\ref{equation-kunneth}) are in $D_\QCoh(\mathcal{O}_S)$.
+Thus, by Lemma \ref{lemma-affine-compare-bounded}, it suffices to prove that
+(\ref{equation-kunneth-global}) is an isomorphism.
+
+\medskip\noindent
+Assume $S = \Spec(A)$ and $X = \Spec(B)$ and $Y = \Spec(C)$ are all affine.
+We will use Lemma \ref{lemma-affine-compare-bounded} without further mention.
+In this case we can choose a K-flat complex $K^\bullet$ of $B$-modules
+whose terms are flat such that $K$ is represented by $\widetilde{K}^\bullet$.
+Similarly, we can choose a K-flat complex $M^\bullet$ of $C$-modules
+whose terms are flat such that $M$ is represented by $\widetilde{M}^\bullet$.
+See More on Algebra, Lemma \ref{more-algebra-lemma-K-flat-resolution}.
+Then $\widetilde{K}^\bullet$ is a K-flat complex of $\mathcal{O}_X$-modules
+and similarly for $\widetilde{M}^\bullet$, see
+Lemma \ref{lemma-affine-K-flat}. Thus
+$La^*K$ is represented by
+$$
+a^*\widetilde{K}^\bullet = \widetilde{K^\bullet \otimes_A C}
+$$
+and similarly for $Lb^*M$. This in turn is a K-flat complex
+of $\mathcal{O}_{X \times_S Y}$-modules by the lemma cited above
+and More on Algebra, Lemma \ref{more-algebra-lemma-base-change-K-flat}.
+Thus we finally see that the complex of
+$\mathcal{O}_{X \times_S Y}$-modules associated to
+$$
+\text{Tot}((K^\bullet \otimes_A C) \otimes_{B \otimes_A C}
+(B \otimes_A M^\bullet)) =
+\text{Tot}(K^\bullet \otimes_A M^\bullet)
+$$
+represents $La^*K \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} Lb^*M$
+in the derived category of $X \times_S Y$. Taking global sections
+we obtain $\text{Tot}(K^\bullet \otimes_A M^\bullet)$ which of course
+is also the complex representing
+$R\Gamma(X, K) \otimes_A^\mathbf{L} R\Gamma(Y, M)$.
+The fact that the isomorphism is given by cup product follows from the
+relationship between the genuine cup product and the naive one
+in Cohomology, Section \ref{cohomology-section-cup-product}
+(and in particular
+Cohomology, Lemma \ref{cohomology-lemma-cup-compatible-with-naive}
+and the discussion following it).
+
+\medskip\noindent
+Assume $S = \Spec(A)$ and $Y$ are affine. We will use the induction
+principle of
+Cohomology of Schemes, Lemma \ref{coherent-lemma-induction-principle}
+to prove the statement. To do this we only have to show:
+if $X = U \cup V$ is an open covering with $U$ and $V$ quasi-compact
+and if the map (\ref{equation-kunneth-global})
+$$
+R\Gamma(U, K) \otimes_A^\mathbf{L} R\Gamma(Y, M)
+\longrightarrow
+R\Gamma(U \times_S Y,
+Lp^*K \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} Lq^*M)
+$$
+for $U$ and $Y$ over $S$, the map (\ref{equation-kunneth-global})
+$$
+R\Gamma(V, K) \otimes_A^\mathbf{L} R\Gamma(Y, M)
+\longrightarrow
+R\Gamma(V \times_S Y,
+Lp^*K \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} Lq^*M)
+$$
+for $V$ and $Y$ over $S$, and the map (\ref{equation-kunneth-global})
+$$
+R\Gamma(U \cap V, K) \otimes_A^\mathbf{L} R\Gamma(Y, M)
+\longrightarrow
+R\Gamma((U \cap V) \times_S Y,
+Lp^*K \otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L} Lq^*M)
+$$
+for $U \cap V$ and $Y$ over $S$ are isomorphisms, then so is the map
+(\ref{equation-kunneth-global}) for $X$ and $Y$ over $S$.
+However, by Cohomology, Lemma \ref{cohomology-lemma-mayer-vietoris-cup}
+these maps fit into a map of distinguished triangles with
+(\ref{equation-kunneth-global}) the final leg and hence we conclude
+by Derived Categories, Lemma \ref{derived-lemma-third-isomorphism-triangle}.
+
+\medskip\noindent
+Assume $S = \Spec(A)$ is affine. To finish the proof we can use the
+induction principle of
+Cohomology of Schemes, Lemma \ref{coherent-lemma-induction-principle}
+on $Y$. Namely, by the above we already know that our map is
+an isomorphism when $Y$ is affine. The rest of the argument is
+exactly the same as in the previous paragraph but with the roles of
+$X$ and $Y$ switched.
+\end{proof}
 
 \begin{lemma}
 \label{lemma-cohomology-de-rham-base-change}
@@ -4929,49 +5646,45 @@ by More on Algebra, Lemma
 
 \noindent
 Let $X, Y, S, a, b, p, q, f$ be as in the introduction to this section.
-Assume $S = \Spec(A)$ affine. On $X$ let $\mathcal{F}^\bullet$
-be a complex of $a^{-1}\mathcal{O}_S$-modules. On $Y$ let
-$\mathcal{G}^\bullet$ be a complex of $b^{-1}\mathcal{O}_S$-modules.
-Then there exists a ``cup product'' map
+Let $\mathcal{F}$ be an $\mathcal{O}_X$-module.
+Let $\mathcal{G}$ be an $\mathcal{O}_Y$-module.
+Set $A = \Gamma(S, \mathcal{O}_S)$.
+Consider the map
 \begin{equation}
-\label{equation-de-rham-kunneth}
-R\Gamma(X, \mathcal{F}^\bullet)
+\label{equation-kunneth-single-sheaves}
+R\Gamma(X, \mathcal{F})
 \otimes_A^\mathbf{L}
-R\Gamma(Y, \mathcal{G}^\bullet)
+R\Gamma(Y, \mathcal{G})
 \longrightarrow
 R\Gamma(X \times_S Y,
-\text{Tot}(p^{-1}\mathcal{F}^\bullet
-\otimes_{f^{-1}\mathcal{O}_S}
-q^{-1}\mathcal{G}^\bullet))
+p^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times_S Y}}
+q^*\mathcal{G})
 \end{equation}
-in $D(A)$. This is constructed using the pullback maps
-$R\Gamma(X, \mathcal{F}^\bullet) \to
-R\Gamma(X \times_S Y, p^{-1}\mathcal{F}^\bullet)$
-and
-$R\Gamma(Y, \mathcal{G}^\bullet) \to
-R\Gamma(X \times_S Y, q^{-1}\mathcal{G}^\bullet)$
-and the cup product constructed in
-Cohomology, Section \ref{cohomology-section-cup-product}.
+in $D(A)$. This map is constructed using the pullback maps
+$R\Gamma(X, \mathcal{F}) \to R\Gamma(X \times_S Y, p^*\mathcal{F})$ and
+$R\Gamma(Y, \mathcal{G}) \to R\Gamma(X \times_S Y, q^*\mathcal{G})$,
+the cup product constructed in
+Cohomology, Section \ref{cohomology-section-cup-product}, and
+the canonical map
+$p^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times_S Y}}^\mathbf{L}
+q^*\mathcal{G}
+\to
+p^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times_S Y}}
+q^*\mathcal{G}$.
 
 \begin{lemma}
 \label{lemma-kunneth-single-sheaf}
-The cup product (\ref{equation-de-rham-kunneth}) is an isomorphism if
-$\mathcal{F}^\bullet$, resp.\ $\mathcal{G}^\bullet$ consist of a single
-$S$-flat quasi-coherent $\mathcal{O}_X$, resp.\ $\mathcal{O}_Y$-module
-sitting in degree zero and $X$ and $Y$ are
-quasi-compact with affine diagonal.
+In the situation above the map (\ref{equation-kunneth-single-sheaves}) is an
+isomorphism if $S$ is affine, $\mathcal{F}$ and $\mathcal{G}$ are $S$-flat and
+quasi-coherent and $X$ and $Y$ are quasi-compact with affine diagonal.
 \end{lemma}
 
-\noindent
-This lemma is true without the assumption on the affineness of the
-diagonals of $X$ and $Y$ replaced by $X$ and $Y$ are quasi-separated.
-To see this one replaces open coverings in the proof below by hypercoverings.
-
 \begin{proof}
-Assume $\mathcal{F}^\bullet = \mathcal{F}$ and
-$\mathcal{G}^\bullet = \mathcal{G}$ are both reduced to
-a single quasi-coherent module placed in degree $0$ and
-both $\mathcal{F}$ and $\mathcal{G}$ are flat over $S$.
+We strongly urge the reader to read the proof of
+Varieties, Lemma \ref{varieties-lemma-kunneth} first.
 Choose finite affine open coverings
 $\mathcal{U} : X = \bigcup_{i \in I} U_i$ and
 $\mathcal{V} : Y = \bigcup_{j \in J} V_j$.
@@ -5014,14 +5727,14 @@ Combining the above we obtain a map of complexes
 \otimes_A
 \check{\mathcal{C}}^\bullet(\mathcal{V}, \mathcal{G}))
 \to
-\text{Tot}(\check{\mathcal{C}}^\bullet(\mathcal{W},
+\check{\mathcal{C}}^\bullet(\mathcal{W},
 p^*\mathcal{F}
 \otimes_{\mathcal{O}_{X \times_S Y}}
-q^*\mathcal{G}))
+q^*\mathcal{G})
 \end{equation}
 We claim this is the map in the statement of the lemma, i.e.,
 the source and target of this arrow are the same as the source
-and target of (\ref{equation-de-rham-kunneth}). Namely, by
+and target of (\ref{equation-kunneth-single-sheaves}). Namely, by
 Cohomology of Schemes, Lemma
 \ref{coherent-lemma-quasi-coherent-affine-cohomology-zero}
 and
@@ -5047,27 +5760,14 @@ q^*\mathcal{G})
 $$
 are isomorphisms. On the other hand, the complex
 $\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{F})$
-is homotopy equivalent to the alternating {\v C}ech complex
-$\check{\mathcal{C}}_{alt}^\bullet(\mathcal{U}, \mathcal{F})$
-by Cohomology, Lemma \ref{cohomology-lemma-alternating-usual}.
-As the modules
-$\mathcal{F}^n(U_{i_0\ldots i_s})$ are $A$-flat,
-we see that the complex
-$\check{\mathcal{C}}_{alt}^\bullet(\mathcal{U}, \mathcal{F})$
-is K-flat (More on Algebra, Lemma
-\ref{more-algebra-lemma-derived-tor-quasi-isomorphism}). Hence
-$\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{F})$
-is a K-flat complex of $A$-modules too and we conclude that
+is K-flat by Lemma \ref{lemma-K-flat} and we conclude that
 $\text{Tot}(
 \check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{F})
 \otimes_A
 \check{\mathcal{C}}^\bullet(\mathcal{V}, \mathcal{G}))$
 represents the derived tensor product
 $R\Gamma(X, \mathcal{F}) \otimes_A^\mathbf{L} R\Gamma(Y, \mathcal{G})$
-as claimed. Finally, we have
-$p^*\mathcal{F} \otimes_{\mathcal{O}_{X \times_S Y}} q^*\mathcal{G} =
-p^{-1}\mathcal{F} \otimes_{f^{-1}\mathcal{O}_S} q^{-1}\mathcal{G}$
-by Remark \ref{remark-silly}.
+as claimed.
 
 \medskip\noindent
 We still have to show that (\ref{equation-kunneth-on-cech})
@@ -5091,7 +5791,46 @@ then $\mathcal{F}' \to (U_i \to X)_*\mathcal{F}|_{U_i}$
 gives a splitting. We conclude that
 $\mathcal{F} \to \mathcal{F}'$ is injective and
 $\mathcal{F}'' = \mathcal{F}'/\mathcal{F}$
-is $S$-flat as well. Also $d(\mathcal{F}'') < d(\mathcal{F})$.
+is $S$-flat as well. The short exact sequence
+$0 \to \mathcal{F} \to \mathcal{F}' \to \mathcal{F}'' \to 0$
+of flat quasi-coherent $\mathcal{O}_X$-modules
+produces a short exact sequence of complexes
+$$
+0 \to
+\text{Tot}(
+\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{F})
+\otimes_A
+\check{\mathcal{C}}^\bullet(\mathcal{V}, \mathcal{G})) \to
+\text{Tot}(
+\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{F}')
+\otimes_A
+\check{\mathcal{C}}^\bullet(\mathcal{V}, \mathcal{G})) \to
+\text{Tot}(
+\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{F}'')
+\otimes_A
+\check{\mathcal{C}}^\bullet(\mathcal{V}, \mathcal{G})) \to 0
+$$
+and a short exact sequence of complexes
+$$
+0 \to
+\check{\mathcal{C}}^\bullet(\mathcal{W},
+p^*\mathcal{F}
+\otimes_{\mathcal{O}_{X \times_S Y}}
+q^*\mathcal{G}) \to
+\check{\mathcal{C}}^\bullet(\mathcal{W},
+p^*\mathcal{F}'
+\otimes_{\mathcal{O}_{X \times_S Y}}
+q^*\mathcal{G}) \to
+\check{\mathcal{C}}^\bullet(\mathcal{W},
+p^*\mathcal{F}''
+\otimes_{\mathcal{O}_{X \times_S Y}}
+q^*\mathcal{G}) \to 0
+$$
+Moreover, the maps (\ref{equation-kunneth-on-cech}) between these are
+compatible with these short exact sequences. Hence it suffices to prove
+(\ref{equation-kunneth-on-cech})
+is an isomorphism for $\mathcal{F}'$ and $\mathcal{F}''$. Finally,
+we have $d(\mathcal{F}'') < d(\mathcal{F})$.
 In this way we reduce to the case $d(\mathcal{F}) = 0$.
 
 \medskip\noindent
@@ -5099,10 +5838,12 @@ Arguing in the same fashion for $\mathcal{G}$ we find that we
 may assume that both $\mathcal{F}$ and $\mathcal{G}$
 have nonzero cohomology only in degree $0$.
 Observe that this means that $\Gamma(X, \mathcal{F})$
-is quasi-isomorphic to the finite complex
-$\check{\mathcal{C}}_{alt}^\bullet(\mathcal{U}, \mathcal{F})$
-of flat $A$-modules sitting in degrees $0, \ldots, |I|$.
-It follows that $\Gamma(X, \mathcal{F})$ is a flat $A$-module.
+is quasi-isomorphic to the $K$-flat complex
+$\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{F})$
+of $A$-modules sitting in degrees $\geq 0$.
+It follows that $\Gamma(X, \mathcal{F})$ is a flat $A$-module
+(because we can compute higher Tor's against this module
+by tensoring with the Cech complex).
 Let $V \subset Y$ be an affine open. Consider the affine open covering
 $\mathcal{U}_V : X \times_S V = \bigcup_{i \in I} U_i \times_S V$.
 It is immediate that
@@ -5131,48 +5872,244 @@ Rq_*(p^*\mathcal{F} \otimes_{\mathcal{O}_{X \times Y}} q^*\mathcal{G})
 \cong
 \Gamma(X, \mathcal{F}) \otimes_A \mathcal{G}
 $$
-on $Y$ with obvious notation. Using this and
-Lemma \ref{lemma-cohomology-base-change} (which applies as
-$\Gamma(X, \mathcal{F})$ is $A$-flat) we conclude that
+on $Y$ where the notation on the right hand side indicates the module
+$$
+b^*\widetilde{\Gamma(X, \mathcal{F})} \otimes_{\mathcal{O}_Y} \mathcal{G}
+$$
+Using the Leray spectral sequence for $q$ we find
+$$
+H^n(X \times_S Y, p^*\mathcal{F} \otimes_{\mathcal{O}_{X \times Y}}
+q^*\mathcal{G}) =
+H^n(Y,
+b^*\widetilde{\Gamma(X, \mathcal{F})} \otimes_{\mathcal{O}_Y} \mathcal{G})
+$$
+Using Lemma \ref{lemma-cohomology-base-change} for the morphism
+$b : Y \to S = \Spec(A)$ and using that $\Gamma(X, \mathcal{F})$
+is $A$-flat we conclude that
 $H^n(X \times_S Y, p^*\mathcal{F} \otimes_{\mathcal{O}_{X \times Y}}
 q^*\mathcal{G})$ is zero for $n > 0$ and isomorphic to
 $H^0(X, \mathcal{F}) \otimes_A H^0(Y, \mathcal{G})$ for $n = 0$.
+Of course, here we also use that $\mathcal{G}$ only has
+cohomology in degree $0$.
 This finishes the proof (except that we should check that the
 isomorphism is indeed given by cup product in degree $0$; we omit
 the verification).
 \end{proof}
 
+\begin{remark}
+\label{remark-annoying-compatibility}
+Let $S = \Spec(A)$ be an affine scheme. Let $a : X \to S$
+and $b : Y \to S$ be morphisms of schemes. Let $\mathcal{F}$, $\mathcal{G}$
+be quasi-coherent $\mathcal{O}_X$-modules and let $\mathcal{E}$
+be a quasi-coherent $\mathcal{O}_Y$-module. Let
+$\xi \in H^i(X, \mathcal{G})$ with pullback
+$p^*\xi \in H^i(X \times_S Y, p^*\mathcal{G})$.
+Then the following diagram is commutative
+$$
+\xymatrix{
+R\Gamma(X, \mathcal{F})[-i] \otimes_A^\mathbf{L} R\Gamma(Y, \mathcal{E})
+\ar[d] \ar[rr]_-{\xi \otimes \text{id}} & &
+R\Gamma(X, \mathcal{G} \otimes_{\mathcal{O}_X} \mathcal{F})
+\otimes_A^\mathbf{L} R\Gamma(Y, \mathcal{E}) \ar[d] \\
+R\Gamma(X \times_S Y, p^*\mathcal{F} \otimes q^*\mathcal{E})[-i]
+\ar[rr]^-{p^*\xi} & &
+R\Gamma(X \times_S Y,
+p^*(\mathcal{G} \otimes_{\mathcal{O}_X} \mathcal{F}) \otimes q^*\mathcal{E})
+}
+$$
+where the unadorned tensor products are over $\mathcal{O}_{X \times_S Y}$.
+The horizontal arrows are from Cohomology, Remark
+\ref{cohomology-remark-cup-with-element-map-total-cohomology}
+and the vertical arrows are (\ref{equation-kunneth-global})
+hence given by pulling back followed by cup product on $X \times_S Y$.
+The diagram commutes because the global cup product (on $X \times_S Y$
+with the sheaves $p^*\mathcal{G}$, $p^*\mathcal{F}$, and $q^*\mathcal{E}$)
+is associative, see
+Cohomology, Lemma \ref{cohomology-lemma-cup-product-associative}.
+\end{remark}
+
+
+
+
+
+
+
+\section{K\"unneth formula, III}
+\label{section-kunneth-complexes}
+
+\noindent
+Let $X, Y, S, a, b, p, q, f$ be as in the introduction to
+Section \ref{section-kunneth}. In this section, given an
+$\mathcal{O}_X$-module $\mathcal{F}$ and a $\mathcal{O}_Y$-module
+$\mathcal{G}$ let us set
+$$
+\mathcal{F} \boxtimes \mathcal{G} =
+p^*\mathcal{F} \otimes_{\mathcal{O}_{X \times_S Y}} q^*\mathcal{G}
+$$
+Note that, contrary to what happens in a future section, we take
+the nonderived tensor product here.
+
+\medskip\noindent
+On $X$ let $\mathcal{F}^\bullet$ be a complex of sheaves of abelian groups
+whose terms are quasi-coherent $\mathcal{O}_X$-modules
+such that the differentials
+$d^i_\mathcal{F} : \mathcal{F}^i \to \mathcal{F}^{i + 1}$
+are differential operators on $X/S$ of finite order, see
+Morphisms, Section \ref{morphisms-section-differential-operators}.
+Simlarly, on $Y$ let $\mathcal{G}^\bullet$ be a complex of sheaves
+of abelian groups whose terms are quasi-coherent $\mathcal{O}_Y$-modules
+such that the differentials
+$d^j_\mathcal{G} : \mathcal{G}^j \to \mathcal{G}^{j + 1}$
+are differential operators on $Y/S$ of finite order.
+Applying the construction of
+Morphisms, Lemma \ref{morphisms-lemma-base-change-differential-operators}
+we obtain a double complex
+$$
+\xymatrix{
+\ldots &
+\ldots &
+\ldots &
+\ldots \\
+\ldots \ar[r] &
+\mathcal{F}^i \boxtimes \mathcal{G}^{j + 1}
+\ar[r]^{d_1^{i, j + 1}} \ar[u] &
+\mathcal{F}^{i + 1} \boxtimes \mathcal{G}^{j + 1} \ar[r] \ar[u] &
+\ldots \\
+\ldots \ar[r] &
+\mathcal{F}^i \boxtimes \mathcal{G}^j
+\ar[r]^{d_1^{i, j}} \ar[u]^{d_2^{i, j}} &
+\mathcal{F}^{i + 1} \boxtimes \mathcal{G}^j \ar[r] \ar[u]_{d_2^{i + 1, j}} &
+\ldots \\
+\ldots &
+\ldots \ar[u] &
+\ldots \ar[u] &
+\ldots
+}
+$$
+of quasi-coherent modules whose maps are differential operators of
+finite order on $X \times_S Y / S$. Please see the discussion in
+Morphisms, Remark \ref{morphisms-remark-base-change-differential-operators}
+and
+Homology, Example \ref{homology-example-double-complex-as-tensor-product-of}.
+To be explicit, we set
+$$
+d_1^{i, j} = d^i_\mathcal{F} \boxtimes 1
+\quad\text{and}\quad
+d_2^{i, j} = 1 \boxtimes d^j_\mathcal{G}
+$$
+In the discussion below the notation
+$$
+\text{Tot}(\mathcal{F}^\bullet \boxtimes \mathcal{G}^\bullet)
+$$
+refers to the total complex associated to this double complex.
+This complex has terms which are quasi-coherent
+$\mathcal{O}_{X \times_S Y}$-modules and whose differentials
+are differential operators of finite order on $X \times_S Y / S$.
+
+\medskip\noindent
+In the situation above there exists a ``relative cup product'' map
+\begin{equation}
+\label{equation-relative-de-rham-kunneth}
+Ra_*(\mathcal{F}^\bullet)
+\otimes_{\mathcal{O}_S}^\mathbf{L}
+Rb_*(\mathcal{G}^\bullet)
+\longrightarrow
+Rf_*\left(\text{Tot}(\mathcal{F}^\bullet \boxtimes \mathcal{G}^\bullet)\right)
+\end{equation}
+Namely, we can construct this map by combining
+\begin{enumerate}
+\item $Ra_*(\mathcal{F}^\bullet) \to Rf_*(p^{-1}\mathcal{F}^\bullet)$,
+\item $Rb_*(\mathcal{G}^\bullet) \to Rf_*(q^{-1}\mathcal{G}^\bullet)$,
+\item
+$Rf_*(p^{-1}\mathcal{F}^\bullet)
+\otimes_{\mathcal{O}_S}^\mathbf{L}
+Rf_*(q^{-1}\mathcal{G}^\bullet)
+\to
+Rf_*(p^{-1}\mathcal{F}^\bullet \otimes_{f^{-1}\mathcal{O}_S}^\mathbf{L}
+q^{-1}\mathcal{G}^\bullet)$,
+\item
+$p^{-1}\mathcal{F}^\bullet \otimes_{f^{-1}\mathcal{O}_S}^\mathbf{L}
+q^{-1}\mathcal{G}^\bullet \to
+\text{Tot}(p^{-1}\mathcal{F}^\bullet \otimes_{f^{-1}\mathcal{O}_S}
+q^{-1}\mathcal{G}^\bullet)$
+\item
+$\text{Tot}(p^{-1}\mathcal{F}^\bullet \otimes_{f^{-1}\mathcal{O}_S}
+q^{-1}\mathcal{G}^\bullet) \to \text{Tot}(\mathcal{F}^\bullet \boxtimes
+\mathcal{G}^\bullet)$.
+\end{enumerate}
+Maps (1) and (2) are pullback maps, map (3) is
+the relative cup product, see
+Cohomology, Remark \ref{cohomology-remark-cup-product},
+map (4) compares the derived and nonderived tensor products, and
+map (5) is given by the obvious maps
+$p^{-1}\mathcal{F}^i \otimes_{f^{-1}\mathcal{O}_S} q^{-1}\mathcal{G}^j
+\to \mathcal{F}^i \boxtimes \mathcal{G}^j$ on the underlying double complexes.
+
+\medskip\noindent
+Set $A = \Gamma(S, \mathcal{O}_S)$. There exists a ``global cup product'' map
+\begin{equation}
+\label{equation-de-rham-kunneth}
+R\Gamma(X, \mathcal{F}^\bullet)
+\otimes_A^\mathbf{L}
+R\Gamma(Y, \mathcal{G}^\bullet)
+\longrightarrow
+R\Gamma(X \times_S Y,
+\text{Tot}(\mathcal{F}^\bullet \boxtimes \mathcal{G}^\bullet))
+\end{equation}
+in $D(A)$. This is constructed similarly to the relative cup product above
+using
+\begin{enumerate}
+\item $R\Gamma(X, \mathcal{F}^\bullet) \to
+R\Gamma(X \times_S Y, p^{-1}\mathcal{F}^\bullet)$
+\item $R\Gamma(Y, \mathcal{G}^\bullet) \to
+R\Gamma(X \times_S Y, q^{-1}\mathcal{G}^\bullet)$,
+\item $R\Gamma(X \times_S Y, p^{-1}\mathcal{F}^\bullet)
+\otimes_A^\mathbf{L} R\Gamma(X \times_S Y, q^{-1}\mathcal{G}^\bullet) \to
+R\Gamma(X \times_S Y,
+p^{-1}\mathcal{F}^\bullet \otimes_{f^{-1}\mathcal{O}_S}^\mathbf{L}
+q^{-1}\mathcal{G}^\bullet)$,
+\item
+$p^{-1}\mathcal{F}^\bullet \otimes_{f^{-1}\mathcal{O}_S}^\mathbf{L}
+q^{-1}\mathcal{G}^\bullet \to
+\text{Tot}(p^{-1}\mathcal{F}^\bullet \otimes_{f^{-1}\mathcal{O}_S}
+q^{-1}\mathcal{G}^\bullet)$
+\item
+$\text{Tot}(p^{-1}\mathcal{F}^\bullet \otimes_{f^{-1}\mathcal{O}_S}
+q^{-1}\mathcal{G}^\bullet) \to \text{Tot}(\mathcal{F}^\bullet \boxtimes
+\mathcal{G}^\bullet)$.
+\end{enumerate}
+Here maps (1) and (2) are the pullback maps, map (3) is the cup product
+constructed in Cohomology, Section \ref{cohomology-section-cup-product}.
+Maps (4) and (5) are as indicated in the previous paragraph.
+
 \begin{lemma}
 \label{lemma-kunneth-special}
-The cup product (\ref{equation-de-rham-kunneth}) is an isomorphism in $D(A)$
-if the following assumptions hold
+In the situation above the cup product (\ref{equation-de-rham-kunneth})
+is an isomorphism in $D(A)$ if the following assumptions hold
 \begin{enumerate}
+\item $S = \Spec(A)$ is affine,
 \item $X$ and $Y$ are quasi-compact with affine diagonal,
 \item $\mathcal{F}^\bullet$ is bounded,
 \item $\mathcal{G}^\bullet$ is bounded below,
-\item $\mathcal{F}^n$ is a flat $a^{-1}\mathcal{O}_S$-module and
-$\mathcal{F}^n$ has the structure of a quasi-coherent $\mathcal{O}_X$-module
-compatible with the given $a^{-1}\mathcal{O}_S$-module structure (but the
-differentials in the complex $\mathcal{F}^\bullet$ need not
-be $\mathcal{O}_X$-linear),
-\item $\mathcal{G}^m$ is a flat $b^{-1}\mathcal{O}_S$-module and
-$\mathcal{G}^m$ has the structure of a quasi-coherent $\mathcal{O}_Y$-module
-compatible with the given $b^{-1}\mathcal{O}_S$-module structure (but the
-differentials in the complex $\mathcal{G}^\bullet$ need not
-be $\mathcal{O}_Y$-linear).
+\item $\mathcal{F}^n$ is $S$-flat, and
+\item $\mathcal{G}^m$ is $S$-flat.
 \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-Suppose that we have maps of complexes of $p^{-1}\mathcal{O}_S$-modules
+We will use the notation $\mathcal{A}_{X/S}$ and $\mathcal{A}_{Y/S}$
+introduced in Morphisms, Remark
+\ref{morphisms-remark-base-change-differential-operators}.
+Suppose that we have maps of complexes
 $$
 \mathcal{F}_1^\bullet \to
 \mathcal{F}_2^\bullet \to
 \mathcal{F}_3^\bullet \to
 \mathcal{F}_1^\bullet[1]
 $$
-Then by the functoriality of the cup product we obtain a
-commutative diagram
+in the category $\mathcal{A}_{X/S}$.
+Then by the functoriality of the cup product
+we obtain a commutative diagram
 $$
 \xymatrix{
 R\Gamma(X, \mathcal{F}_1^\bullet)
@@ -5180,42 +6117,34 @@ R\Gamma(X, \mathcal{F}_1^\bullet)
 R\Gamma(Y, \mathcal{G}^\bullet)
 \ar[r] \ar[d] &
 R\Gamma(X \times_S Y,
-\text{Tot}(p^{-1}\mathcal{F}_1^\bullet
-\otimes_{f^{-1}\mathcal{O}_S}
-q^{-1}\mathcal{G}^\bullet)) \ar[d] \\
+\text{Tot}(\mathcal{F}_1^\bullet \boxtimes \mathcal{G}^\bullet)) \ar[d] \\
 R\Gamma(X, \mathcal{F}_2^\bullet)
 \otimes_A^\mathbf{L}
 R\Gamma(Y, \mathcal{G}^\bullet)
 \ar[r] \ar[d] &
 R\Gamma(X \times_S Y,
-\text{Tot}(p^{-1}\mathcal{F}_2^\bullet
-\otimes_{f^{-1}\mathcal{O}_S}
-q^{-1}\mathcal{G}^\bullet)) \ar[d] \\
+\text{Tot}(\mathcal{F}_2^\bullet \boxtimes \mathcal{G}^\bullet)) \ar[d] \\
 R\Gamma(X, \mathcal{F}_3^\bullet)
 \otimes_A^\mathbf{L}
 R\Gamma(Y, \mathcal{G}^\bullet)
 \ar[r] \ar[d] &
 R\Gamma(X \times_S Y,
-\text{Tot}(p^{-1}\mathcal{F}_3^\bullet
-\otimes_{f^{-1}\mathcal{O}_S}
-q^{-1}\mathcal{G}^\bullet)) \ar[d] \\
+\text{Tot}(\mathcal{F}_3^\bullet \boxtimes \mathcal{G}^\bullet)) \ar[d] \\
 R\Gamma(X, \mathcal{F}_1^\bullet[1])
 \otimes_A^\mathbf{L}
 R\Gamma(Y, \mathcal{G}^\bullet)
 \ar[r] &
 R\Gamma(X \times_S Y,
-\text{Tot}(p^{-1}\mathcal{F}_1^\bullet[1]
-\otimes_{f^{-1}\mathcal{O}_S}
-q^{-1}\mathcal{G}^\bullet))
+\text{Tot}(\mathcal{F}_1^\bullet[1] \boxtimes \mathcal{G}^\bullet))
 }
 $$
-If the original maps form a distinguished triangle in the
-homotopy category of complexes of $p^{-1}\mathcal{O}_S$-modules,
-then the columns of this diagram form distinguished triangles
-in $D(A)$.
+If the original maps form a distinguished triangle in the homotopy category
+of $\mathcal{A}_{X/S}$, then
+the columns of this diagram form distinguished triangles in $D(A)$.
 
 \medskip\noindent
-Suppose that $\mathcal{F}^n = 0$ for $n < i$. Then we may consider the
+In the situation of the lemma,
+suppose that $\mathcal{F}^n = 0$ for $n < i$. Then we may consider the
 termwise split short exact sequence of complexes
 $$
 0 \to \sigma_{\geq i + 1}\mathcal{F}^\bullet \to
@@ -5230,6 +6159,7 @@ $$
 \mathcal{F}^i[-i] \to
 (\sigma_{\geq i + 1}\mathcal{F}^\bullet)[1]
 $$
+in the homotopy category of $\mathcal{A}_{X/S}$
 where the final arrow is given by the boundary map
 $\mathcal{F}^i \to \mathcal{F}^{i + 1}$.
 It follows from the discussion above that it suffices to prove the lemma for
@@ -5252,16 +6182,14 @@ $$
 \sigma_{\leq N}\mathcal{G}^\bullet \to
 (\sigma_{\geq N + 1}\mathcal{G}^\bullet)[1]
 $$
-in the homotopy category of complexes of $b^{-1}\mathcal{O}_S$-modules on $Y$.
-Now observe that both
+in the homotopy category of $\mathcal{A}_{Y/S}$. Now observe that both
 $$
 R\Gamma(X, \mathcal{F})
 \otimes_A^\mathbf{L}
 R\Gamma(Y, \sigma_{\geq N + 1}\mathcal{G}^\bullet)
 \quad\text{and}\quad
 R\Gamma(X \times_S Y,
-\mathcal{F} \otimes_{f^{-1}\mathcal{O}_S}
-q^{-1}\sigma_{\geq N + 1}\mathcal{G}^\bullet))
+\text{Tot}(\mathcal{F} \boxtimes \sigma_{\geq N + 1}\mathcal{G}^\bullet))
 $$
 have vanishing cohomology in degrees $\leq N + i$. Thus, using the arguments
 given above, if we want to prove our statement in a given degree, then we may
@@ -6708,7 +7636,7 @@ x \ar[r]^i & X
 }
 $$
 Then we see that $Lg^* \circ Li^* = Lj^* \circ Lf^*$. This implies that
-the function $\beta'_i$ associated to the perfect complex $Lf^*K$
+the function $\beta'_i$ associated to the pseudo-coherent complex $Lf^*E$
 is the pullback of the function $\beta_i$, in a formula:
 $\beta'_i = \beta_i \circ f$. This is the meaning of (1).
 
@@ -6727,7 +7655,7 @@ for all $x' \in X$. Thus we may assume $E$ is perfect. In this case
 by More on Algebra, Lemma
 \ref{more-algebra-lemma-lift-perfect-from-residue-field}
 there exists an affine open neighbourhood $U$ of $x$ and
-$a \leq b$ such that $K|_U$ is represented by a complex
+$a \leq b$ such that $E|_U$ is represented by a complex
 $$
 \ldots \to 0 \to \mathcal{O}_U^{\oplus \beta_a(x)}
 \to \mathcal{O}_U^{\oplus \beta_{a + 1}(x)} \to
@@ -6745,7 +7673,7 @@ semi-continuous.
 
 \medskip\noindent
 To prove (3) we may assume that $X$ is affine and
-$K$ is given by a complex of finite
+$E$ is given by a complex of finite
 free $\mathcal{O}_X$-modules (for example by arguing as in the previous
 paragraph, or by using Cohomology, Lemma
 \ref{cohomology-lemma-perfect-on-locally-ringed}).
@@ -7034,7 +7962,7 @@ in Algebra, Lemma \ref{algebra-lemma-finite-projective}).
 Commutation with base change means that
 $g^*f_*\mathcal{F} = f'_*(g')^*\mathcal{F}$ for
 a diagram as above and it follows from the already
-esthablished commutation of base change for $E$.
+established commutation of base change for $E$.
 \end{proof}
 
 \begin{lemma}
@@ -7062,46 +7990,29 @@ By cohomology and base change
 (Lemma \ref{lemma-flat-proper-perfect-direct-image-general})
 the complex $E = Rf_*\mathcal{O}_X$
 is perfect and its formation commutes with arbitrary base change.
-In particular, for $s \in S$ we see that
+This first implies that $E$ has tor aplitude in $[0, \infty)$.
+Second, it implies that for $s \in S$ we have
 $H^0(E \otimes^\mathbf{L} \kappa(s)) =
 H^0(X_s, \mathcal{O}_{X_s}) = \kappa(s)$.
-Thus $\beta_0(s) \leq 1$ for all $s \in S$ with notation as in
-Lemma \ref{lemma-jump-loci}. Apply
-Lemma \ref{lemma-locally-closed-where-H0-locally-free}
-with $a = 0$ and $r = 1$. We obtain a universal closed subscheme
-$j : Z \to S$ with $H^0(Lj^*E)$ invertible characterized
-by the equivalence of (4)(a), (b), and (c) of the lemma.
-Since formation of $E$ commutes with base change, we have
-$$
-Lf^*E = R\text{pr}_{1, *}\mathcal{O}_{X \times_S X}
-$$
-The morphism $\text{pr}_1 : X \times_S X$ has a section
-namely the diagonal morphism $\Delta$ for $X$ over $S$.
-We obtain maps
-$$
-\mathcal{O}_X \longrightarrow R\text{pr}_{1, *}\mathcal{O}_{X \times_S X}
-\longrightarrow \mathcal{O}_X
-$$
-in $D(\mathcal{O}_X)$ whose composition is the identity. Thus
-$R\text{pr}_{1, *}\mathcal{O}_{X \times_S X} = \mathcal{O}_X \oplus E'$
-in $D(\mathcal{O}_X)$. Thus $\mathcal{O}_X$ is a direct summand of
-$H^0(Lf^*E)$ and we conclude that $X \to S$ factors through $Z$
-by the equivalence of (4)(c) and (4)(a) of the lemma cited above.
-Since $\{X \to S\}$ is an fppf covering, we have $Z = S$.
-Thus $f_*\mathcal{O}_X$ is an invertible $\mathcal{O}_S$-module.
-We conclude $\mathcal{O}_S \to f_*\mathcal{O}_X$ is an isomorphism
-because a ring map $A \to B$ such that $B$ is invertible as an $A$-module
-is an isomorphism. Since the assumptions are preserved under base
-change, we see that (a) is true.
-
-\medskip\noindent
-Proof of (b). Above we have seen that for every $s \in S$ the map
-$\mathcal{O}_S \to H^0(E \otimes^\mathbf{L} \kappa(s))$ is surjective.
-Thus we may apply
+It follows that the map $\mathcal{O}_S \to Rf_*\mathcal{O}_X = E$
+induces an isomorphism
+$\mathcal{O}_S \otimes \kappa(s) \to H^0(E \otimes^\mathbf{L} \kappa(s))$.
+Hence $H^0(E) \otimes \kappa(s) \to H^0(E \otimes^\mathbf{L} \kappa(s))$
+is surjective and we may apply
 More on Algebra, Lemma \ref{more-algebra-lemma-better-cut-complex-in-two}
-to see that in an open neighbourhood of $s$ we have
-a decomposition $Rf_*\mathcal{O}_X = \mathcal{O}_S \oplus P$
-as stated in the lemma.
+to see that, after replacing $S$ by an affine open neighbourhood of $s$,
+we have a decomposition $E = H^0(E) \oplus \tau_{\geq 1}E$
+with $\tau_{\geq 1}E$ perfect of tor amplitude in $[1, \infty)$.
+Since $E$ has tor amplitude in $[0, \infty)$ we find that
+$H^0(E)$ is a flat $\mathcal{O}_S$-module.
+It follows that $H^0(E)$ is a flat, perfect $\mathcal{O}_S$-module,
+hence finite locally free, see
+More on Algebra, Lemma \ref{more-algebra-lemma-perfect}
+(and the fact that finite projective modules are finite locally free by
+Algebra, Lemma \ref{algebra-lemma-finite-projective}).
+It follows that the map $\mathcal{O}_S \to H^0(E)$ is
+an isomorphism as we can check this after tensoring with
+residue fields (Algebra, Lemma \ref{algebra-lemma-cokernel-flat}).
 \end{proof}
 
 \begin{lemma}
@@ -7124,7 +8035,154 @@ Varieties, Lemma
 and the fact that $X_s$ is geometrically connected and geometrically reduced.
 \end{proof}
 
+\begin{lemma}
+\label{lemma-proper-idempotent-on-fibre}
+Let $f : X \to S$ be a proper morphism of schemes. Let $s \in S$
+and let $e \in H^0(X_s, \mathcal{O}_{X_s})$ be an idempotent.
+Then $e$ is in the image of the map
+$(f_*\mathcal{O}_X)_s \to H^0(X_s, \mathcal{O}_{X_s})$.
+\end{lemma}
 
+\begin{proof}
+Let $X_s = T_1 \amalg T_2$ be the disjoint union decomposition
+with $T_1$ and $T_2$ nonempty and open and closed in $X_s$
+corresponding to $e$, i.e., such that $e$ is identitically $1$
+on $T_1$ and identically $0$ on $T_2$.
+
+\medskip\noindent
+Assume $S$ is Noetherian. We will use the theorem on formal functions
+in the form of Cohomology of Schemes, Lemma
+\ref{coherent-lemma-formal-functions-stalk}.
+It tells us that
+$$
+(f_*\mathcal{O}_X)_s^\wedge = \lim_n H^0(X_n, \mathcal{O}_{X_n})
+$$
+where $X_n$ is the $n$th infinitesimal neighbourhood of $X_s$.
+Since the underlying topological space of $X_n$ is equal to that
+of $X_s$ we obtain for all $n $ a disjoint union decomposition of schemes
+$X_n = T_{1, n} \amalg T_{2, n}$ where the underlying topological space
+of $T_{i, n}$ is $T_i$ for $i = 1, 2$. This means
+$H^0(X_n, \mathcal{O}_{X_n})$ contains a nontrivial idempotent $e_n$,
+namely the function which is identically $1$ on $T_{1, n}$ and
+identically $0$ on $T_{2, n}$. It is clear that $e_{n + 1}$
+restricts to $e_n$ on $X_n$. Hence $e_\infty = \lim e_n$
+is a nontrivial idempotent of the limit. Thus $e_\infty$
+is an element of the completion of $(f_*\mathcal{O}_X)_s$
+mapping to $e$ in $H^0(X_s, \mathcal{O}_{X_s})$.
+Since the map $(f_*\mathcal{O}_X)_s^\wedge \to H^0(X_s, \mathcal{O}_{X_s})$
+factors through
+$(f_*\mathcal{O}_X)^\wedge_s / \mathfrak m_s (f_*\mathcal{O}_X)_s^\wedge =
+(f_*\mathcal{O}_X)_s / \mathfrak m_s (f_*\mathcal{O}_X)_s$
+(Algebra, Lemma \ref{algebra-lemma-hathat-finitely-generated})
+we conclude that $e$ is in the image of the
+map $(f_*\mathcal{O}_X)_s \to H^0(X_s, \mathcal{O}_{X_s})$
+as desired.
+
+\medskip\noindent
+General case: we reduce the general case to the Noetherian case by
+limit arguments. We urge the reader to skip the proof.
+We may replace $S$ by an affine open neighbourhood of $s$.
+Thus we may and do assume that $S$ is affine. By Limits, Lemma
+\ref{limits-lemma-proper-limit-of-proper-finite-presentation-noetherian}
+we can write $(f : X \to S) = \lim (f_i : X_i \to S_i)$ with $f_i$
+proper and $S_i$ Noetherian. Denote $s_i \in S_i$ the image of $s$.
+Then $s = \lim s_i$, see
+Limits, Lemma \ref{limits-lemma-inverse-limit-irreducibles}.
+Then $X_s = X \times_S s = \lim X_i \times_{S_i} s_i = \lim X_{i, s_i}$
+because limits commute with limits
+(Categories, Lemma \ref{categories-lemma-colimits-commute}).
+Hence $e$ is the image of some idempotent
+$e_i \in H^0(X_{i, s_i}, \mathcal{O}_{X_{i, s_i}})$
+by Limits, Lemma \ref{limits-lemma-descend-section}.
+By the Noetherian case there is an element $\tilde e_i$
+in the stalk $(f_{i, *}\mathcal{O}_{X_i})_{s_i}$ mapping
+to $e_i$. Taking the pullback of $\tilde e_i$ we get an
+element $\tilde e$ of $(f_*\mathcal{O}_X)_s$ mapping
+to $e$ and the proof is complete.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-proper-flat-geom-red}
+Let $f : X \to S$ be a morphism of schemes. Let $s \in S$. Assume
+\begin{enumerate}
+\item $f$ is proper, flat, and of finite presentation, and
+\item the fibre $X_s$ is geometrically reduced.
+\end{enumerate}
+Then, after replacing $S$ by an open neighbourhood of $s$, there
+exists a direct sum decomposition
+$Rf_*\mathcal{O}_X = f_*\mathcal{O}_X \oplus P$
+in $D(\mathcal{O}_S)$ where $f_*\mathcal{O}_X$ is a finite \'etale
+$\mathcal{O}_S$-algebra and
+$P$ is a perfect of tor amplitude in $[1, \infty)$.
+\end{lemma}
+
+\begin{proof}
+The proof of this lemma is similar to the proof of
+Lemma \ref{lemma-proper-flat-h0}
+which we suggest the reader read first.
+By cohomology and base change
+(Lemma \ref{lemma-flat-proper-perfect-direct-image-general})
+the complex $E = Rf_*\mathcal{O}_X$
+is perfect and its formation commutes with arbitrary base change.
+This first implies that $E$ has tor aplitude in $[0, \infty)$.
+
+\medskip\noindent
+We claim that after replacing $S$ by an open neighbourhood of
+$s$ we can find a direct sum decomposition
+$E = H^0(E) \oplus \tau_{\geq 1}E$ in $D(\mathcal{O}_S)$
+with $\tau_{\geq 1}E$ of tor amplitude in $[1, \infty)$.
+Assume the claim is true for now and assume we've made the replacement
+so we have the direct sum decomposition.
+Since $E$ has tor amplitude in $[0, \infty)$ we find that
+$H^0(E)$ is a flat $\mathcal{O}_S$-module.
+Hence $H^0(E)$ is a flat, perfect $\mathcal{O}_S$-module,
+hence finite locally free, see
+More on Algebra, Lemma \ref{more-algebra-lemma-perfect}
+(and the fact that finite projective modules are finite locally free by
+Algebra, Lemma \ref{algebra-lemma-finite-projective}).
+Of course $H^0(E) = f_*\mathcal{O}_X$ is an $\mathcal{O}_S$-algebra.
+By cohomology and base change we obtain
+$H^0(E) \otimes \kappa(s) = H^0(X_s, \mathcal{O}_{X_s})$.
+By Varieties, Lemma
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections}
+and the assumption that $X_s$ is geometrically reduced, we
+see that $\kappa(s) \to H^0(E) \otimes \kappa(s)$
+is finite \'etale. By Morphisms, Lemma
+\ref{morphisms-lemma-set-points-where-fibres-etale}
+applied to the finite locally free morphism
+$\underline{\Spec}_S(H^0(E)) \to S$,
+we conclude that after shrinking $S$ the $\mathcal{O}_S$-algebra
+$H^0(E)$ is finite \'etale.
+
+\medskip\noindent
+It remains to prove the claim. For this it suffices to prove that the map
+$$
+(f_*\mathcal{O}_X)_s
+\longrightarrow
+H^0(X_s, \mathcal{O}_{X_s}) = H^0(E \otimes^\mathbf{L} \kappa(s))
+$$
+is surjective, see
+More on Algebra, Lemma \ref{more-algebra-lemma-better-cut-complex-in-two}.
+Choose a flat local ring homomorphism $\mathcal{O}_{S, s} \to A$
+such that the residue field $k$ of $A$ is algebraically closed, see
+Algebra, Lemma \ref{algebra-lemma-flat-local-given-residue-field}.
+By flat base change (Cohomology of Schemes, Lemma
+\ref{coherent-lemma-flat-base-change-cohomology})
+we get $H^0(X_A, \mathcal{O}_{X_A}) =
+(f_*\mathcal{O}_X)_s \otimes_{\mathcal{O}_{S, s}} A$
+and $H^0(X_k, \mathcal{O}_{X_k}) =
+H^0(X_s, \mathcal{O}_{X_s}) \otimes_{\kappa(s)} k$.
+Hence it suffices to prove that
+$H^0(X_A, \mathcal{O}_{X_A}) \to H^0(X_k, \mathcal{O}_{X_k})$
+is surjective. Since $X_k$ is a reduced proper scheme over $k$
+and since $k$ is algebraically closed, we see that
+$H^0(X_k, \mathcal{O}_{X_k})$ is a finite product of copies
+of $k$ by the already used Varieties, Lemma
+\ref{varieties-lemma-proper-geometrically-reduced-global-sections}.
+Since by Lemma \ref{lemma-proper-idempotent-on-fibre}
+the idempotents of this $k$-algebra are in the image
+of $H^0(X_A, \mathcal{O}_{X_A}) \to H^0(X_k, \mathcal{O}_{X_k})$ we conclude.
+\end{proof}
 
 
 
@@ -8050,7 +9108,7 @@ If you know the answer to this question, please email
 \href{mailto:stacks.project@gmail.com}{stacks.project@gmail.com}
 
 \medskip\noindent
-We can make the following definition although it scarecely makes
+We can make the following definition although it scarcely makes
 sense to consider it for general schemes.
 
 \begin{definition}

@@ -24,6 +24,18 @@ In this chapter we put some lemmas that have become ``obsolete''
 (see \cite{Miller}).
 
 
+\section{Preliminaries}
+\label{section-preliminaries}
+
+\begin{remark}
+\label{remark-composition-of-adjoints-isomorphic-to-identity}
+The information which used to be contained in this remark is now
+subsumed in the combination of
+Categories, Lemmas \ref{categories-lemma-adjoint-fully-faithful} and
+\ref{categories-lemma-left-adjoint-composed-fully-faithful}.
+\end{remark}
+
+
 \section{Homological algebra}
 \label{section-homological-algebra}
 
@@ -764,6 +776,8 @@ $S''/J$ does the job.
 \end{proof}
 
 
+
+
 \section{Formally smooth ring maps}
 \label{section-formally-smooth}
 
@@ -776,6 +790,110 @@ then $S$ is smooth over $R$.
 
 \begin{proof}
 See Algebra, Proposition \ref{algebra-proposition-smooth-formally-smooth}.
+\end{proof}
+
+\begin{remark}
+\label{remark-equation-derivatives}
+This tag used to refer to an equation in the proof of
+Restricted Power Series, Proposition \ref{restricted-proposition-approximate}
+which became unused because of a rearrangement of the material.
+\end{remark}
+
+\begin{remark}
+\label{remark-equation-ci}
+This tag used to refer to an equation in the proof of
+Restricted Power Series, Proposition \ref{restricted-proposition-approximate}
+which became unused because of a rearrangement of the material.
+\end{remark}
+
+\begin{remark}
+\label{remark-equation-in-ideal}
+This tag used to refer to an equation in the proof of
+Restricted Power Series, Proposition \ref{restricted-proposition-approximate}
+which became unused because of a rearrangement of the material.
+\end{remark}
+
+\begin{remark}
+\label{remark-equation-derivatives-analogue}
+This tag used to refer to an equation in the proof of
+Restricted Power Series, Proposition \ref{restricted-proposition-approximate}
+which became unused because of a rearrangement of the material.
+\end{remark}
+
+\begin{remark}
+\label{remark-equation-go-down}
+This tag used to refer to an equation in the proof of
+Restricted Power Series, Lemma \ref{restricted-lemma-lift-approximation}
+which became unused because of a rearrangement of the material.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-get-morphism-general}
+Let $A$ be a Noetherian ring. Let $I \subset A$ be an ideal.
+Let $t$ be the minimal number of generators for $I$.
+Let $C$ be a Noetherian $I$-adically complete $A$-algebra.
+There exists an integer $d \geq 0$ depending only on
+$I \subset A \to C$ with the following property: given
+\begin{enumerate}
+\item $c \geq 0$ and $B$ in
+Restricted Power Series, Equation (\ref{restricted-equation-C-prime})
+such that for $a \in I^c$
+multiplication by $a$ on $\NL_{B/A}^\wedge$ is zero in $D(B)$,
+\item an integer $n > 2t\max(c, d)$,
+\item an $A/I^n$-algebra map $\psi_n : B/I^nB \to C/I^nC$,
+\end{enumerate}
+there exists a map $\varphi : B \to C$ of $A$-algebras such
+that $\psi_n \bmod I^{m - c} = \varphi \bmod I^{m - c}$
+with $m = \lfloor \frac{n}{t} \rfloor$.
+\end{lemma}
+
+\begin{proof}
+This lemma has been obsoleted by the stronger
+Restricted Power Series, Lemma
+\ref{restricted-lemma-get-morphism-general-better}.
+In fact, we will deduce the lemma from it.
+
+\medskip\noindent
+Let $I \subset A \to C$ be given as in the statement above.
+Denote $d(\text{Gr}_I(C))$ and $q(\text{Gr}_I(C))$ the integers found in 
+Local Cohomology, Section \ref{local-cohomology-section-uniform}.
+Observe that $t$ is an upper bound for the minimal number of generators
+of $IC$ and hence we have $d(\text{Gr}_I(C)) + 1 \leq t$, see discussion in
+Local Cohomology, Section \ref{local-cohomology-section-uniform}.
+We may and do assume $t \geq 1$ since otherwise the lemma does
+not say anything. We claim that the lemma is true with
+$$
+d = q(\text{Gr}_I(C))
+$$
+Namely, suppose that $c$, $B$, $n$, $\psi_n$ are as in the statement above.
+Then we see that
+$$
+n > 2t\max(c, d) \Rightarrow n \geq 2tc + 1 \Rightarrow
+n \geq 2(d(\text{Gr}_I(C)) + 1)c + 1
+$$
+On the other hand, we have
+$$
+n > 2t\max(c, d) \Rightarrow n > t(c + d) \Rightarrow
+n \geq q(C) + tc \geq q(\text{Gr}_I(C)) + (d(\text{Gr}_I(C)) + 1)c
+$$
+Hence the assumptions of
+Restricted Power Series, Lemma
+\ref{restricted-lemma-get-morphism-general-better}
+are satisfied and we obtain an $A$-algebra homomorphism
+$\varphi : B \to C$ which is congruent with $\psi_n$
+module $I^{n - (d(\text{Gr}_I(C)) + 1)c}C$.
+Since
+\begin{align*}
+n - (d(\text{Gr}_I(C)) + 1)c
+& = \frac{n}{t} + \frac{(t - 1)n}{t} - (d(\text{Gr}_I(C)) + 1)c \\
+& \geq \frac{n}{t} + \frac{(d(\text{Gr}_I(C))n}{t} - (d(\text{Gr}_I(C)) + 1)c \\
+& > \frac{n}{t} + \frac{d(\text{Gr}_I(C))2tc}{t} - (d(\text{Gr}_I(C)) + 1)c \\
+& = \frac{n}{t} + 2d(\text{Gr}_I(C))c - (d(\text{Gr}_I(C)) + 1)c \\
+& = \frac{n}{t} + d(\text{Gr}_I(C))c - c \\
+& \geq m - c
+\end{align*}
+we see that we have the congruence of
+$\varphi$ and $\psi_n$ module $I^{m - c}C$ as desired.
 \end{proof}
 
 
@@ -838,6 +956,32 @@ equal to $1$ and almost surely the diagram doesn't commute.
 \section{Cohomology}
 \label{section-cohomology}
 
+\noindent
+Remarks on K-flat complexes which are obsoleted by stronger results.
+
+\begin{lemma}
+\label{lemma-pullback-K-flat}
+Let $(\Sh(\mathcal{C}), \mathcal{O}_\mathcal{C})$ be a ringed topos.
+For any complex of $\mathcal{O}_\mathcal{C}$-modules $\mathcal{G}^\bullet$
+there exists a quasi-isomorphism $\mathcal{K}^\bullet \to \mathcal{G}^\bullet$
+such that $f^*\mathcal{K}^\bullet$ is a K-flat complex of
+$\mathcal{O}_\mathcal{D}$-modules for any morphism
+$f : (\Sh(\mathcal{D}), \mathcal{O}_\mathcal{D}) \to
+(\Sh(\mathcal{C}), \mathcal{O}_\mathcal{C})$ of ringed topoi.
+\end{lemma}
+
+\begin{proof}
+This follows from Cohomology on Sites, Lemmas
+\ref{sites-cohomology-lemma-K-flat-resolution} and
+\ref{sites-cohomology-lemma-pullback-K-flat}.
+\end{proof}
+
+\begin{remark}
+\label{remark-pullback-K-flat}
+This remark used to discuss what we know about pullbacks of K-flat complexes
+being K-flat or not, but is now obsoleted by
+Cohomology on Sites, Lemma \ref{sites-cohomology-lemma-pullback-K-flat}.
+\end{remark}
 
 \noindent
 The following lemma computes the cohomology sheaves of the
@@ -1092,7 +1236,7 @@ longer suitable there because of a reorganization. The content of
 the tag was the following:
 \'Etale Cohomology, Lemma \ref{etale-cohomology-lemma-when-ctf}
 can be used to prove that if $f : X \to Y$ is a separated, finite type
-morphism of schemes and $Y$ is noetherian, then $Rf_!$ induces a functor
+morphism of schemes and $Y$ is Noetherian, then $Rf_!$ induces a functor
 $D_{ctf}(X_\etale, \Lambda) \to D_{ctf}(Y_\etale, \Lambda)$.
 An example of this argument, when $Y$ is the spectrum of a field and
 $X$ is a curve is given in The Trace Formula,
@@ -1459,6 +1603,33 @@ This follows from Properties, Lemma
 \ref{properties-lemma-section-maps-backwards}.
 \end{proof}
 
+\begin{lemma}
+\label{lemma-bound-degree-in-nbhd-generic-point}
+Let $f : X \to Y$ be a morphism schemes. Assume
+\begin{enumerate}
+\item $X$ and $Y$ are integral schemes,
+\item $f$ is locally of finite type and dominant,
+\item $f$ is either quasi-compact or separated,
+\item $f$ is generically finite, i.e., one of (1) -- (5) of
+Morphisms, Lemma \ref{morphisms-lemma-finite-degree} holds.
+\end{enumerate}
+Then there is a nonempty open $V \subset Y$ such that
+$f^{-1}(V) \to V$ is finite locally free of degree $\deg(X/Y)$.
+In particular, the degrees of the fibres of $f^{-1}(V) \to V$
+are bounded by $\deg(X/Y)$.
+\end{lemma}
+
+\begin{proof}
+We may choose $V$ such that $f^{-1}(V) \to V$ is finite.
+Then we may shrink $V$ and assume that $f^{-1}(V) \to V$
+is flat and of finite presentation by generic flatness
+(Morphisms, Proposition \ref{morphisms-proposition-generic-flatness}).
+Then the morphism is finite locally free by
+Morphisms, Lemma \ref{morphisms-lemma-finite-flat}.
+Since $V$ is irreducible the morphism has a fixed degree.
+The final statement follows from this and
+Morphisms, Lemma \ref{morphisms-lemma-finite-locally-free-universally-bounded}.
+\end{proof}
 
 
 
@@ -1697,11 +1868,11 @@ open coverings of the $U_i$ gives what we want.
 
 
 
-\section{Obsolete lemma on algebraic spaces}
+\section{Obsolete lemmas on algebraic spaces}
 \label{section-obsolete-on-spaces}
 
 \noindent
-Lemmas that seem superfluous.
+Lemmas that seem superfluous or are no longer used in the text.
 
 \begin{lemma}
 \label{lemma-vanishing-surjective}
@@ -1728,6 +1899,69 @@ Cohomology of Spaces, Proposition
 \ref{spaces-cohomology-proposition-vanishing-affine}
 but now is a consequence of it.
 \end{proof}
+
+
+
+
+
+
+\section{Obsolete lemmas on algebraic stacks}
+\label{section-obsolete-on-stacks}
+
+\noindent
+Lemmas that seem superfluous or are no longer used in the text.
+
+\begin{lemma}
+\label{lemma-infinite-sequence}
+Let $S$ be a locally Noetherian scheme. Let $\mathcal{X}$ be a category
+fibred in groupoids over $(\Sch/S)_{fppf}$ having (RS*).
+Let $x$ be an object of
+$\mathcal{X}$ over an affine scheme $U$ of finite type over $S$.
+Let $u_n \in U$, $n \geq 1$ be pairwise distinct finite type points
+such that $x$ is not versal at $u_n$ for all $n$. After replacing
+$u_n$ by a subsequence, there exist morphisms
+$$
+x \to x_1 \to x_2 \to \ldots
+\quad\text{in }\mathcal{X}\text{ lying over }\quad
+U \to U_1 \to U_2 \to \ldots
+$$
+over $S$ such that
+\begin{enumerate}
+\item for each $n$ the morphism $U \to U_n$ is a first order
+thickening,
+\item for each $n$ we have a short exact sequence
+$$
+0 \to \kappa(u_n) \to \mathcal{O}_{U_n} \to \mathcal{O}_{U_{n - 1}} \to 0
+$$
+with $U_0 = U$ for $n = 1$,
+\item for each $n$ there does {\bf not} exist a pair $(W, \alpha)$
+consisting of an open neighbourhood $W \subset U_n$ of $u_n$
+and a morphism $\alpha : x_n|_W \to x$
+such that the composition
+$$
+x|_{U \cap W} \xrightarrow{\text{restriction of }x \to x_n}
+x_n|_W \xrightarrow{\alpha} x
+$$
+is the canonical morphism $x|_{U \cap W} \to x$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+This lemma was originally used in the proof of a criterion for
+openness of versality
+(Artin's Axioms, Lemma \ref{artin-lemma-SGE-implies-openness-versality}) but it
+got replaced by Artin's Axioms, Lemma \ref{artin-lemma-infinite-sequence-pre}
+from which it readily follows. Namely,
+after replacing $u_n$, $n \geq 1$ by a subsequence we may and do
+assume that there are no specializations among these points, see
+Properties, Lemma \ref{properties-lemma-thin-infinite-sequence}.
+Then we can apply
+Artin's Axioms, Lemma \ref{artin-lemma-infinite-sequence-pre}
+to finish the proof.
+\end{proof}
+
+
+
 
 
 
@@ -3674,6 +3908,19 @@ Combining the above we obtain the statement of the lemma.
 This section is a place where we collect duplicates
 and references which used to say several things at the
 same time but are now split into their constituent parts.
+
+\begin{lemma}
+\label{lemma-directed-colimit-finite-type}
+Let $X$ be a scheme. Assume $X$ is quasi-compact and quasi-separated.
+Let $\mathcal{F}$ be a quasi-coherent $\mathcal{O}_X$-module.
+Then $\mathcal{F}$ is the directed colimit of its finite type
+quasi-coherent submodules.
+\end{lemma}
+
+\begin{proof}
+This is a duplicate of Properties, Lemma
+\ref{properties-lemma-quasi-coherent-colimit-finite-type}.
+\end{proof}
 
 \begin{lemma}
 \label{lemma-points-monomorphism}

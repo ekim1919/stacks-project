@@ -817,7 +817,8 @@ $\{\varphi_i : U_i \to U\}_{i \in I}$ such that $I$ is countable.
 \begin{example}
 \label{example-indiscrete}
 Let $\mathcal{C}$ be a category. There is a canonical way to turn this
-into a site where $\{\text{id}_U : U \to U\}$ are the coverings.
+into a site where $\{f : V \to U \mid f\text{ is an isomorphism}\}$
+are the coverings of $U$.
 Sheaves on this site are the presheaves on $\mathcal{C}$.
 This corresponding topology is called the {\it chaotic} or
 {\it indiscrete topology}.
@@ -977,7 +978,7 @@ we claim that the sheaves on $X'_{Zar}$ are different
 from the sheaves on $X_{Zar}$. For example, as an extreme
 case consider the situation where $X = \{p\}$ is a singleton.
 Then the objects of $X'_{Zar}$ are $\emptyset, X$
-and every covering if $\emptyset$ can be refined by
+and every covering of $\emptyset$ can be refined by
 $\{\emptyset \to \emptyset\}$ and every covering of $X$ by $\{X \to X\}$.
 Clearly, a sheaf on this is given by any choice of
 a set $\mathcal{F}(\emptyset)$ and any choice of a
@@ -1242,8 +1243,8 @@ Omitted.
 
 \begin{lemma}
 \label{lemma-compare-sheaf-condition}
-Let $\mathcal{C}$ be a category. Let $\mathcal{U} = \{U_i \to U\}_{i \in I} \to
-\mathcal{V} = \{V_j \to U\}_{j \in J}$ be a morphism of families of maps
+Let $\mathcal{C}$ be a category. Let $\mathcal{V} = \{V_j \to U\}_{j \in J} \to
+\mathcal{U} = \{U_i \to U\}_{i \in I}$ be a morphism of families of maps
 with fixed target of $\mathcal{C}$ given by $\text{id} : U \to U$,
 $\alpha : J \to I$ and $f_j : V_j \to U_{\alpha(j)}$. Let $\mathcal{F}$
 be a presheaf on $\mathcal{C}$. If
@@ -8845,6 +8846,9 @@ the problem posed in the lemma.
 
 \begin{proposition}
 \label{proposition-criterion-points}
+\begin{reference}
+\cite[Expos\'e VI, Appendix by Deligne, Proposition 9.0]{SGA4}
+\end{reference}
 Let $\mathcal{C}$ be a site. Assume that
 \begin{enumerate}
 \item finite limits exist in $\mathcal{C}$, and
@@ -10486,8 +10490,10 @@ $S' \in J(U)$ by the second axiom.
 \label{definition-finer}
 Let $\mathcal{C}$ be a category. Let $J$, $J'$ be
 two topologies on $\mathcal{C}$. We say that $J$ is
-{\it finer} than $J'$ if and only if for every object
+{\it finer} or {\it stronger} than $J'$ if and only if for every object
 $U$ of $\mathcal{C}$ we have $J'(U) \subset J(U)$.
+In this case we also say that $J'$ is
+{\it coarser} or {\it weaker} than $J$.
 \end{definition}
 
 \noindent

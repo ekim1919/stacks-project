@@ -73,7 +73,7 @@ finite injective dimension, and is such that the map
 $$
 A \longrightarrow R\Hom_A(\omega_A^\bullet, \omega_A^\bullet)
 $$
-is a quasi-isomorphism. After esthablishing some elementary properties
+is a quasi-isomorphism. After establishing some elementary properties
 of dualizing complexes, we show a dualizing complex gives rise to a
 dimension function. Next, we prove Grothendieck's local duality theorem.
 After briefly discussing dualizing modules and Cohen-Macaulay rings,
@@ -1945,6 +1945,9 @@ A more general statement can be found in
 
 \begin{lemma}
 \label{lemma-complete-and-local}
+\begin{slogan}
+Results of this nature are sometimes referred to as Greenlees-May duality.
+\end{slogan}
 Let $A$ be a ring and let $I$ be a finitely generated ideal.
 Let $R\Gamma_Z$ be as in Lemma \ref{lemma-local-cohomology-adjoint}.
 Let ${\ }^\wedge$ denote derived completion as in
@@ -2562,6 +2565,33 @@ idea to prove some of the following lemmas yourself without reading
 the proofs.
 
 \begin{lemma}
+\label{lemma-finite-ext-into-bounded-injective}
+Let $A$ be a Noetherian ring. Let $K, L \in D_{\textit{Coh}}(A)$
+and assume $L$ has finite injective dimension. Then
+$R\Hom_A(K, L)$ is in $D_{\textit{Coh}}(A)$.
+\end{lemma}
+
+\begin{proof}
+Pick an integer $n$ and consider the distinguished triangle
+$$
+\tau_{\leq n}K \to K \to \tau_{\geq n + 1}K \to \tau_{\leq n}K[1]
+$$
+see Derived Categories, Remark
+\ref{derived-remark-truncation-distinguished-triangle}.
+Since $L$ has finite injective dimension we see
+that $R\Hom_A(\tau_{\geq n + 1}K, L)$ has vanishing
+cohomology in degrees $\geq c - n$ for some constant $c$.
+Hence, given $i$, we see that
+$\Ext^i_A(K, L) \to \Ext^i_A(\tau_{\leq n}K, L)$
+is an isomorphism for some $n \gg - i$. By
+Derived Categories of Schemes, Lemma \ref{perfect-lemma-coherent-internal-hom}
+applied to $\tau_{\leq n}K$ and $L$
+we see conclude that $\Ext^i_A(K, L)$ is
+a finite $A$-module for all $i$. Hence $R\Hom_A(K, L)$
+is indeed an object of $D_{\textit{Coh}}(A)$.
+\end{proof}
+
+\begin{lemma}
 \label{lemma-dualizing}
 Let $A$ be a Noetherian ring. If $\omega_A^\bullet$ is a dualizing
 complex, then the functor
@@ -2576,27 +2606,9 @@ Moreover $D \circ D$ is isomorphic to the identity functor.
 \end{lemma}
 
 \begin{proof}
-Let $K$ be an object of $D_{\textit{Coh}}(A)$. Pick an integer $n$ and
-consider the distinguished triangle
-$$
-\tau_{\leq n}K \to K \to \tau_{\geq n + 1}K \to \tau_{\leq n}K[1]
-$$
-see Derived Categories, Remark
-\ref{derived-remark-truncation-distinguished-triangle}.
-Since $\omega_A^\bullet$ has finite injective dimension we see
-that $R\Hom_A(\tau_{\geq n + 1}K, \omega_A^\bullet)$ has vanishing
-cohomology in degrees $\geq n - c$ for some constant $c$.
-On the other hand, we obtain a spectral sequence
-$$
-\Ext_A^p(H^{-q}(\tau_{\leq n}K), \omega_A^\bullet)
-\Rightarrow
-\Ext_A^{p + q}(\tau_{\leq n}K, \omega_A^\bullet) =
-H^{p + q}(R\Hom_A(\tau_{\leq n}K, \omega_A^\bullet))
-$$
-which shows that these cohomology modules are finite. Since for
-$n > p + q + c$ this is equal to $H^{p + q}(R\Hom_A(K, \omega_A^\bullet))$
-we see that $R\Hom_A(K, \omega_A^\bullet)$ is indeed an object
-of $D_{\textit{Coh}}(A)$.
+Let $K$ be an object of $D_{\textit{Coh}}(A)$. From
+Lemma \ref{lemma-finite-ext-into-bounded-injective}
+we see $R\Hom_A(K, \omega_A^\bullet)$ is an object of $D_{\textit{Coh}}(A)$.
 By More on Algebra, Lemma
 \ref{more-algebra-lemma-internal-hom-evaluate-isomorphism-technical}
 and the assumptions on the dualizing complex
@@ -2607,36 +2619,6 @@ K = R\Hom_A(\omega_A^\bullet, \omega_A^\bullet) \otimes_A^\mathbf{L} K
 R\Hom_A(R\Hom_A(K, \omega_A^\bullet), \omega_A^\bullet)
 $$
 Thus our functor has a quasi-inverse and the proof is complete.
-\end{proof}
-
-\begin{lemma}
-\label{lemma-detect-cohomology}
-Let $A$ be a Noetherian ring. Let $K \in D^b_{\textit{Coh}}(A)$.
-Let $\mathfrak m$ be a maximal ideal of $A$.
-If $H^i(K)/\mathfrak m H^i(K) \not = 0$, then there exists a finite
-$A$-module $E$ annihilated by a power of $\mathfrak m$
-and a map $K \to E[-i]$ which is nonzero on $H^i(K)$.
-\end{lemma}
-
-\begin{proof}
-Let $I$ be the injective hull of the residue field of $\mathfrak m$.
-If $H^i(K)/\mathfrak m H^i(K) \not = 0$, then there exists a nonzero
-map $H^i(K) \to I$. Since $I$ is injective, we can lift this to a
-nonzero map $K \to I[-i]$. Recall that $I = \bigcup I[\mathfrak m^n]$,
-see Lemma \ref{lemma-torsion-submodule-sum-injective-hulls}
-and that each of the modules $E = I[\mathfrak m^n]$ is of the
-desired type. Thus it suffices to prove that
-$$
-\Hom_{D(A)}(K, I) = \colim \Hom_{D(A)}(K, I[\mathfrak m^n])
-$$
-This would be immediate if $K$ where a compact object
-(or a perfect object) of $D(A)$. This is not the case, but
-$K$ is a pseudo-coherent object which is enough here. Namely,
-we can represent $K$ by a bounded above complex of finite
-free $R$-modules $K^\bullet$. In this case the $\Hom$ groups
-above are computed by using $\Hom_{K(A)}(K^\bullet, -)$.
-As each $K^n$ is finite free the limit statement holds and the
-proof is complete.
 \end{proof}
 
 \noindent
@@ -2696,7 +2678,8 @@ lemma this implies that $H^j(F(A))_\mathfrak m$ is zero for $j > a$ and
 generated by $1$ element for $j = a$. On the other hand, if
 $H^j(F(A))_\mathfrak m$ is not zero for some $j < a$, then
 there is a map $F(A) \to E[-a + i]$ for some $i < 0$ and some
-$E$ (Lemma \ref{lemma-detect-cohomology}) which is a contradiction.
+$E$ (More on Algebra, Lemma \ref{more-algebra-lemma-detect-cohomology})
+which is a contradiction.
 Thus we see that $F(A)_\mathfrak m = M[-a]$
 for some $A_\mathfrak m$-module $M$ generated by $1$ element.
 However, since
@@ -3236,7 +3219,7 @@ we see that the remaining module has to be nonzero.
 
 \noindent
 Our results in the local setting have the following consequence:
-a Noetherian ring with has a dualizing complex is a
+a Noetherian ring which has a dualizing complex is a
 universally catenary ring of finite dimension.
 
 \begin{lemma}
@@ -3935,8 +3918,8 @@ The following are equivalent
 \begin{proof}
 Below we will use without further mention that a local Gorenstein ring
 has finite injective dimension as well as Lemma \ref{lemma-gorenstein-ext}.
-By More on Algebra, Remark
-\ref{more-algebra-remark-pseudo-coherence-and-base-change-ext}
+By More on Algebra, Lemma
+\ref{more-algebra-lemma-pseudo-coherence-and-base-change-ext}
 we have
 $$
 \Ext^i_A(\kappa_A, A) \otimes_A B =
@@ -5032,8 +5015,8 @@ where $\mathfrak r \subset P$ is the prime corresponding to $\mathfrak q$
 and $I$ is the kernel of $P \to A$.
 We may rewrite this as
 $\Ext_{P_\mathfrak r}^i(P_\mathfrak r/IP_\mathfrak r, P_\mathfrak r)$
-by More on Algebra, Remark
-\ref{more-algebra-remark-pseudo-coherence-and-base-change-ext}.
+by More on Algebra, Lemma
+\ref{more-algebra-lemma-pseudo-coherence-and-base-change-ext}.
 Thus we have to show
 $$
 \text{depth}_{IP_\mathfrak r}(P_\mathfrak r) \geq n - d

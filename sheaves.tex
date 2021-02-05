@@ -1495,8 +1495,8 @@ $$
 \prod\nolimits_{v \in V} \mathcal{F}_v
 $$
 maps elements of $\mathcal{F}^{\#}(U)$ into $\mathcal{F}^{\#}(V)$.
-In other words, we get the structure of a presheaf of sets
-on $\mathcal{F}^{\#}$.
+Using these maps as the restriction mappings, we turn $\mathcal{F}^\#$
+into a presheaf of sets on $X$.
 
 \medskip\noindent
 Furthermore, the map $\mathcal{F}(U) \to \prod_{u \in U} \mathcal{F}_u$
@@ -4356,7 +4356,7 @@ $\varphi : \mathcal{G} \to \mathcal{F}$
 recovering $\varphi_V^U$ as the composition
 $$
 \mathcal{G}(V) \xrightarrow{\varphi_V}
-\mathcal{F}(f^{-1}(V)) \xrightarrow{\text{restrc.}}
+\mathcal{F}(f^{-1}(V)) \xrightarrow{\text{restr.}}
 \mathcal{F}(U)
 $$
 for every pair $(U, V)$ as above.
@@ -5127,7 +5127,7 @@ collection by setting $s_i = s$ and $s_j = \varphi_{ij}(s_i|_{W \cap U_j})$.
 
 \medskip\noindent
 Second proof (sketch). Let $\mathcal{B}$ be the set of opens $U \subset X$
-such that $U \subset U_i$ for somje $i \in I$. Then $\mathcal{B}$
+such that $U \subset U_i$ for some $i \in I$. Then $\mathcal{B}$
 is a base for the topology on $X$. For $U \in \mathcal{B}$ we pick
 $i \in I$ with $U \subset U_i$ and we set $\mathcal{F}(U) = \mathcal{F}_i(U)$.
 Using the isomorphisms $\varphi_{ij}$ we see that this prescription

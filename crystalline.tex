@@ -1259,7 +1259,7 @@ B \ar[r]_\varphi & B' \\
 A \ar[u] \ar[r] & A' \ar[u]
 }
 $$
-Let $\Omega_{B/A} \to \Omega$ and $\Omega_{B'/A} \to \Omega'$
+Let $\Omega_{B/A} \to \Omega$ and $\Omega_{B'/A'} \to \Omega'$
 be quotients satisfying the assumptions of
 Algebra, Lemma \ref{algebra-lemma-de-rham-complex}.
 Assume there is a map $\varphi : \Omega \to \Omega'$ which
@@ -1986,7 +1986,7 @@ In this case the comparison mappings (\ref{equation-comparison})
 define a comparison map
 \begin{equation}
 \label{equation-comparison-modules}
-c_f : f^*\mathcal{F}_T \longrightarrow \mathcal{F}_{T'}
+c_f : f^*\mathcal{F}_{T'} \longrightarrow \mathcal{F}_T
 \end{equation}
 of $\mathcal{O}_T$-modules.
 
@@ -2605,8 +2605,10 @@ $$
 \Omega_{T/S, \delta}
 $$
 because this is the kernel of $p_1^*\mathcal{F}_T \to \mathcal{F}_T$
-as $\Omega_{T/S, \delta}$ is the kernel of
-$\mathcal{O}_{T'} \to \mathcal{O}_T$ by construction.
+as $\mathcal{O}_{T'} = \mathcal{O}_T \oplus \Omega_{T/S, \delta}$
+by construction. It is easily verified that $\nabla(fs) =
+f\nabla(s) + s \otimes \text{d}(f)$ using the description of
+$\text{d}$ in Remark \ref{remark-first-order-thickening}.
 
 \medskip\noindent
 The collection of maps
@@ -2901,7 +2903,9 @@ $$
 \xi_i(j) = x_i \otimes 1 \otimes \ldots \otimes 1 -
 1 \otimes \ldots \otimes 1 \otimes x_i \otimes 1 \otimes \ldots \otimes 1
 $$
-for $j = 1, \ldots, n$.
+for $j = 1, \ldots, n$ where the second $x_i$ is placed in the $j + 1$st
+slot; recall that $D(n)$ is constructed starting with the
+$n + 1$-fold tensor product of $P$ over $A$.
 \end{lemma}
 
 \begin{proof}
@@ -3184,6 +3188,22 @@ also holds for the corresponding functor towards pairs over $D'$.
 \end{lemma}
 
 \begin{proof}
+Before we embark on the proof we briefly explain how to formulate
+condition (\ref{item-topologically-quasi-nilpotent}) for the case of
+pairs $(M', \nabla')$ over $D'$. Since $A \to P'$ is smooth
+the $P'$-module $\Omega_{P'/A}$ is finite projective. Thus we can
+choose a map $\Omega_{P'/A} \to \bigoplus_{i = 1, \ldots, n} P'$
+wich identifies $\Omega_{P'/A}$ with a direct summand of the target.
+This determines a map $\Omega_{D'} \to \bigoplus_{i = 1, \ldots, n} D'$
+identifying the source with a direct summand of the target.
+Thus for $m' \in M'$ we can write $\nabla'(m') = \sum \theta'_i(m')$
+with $\theta'_i(m') \in D'$. The topogical quasi-nilpotence of
+$\nabla'$ means: for any $m' \in M'$ there are only finitely
+many pairs $(i, k)$ such that $(\theta'_i)^k(m') \not \in pM'$.
+(Since in this case there are only finitely many $i$ this just means
+that $\theta_i^k(m') \in pM'$ for all $k \gg 0$.)
+
+\medskip\noindent
 We can pick the map $P = A[x_i] \to C$ such that it factors through
 a surjection of $A$-algebras $P \to P'$ (we may have to increase the
 number of variables in $P$ to do this). Hence we obtain a surjective
@@ -3416,8 +3436,8 @@ associated to the cosimplicial abelian group $[n] \mapsto \mathcal{F}(X^n)$.
 \end{lemma}
 
 \begin{proof}
-Note that $H^q(X^p, \mathcal{F}) = 0$ for all $q > 0$ as sheaves are
-presheaves on $\mathcal{C}$. The assumption on $X$ is that $h_X \to *$
+Note that $H^q(X^p, \mathcal{F}) = 0$ for all $q > 0$ as any presheaf is a
+sheaf on $\mathcal{C}$. The assumption on $X$ is that $h_X \to *$
 is surjective. Using that $H^q(X, \mathcal{F}) = H^q(h_X, \mathcal{F})$ and
 $H^q(\mathcal{C}, \mathcal{F}) = H^q(*, \mathcal{F})$ we see that our
 statement is a special case of

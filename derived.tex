@@ -554,9 +554,9 @@ be a morphism of distinguished triangles. If one of the following
 conditions holds
 \begin{enumerate}
 \item $\Hom(Y, X') = 0$,
-\item $\Hom(Z', Y) = 0$,
+\item $\Hom(Z, Y') = 0$,
 \item $\Hom(X, X') = \Hom(Z, X') = 0$,
-\item $\Hom(Z', X) = \Hom(Z', Z) = 0$, or
+\item $\Hom(Z, X') = \Hom(Z, Z') = 0$, or
 \item $\Hom(X[1], Z') = \Hom(Z, X') = 0$
 \end{enumerate}
 then $b$ is the unique morphism from $Y \to Y'$ such that
@@ -596,7 +596,7 @@ Then $g' \circ \epsilon \circ g = 0$ which implies that
 $g' \circ \epsilon = \delta \circ h$ for some
 $\delta \in \Hom(X[1], Z')$. Since $\Hom(X[1], Z') = 0$
 we conclude that $g' \circ \epsilon = 0$. Hence
-$\epsilon = f' \circ \gamma$ for some $\gamma : \Hom(Z, X')$.
+$\epsilon = f' \circ \gamma$ for some $\gamma \in \Hom(Z, X')$.
 Since $\Hom(Z, X') = 0$ we conclude that $\epsilon = 0$
 and hence $b = 0$ as desired.
 \end{proof}
@@ -1465,9 +1465,9 @@ $(X, Y, Z \oplus Z', f, g, h)$ such that $f \in S$.
 \end{enumerate}
 If $S$ is saturated, then these are also equivalent to
 \begin{enumerate}
-\item[(4)] the morphism $0 \to Z$ is an element of $S$,
-\item[(5)] the morphism $Z \to 0$ is an element of $S$,
-\item[(6)] there exists a distinguished triangle $(X, Y, Z, f, g, h)$
+\item[(5)] the morphism $0 \to Z$ is an element of $S$,
+\item[(6)] the morphism $Z \to 0$ is an element of $S$,
+\item[(7)] there exists a distinguished triangle $(X, Y, Z, f, g, h)$
 such that $f \in S$.
 \end{enumerate}
 \end{lemma}
@@ -1484,13 +1484,13 @@ then $Q(f)$ is an isomorphism hence $Q(Z \oplus Z') = 0$ hence $Q(Z) = 0$.
 Thus (1) -- (4) are all equivalent.
 
 \medskip\noindent
-Next, assume that $S$ is saturated. Note that each of (4), (5), (6)
+Next, assume that $S$ is saturated. Note that each of (5), (6), (7)
 implies one of the equivalent conditions (1) -- (4). Suppose that
 $Q(Z) = 0$. Then $0 \to Z$ is a morphism of $\mathcal{D}$ which becomes
 an isomorphism in $S^{-1}\mathcal{D}$. According to
 Categories, Lemma \ref{categories-lemma-what-gets-inverted}
 the fact that $S$ is saturated implies that $0 \to Z$ is in $S$.
-Hence (1) $\Rightarrow$ (4). Dually (1) $\Rightarrow$ (5).
+Hence (1) $\Rightarrow$ (5). Dually (1) $\Rightarrow$ (6).
 Finally, if $0 \to Z$ is in $S$, then the triangle
 $(0, Z, Z, 0, \text{id}_Z, 0)$ is distinguished by TR1 and TR2 and
 is a triangle as in (4).
@@ -3335,6 +3335,143 @@ $F(\delta) : F(C^\bullet) \to F(A^\bullet)[1]$.
 Thus $F$ transforms distinguished triangles into distinguished triangles.
 \end{proof}
 
+\begin{lemma}
+\label{lemma-improve-distinguished-triangle-homotopy}
+Let $\mathcal{A}$ be an additive category. Let
+$(A^\bullet, B^\bullet, C^\bullet, a, b, c)$ be a distinguished triangle in
+$K(\mathcal{A})$. Then there exists an isomorphic distinguished triangle
+$(A^\bullet, (B')^\bullet, C^\bullet, a', b', c)$ such that
+$0 \to A^n \to (B')^n \to C^n \to 0$ is a split short exact sequence
+for all $n$.
+\end{lemma}
+
+\begin{proof}
+We will use that $K(\mathcal{A})$ is a triangulated category by
+Proposition \ref{proposition-homotopy-category-triangulated}.
+Let $W^\bullet$ be the cone on $c : C^\bullet \to A^\bullet[1]$ with its maps
+$i : A^\bullet[1] \to W^\bullet$ and $p : W^\bullet \to C^\bullet[1]$. Then
+$(C^\bullet, A^\bullet[1], W^\bullet, c, i, -p)$ is a distinguished triangle
+by Lemma \ref{lemma-the-same-up-to-isomorphisms}. Rotating backwards twice
+we see that $(A^\bullet, W^\bullet[-1], C^\bullet, -i[-1], p[-1], c)$
+is a distinguished triangle. By TR3 there is a morphism of distinguished
+triangles
+$(\text{id}, \beta, \text{id}) : (A^\bullet, B^\bullet, C^\bullet, a, b, c) \to
+(A^\bullet, W^\bullet[-1], C^\bullet, -i[-1], p[-1], c)$
+which must be an isomorphism by Lemma \ref{lemma-third-isomorphism-triangle}.
+This finishes the proof because
+$0 \to A^\bullet \to W^\bullet[-1] \to C^\bullet \to 0$
+is a termwise split short exact sequence of complexes
+by the very construction of cones in Section \ref{section-cones}.
+\end{proof}
+
+\begin{remark}
+\label{remark-homotopy-double}
+Let $\mathcal{A}$ be an additive category with countable direct sums.
+Let $\text{DoubleComp}(\mathcal{A})$ denote the category of double complexes
+in $\mathcal{A}$, see
+Homology, Section \ref{homology-section-double-complexes}.
+We can use this category to construct two triangulated categories.
+\begin{enumerate}
+\item We can consider an object $A^{\bullet, \bullet}$ of
+$\text{DoubleComp}(\mathcal{A})$ as a complex of complexes
+as follows
+$$
+\ldots \to A^{\bullet, -1} \to A^{\bullet, 0} \to A^{\bullet, 1} \to \ldots
+$$
+and take the homotopy category $K_{first}(\text{DoubleComp}(\mathcal{A}))$
+with the corresponding triangulated structure given by
+Proposition \ref{proposition-homotopy-category-triangulated}.
+By Homology, Remark
+\ref{homology-remark-double-complex-complex-of-complexes-first} the functor
+$$
+\text{Tot} :
+K_{first}(\text{DoubleComp}(\mathcal{A}))
+\longrightarrow
+K(\mathcal{A})
+$$
+is an exact functor of triangulated categories.
+\item We can consider an object $A^{\bullet, \bullet}$ of
+$\text{DoubleComp}(\mathcal{A})$ as a complex of complexes
+as follows
+$$
+\ldots \to A^{-1, \bullet} \to A^{0, \bullet} \to A^{1, \bullet} \to \ldots
+$$
+and take the homotopy category $K_{second}(\text{DoubleComp}(\mathcal{A}))$
+with the corresponding triangulated structure given by
+Proposition \ref{proposition-homotopy-category-triangulated}.
+By Homology, Remark
+\ref{homology-remark-double-complex-complex-of-complexes-second} the functor
+$$
+\text{Tot} :
+K_{second}(\text{DoubleComp}(\mathcal{A}))
+\longrightarrow
+K(\mathcal{A})
+$$
+is an exact functor of triangulated categories.
+\end{enumerate}
+\end{remark}
+
+\begin{remark}
+\label{remark-double-complex-as-tensor-product-of}
+Let $\mathcal{A}$, $\mathcal{B}$, $\mathcal{C}$ be additive categories
+and assume $\mathcal{C}$ has countable direct sums. Suppose that
+$$
+\otimes : \mathcal{A} \times \mathcal{B} \longrightarrow \mathcal{C},
+\quad
+(X, Y) \longmapsto X \otimes Y
+$$
+is a functor which is bilinear on morphisms. This determines a functor
+$$
+\text{Comp}(\mathcal{A}) \times \text{Comp}(\mathcal{B})
+\longrightarrow
+\text{DoubleComp}(\mathcal{C}), \quad
+(X^\bullet, Y^\bullet)
+\longmapsto
+X^\bullet \otimes Y^\bullet
+$$
+See
+Homology, Example \ref{homology-example-double-complex-as-tensor-product-of}.
+\begin{enumerate}
+\item For a fixed object $X^\bullet$ of $\text{Comp}(\mathcal{A})$
+the functor
+$$
+K(\mathcal{B}) \longrightarrow K(\mathcal{C}), \quad
+Y^\bullet \longmapsto \text{Tot}(X^\bullet \otimes Y^\bullet)
+$$
+is an exact functor of triangulated categories.
+\item For a fixed object $Y^\bullet$ of $\text{Comp}(\mathcal{B})$
+the functor
+$$
+K(\mathcal{A}) \longrightarrow K(\mathcal{C}), \quad
+X^\bullet \longmapsto \text{Tot}(X^\bullet \otimes Y^\bullet)
+$$
+is an exact functor of triangulated categories.
+\end{enumerate}
+This follows from Remark \ref{remark-homotopy-double} since
+the functors
+$\text{Comp}(\mathcal{A}) \to \text{DoubleComp}(\mathcal{C})$,
+$Y^\bullet \mapsto X^\bullet \otimes Y^\bullet$ and
+$\text{Comp}(\mathcal{B}) \to \text{DoubleComp}(\mathcal{C})$,
+$X^\bullet \mapsto X^\bullet \otimes Y^\bullet$
+are immediately seen to be compatible with homotopies
+and termwise split short exact sequences and hence induce
+exact functors of triangulated categories
+$$
+K(\mathcal{B}) \to K_{first}(\text{DoubleComp}(\mathcal{C}))
+\quad\text{and}\quad
+K(\mathcal{A}) \to K_{second}(\text{DoubleComp}(\mathcal{C}))
+$$
+Observe that for the first of the two the isomorphism
+$$
+\text{Tot}(X^\bullet \otimes Y^\bullet[1]) \cong
+\text{Tot}(X^\bullet \otimes Y^\bullet)[1]
+$$
+involves signs (this goes back to the signs chosen in
+Homology, Remark \ref{homology-remark-shift-double-complex}).
+\end{remark}
+
+
+
 
 
 
@@ -4951,6 +5088,7 @@ F : K(\mathcal{A}) \to K(\mathcal{B}), \quad
 K^{+}(\mathcal{A}) \to K^{+}(\mathcal{B}), \quad
 K^{-}(\mathcal{A}) \to K^{-}(\mathcal{B}).
 $$
+See Lemma \ref{lemma-additive-exact-homotopy-category}.
 We also denote $F$ the composition $K(\mathcal{A}) \to D(\mathcal{B})$,
 $K^{+}(\mathcal{A}) \to D^{+}(\mathcal{B})$, and
 $K^{-}(\mathcal{A}) \to D^-(\mathcal{B})$ of $F$ with the localization
@@ -6247,7 +6385,7 @@ Then we see that
 $$
 \beta_1^n - \beta_2^n
 -
-(d \circ h^n + h^{n + 1}) \circ d)
+(d \circ h^n + h^{n + 1}) \circ d
 $$
 is a morphism of complexes $L^\bullet \to I^\bullet$
 which is identically zero on the subcomplex $K^\bullet$.
@@ -6909,18 +7047,21 @@ $H^p(K^\bullet)$ the derived functor $RF$ is defined at $H^p(K^\bullet)[0]$
 with value $F(H^p_I(I^{\bullet, \bullet}))$.
 \item By
 Homology, Lemma \ref{homology-lemma-double-complex-gives-resolution}
-the total complex $sI^\bullet$ is an injective resolution of
+the total complex $\text{Tot}(I^{\bullet, \bullet})$
+is an injective resolution of
 $K^\bullet$. Hence $RF$ is defined at $K^\bullet$ with value
-$F(sI^\bullet)$.
+$F(\text{Tot}(I^{\bullet, \bullet}))$.
 \end{enumerate}
 Consider the two spectral sequences associated to the double complex
 $L^{\bullet, \bullet} = F(I^{\bullet, \bullet})$, see
 Homology, Lemma \ref{homology-lemma-ss-double-complex}.
-These are both bounded, converge to $H^*(sL^\bullet)$, and induce
-finite filtrations on $H^n(sL^\bullet)$, see
+These are both bounded, converge to $H^*(\text{Tot}(L^{\bullet, \bullet}))$,
+and induce finite filtrations on $H^n(\text{Tot}(L^{\bullet, \bullet}))$, see
 Homology, Lemma \ref{homology-lemma-first-quadrant-ss}.
 Since
-$sL^\bullet = s(F(I^{\bullet, \bullet})) = F(sI^\bullet)$ computes
+$\text{Tot}(L^{\bullet, \bullet}) =
+\text{Tot}(F(I^{\bullet, \bullet})) =
+F(\text{Tot}(I^{\bullet, \bullet}))$ computes
 $H^n(RF(K^\bullet))$ we find the final assertion of the lemma holds true.
 
 \medskip\noindent
@@ -7002,8 +7143,7 @@ of $\mathcal{A}$, and
 $$
 t : R(G \circ F) \longrightarrow RG \circ RF.
 $$
-is isomorphism of functors of functors from
-$D^{+}(\mathcal{A})$ to $D^{+}(\mathcal{C})$.
+is isomorphism of functors from $D^{+}(\mathcal{A})$ to $D^{+}(\mathcal{C})$.
 \end{enumerate}
 \end{lemma}
 
@@ -7367,7 +7507,7 @@ At this point we can apply
 Homology, Lemma \ref{homology-lemma-double-complex-gives-resolution}
 to get that the map
 $$
-\alpha : K^\bullet \to sI^\bullet
+\alpha : K^\bullet \longrightarrow \text{Tot}(I^{\bullet, \bullet})
 $$
 is a quasi-isomorphism. To prove we get a functor $inj$ it
 rests to show that the construction above
@@ -8305,9 +8445,11 @@ that the differentials match up.
 \medskip\noindent
 Actually, given a Cartan-Eilenberg resolution
 $K^\bullet \to I^{\bullet, \bullet}$ the induced morphism
-$K^\bullet \to sI^\bullet$ into the associated simple complex
+$K^\bullet \to \text{Tot}(I^{\bullet, \bullet})$
+into the associated total complex
 will be a filtered injective resolution for either filtration
-using suitable filtrations on $sI^\bullet$. This can be used
+using suitable filtrations on $\text{Tot}(I^{\bullet, \bullet})$.
+This can be used
 to match up the spectral sequences exactly.
 \end{remark}
 
@@ -8536,7 +8678,7 @@ Let $\xi : B[0] \to A[i]$ be an element of $\Ext^i_\mathcal{A}(B, A)$.
 We may write $\xi = f s^{-1}$ for some quasi-isomorphism
 $s : L^\bullet \to B[0]$ and map $f : L^\bullet \to A[i]$.
 After replacing $L^\bullet$ by $\tau_{\leq 0}L^\bullet$ we may assume
-that $L^i = 0$ for $i > 0$. Picture
+that $L^j = 0$ for $j > 0$. Picture
 $$
 \xymatrix{
 L^{- i - 1} \ar[r] & L^{-i} \ar[r] \ar[d] & \ldots \ar[r] &
@@ -8817,7 +8959,7 @@ P_1^\bullet \ar[d] \ar[r] & P_2^\bullet \ar[d] \ar[r] & \ldots \\
 $$
 in the category of complexes such that
 \begin{enumerate}
-\item the vertical arrows are quasi-isomorphisms,
+\item the vertical arrows are quasi-isomorphisms and termwise surjective,
 \item $P_n^\bullet$ is a bounded above complex with terms in
 $\mathcal{P}$,
 \item the arrows $P_n^\bullet \to P_{n + 1}^\bullet$
@@ -8827,55 +8969,92 @@ $P^i_{n + 1}/P^i_n$ is an element of $\mathcal{P}$.
 \end{lemma}
 
 \begin{proof}
-By
-Lemma \ref{lemma-subcategory-left-resolution}
-any bounded above complex has a resolution by a bounded above complex
-whose terms are in $\mathcal{P}$. Thus we obtain the first complex
-$P_1^\bullet$. By induction it suffices, given
+We are going to use that the homotopy category $K(\mathcal{A})$ is a
+triangulated category, see Proposition
+\ref{proposition-homotopy-category-triangulated}.
+By Lemma \ref{lemma-subcategory-left-resolution} we can find a
+termwise surjective map of complexes $P_1^\bullet \to \tau_{\leq 1}K^\bullet$
+which is a quasi-isomorphism
+such that the terms of $P_1^\bullet$ are in $\mathcal{P}$.
+By induction it suffices, given
 $P_1^\bullet, \ldots, P_n^\bullet$ to construct
 $P_{n + 1}^\bullet$ and the maps
 $P_n^\bullet \to P_{n + 1}^\bullet$ and
 $P_{n + 1}^\bullet \to \tau_{\leq n + 1}K^\bullet$.
-Consider the cone $C_1^\bullet$ of the composition
-$P_n^\bullet \to \tau_{\leq n}K^\bullet \to \tau_{\leq n + 1}K^\bullet$.
-This fits into the distinguished triangle
-$$
-P_n^\bullet \to \tau_{\leq n + 1}K^\bullet \to C_1^\bullet \to P_n^\bullet[1]
-$$
-Note that $C_1^\bullet$ is bounded above, hence we can choose a
-quasi-isomorphism $Q^\bullet \to C_1^\bullet$ where $Q^\bullet$ is a
-bounded above complex whose terms are elements of $\mathcal{P}$.
-Take the cone $C_2^\bullet$ of the map of complexes
-$Q^\bullet \to P_n^\bullet[1]$ to get the
-distinguished triangle
-$$
-Q^\bullet \to P_n^\bullet[1] \to C_2^\bullet \to Q^\bullet[1]
-$$
+
+\medskip\noindent
+Choose a distinguished triangle
+$P_n^\bullet \to \tau_{\leq n + 1}K^\bullet \to C^\bullet \to P_n^\bullet[1]$
+in $K(\mathcal{A})$. Applying
+Lemma \ref{lemma-subcategory-left-resolution} we choose a
+map of complexes $Q^\bullet \to C^\bullet$
+which is a quasi-isomorphism such that the terms of $Q^\bullet$
+are in $\mathcal{P}$. By the axioms of triangulated categories
+we may fit the composition $Q^\bullet \to C^\bullet \to P_n^\bullet[1]$ into
+a distinguished triangle
+$P_n^\bullet \to P_{n + 1}^\bullet \to Q^\bullet \to P_n^\bullet[1]$
+in $K(\mathcal{A})$.
+By Lemma \ref{lemma-improve-distinguished-triangle-homotopy}
+we may and do assume
+$0 \to P_n^\bullet \to P_{n + 1}^\bullet \to Q^\bullet \to 0$
+is a termwise split short exact sequence. This implies that
+the terms of $P_{n + 1}^\bullet$ are in $\mathcal{P}$ and that
+$P_n^\bullet \to P_{n + 1}^\bullet$ is a termwise split injection
+whose cokernels are in $\mathcal{P}$.
 By the axioms of triangulated categories we obtain a map
 of distinguished triangles
 $$
 \xymatrix{
 P_n^\bullet \ar[r] \ar[d] &
-C_2^\bullet[-1] \ar[r] \ar[d] &
+P_{n + 1}^\bullet \ar[r] \ar[d] &
 Q^\bullet \ar[r] \ar[d] &
 P_n^\bullet[1] \ar[d] \\
 P_n^\bullet \ar[r] &
 \tau_{\leq n + 1}K^\bullet \ar[r] &
-C_1^\bullet \ar[r] &
+C^\bullet \ar[r] &
 P_n^\bullet[1]
 }
 $$
-in the triangulated category $K(\mathcal{A})$.
-Set $P_{n + 1}^\bullet = C_2^\bullet[-1]$.
-Then (2) holds because $\mathcal{P}$ is closed
-under direct sums. Note that (3) holds by construction.
-Choose an actual morphism of complexes
-$f : P_{n + 1}^\bullet \to \tau_{\leq n + 1}K^\bullet$.
+in the triangulated category $K(\mathcal{A})$. Choose an actual morphism of
+complexes $f : P_{n + 1}^\bullet \to \tau_{\leq n + 1}K^\bullet$.
 The left square of the diagram above commutes up to homotopy, but as
 $P_n^\bullet \to P_{n + 1}^\bullet$ is a termwise split injection
 we can lift the homotopy and modify our choice of $f$ to make it commute.
 Finally, $f$ is a quasi-isomorphism, because both $P_n^\bullet \to P_n^\bullet$
-and $Q^\bullet \to C_1^\bullet$ are.
+and $Q^\bullet \to C^\bullet$ are.
+
+\medskip\noindent
+At this point we have all the properties we want, except we don't know
+that the map $f : P_{n + 1}^\bullet \to \tau_{\leq n + 1}K^\bullet$
+is termwise surjective. Since we have the commutative diagram
+$$
+\xymatrix{
+P_n^\bullet \ar[d] \ar[r] & P_{n + 1}^\bullet \ar[d] \\
+\tau_{\leq n}K^\bullet \ar[r] & \tau_{\leq n + 1}K^\bullet
+}
+$$
+of complexes, by induction hypothesis we see that $f$ is surjective
+on terms in all degrees except possibly $n$ and $n + 1$. Choose
+an object $P \in \mathcal{P}$ and a surjection $q : P \to K^n$.
+Consider the map
+$$
+g :
+P^\bullet = (\ldots \to 0 \to P \xrightarrow{1} P \to 0 \to \ldots)
+\longrightarrow
+\tau_{\leq n + 1}K^\bullet
+$$
+with first copy of $P$ in degree $n$ and maps given by
+$q$ in degree $n$ and $d_K \circ q$ in degree $n + 1$.
+This is a surjection in degree $n$ and the cokernel in
+degree $n + 1$ is $H^{n + 1}(\tau_{\leq n + 1}K^\bullet)$;
+to see this recall that $\tau_{\leq n + 1}K^\bullet$ has
+$\Ker(d_K^{n + 1})$ in degree $n + 1$.
+However, since $f$ is a quasi-isomorphism we know that
+$H^{n + 1}(f)$ is surjective. Hence after replacing 
+$f : P_{n + 1}^\bullet \to \tau_{\leq n + 1}K^\bullet$
+by
+$f \oplus g : P_{n + 1}^\bullet \oplus P^\bullet \to \tau_{\leq n + 1}K^\bullet$
+we win.
 \end{proof}
 
 \noindent
@@ -9012,7 +9191,7 @@ $$
 $$
 in the category of complexes such that
 \begin{enumerate}
-\item the vertical arrows are quasi-isomorphisms,
+\item the vertical arrows are quasi-isomorphisms and termwise injective,
 \item $I_n^\bullet$ is a bounded below complex with terms in $\mathcal{I}$,
 \item the arrows $I_{n + 1}^\bullet \to I_n^\bullet$ are termwise split
 surjections and $\Ker(I^i_{n + 1} \to I^i_n)$ is an element of $\mathcal{I}$.
@@ -11538,6 +11717,224 @@ isomorphisms.
 \end{proof}
 
 
+
+
+
+
+
+
+
+\section{Essentially constant systems}
+\label{section-essentially-constant}
+
+\noindent
+Some preliminary lemmas on essentially constant systems in triangulated
+categories.
+
+\begin{lemma}
+\label{lemma-essentially-constant}
+Let $\mathcal{D}$ be a triangulated category. Let $(A_i)$ be an inverse system
+in $\mathcal{D}$. Then $(A_i)$ is essentially constant (see
+Categories, Definition
+\ref{categories-definition-essentially-constant-diagram})
+if and only if there exists an $i$ and for all $j \geq i$ a direct sum
+decomposition $A_j = A \oplus Z_j$ such that
+(a) the maps $A_{j'} \to A_j$ are compatible with the direct sum
+decompositions and identity on $A$, (b) for all $j \geq i$ there exists some
+$j' \geq j$ such that $Z_{j'} \to Z_j$ is zero.
+\end{lemma}
+
+\begin{proof}
+Assume $(A_i)$ is essentially constant with value $A$. Then $A = \lim A_i$
+and there exists an $i$ and a morphism $A_i \to A$ such that (1)
+the composition $A \to A_i \to A$ is the identity on $A$ and (2) for all
+$j \geq i$ there exists a $j' \geq j$ such that $A_{j'} \to A_j$ factors as
+$A_{j'} \to A_i \to A \to A_j$. From (1) we conclude that for $j \geq i$
+the maps $A \to A_j$ and $A_j \to A_i \to A$ compose to the identity on $A$.
+It follows that $A_j \to A$ has a kernel $Z_j$ and that
+the map $A \oplus Z_j \to A_j$ is an isomorphism, see
+Lemmas \ref{lemma-when-split} and \ref{lemma-split}.
+These direct sum decompositions clearly satisfy (a).
+From (2) we conclude that for all $j$ there is a $j' \geq j$ such that
+$Z_{j'} \to Z_j$ is zero, so (b) holds. Proof of the converse is omitted.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-essentially-constant-2-out-of-3}
+Let $\mathcal{D}$ be a triangulated category. Let
+$$
+A_n \to B_n \to C_n \to A_n[1]
+$$
+be an inverse system of distinguished triangles in $\mathcal{D}$.
+If $(A_n)$ and $(C_n)$ are essentially constant, then
+$(B_n)$ is essentially constant and their values fit into
+a distinguished triangle $A \to B \to C \to A[1]$ such that for
+some $n \geq 1$ there is a map
+$$
+\xymatrix{
+A_n \ar[d] \ar[r] &
+B_n \ar[d] \ar[r] &
+C_n \ar[d] \ar[r] &
+A_n[1] \ar[d] \\
+A \ar[r] &
+B \ar[r] &
+C \ar[r] &
+A[1]
+}
+$$
+of distinguished triangles which induces an isomorphism
+$\lim_{n' \geq n} A_{n'} \to A$ and similarly for $B$ and $C$.
+\end{lemma}
+
+\begin{proof}
+After renumbering we may assume that $A_n = A \oplus A'_n$ and
+$C_n = C \oplus C'_n$ for inverse systems $(A'_n)$ and $(C'_n)$
+which are essentially zero, see Lemma \ref{lemma-essentially-constant}.
+In particular, the morphism
+$$
+C \oplus C'_n \to (A \oplus A'_n)[1]
+$$
+maps the summand $C$ into the summand $A[1]$ for all $n$ by a map
+$\delta : C \to A[1]$ which is independent of $n$. Choose a distinguished
+triangle
+$$
+A \to B \to C \xrightarrow{\delta} A[1]
+$$
+Next, choose a morphism of distingished triangles
+$$
+(A_1 \to B_1 \to C_1 \to A_1[1]) \to
+(A \to B \to C \to A[1])
+$$
+which is possible by TR3. For any object $D$ of $\mathcal{D}$ this induces
+a commutative diagram
+$$
+\xymatrix{
+\ldots \ar[r] &
+\Hom_\mathcal{D}(C, D) \ar[r] \ar[d] &
+\Hom_\mathcal{D}(B, D) \ar[r] \ar[d] &
+\Hom_\mathcal{D}(A, D) \ar[r] \ar[d] &
+\ldots \\
+\ldots \ar[r] &
+\colim \Hom_\mathcal{D}(C_n, D) \ar[r] &
+\colim \Hom_\mathcal{D}(B_n, D) \ar[r] &
+\colim \Hom_\mathcal{D}(A_n, D) \ar[r] &
+\ldots
+}
+$$
+The left and right vertical arrows are isomorphisms and so are the ones
+to the left and right of those. Thus by the 5-lemma we conclude that
+the middle arrow is an isomorphism. It follows that
+$(B_n)$ is isomorphic to the constant inverse system with value $B$
+by the discussion in
+Categories, Remark \ref{categories-remark-pro-category-copresheaves}.
+Since this is equivalent to $(B_n)$ being essentially constant
+with value $B$ by
+Categories, Remark \ref{categories-remark-pro-category}
+the proof is complete.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-essentially-constant-cohomology}
+Let $\mathcal{A}$ be an abelian category. Let $A_n$ be an inverse
+system of objects of $D(\mathcal{A})$. Assume
+\begin{enumerate}
+\item there exist integers $a \leq b$ such that $H^i(A_n) = 0$
+for $i \not \in [a, b]$, and
+\item the inverse systems $H^i(A_n)$ of $\mathcal{A}$ are essentially constant
+for all $i \in \mathbf{Z}$.
+\end{enumerate}
+Then $A_n$ is an essentially constant system of $D(\mathcal{A})$ whose
+value $A$ satisfies that $H^i(A)$ is the value of the constant system
+$H^i(A_n)$ for each $i \in \mathbf{Z}$.
+\end{lemma}
+
+\begin{proof}
+By Remark \ref{remark-truncation-distinguished-triangle} we obtain
+an inverse system of distinguished triangles
+$$
+\tau_{\leq a}A_n \to A_n \to \tau_{\geq a + 1}A_n \to (\tau_{\leq a}A_n)[1]
+$$
+Of course we have $\tau_{\leq a}A_n = H^a(A_n)[-a]$ in $D(\mathcal{A})$.
+Thus by assumption these form an essentially constant system.
+By induction on $b - a$ we find that the inverse system
+$\tau_{\geq a + 1}A_n$ is essentially constant, say with value $A'$.
+By Lemma \ref{lemma-essentially-constant-2-out-of-3} we find that
+$A_n$ is an essentially constant system. We omit the proof of
+the statement on cohomologies (hint: use the final part of
+Lemma \ref{lemma-essentially-constant-2-out-of-3}).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pro-isomorphism}
+Let $\mathcal{D}$ be a triangulated category. Let
+$$
+A_n \to B_n \to C_n \to A_n[1]
+$$
+be an inverse system of distinguished triangles. If the system $C_n$
+is pro-zero (essentially constant with value $0$), then the maps
+$A_n \to B_n$ determine a pro-isomorphism between the pro-object $(A_n)$
+and the pro-object $(B_n)$.
+\end{lemma}
+
+\begin{proof}
+For any object $X$ of $\mathcal{D}$ consider the exact sequence
+$$
+\colim \Hom(C_n, X) \to
+\colim \Hom(B_n, X) \to
+\colim \Hom(A_n, X) \to
+\colim \Hom(C_n[-1], X) \to
+$$
+Exactness follows from Lemma \ref{lemma-representable-homological}
+combined with
+Algebra, Lemma \ref{algebra-lemma-directed-colimit-exact}.
+By assumption the first and last term are zero. Hence the map
+$\colim \Hom(B_n, X) \to \colim \Hom(A_n, X)$ is an isomorphism
+for all $X$. The lemma follows from this and
+Categories, Remark \ref{categories-remark-pro-category-copresheaves}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-pro-isomorphism-bis}
+Let $\mathcal{A}$ be an abelian category.
+$$
+A_n \to B_n
+$$
+be an inverse system of maps of $D(\mathcal{A})$. Assume
+\begin{enumerate}
+\item there exist integers $a \leq b$ such that $H^i(A_n) = 0$
+and $H^i(B_n) = 0$ for $i \not \in [a, b]$, and
+\item the inverse system of maps $H^i(A_n) \to H^i(B_n)$ of $\mathcal{A}$
+define an isomorphism of pro-objects of $\mathcal{A}$
+for all $i \in \mathbf{Z}$.
+\end{enumerate}
+Then the maps $A_n \to B_n$
+determine a pro-isomorphism between the pro-object $(A_n)$
+and the pro-object $(B_n)$.
+\end{lemma}
+
+\begin{proof}
+We can inductively extend the maps $A_n \to B_n$ to an inverse system of
+distinguished triangles $A_n \to B_n \to C_n \to A_n[1]$ by
+axiom TR3. By Lemma \ref{lemma-pro-isomorphism} it suffices to prove
+that $C_n$ is pro-zero. By Lemma \ref{lemma-essentially-constant-cohomology}
+it suffices to show that $H^p(C_n)$ is pro-zero for each $p$.
+This follows from assumption (2) and the long exact sequences
+$$
+H^p(A_n) \xrightarrow{\alpha_n} H^p(B_n)
+\xrightarrow{\beta_n}
+H^p(C_n) \xrightarrow{\delta_n} H^{p + 1}(A_n)
+\xrightarrow{\epsilon_n}
+H^{p + 1}(B_n)
+$$
+Namely, for every $n$ we can find an $m > n$ such that
+$\Im(\beta_m)$ maps to zero in $H^p(C_n)$ because we may choose
+$m$ such that $H^p(B_m) \to H^p(B_n)$ factors through
+$\alpha_n : H^p(A_n) \to H^p(B_n)$. For a similar reason we may
+then choose $k > m$ such that $\Im(\delta_k)$ maps to zero
+in $H^{p + 1}(A_m)$. Then $H^p(C_k) \to H^p(C_n)$ is zero because
+$H^p(C_k) \to H^p(C_m)$ maps into $\Ker(\delta_m)$ and $H^p(C_m) \to H^p(C_n)$
+annihilates $\Ker(\delta_m) = \Im(\beta_m)$.
+\end{proof}
 
 
 

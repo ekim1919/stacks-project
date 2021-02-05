@@ -874,25 +874,7 @@ Then $f$ is formally unramified if and only if $\Omega_{X/S} = 0$.
 \end{lemma}
 
 \begin{proof}
-We give two proofs.
-
-\medskip\noindent
-First proof. It suffices to show that $\Omega_{X/S}$ is zero on the members of
-an affine open covering of $X$. Choose an affine open $U \subset X$
-with $f(U) \subset V$ where $V \subset S$ is an affine open of $S$. By
-Lemma \ref{lemma-formally-unramified-on-opens}
-the restriction $f_U : U \to V$ is formally unramified. By
-Morphisms, Lemma \ref{morphisms-lemma-differentials-affine}
-we see that $\Omega_{X/S}|_U$ is the quasi-coherent sheaf associated to
-the $\mathcal{O}_X(U)$-module $\Omega_{\mathcal{O}_X(U)/\mathcal{O}_S(V)}$. By
-Lemma \ref{lemma-affine-formally-unramified}
-we see that $\mathcal{O}_S(V) \to \mathcal{O}_X(U)$ is a formally unramified
-ring map. Hence by
-Algebra, Lemma \ref{algebra-lemma-characterize-formally-unramified}
-we conclude that $\Omega_{X/S}|_U = 0$ as desired.
-
-\medskip\noindent
-Second proof. We recall some of the arguments of the proof of
+We recall some of the arguments of the proof of
 Morphisms, Lemma \ref{morphisms-lemma-differentials-affine}.
 Let $W \subset X \times_S X$ be an open such that
 $\Delta : X \to X \times_S X$ induces a closed immersion into $W$.
@@ -3808,6 +3790,25 @@ finite projective for modules over rings
 \end{proof}
 
 \begin{lemma}
+\label{lemma-NL-etale}
+Let $f : X \to Y$ be a morphism of schemes. The following are equivalent
+\begin{enumerate}
+\item $f$ is \'etale, and
+\item $f$ is locally of finite presentation and
+$H^{-1}(\NL_{X/Y}) = H^0(\NL_{X/Y}) = 0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+This follows from the definition of an \'etale ring homomorphism
+(Algebra, Definition \ref{algebra-definition-etale}),
+Lemma \ref{lemma-NL-affine}, and
+the definition of an \'etale morphism of schemes
+(Morphisms, Definition \ref{morphisms-definition-etale}).
+\end{proof}
+
+
+\begin{lemma}
 \label{lemma-NL-immersion}
 Let $i : Z \to X$ be an immersion of schemes. Then $\NL_{Z/X}$
 is isomorphic to $\mathcal{C}_{Z/X}[1]$ in $D(\mathcal{O}_Z)$
@@ -3863,6 +3864,25 @@ is injective. Affine locally this follows from the corresponding
 algebra result in More on Algebra, Lemma
 \ref{more-algebra-lemma-transitive-lci-at-end}.
 To translate into algebra use Lemma \ref{lemma-NL-affine}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-smooth-etale-permanence}
+Let $X \to Y \to Z$ be morphisms of schemes. Assume $X \to Z$ smooth
+and $Y \to Z$ \'etale. Then $X \to Y$ is smooth.
+\end{lemma}
+
+\begin{proof}
+The morphism $X \to Y$ is locally of finite presentation by
+Morphisms, Lemma \ref{morphisms-lemma-finite-presentation-permanence}.
+By Lemma \ref{lemma-NL-smooth} we have $H^{-1}(\NL_{X/Z}) = 0$
+and the module $\Omega_{X/Z}$ is finite locally free.
+By Lemma \ref{lemma-NL-etale} we have
+$H^{-1}(\NL_{Y/Z}) = H^0(\NL_{Y/Z}) = 0$.
+By Lemma \ref{lemma-exact-sequence-NL} we get
+$H^{-1}(\NL_{X/Y}) = 0$ and $\Omega_{X/Y} \cong \Omega_{X/Z}$
+is finite locally free.
+By Lemma \ref{lemma-NL-smooth} the morphism $X \to Y$ is smooth.
 \end{proof}
 
 \begin{lemma}
@@ -4811,7 +4831,8 @@ Lemma \ref{lemma-integral-closure-smooth-pullback}.
 Let $X \to Y$ be a smooth morphism of schemes. Assume every quasi-compact
 open of $Y$ has finitely many irreducible components. Then the same
 is true for $X$ and there is a canonical isomorphism
-$X^\nu = X \times_Y Y^\nu$.
+$X^\nu = X \times_Y Y^\nu$ where $X^\nu$, $Y^\nu$ are the normalizations
+of $X$, $Y$.
 \end{lemma}
 
 \begin{proof}
@@ -5276,7 +5297,7 @@ at $f(x)$, then $g \circ f$ is Cohen-Macaulay at $x$.
 \item If $f$ and $g$ are Cohen-Macaulay, then $g \circ f$ is Cohen-Macaulay.
 \item If $g \circ f$ is Cohen-Macaulay at $x$ and $f$ is flat at $x$,
 then $f$ is Cohen-Macaulay at $x$ and $g$ is Cohen-Macaulay at $f(x)$.
-\item If $f \circ g$ is Cohen-Macaulay and $f$ is flat, then
+\item If $g \circ f$ is Cohen-Macaulay and $f$ is flat, then
 $f$ is Cohen-Macaulay and $g$ is Cohen-Macaulay at every point in
 the image of $f$.
 \end{enumerate}
@@ -5940,7 +5961,7 @@ Properties, Lemma \ref{properties-lemma-characterize-integral}.
 By
 Morphisms, Proposition \ref{morphisms-proposition-generic-flatness}
 there exists a nonempty affine open $V \subset Y$ such that
-$X_V \to V$ and $Z_V \to Z$ are flat and of finite presentation.
+$X_V \to V$ and $Z_V \to V$ are flat and of finite presentation.
 We claim that $V$ works.
 Pick $y \in V$. If $Z_y$ has a nonempty interior, then $Z_y$ contains
 a generic point $\xi$ of an irreducible component of $X_y$.
@@ -7930,6 +7951,301 @@ Lemmas \ref{lemma-dimension-fibres-flat} and
 
 
 
+
+
+\section{Bertini theorems}
+\label{section-bertini}
+
+\noindent
+We continue the discussion started in
+Varieties, Section \ref{varieties-section-bertini}.
+In this section we prove that general hyperplane sections
+of geometrically irreducible varieties are geometrically irreducible
+following the remarkable argument given in \cite{Jou}.
+
+\begin{lemma}
+\label{lemma-amazing-bertini-lemma}
+\begin{reference}
+See pages 71 and 72 of \cite{Jou}
+\end{reference}
+Let $K/k$ be a geometrically irreducible and finitely generated
+field extension. Let $n \geq 1$.
+Let $g_1, \ldots, g_n \in K$ be elements such that there
+exist $c_1, \ldots, c_n \in k$ such that the elements
+$$
+x_1, \ldots, x_n, \sum g_ix_i, \sum c_ig_i \in K(x_1, \ldots, x_n)
+$$
+are algebraically independent over $k$. Then
+$K(x_1, \ldots, x_n)$ is geometrically irreducible over
+$k(x_1, \ldots, x_n, \sum g_ix_i)$.
+\end{lemma}
+
+\begin{proof}
+Let $c_1, \ldots, c_n \in k$ be as in the statement of the lemma.
+Write $\xi = \sum g_ix_i$ and $\delta = \sum c_ig_i$.
+For $a \in k$ consider the automorphism $\sigma_a$
+of $K(x_1, \ldots, x_n)$ given by the identity on $K$ and the rules
+$$
+\sigma_a(x_i) = x_i + a c_i
+$$
+Observe that $\sigma_a(\xi) = \xi + a \delta$ and $\sigma_a(\delta) = \delta$.
+Consider the tower of fields
+$$
+K_0 = k(x_1, \ldots, x_n) \subset
+K_1 = K_0(\xi) \subset
+K_2 = K_0(\xi, \delta) \subset K(x_1, \ldots, x_n) = \Omega
+$$
+Observe that $\sigma_a(K_0) = K_0$ and $\sigma_a(K_2) = K_2$.
+Let $\theta \in \Omega$ be separable algebraic over $K_1$.
+We have to show $\theta \in K_1$, see Algebra, Lemma
+\ref{algebra-lemma-geometrically-irreducible-separable-elements}.
+
+\medskip\noindent
+Denote $K'_2$ the separable algebraic closure of $K_2$ in $\Omega$.
+Since $K'_2/K_2$ is finite (Algebra, Lemma
+\ref{algebra-lemma-make-geometrically-irreducible}) and
+separable there are only a finite number of fields in
+between $K'_2$ and $K_2$ (Fields, Lemma \ref{fields-lemma-primitive-element}).
+If $k$ is infinite\footnote{We will deal with the finite field case in the
+last paragraph of the proof.}, then we can find distinct elements
+$a_1, a_2$ of $k$ such that
+$$
+K_2(\sigma_{a_1}(\theta)) = K_2(\sigma_{a_2}(\theta))
+$$
+as subfields of $\Omega$. Write $\theta_i = \sigma_{a_i}(\theta)$
+and $\xi_i = \sigma_{a_i}(\xi) = \xi + a_i \delta$. Observe that
+$$
+K_2 = K_0(\xi_1, \xi_2)
+$$
+as we have $\xi_i = \xi + a_i \delta$,
+$\xi = (a_2 \xi_1 - a_1 \xi_2)/(a_2 - a_1)$, and
+$\delta = (\xi_1 - \xi_2)/(a_1 - a_2)$.
+Since $K_2/K_0$ is purely transcendental of degree $2$ we conclude
+that $\xi_1$ and $\xi_2$ are algebraically indepedent over $K_0$.
+Since $\theta_1$ is algebraic over $K_0(\xi_1)$ we conclude that
+$\xi_2$ is transcendental over $K_0(\xi_1, \theta_1)$.
+
+\medskip\noindent
+By assumption $K/k$ is geometrically irreducible. This implies
+that $K(x_1, \ldots, x_n)/K_0$ is geometrically irreducible
+(Algebra, Lemma
+\ref{algebra-lemma-geometrically-irreducible-base-change-transcendental}).
+This in turn implies that $K_0(\xi_1, \theta_1)/K_0$
+is geometrically irreducible as a subextension
+(Algebra, Lemma \ref{algebra-lemma-subalgebra-geometrically-irreducible}).
+Since $\xi_2$ is transcendental over $K_0(\xi_1, \theta_1)$
+we conclude that $K_0(\xi_1, \xi_2, \theta_1)/K_0(\xi_2)$
+is geometrically irreducible (Algebra, Lemma
+\ref{algebra-lemma-geometrically-irreducible-add-transcendental}).
+By our choice of $a_1, a_2$ above we have
+$$
+K_0(\xi_1, \xi_2, \theta_1) =
+K_2(\sigma_{a_1}(\theta)) =
+K_2(\sigma_{a_2}(\theta)) =
+K_0(\xi_1, \xi_2, \theta_2)
+$$
+Since $\theta_2$ is separably algebraic over $K_0(\xi_2)$
+we conclude by Algebra, Lemma
+\ref{algebra-lemma-geometrically-irreducible-separable-elements} again that
+$\theta_2 \in K_0(\xi_2)$. Taking $\sigma_{a_2}^{-1}$
+of this relation givens $\theta \in K_0(\xi) = K_1$ as desired.
+
+\medskip\noindent
+This finishes the proof in case $k$ is infinite. If $k$ is finite,
+then we can choose a variable $t$ and consider the extension
+$K(t)/k(t)$ which is geometrically irreducible by
+Algebra, Lemma
+\ref{algebra-lemma-geometrically-irreducible-base-change-transcendental}.
+Since it is still be true that
+$x_1, \ldots, x_n, \sum g_ix_i, \sum c_ig_i$
+in $K(t, x_1, \ldots, x_n)$ are algebraically independent over $k(t)$
+we conclude that $K(t, x_1, \ldots, x_n)$
+is geometrically irreducible over
+$k(t, x_1, \ldots, x_n, \sum g_ix_i)$
+by the argument already given.
+Then using Algebra, Lemma
+\ref{algebra-lemma-geometrically-irreducible-base-change-transcendental}
+once more finishes the job.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-algebraically-independent}
+Let $A$ be a domain of finite type over a field $k$. Let $n \geq 2$.
+Let $g_1, \ldots, g_n \in A$ be elements such that $V(g_1, g_2)$
+has an irreducible component of dimension $\dim(A) - 2$.
+Then there exist $c_1, \ldots, c_n \in k$ such that the elements
+$$
+x_1, \ldots, x_n, \sum g_ix_i, \sum c_ig_i \in
+\text{Frac}(A)(x_1, \ldots, x_n)
+$$
+are algebraically independent over $k$.
+\end{lemma}
+
+\begin{proof}
+The algebraic independence over $k$ means that the morphism
+$$
+T = \Spec(A[x_1, \ldots, x_n])
+\longrightarrow
+\Spec(k[x_1, \ldots, x_n, y, z]) = S
+$$
+given by $y = \sum g_ix_i$ and $z = \sum c_ig_i$ is dominant.
+Set $d = \dim(A)$. If $T \to S$ is not dominant, then the image
+has dimension $< n + 2$ and hence every irreducible component
+of every fibre has dimension $> d + n - (n + 2) = d - 2$, see
+Varieties, Lemma
+\ref{varieties-lemma-dimension-fibres-locally-algebraic}.
+Choose a closed point $u \in V(g_1, g_2)$ contained in an irreducible component
+of dimension $d - 2$ and in no other component of $V(g_1, g_2)$.
+Consider the closed point $t = (u, 1, 0, \ldots 0)$
+of $T$ lying over $u$. Set $(c_1, \ldots, c_n) = (0, 1, 0, \ldots, 0)$.
+Then $t$ maps to the point $s = (1, 0, \ldots, 0)$ of $S$.
+The fibre of $T \to S$ over $s$ is cut out by
+$$
+x_1 - 1, x_2, \ldots, x_n, \sum x_ig_i, g_2
+$$
+and hence equivalently is cut out by
+$$
+x_1 - 1, x_2, \ldots, x_n, g_1, g_2
+$$
+By our condition on $g_1, g_2$ this subscheme has an irreducible component
+of dimension $d - 2$.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-bertini-irreducible}
+\begin{reference}
+\cite[Theorem 6.3 part 4)]{Jou}
+\end{reference}
+In Varieties, Situation \ref{varieties-situation-family-divisors} assume
+\begin{enumerate}
+\item $X$ is of finite type over $k$,
+\item $X$ is geometrically irreducible over $k$,
+\item there exist $v_1, v_2, v_3 \in V$ and an irreducible component
+$Z$ of $H_{v_2} \cap H_{v_3}$ such that $Z \not \subset H_{v_1}$ and
+$\text{codim}(Z, X) = 2$, and
+\item every irreducible component $Y$ of $\bigcap_{v \in V} H_v$
+has $\text{codim}(Y, X) \geq 2$.
+\end{enumerate}
+Then for general $v \in V \otimes_k k'$
+the scheme $H_v$ is geometrically irreducible over $k'$.
+\end{lemma}
+
+\begin{proof}
+In order for assumption (2) to hold, the elements $v_1, v_2, v_3$
+must be $k$-linearly independent in $V$ (small detail omitted).
+Thus we may choose a basis $v_1, \ldots, v_r$ of $V$ incorporating
+these elements as the first $3$. Recall that
+$H_{univ} \subset \mathbf{A}^r_k \times_k X$ is the ``universal divisor''.
+Consider the projection $q : H_{univ} \to \mathbf{A}^r_k$
+whose scheme theoretic fibres are the divisors $H_v$. By
+Lemma \ref{lemma-geom-irreducible-generic-fibre}
+it suffices to show that the generic fibre of $q$ is geometrically
+irreducible.
+To prove this we may replace $X$ by its reduction, hence
+we may assume $X$ is an integral scheme of finite type over $k$.
+
+\medskip\noindent
+Let $U \subset X$ be a nonempty affine open such that
+$\mathcal{L}|_U \cong \mathcal{O}_U$. Write $U = \Spec(A)$.
+Denote $f_i \in A$ the element corresponding to section $\psi(v_i)|_U$
+via the isomorphism $\mathcal{L}|_U \cong \mathcal{O}_U$.
+Then $H_{univ} \cap (\mathbf{A}^r_k \times_k U)$ is given by
+$$
+H_U = \Spec(A[x_1, \ldots, x_r]/(x_1f_1 + \ldots + x_rf_r))
+$$
+By our choice of basis we see that $f_1$ cannot be zero because this
+would mean $v_1 = 0$ and hence $H_{v_1} = X$ which contradicts
+assumption (2). Hence $\sum x_if_i$ is a nonzerodivisor in
+$A[x_1, \ldots, x_r]$.
+It follows that every irreducible component of $H_U$ has dimension
+$d + r - 1$ where $d = \dim(X) = \dim(A)$. If $U' = U \cap D(f_1)$
+then we see that
+$$
+H_{U'} =
+\Spec(A_{f_1}[x_1, \ldots, x_r]/(x_1f_1 + \ldots + x_rf_r)) \cong
+\Spec(A_{f_1}[x_2, \ldots x_r]) =
+\mathbf{A}^{r - 1}_k \times_k U'
+$$
+is irreducible. On the other hand, we have
+$$
+H_U \setminus H_{U'} =
+\Spec(A/(f_1)[x_1, \ldots, x_r]/(x_2f_2 + \ldots + x_rf_r))
+$$
+which has dimension at most $d + r - 2$. Namely, for $i \not = 1$
+the scheme $(H_U \setminus H_{U'}) \times_U D(f_i)$ is either empty
+(if $f_i = 0$) or by the same argument as above isomorphic to an $r - 1$
+dimensional affine space over an open of $\Spec(A/(f_1))$ and hence has
+dimension at most $d + r - 2$.
+On the other hand, $(H_U \setminus H_{U'}) \times_U V(f_2, \ldots, f_r)$
+is an $r$ dimensional affine space over $\Spec(A/(f_1, \ldots, f_r))$
+and hence assumption (3) tells us this has dimension at most
+$d + r - 2$. We conclude that $H_U$ is irreducible for every $U$ as above.
+It follows that $H_{univ}$ is irreducible.
+
+\medskip\noindent
+Thus it suffices to show that the generic point of $H_{univ}$
+is geometrically irreducible over the generic point of $\mathbf{A}^r_k$, see
+Varieties, Lemma
+\ref{varieties-lemma-geometrically-irreducible-function-field}.
+Choose a nonempty affine open $U = \Spec(A)$ of $X$
+contained in $X \setminus H_{v_1}$ which meets the irreducible
+component $Z$ of $H_{v_2} \cap H_{v_3}$ whose existence is averted in
+assumption (2). With notation as above we have to prove that
+the field extension
+$$
+\text{Frac}(A[x_1, \ldots, x_r]/(x_1f_1 + \ldots + x_rf_r))/
+k(x_1, \ldots , x_r)
+$$
+is geometrically irreducible. Observe that $f_1$ is invertible in $A$
+by our choice of $U$.
+Set $K = \text{Frac}(A)$ equal to the fraction field of $A$.
+Eliminating the variable $x_1$ as above,
+we find that we have to show that the field extension
+$$
+K(x_2, \ldots, x_r)/
+k(x_2, \ldots, x_r, -\sum\nolimits_{i = 2, \ldots, r} f_1^{-1}f_i x_i)
+$$
+is geometrically irreducible. By Lemma \ref{lemma-amazing-bertini-lemma}
+it suffices to show that for some $c_2, \ldots, c_r \in k$ the elements
+$$
+x_2, \ldots, x_r, \sum\nolimits_{i = 2, \ldots, r} f_1^{-1}f_i x_i,
+\sum\nolimits_{i = 2, \ldots, r} c_if_1^{-1}f_i
+$$
+are algebraically independent over $k$ in the fraction field of
+$A[x_2, \ldots, x_r]$. This follows from
+Lemma \ref{lemma-algebraically-independent}
+and the fact that $Z \cap U$ is an irreducible
+component of $V(f_1^{-1}f_2, f_1^{-1}f_3) \subset U$.
+\end{proof}
+
+\begin{remark}
+\label{remark-geometric-proof-bertini-irreducible}
+Let us sketch a ``geometric'' proof of a special case of
+Lemma \ref{lemma-bertini-irreducible}. Namely, say $k$
+is an algebraically closed field and $X \subset \mathbf{P}^n_k$ is smooth and
+irreducible of dimension $\geq 2$. Then we claim there is a
+hyperplane $H \subset \mathbf{P}^n_k$ such that $X \cap H$ is
+smooth and irreducible. Namely, by
+Varieties, Lemma \ref{varieties-lemma-bertini}
+for a general $v \in V = kT_0 \oplus \ldots \oplus kT_n$
+the corresponding hyperplane section $X \cap H_v$ is smooth.
+On the other hand, by Enriques-Severi-Zariski the scheme
+$X \cap H_v$ is connected, see
+Varieties, Lemma \ref{varieties-lemma-connectedness-ample-divisor}.
+Hence $X \cap H_v$ is smooth and irreducible.
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Theorem of the cube}
 \label{section-theorem-cube}
 
@@ -9045,7 +9361,7 @@ Assume further we are given a local $\mathcal{O}_{S, s}$-algebra map
 $$
 \varphi : \mathcal{O}_{Y, y} \longrightarrow \mathcal{O}_{X, x}^\wedge
 $$
-between the complete local rings. For every $N \geq 1$
+For every $N \geq 1$
 there exists an elementary \'etale neighbourhood
 $(U, u) \to (X, x)$ and an $S$-morphism
 $f : U \to Y$ mapping $u$ to $y$ such that the diagram
@@ -10962,6 +11278,9 @@ The claim follows and we win.
 
 \begin{lemma}
 \label{lemma-quasi-finite-separated-quasi-affine}
+\begin{slogan}
+Quasi-finite, separated morphisms are quasi-affine
+\end{slogan}
 Let $f : X \to S$ be a morphism of schemes.
 Assume $f$ is quasi-finite and separated.
 Let $S'$ be the normalization of $S$ in $X$, see
@@ -10980,7 +11299,7 @@ In particular $f$ is quasi-affine.
 \begin{proof}
 This follows from Lemma \ref{lemma-finite-type-separated}. Namely, by
 that lemma there exists an open subscheme $U' \subset S'$ such that
-$(f')^{-1}(U') = X$ (!) and $X \to U'$ is an isomorphism! In other
+$(f')^{-1}(U') = X$ and $X \to U'$ is an isomorphism. In other
 words, $f'$ is an open immersion. Note that $f'$ is quasi-compact as
 $f$ is quasi-compact and $\nu : S' \to S$ is separated
 (Schemes, Lemma \ref{schemes-lemma-quasi-compact-permanence}).
@@ -11524,7 +11843,7 @@ Since $X$ is quasi-compact, there exist finitely many affine opens
 $U_i \subset U$ such that $U' = \coprod U_i \to X$ is surjective.
 After replacing $U$ by $U'$, we see that we may assume $U$ is affine.
 In particular $U \to X$ is separated
-(Morphisms, Lemma \ref{morphisms-lemma-affine-separated}).
+(Schemes, Lemma \ref{schemes-lemma-affine-separated}).
 Then there exists an integer $d$ bounding the degree of the geometric
 fibres of $U \to X$ (see Morphisms, Lemma
 \ref{morphisms-lemma-locally-quasi-finite-qc-source-universally-bounded}).
@@ -12843,8 +13162,9 @@ $$
 $$
 This isomorphism is compatible with further localization.
 Taking $m' = 0$ we see that $\pi_*\mathcal{O}_L$ is the
-direct sum of $\mathcal{O}_P(m)$ for $m \geq 0$. We conclude
-$L$ is idendified with the relative spectrum:
+direct sum of $\mathcal{O}_P(m)$ for $m \geq 0$\footnote{It similarly follows
+that $\pi_*\mathcal{O}_L(i) = \bigoplus_{m \geq -i} \mathcal{O}_P(m)$.}.
+We conclude $L$ is idendified with the relative spectrum:
 $$
 L = \underline{\Spec}_P
 \left(
@@ -13803,15 +14123,20 @@ and that also $(f_U)_*\mathcal{O}_{X_U} = \mathcal{O}_U$
 (Cohomology of Schemes, Lemma \ref{coherent-lemma-flat-base-change-cohomology}).
 Hence after replacing
 $(f : X \to S, s)$ by the base change $(f_U : X_U \to U, u)$
-it suffices to prove that the fibre $X_s$ is connected.
+it suffices to prove that the fibre $X_s$ is connected when
+$f_*\mathcal{O}_X = \mathcal{O}_S$. We can deduce this
+from Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-proper-idempotent-on-fibre}
+(by looking at idempotents in the structure sheaf of $X_s$)
+but we will also give a direct argument below.
 
 \medskip\noindent
-At this point we apply the theorem on formal functions,
+Namely, we apply the theorem on formal functions,
 more precisely Cohomology of Schemes, Lemma
 \ref{coherent-lemma-formal-functions-stalk}.
 It tells us that
 $$
-\mathcal{O}^\wedge_{S, s} =
+\mathcal{O}^\wedge_{S, s} = (f_*\mathcal{O}_X)_s^\wedge =
 \lim_n H^0(X_n, \mathcal{O}_{X_n})
 $$
 where $X_n$ is the $n$th infinitesimal neighbourhood of $X_s$.
@@ -13882,33 +14207,15 @@ $S = \Spec(R)$ affine, $X \to S$ proper with $\Gamma(X, \mathcal{O}_X) = R$
 and $s \in S$ is a point, the fibre $X_s$ is connected.
 
 \medskip\noindent
-By Limits, Lemma
-\ref{limits-lemma-proper-limit-of-proper-finite-presentation-noetherian}
-we can write $(X \to S) = \lim (X_i \to S_i)$ with $X_i \to S_i$
-proper and of finite presentation and $S_i$ Noetherian. For $i$ large
-enough $S_i$ is affine (Limits, Lemma \ref{limits-lemma-limit-affine}).
-Say $S_i = \Spec(R_i)$. Let $R'_i = \Gamma(X_i, \mathcal{O}_{X_i})$.
-Observe that we have ring maps $R_i \to R_i' \to R$. Namely, we have
-the first because $X_i$ is a scheme over $R_i$ and the second because
-we have $X \to X_i$ and $R = \Gamma(X, \mathcal{O}_X)$. Note that
-$R = \colim R'_i$ by Limits, Lemma \ref{limits-lemma-descend-section}.
-Then 
-$$
-\xymatrix{
-X \ar[d]  \ar[r] & X_i \ar[d] \\
-S \ar[r] & S'_i \ar[r] & S_i
-}
-$$
-is commutative with $S'_i = \Spec(R'_i)$.
-Let $s'_i \in S'_i$ be the image of $s$.
-We have $X_s = \lim X_{i, s'_i}$ because $X = \lim X_i$,
-$S = \lim S'_i$, and $\kappa(s) = \colim \kappa(s'_i)$.
-Now let $X_s = U \amalg V$ with $U$ and $V$ open and closed.
-Then $U, V$ are the inverse images of opens $U_i, V_i$ in $X_{i, s'_i}$
-(Limits, Lemma \ref{limits-lemma-descend-opens}).
-By Theorem \ref{theorem-stein-factorization-Noetherian} the fibres
-of $X_i \to S'_i$ are connected, hence either $U$ or $V$ is empty.
-This finishes the proof.
+To do this it suffices to show that the only idempotents
+$e \in H^0(X_s, \mathcal{O}_{X_s})$ are $0$ and $1$ (we already
+know that $X_s$ is nonempty by Lemma \ref{lemma-stein-universally-closed}).
+By Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-proper-idempotent-on-fibre}
+after replacing $R$ by a principal localization
+we may assume $e$ is the image of an element of $R$.
+Since $R \to H^0(X_s, \mathcal{O}_{X_s})$ factors through
+$\kappa(s)$ we conclude.
 \end{proof}
 
 \noindent
@@ -15809,6 +16116,25 @@ Thus $A \to B$ is a perfect ring map by definition.
 \end{proof}
 
 \begin{lemma}
+\label{lemma-perfect-closed-immersion-perfect-direct-image}
+Let $i : Z \to X$ be a perfect closed immersion of schemes.
+Then $i_*\mathcal{O}_X$ is a perfect $\mathcal{O}_X$-module, i.e.,
+it is a perfect object of $D(\mathcal{O}_X)$.
+\end{lemma}
+
+\begin{proof}
+This is more or less immediate from the definition. Namely, let
+$U = \Spec(A)$ be an affine open of $X$. Then $i^{-1}(U) = \Spec(A/I)$
+for some ideal $I \subset A$ and $A/I$ has a finite resolution by
+finite projective $A$-modules by
+More on Algebra, Lemma \ref{more-algebra-lemma-perfect-ring-map}.
+Hence $i_*\mathcal{O}_Z|_U$ can be represented by a finite
+length complex of finite locally free $\mathcal{O}_U$-modules.
+This is what we had to show, see
+Cohomology, Section \ref{cohomology-section-perfect}.
+\end{proof}
+
+\begin{lemma}
 \label{lemma-perfect-proper-perfect-direct-image}
 Let $S$ be a Noetherian scheme. Let $f : X \to S$ be a perfect proper
 morphism of schemes. Let $E \in D(\mathcal{O}_X)$ be perfect. Then
@@ -15888,7 +16214,7 @@ In
 Divisors, Section \ref{divisors-section-regular-immersions}
 we have defined 4 different types of regular immersions: regular,
 Koszul-regular, $H_1$-regular, and quasi-regular. In this section
-we consider morphisms $f : X \to S$ which locally on $X$ factors as
+we consider morphisms $f : X \to S$ which locally on $X$ factor as
 $$
 \xymatrix{
 X \ar[rr]_i \ar[rd] & & \mathbf{A}^n_S \ar[ld] \\
@@ -17562,7 +17888,7 @@ with $j^{-1}(\{y\}) \subset i^{-1}(U)$.
 \label{lemma-prepare-pushout-along-closed-immersion-and-integral}
 In Situation \ref{situation-pushout-along-closed-immersion-and-integral}
 then for $y \in Y$ there exist affine opens $U \subset X$ and
-$V \subset Y$ with $i^{-1}(U) = j^{-1}(V)$.
+$V \subset Y$ with $i^{-1}(U) = j^{-1}(V)$ and $y \in V$.
 \end{lemma}
 
 \begin{proof}

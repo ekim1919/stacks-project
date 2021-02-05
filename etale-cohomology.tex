@@ -917,7 +917,7 @@ where $k$ is a field, is flat and surjective. It is not quasi-compact, and
 in fact the family $\{\varphi\}$ is not an fpqc covering.
 \item Write
 $\mathbf{A}^2_k = \Spec(k[x, y])$. Denote $i_x : D(x) \to \mathbf{A}^2_k$
-and $i_y : D(y) \hookrightarrow \mathbf{A}^2_k$ the standard opens.
+and $i_y : D(y) \to \mathbf{A}^2_k$ the standard opens.
 Then the families
 $\{i_x, i_y, \Spec(k[[x, y]]) \to \mathbf{A}^2_k\}$
 and
@@ -1084,9 +1084,11 @@ Sites, Section \ref{sites-section-representable-sheaves}.
 
 \begin{remark}
 \label{remark-fpqc-finest}
-The fpqc is the finest topology that we will see. Hence any presheaf
+The fpqc is finer than the Zariski, \'etale, smooth, syntomic, and fppf
+topologies. Hence any presheaf
 satisfying the sheaf condition for the fpqc topology will be a
-sheaf in the subsequent sites (\'etale, smooth, etc). In particular
+sheaf on the Zariski, \'etale, smooth, syntomic, and fppf
+sites. In particular
 representable presheaves will be sheaves on the \'etale site of a scheme
 for example.
 \end{remark}
@@ -4368,8 +4370,8 @@ More on Morphisms, Lemma \ref{more-morphisms-lemma-describe-henselization}.
 \begin{remark}
 \label{remark-henselization-Noetherian}
 Let $S$ be a scheme. Let $s \in S$.
-If $S$ is locally noetherian then $\mathcal{O}_{S, s}^h$
-is also noetherian and it has the same completion:
+If $S$ is locally Noetherian then $\mathcal{O}_{S, s}^h$
+is also Noetherian and it has the same completion:
 $$
 \widehat{\mathcal{O}_{S, s}} \cong \widehat{\mathcal{O}_{S, s}^h}.
 $$
@@ -5587,7 +5589,7 @@ $$
 (g, g^\sharp) \circ (j_{i, small}, j_{i, small}^\sharp) :
 (\Sh(U_{i, \etale}), \mathcal{O}_{U_i})
 \to
-(\Sh(X_\etale), \mathcal{O}_X)
+(\Sh(Y_\etale), \mathcal{O}_Y)
 $$
 see
 Modules on Sites,
@@ -9089,7 +9091,13 @@ defined above is a group isomorphism.
 \end{theorem}
 
 \begin{proof}[Sketch of proof]
-In the abelian case ($d = 1$), one has the identification
+To prove that $\delta$ defines a group homomorphism, i.e., that
+$\delta(A \otimes_K B) = \delta(A) + \delta(B)$, one computes
+directly with cocycles.
+
+\medskip\noindent
+Injectivity of $\delta$. In the abelian case ($d = 1$), one has the
+identification
 $$
 H^1(\text{Gal}(K^{sep}/K), \text{GL}_d(K^{sep})) =
 H_\etale^1(\Spec(K), \text{GL}_d(\mathcal{O}))
@@ -9099,7 +9107,10 @@ non-abelian case, this would readily imply injectivity of $\delta$. (See
 \cite{SGA4.5}.) Rather, to prove this, one can reinterpret $\delta([A])$ as the
 obstruction to the existence of a $K$-vector space $V$ with a left $A$-module
 structure and such that $\dim_K V = \deg A$. In the case where $V$ exists, one
-has $A \cong \text{End}_K(V)$. For surjectivity, pick a
+has $A \cong \text{End}_K(V)$.
+
+\medskip\noindent
+For surjectivity, pick a
 cohomology class $\xi \in H^2(\text{Gal}(K^{sep}/K), (K^{sep})^*)$,
 then there exists a finite Galois extension $K \subset K' \subset K^{sep}$
 such that $\xi$ is the image of some
@@ -10022,13 +10033,20 @@ over the spectrum of a field.
 \label{lemma-nonvanishing-inherited}
 Let $\ell$ be a prime number and $n$ an integer $> 0$.
 Let $S$ be a quasi-compact and quasi-separated scheme.
-Let $X = \lim_{i \in I}{X_i}$ be the limit of a
+Let $X = \lim_{i \in I} X_i$ be the limit of a
 directed system of $S$-schemes each $X_i \to S$
 being finite \'etale of constant degree relatively prime to $\ell$.
-For any abelian $\ell$-power torsion sheaf $\mathcal{G}$ on $S$
-such that $H_\etale^n(S, \mathcal{G}) \neq 0$
-there exists an $\ell$-power torsion sheaf $\mathcal{F}$ on $X$
-such that $H_\etale^n(X, \mathcal{F}) \neq 0$
+The following are equivalent:
+\begin{enumerate}
+\item there exists an $\ell$-power torsion sheaf
+$\mathcal{G}$ on $S$ such that $H_\etale^n(S, \mathcal{G}) \neq 0$ and
+\item there exists an $\ell$-power torsion sheaf $\mathcal{F}$ on $X$
+such that $H_\etale^n(X, \mathcal{F}) \neq 0$.
+\end{enumerate}
+In fact, given
+$\mathcal{G}$ we can take $\mathcal{F} = g^{-1}\mathcal{F}$
+and given
+$\mathcal{F}$ we can take $\mathcal{G} = g_*\mathcal{F}$.
 \end{lemma}
 
 \begin{proof}
@@ -10040,14 +10058,14 @@ satisify the conditions of Theorem \ref{theorem-colimit}
 with colimit sheaf given by $g^{-1}\mathcal{G}$. This tells 
 us that:
 $$
-\colim_{i\in I} H^p_\etale(X_i, g_i^{-1}\mathcal{G}) = 
-H^p_\etale(X, \mathcal{G})
+\colim_{i\in I} H^n_\etale(X_i, g_i^{-1}\mathcal{G}) =
+H^n_\etale(X, \mathcal{G})
 $$
 By virtue of the $g_i$ being finite \'etale morphism of degree prime
 to $\ell$ we can apply ``la m\'ethode de la trace'' and we find
 the maps
 $$
-H^n_\etale(S, \mathcal{G}) \to H^p_\etale(X_i, g_i^{-1}\mathcal{G})
+H^n_\etale(S, \mathcal{G}) \to H^n_\etale(X_i, g_i^{-1}\mathcal{G})
 $$
 are all injective (and compatible with the transition maps).
 See Section \ref{section-trace-method}. Thus, the colimit is non-zero, i.e.,
@@ -10342,7 +10360,7 @@ $k(x_1, \ldots, x_r)$ is $C_r$ (exercise).
 
 \medskip\noindent
 General case. Without loss of generality, we may assume $X$ to be projective.
-Let $f \in K[T_1, \ldots, T_n]_d$ with $0 < d^r < n$.
+Let $f \in k(X)[T_1, \ldots, T_n]_d$ with $0 < d^r < n$.
 Say the coefficients of $f$ are in $\Gamma(X, \mathcal{O}_X(H))$
 for some ample $H \subset X$. Let
 $\mathbf{\alpha} = (\alpha_1, \ldots, \alpha_n)$ with $\alpha_i \in \Gamma(X,
@@ -10353,9 +10371,9 @@ $\mathbf{\alpha} = (\alpha_1, \ldots, \alpha_n)$ with $\alpha_i \in \Gamma(X,
 there exists a $c > 0$ such that
 \begin{itemize}
 \item the number of variables is
-$n\dim_K \Gamma(X, \mathcal{O}_X(eH)) \sim n e^r c$, and
+$n\dim_k \Gamma(X, \mathcal{O}_X(eH)) \sim n e^r c$, and
 \item the number of equations is
-$\dim_K \Gamma(X, \mathcal{O}_X((de + 1)H)) \sim (de + 1)^r c$.
+$\dim_k \Gamma(X, \mathcal{O}_X((de + 1)H)) \sim (de + 1)^r c$.
 \end{itemize}
 Since $n > d^r$, there are more variables than equations. The equations are
 homogeneous hence there is a solution by
@@ -10434,7 +10452,7 @@ hence irreducible. In this case, there is a well known exact sequence
 $$
 1 \longrightarrow
 \Gamma(U, \mathcal{O}_U^*) \longrightarrow
-k(U)^* \longrightarrow \bigoplus\nolimits_{y \in U^0} \mathbf{Z}_y.
+k(U)^* \longrightarrow \bigoplus\nolimits_{y \in U_0} \mathbf{Z}_y.
 $$
 This amounts to a sequence
 $$
@@ -10734,7 +10752,7 @@ for all $q\geq 2$, $H_\etale^q(X, \mu_n) = 0$.
 Write $X = \bar X - \{ x_1, \ldots, x_r\}$. Then $\Pic(X) =
 \Pic(\bar X)/ R$, where $R$ is the subgroup generated by
 $\mathcal{O}_{\bar X}(x_i)$, $1 \leq i \leq r$. Since $r \geq 1$, we see that
-$\Pic^0(X) \to \Pic(X)$ is surjective, hence $\Pic(X)$ is
+$\Pic^0(\bar X) \to \Pic(X)$ is surjective, hence $\Pic(X)$ is
 divisible. Applying the Kummer sequence, we get (1) and (3). For (2), recall
 that
 \begin{align*}
@@ -11281,7 +11299,7 @@ with $\mathcal{F}$, $\mathcal{G}$ constructible. We have to show
 that $\mathcal{E}$ is constructible.
 In both cases we can replace $X$ with the members of an
 affine open covering. Hence we may assume $X$ is affine.
-The we may further replace $X$ by the members of a finite
+Then we may further replace $X$ by the members of a finite
 partition of $X$ by constructible locally closed subschemes
 on which $\mathcal{F}$ and $\mathcal{G}$ are of finite type and
 locally constant. Thus we may apply
@@ -11478,7 +11496,7 @@ Noetherian induction and the following amusing lemma.
 \label{lemma-generically-finite}
 Let $f: X \to Y$ be a morphism of schemes which is quasi-compact,
 quasi-separated, and locally of finite type. If $\eta$ is a generic point
-of on irreducible component of $Y$ such that $f^{-1}(\eta)$ is finite, then
+of an irreducible component of $Y$ such that $f^{-1}(\eta)$ is finite, then
 there exists an open $V \subset Y$ containing $\eta$ such that
 $f^{-1}(V) \to V$ is finite.
 \end{lemma}
@@ -11647,7 +11665,7 @@ $$
 \xymatrix{
 \coprod\nolimits_{j = 1, \ldots, m} h_{V_j}
 \ar@<1ex>[r] \ar@<-1ex>[r] &
-\coprod\nolimits_{i = 1, \ldots, n} j_{U_i}
+\coprod\nolimits_{i = 1, \ldots, n} h_{U_i}
 }
 \right)
 $$
@@ -12290,7 +12308,7 @@ Let $X$ be a Noetherian scheme.
 There exist an injective map of sheaves
 $$
 \mathcal{F} \longrightarrow
-\coprod\nolimits_{i = 1, \ldots, n} f_{i, *}\underline{E_i}
+\prod\nolimits_{i = 1, \ldots, n} f_{i, *}\underline{E_i}
 $$
 where $f_i : Y_i \to X$ is a finite morphism and $E_i$ is a finite set.
 \item Let $\mathcal{F}$ be a constructible abelian sheaf on $X_\etale$.
@@ -12333,13 +12351,13 @@ Let $Z \subset X$ be the induced reduced scheme structure
 (Schemes, Definition \ref{schemes-definition-reduced-induced-scheme})
 on $\overline{\{x\}}$.
 Since $\mathcal{F}$ is constructible, there is a finite separable
-extension $\kappa(x) \subset \Spec(K)$ such that
+extension $K/\kappa(x)$ such that
 $\mathcal{F}|_{\Spec(K)}$ is the constant sheaf with value $E$
 for some finite set $E$. Let $Y \to Z$ be the normalization
 of $Z$ in $\Spec(K)$.
 By Morphisms, Lemma \ref{morphisms-lemma-normal-normalization}
 we see that $Y$ is a normal integral scheme.
-As $\kappa(x) \subset K$ is finite, it is clear that $K$ is the function
+As $K/\kappa(x)$ is a finite extension, it is clear that $K$ is the function
 field of $Y$. Denote $g : \Spec(K) \to Y$ the inclusion.
 The map $\mathcal{F}|_{\Spec(K)} \to \underline{E}$ is adjoint
 to a map $\mathcal{F}|_Y \to g_*\underline{E} = \underline{E}$
@@ -12391,13 +12409,16 @@ statement to the Noetherian case.
 
 \begin{lemma}
 \label{lemma-constructible-maps-into-constant-general}
+\begin{reference}
+\cite[Exposee IX, Proposition 2.14]{SGA4}
+\end{reference}
 Let $X$ be a quasi-compact and quasi-separated scheme.
 \begin{enumerate}
 \item Let $\mathcal{F}$ be a constructible sheaf of sets on $X_\etale$.
 There exist an injective map of sheaves
 $$
 \mathcal{F} \longrightarrow
-\coprod\nolimits_{i = 1, \ldots, n} f_{i, *}\underline{E_i}
+\prod\nolimits_{i = 1, \ldots, n} f_{i, *}\underline{E_i}
 $$
 where $f_i : Y_i \to X$ is a finite and finitely presented morphism and
 $E_i$ is a finite set.
@@ -12437,7 +12458,7 @@ over $X_t$ for some $t$. Then we apply the Noetherian case
 to find an injection
 $$
 \mathcal{F}_t \longrightarrow
-\coprod\nolimits_{i = 1, \ldots, n} f_{i, *}\underline{E_i}
+\prod\nolimits_{i = 1, \ldots, n} f_{i, *}\underline{E_i}
 \quad\text{or}\quad
 \mathcal{F}_t \longrightarrow
 \bigoplus\nolimits_{i = 1, \ldots, n} f_{i, *}\underline{M_i}
@@ -12518,7 +12539,7 @@ are constructible sheaves of $\Lambda$-modules.
 This definition makes sense by Lemma \ref{lemma-constructible-abelian} and
 Derived Categories, Section \ref{derived-section-triangulated-sub}.
 Thus we see that $D_c(X_\etale, \Lambda)$ is a strictly full, saturated
-triangulated subcategory of $D_c(X_\etale, \Lambda)$.
+triangulated subcategory of $D(X_\etale, \Lambda)$.
 
 \begin{lemma}
 \label{lemma-restrict-and-shriek-from-etale-c}
@@ -13527,13 +13548,16 @@ i^{-1}(\mathcal{F}|_{X_{Zar}})
 \longrightarrow
 (i_{small}^{-1}\mathcal{F})|_{Z_{Zar}}
 $$
-of sheaves on $Z_{Zar}$. This map is injective as can be seen by looking
-on stalks. The stalk on the left hand side at $z \in Z$
+of sheaves on $Z_{Zar}$. We will show this map is injective by looking
+at stalks. The stalk on the left hand side at $z \in Z$
 is the stalk of $\mathcal{F}|_{X_{Zar}}$ at $z$. The stalk on the right
 hand side is the colimit over all elementary \'etale neighbourhoods
 $(U, u) \to (X, z)$ such that $U \times_X Z \to Z$ has a section over
 a neighbourhood of $z$. As \'etale morphisms are open, the image of
-$U \to X$ is an open neighbourhood of $z$ in $X$ and injectivity follows.
+$U \to X$ is an open neighbourhood $U_0$ of $z$ in $X$. The map
+$\mathcal{F}(U_0) \to \mathcal{F}(U)$ is injective by the sheaf
+condition for $\mathcal{F}$ with respect to the \'etale covering $U \to U_0$.
+Taking the colimit over all $U$ and $U_0$ we obtain injectivity on stalks.
 
 \medskip\noindent
 It follows from this and assumption (1) that the map
@@ -17442,7 +17466,7 @@ $R^pg_*R^qj_*\mathcal{F} = 0$ for $p > 0$ and $q > 0$. Moreover, we have
 $R^qj_*\mathcal{F} = 0$ for $q > d$. On the other hand, $g$ is a
 proper morphism of relative dimension $1$. Hence by
 Lemma \ref{lemma-cohomological-dimension-proper}
-we see that $R^pj_*\mathcal{F} = 0$ for $p > 2$. Thus the $E_2$-page
+we see that $R^pg_*j_*\mathcal{F} = 0$ for $p > 2$. Thus the $E_2$-page
 of the spectral sequence looks like this
 $$
 \begin{matrix}
@@ -17465,7 +17489,8 @@ $$
 On the other hand, by Theorem \ref{theorem-higher-direct-images}
 we have $R^2f_*\mathcal{F}_{\overline{\eta}} =
 H^2(\mathbf{A}^1_{\overline{\eta}}, \mathcal{F}) = 0$
-(vanishing by the case of dimension $1$).
+(vanishing by the case of dimension $1$) where $\eta$ is the
+generic point of $\mathbf{A}^{d - 1}_K$.
 Hence by interlude II again we see
 $$
 H^p(\mathbf{A}^{d - 1}_K, R^2f_*\mathcal{F}) = 0

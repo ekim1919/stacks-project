@@ -755,6 +755,30 @@ This proves (3). Part (4) is an immediate consequence of (3)
 as a singleton space is irreducible.
 \end{proof}
 
+\begin{lemma}
+\label{lemma-pick-irreducible-components}
+Let $X$ be a topological space and suppose $X = \bigcup_{i = 1, \ldots, n} X_i$
+where each $X_i$ is an irreducible closed subset of $X$ and no $X_i$
+is contained in the union of the other members.  Then each $X_i$ is an
+irreducible component of $X$ and each irreducible component of $X$
+is one of the $X_i$.
+\end{lemma}
+
+\begin{proof}
+Let $Y$ be an irreducible component of $X$. Write
+$Y = \bigcup_{i = 1, \ldots, n} (Y \cap X_i)$
+and note that each $Y \cap X_i$ is closed in $Y$ since $X_i$ is closed in $X$.
+By irreducibility of $Y$ we see that $Y$ is equal to one of the $Y \cap X_i$,
+i.e., $Y \subset X_i$.  By maximality of irreducible components we
+get $Y = X_i$.
+
+\medskip\noindent
+Conversely, take one of the $X_i$ and expand it to an irreducible component
+$Y$, which we have already shown is one of the $X_j$.
+So $X_i \subset X_j$ and since the original union does not have
+redundant members, $X_i = X_j$, which is an irreducible component.
+\end{proof}
+
 \noindent
 A singleton is irreducible. Thus if $x \in X$ is a point
 then the closure $\overline{\{x\}}$ is an irreducible closed
@@ -1058,7 +1082,7 @@ components. Hence $Z = \bigcup Z'_i \cup \bigcup Z''_j$ is
 a finite union of irreducible closed subsets.
 After removing redundant members of this expression,
 this will be the decomposition of $Z$ into its irreducible
-components, a contradiction.
+components (Lemma \ref{lemma-pick-irreducible-components}), a contradiction.
 
 \medskip\noindent
 Let $Z \subset X$ be an irreducible component of $X$.
@@ -3809,18 +3833,27 @@ By Lemma \ref{lemma-bijective-map} the map is a homeomorphism.
 
 \begin{lemma}
 \label{lemma-directed-inverse-limit-profinite}
-A cofiltered limit of profinite spaces is profinite.
+A limit of profinite spaces is profinite.
 \end{lemma}
 
 \begin{proof}
+Let $i \mapsto X_i$ be a diagram of profinite spaces
+over the index category $\mathcal{I}$.
 Let us use the characterization of profinite spaces in
-Lemma \ref{lemma-profinite}.
-By Lemma \ref{lemma-limits} the limit exists.
-By Theorem \ref{theorem-tychonov}
-the limit is quasi-compact. A cofiltered limit of
-totally disconnected spaces is totally disconnected
-(details omitted). A cofiltered limit of Hausdorff spaces is Hausdorff
-(details omitted). This finishes the proof.
+Lemma \ref{lemma-profinite}. In particular each $X_i$ is
+Hausdorff, quasi-compact, and totally disconnected.
+By Lemma \ref{lemma-limits} the limit $X = \lim X_i$ exists.
+By Lemma \ref{lemma-inverse-limit-quasi-compact}
+the limit $X$ is quasi-compact. Let $x, x' \in X$ be distinct points.
+Then there exists an $i$ such that $x$ and $x'$
+have distinct images $x_i$ and $x'_i$ in $X_i$
+under the projection $X \to X_i$. Then $x_i$ and $x'_i$
+have disjoint open neighbourhoods in $X_i$. Taking the
+inverse images of these opens we conclude that $X$ is Hausdorff.
+Similarly, $x_i$ and $x'_i$ are in distinct connected components
+of $X_i$ whence necessarily $x$ and $x'$ must be in distinct
+connected components of $X$. Hence $X$ is totally disconnected.
+This finishes the proof.
 \end{proof}
 
 \begin{lemma}
@@ -3912,8 +3945,12 @@ is the topology which has as a subbase of opens the sets $U$ and $U^c$
 where $U$ is a quasi-compact open of $X$. Note that since $X$ is spectral
 an open $U \subset X$ is retrocompact if and only if $U$ is quasi-compact.
 Hence the constructible topology can also be characterized as the coarsest
-topology such that every constructible subset of $X$ is both open and closed.
-Since the collection of quasi-compact opens is a basis for the topology
+topology such that every constructible subset of $X$ is both open and closed
+(see Section \ref{section-constructible} for definitions and properties of
+constructible sets).
+It follows that a subset of $X$ is open, resp.\ closed in the constructible
+topology if and only if it is a union, resp.\ intersection of constructible
+subsets. Since the collection of quasi-compact opens is a basis for the topology
 on $X$ we see that the constructible topology is stronger than the
 given topology on $X$.
 
@@ -3955,8 +3992,10 @@ of elements of $\mathcal{B}$ having the finite intersection property
 but empty intersection. An application of Zorn's lemma shows that we
 may assume our family is maximal (details omitted).
 Let $I' \subset I$ be those indices such that
-$B_i$ is closed and set $Z = \bigcap_{i \in I'} B_i$. This is a closed
-subset of $X$. If $Z$ is reducible, then we can write $Z = Z' \cup Z''$
+$B_i$ is closed and set $Z = \bigcap_{i \in I'} B_i$.
+This is a closed subset of $X$ which is nonempty by Lemma
+\ref{lemma-intersection-closed-in-quasi-compact}.
+If $Z$ is reducible, then we can write $Z = Z' \cup Z''$
 as a union of two closed subsets, neither equal to $Z$. This means in
 particular that we can find a quasi-compact open $U' \subset X$ meeting
 $Z'$ but not $Z''$. Similarly, we can find a quasi-compact open
@@ -4012,6 +4051,30 @@ we see that $X'_y$ is quasi-compact
 (Lemma \ref{lemma-closed-in-quasi-compact}).
 As $X'_y \to X_y$ is a surjective continuous map we conclude
 that $X_y$ is quasi-compact (Lemma \ref{lemma-image-quasi-compact}).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-spectral-if-continuous-wrt-constructible-top}
+Let $X$ and $Y$ be spectral spaces. Let $f : X \to Y$ be a continuous map.
+Then $f$ is spectral if and only if $f$ is continuous in the constructible
+topology.
+\end{lemma}
+
+\begin{proof}
+The only if part of this is
+Lemma \ref{lemma-fibres-spectral-map-quasi-compact}.
+Assume $f$ is continuous in the constructible topology.
+Let $V \subset Y$ be quasi-compact open.
+Then $V$ is open and closed in the constructible topology.
+Hence $f^{-1}(V)$ is open and closed in the constructible topology.
+Hence $f^{-1}(V)$ is quasi-compact in the constructible topology
+as $X$ is quasi-compact in the constructible topology by
+Lemma \ref{lemma-constructible-hausdorff-quasi-compact}.
+Since the identity $f^{-1}(V) \to f^{-1}(V)$ is surjective
+and continuous from the constructible topology to the usual
+topology, we conclude that $f^{-1}(V)$ is quasi-compact
+in the topology of $X$ by Lemma \ref{lemma-image-quasi-compact}.
+This finishes the proof.
 \end{proof}
 
 \begin{lemma}
@@ -5266,7 +5329,7 @@ $U_i \subset X_i$ is open.
 \medskip\noindent
 The category of topological spaces has coequalizers. Namely, if
 $a, b : X \to Y$ are morphisms of topological spaces, then the
-equalizer of $a$ and $b$ is the coequalizer $Y/\sim$ in the category
+coequalizer of $a$ and $b$ is the coequalizer $Y/\sim$ in the category
 of sets endowed with the quotient topology (Section \ref{section-submersive}).
 
 \begin{lemma}

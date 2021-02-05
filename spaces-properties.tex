@@ -402,7 +402,7 @@ Let us prove that the topology is independent of the choice of
 the presentation. To do this it suffices to show that if $U'$ is a scheme,
 and $U' \to X$ is an \'etale morphism, then the map $|U'| \to |X|$
 (with topology on $|X|$ defined using $U \to X$ as above)
-is open and continuous; which in addition will prove that (2) holds.
+is open and continuous; which in addition will prove that (3) holds.
 Set $U'' = U \times_X U'$, so that we have the commutative diagram
 $$
 \xymatrix{
@@ -433,7 +433,7 @@ again.) Hence it follows formally that the right vertical
 arrow is continuous and open.
 
 \medskip\noindent
-To finish the proof we prove (1).
+To finish the proof we prove (2).
 Let $a : X \to Y$ be a morphism of algebraic spaces. According to
 Spaces, Lemma \ref{spaces-lemma-lift-morphism-presentations}
 we can find a diagram
@@ -1154,9 +1154,9 @@ Let $W' \subset U'$ be an affine open. Since $\text{pr}_2$ is
 \'etale and hence open, we can choose a quasi-compact open
 $W'' \subset U \times_X U'$ with $\text{pr}_2(W'') = W'$.
 Then $\text{pr}_2|_{W''} : W'' \to W'$ is quasi-compact.
-We have $W \cap (\varphi')^{-1}(E) = \text{pr}_2(E'' \cap W'')$
+We have $W' \cap (\varphi')^{-1}(E) = \text{pr}_2(E'' \cap W'')$
 as $\varphi$ is surjective, see Lemma \ref{lemma-points-cartesian}.
-Thus $W \cap (\varphi')^{-1}(E) = \text{pr}_2(E'' \cap W'')$
+Thus $W' \cap (\varphi')^{-1}(E) = \text{pr}_2(E'' \cap W'')$
 is locally constructible by
 Morphisms, Theorem \ref{morphisms-theorem-chevalley} as desired.
 \end{proof}
@@ -1373,28 +1373,6 @@ We have already defined reduced algebraic spaces in
 Section \ref{section-types-properties}.
 Here we just prove some simple lemmas regarding reduced algebraic
 spaces.
-
-\begin{lemma}
-\label{lemma-reduced-space}
-Let $S$ be a scheme. Let $X$ be an algebraic space over $S$.
-The following are equivalent
-\begin{enumerate}
-\item $X$ is reduced,
-\item for every $x \in |X|$ the local ring of $X$ at $x$ is
-reduced (Remark \ref{remark-list-properties-local-ring-local-etale-topology}).
-\end{enumerate}
-In this case $\Gamma(X, \mathcal{O}_X)$ is a reduced ring and
-if $f \in \Gamma(X, \mathcal{O}_X)$ has $X = V(f)$, then $f = 0$.
-\end{lemma}
-
-\begin{proof}
-The equivalence of (1) and (2) follows from
-Properties, Lemma \ref{properties-lemma-characterize-reduced}
-applied to affine schemes \'etale over $X$. The final statements
-follow the cited lemma and fact that $\Gamma(X, \mathcal{O}_X)$ is
-a subring of $\Gamma(U, \mathcal{O}_U)$ for some
-reduced scheme $U$ \'etale over $X$.
-\end{proof}
 
 \begin{lemma}
 \label{lemma-subspace-induced-topology}
@@ -2351,7 +2329,7 @@ $a : T \to X$ whose composition with $T' \to T$ is $c$. Choose an
 affine scheme $U$ and an \'etale morphism $U \to X$ such that the image
 of $|U| \to |X|$ contains the image of $|c| : |T'| \to |X|$.
 This is possible by Lemmas \ref{lemma-topology-points} and
-\ref{lemma-cover-by-union-affines}, the fact that a finite union of
+\ref{lemma-cover-by-union-affines}, the fact that a finite disjoint union of
 affines is affine, and the fact that $|T'|$ is quasi-compact
 (small argument omitted). Since $U \to X$ is separated
 (Lemma \ref{lemma-separated-cover}), we see that
@@ -3177,7 +3155,7 @@ lying over $x \in |X|$. Let $\varphi : U \to X$ be an \'etale morphism
 of algebraic spaces and let $u \in |U|$ with $\varphi(u) = x$.
 Then there exists a geometric point
 $\overline{u} : \Spec(k) \to U$ lying over $u$ with
-$\overline{x} = f \circ \overline{u}$.
+$\overline{x} = \varphi \circ \overline{u}$.
 \end{lemma}
 
 \begin{proof}
@@ -3204,7 +3182,7 @@ But $k$ is algebraically closed, so all these extensions are trivial,
 so $\Spec(k) \times_{\overline{x}, X, \varphi} U$
 is a disjoint union of copies of $\Spec(k)$ and each of
 these corresponds to a geometric point $\overline{u}$ with
-$f \circ \overline{u} = \overline{x}$. By
+$\varphi \circ \overline{u} = \overline{x}$. By
 Lemma \ref{lemma-points-cartesian}
 the map
 $$
@@ -3847,6 +3825,28 @@ and hence indeed gives an $f$-map.
 We omit checking compatibility with compositions and agreement with the
 construction in
 Descent, Remark \ref{descent-remark-change-topologies-ringed}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-reduced-space}
+Let $S$ be a scheme. Let $X$ be an algebraic space over $S$.
+The following are equivalent
+\begin{enumerate}
+\item $X$ is reduced,
+\item for every $x \in |X|$ the local ring of $X$ at $x$ is
+reduced (Remark \ref{remark-list-properties-local-ring-local-etale-topology}).
+\end{enumerate}
+In this case $\Gamma(X, \mathcal{O}_X)$ is a reduced ring and
+if $f \in \Gamma(X, \mathcal{O}_X)$ has $X = V(f)$, then $f = 0$.
+\end{lemma}
+
+\begin{proof}
+The equivalence of (1) and (2) follows from
+Properties, Lemma \ref{properties-lemma-characterize-reduced}
+applied to affine schemes \'etale over $X$. The final statements
+follow the cited lemma and fact that $\Gamma(X, \mathcal{O}_X)$ is
+a subring of $\Gamma(U, \mathcal{O}_U)$ for some
+reduced scheme $U$ \'etale over $X$.
 \end{proof}
 
 

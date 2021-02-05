@@ -1263,30 +1263,31 @@ and the reader is suggested to skip the rest of the proof.
 Let $\mathcal{F}$ be any abelian presheaf on $\mathcal{C}$.
 Choose an injective resolution $\mathcal{F} \to \mathcal{I}^\bullet$
 in the category $\textit{PAb}(\mathcal{C})$.
-Consider the double complex $A^{\bullet, \bullet}$ with terms
-$$
-A^{p, q} =
-\check{\mathcal{C}}^p(\mathcal{U}, \mathcal{I}^q).
-$$
-Consider the simple complex $sA^\bullet$ associated to this double
-complex. There is a map of complexes
+Consider the double complex
+$\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^\bullet)$
+with terms $\check{\mathcal{C}}^p(\mathcal{U}, \mathcal{I}^q)$.
+Next, consider the total complex
+$\text{Tot}(\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^\bullet))$
+associated to this double complex, see
+Homology, Section \ref{homology-section-double-complexes}.
+There is a map of complexes
 $$
 \check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{F})
 \longrightarrow
-sA^\bullet
+\text{Tot}(\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^\bullet))
 $$
 coming from the maps
 $\check{\mathcal{C}}^p(\mathcal{U}, \mathcal{F})
-\to A^{p, 0} = \check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^0)$
+\to \check{\mathcal{C}}^p(\mathcal{U}, \mathcal{I}^0)$
 and there is a map of complexes
 $$
 \check{H}^0(\mathcal{U}, \mathcal{I}^\bullet)
 \longrightarrow
-sA^\bullet
+\text{Tot}(\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^\bullet))
 $$
 coming from the maps
 $\check{H}^0(\mathcal{U}, \mathcal{I}^q) \to
-A^{0, q} = \check{\mathcal{C}}^0(\mathcal{U}, \mathcal{I}^q)$.
+\check{\mathcal{C}}^0(\mathcal{U}, \mathcal{I}^q)$.
 Both of these maps are quasi-isomorphisms by an application of
 Homology, Lemma \ref{homology-lemma-double-complex-gives-resolution}.
 Namely, the columns of the double complex are exact in positive degrees
@@ -1376,17 +1377,17 @@ $\mathcal{F}$ ranging over $\textit{Ab}(\mathcal{C})$.
 \begin{proof}
 Let $\mathcal{F}$ be an abelian sheaf. Choose an injective resolution
 $\mathcal{F} \to \mathcal{I}^\bullet$. Consider the double complex
-$A^{\bullet, \bullet}$ with terms
-$A^{p, q} = \check{\mathcal{C}}^p(\mathcal{U}, \mathcal{I}^q)$.
-Moreover, consider the associated simple complex
-$sA^\bullet$, see
-Homology, Definition \ref{homology-definition-associated-simple-complex}.
+$\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^\bullet)$
+with terms $\check{\mathcal{C}}^p(\mathcal{U}, \mathcal{I}^q)$.
+Next, consider the associated total complex
+$\text{Tot}(\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^\bullet))$,
+see Homology, Definition \ref{homology-definition-associated-simple-complex}.
 There is a map of complexes
 $$
 \alpha :
 \Gamma(U, \mathcal{I}^\bullet)
 \longrightarrow
-sA^\bullet
+\text{Tot}(\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^\bullet))
 $$
 coming from the maps
 $\mathcal{I}^q(U) \to \check{H}^0(\mathcal{U}, \mathcal{I}^q)$
@@ -1395,14 +1396,15 @@ $$
 \beta :
 \check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{F})
 \longrightarrow
-sA^\bullet
+\text{Tot}(\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^\bullet))
 $$
 coming from the map $\mathcal{F} \to \mathcal{I}^0$.
 We can apply
 Homology, Lemma \ref{homology-lemma-double-complex-gives-resolution}
 to see that $\alpha$ is a quasi-isomorphism.
 Namely, Lemma \ref{lemma-injective-trivial-cech} implies that
-the $q$th row of the double complex $A^{\bullet, \bullet}$ is a
+the $q$th row of the double complex
+$\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^\bullet)$ is a
 resolution of $\Gamma(U, \mathcal{I}^q)$.
 Hence $\alpha$ becomes invertible in $D^{+}(\mathbf{Z})$ and
 the transformation of the lemma is the composition of $\beta$
@@ -2011,7 +2013,7 @@ follows.
 
 
 
-\section{Limp sheaves}
+\section{Totally acyclic sheaves}
 \label{section-limp}
 
 \noindent
@@ -2120,7 +2122,8 @@ for sheaves of modules on ringed sites.
 \label{definition-limp}
 Let $\mathcal{C}$ be a site.
 We say an abelian sheaf $\mathcal{F}$ is
-{\it limp}\footnote{This is probably nonstandard notation.
+{\it totally acyclic}\footnote{Although this terminology is is used in
+\cite[Vbis, Proposition 1.3.10]{SGA4} this is probably nonstandard notation.
 In \cite[V, Definition 4.1]{SGA4} this property is dubbed ``flasque'', but
 we cannot use this because it would clash with our definition
 of flasque sheaves on topological spaces. Please email
@@ -2131,11 +2134,12 @@ for all $p \geq 1$.
 \end{definition}
 
 \noindent
-It is clear that being limp is an intrinsic property, i.e.,
+It is clear that being totally acyclic is an intrinsic property, i.e.,
 preserved under equivalences of topoi.
-A limp sheaf has vanishing higher cohomology on all objects of the site,
-but in general the condition of being limp is strictly stronger.
-Here is a characterization of limp sheaves which is sometimes useful.
+A totally acyclic sheaf has vanishing higher cohomology on all objects
+of the site, but in general the condition of being totally acyclic
+is strictly stronger.
+Here is a characterization of totally acyclic sheaves which is sometimes useful.
 
 \begin{lemma}
 \label{lemma-characterize-limp}
@@ -2150,7 +2154,7 @@ H^0(K' \times_K K', \mathcal{F}) \to \ldots
 $$
 is exact,
 \end{enumerate}
-then $\mathcal{F}$ is limp (and the converse holds too).
+then $\mathcal{F}$ is totally acyclic (and the converse holds too).
 \end{lemma}
 
 \begin{proof}
@@ -2166,7 +2170,8 @@ see Sites, Lemma \ref{sites-lemma-sheaf-coequalizer-representable}.
 Thus we conclude that: (*) for every sheaf of sets $K$ there exists a
 surjection $K' \to K$ of sheaves of sets such that $H^p(K', \mathcal{F}) = 0$
 for $p > 0$. We claim that (*) and condition (2) imply that $\mathcal{F}$
-is limp. Note that conditions (*) and (2) only depend on $\mathcal{F}$ as an
+is totally acyclic.
+Note that conditions (*) and (2) only depend on $\mathcal{F}$ as an
 object of the topos $\Sh(\mathcal{C})$ and not on the underlying site.
 (We will not use property (1) in the rest of the proof.)
 
@@ -2209,7 +2214,7 @@ Let $f : (\Sh(\mathcal{C}), \mathcal{O}_\mathcal{C}) \to
 (\Sh(\mathcal{D}), \mathcal{O}_\mathcal{D})$ be a morphism of ringed topoi.
 Then for any injective object $\mathcal{I}$ in
 $\textit{Mod}(\mathcal{O}_\mathcal{C})$
-the pushforward $f_*\mathcal{I}$ is limp.
+the pushforward $f_*\mathcal{I}$ is totally acyclic.
 \end{lemma}
 
 \begin{proof}
@@ -2267,7 +2272,7 @@ Homology, Lemma \ref{homology-lemma-adjoint-preserve-injectives}.
 \begin{lemma}
 \label{lemma-limp-acyclic}
 Let $(\Sh(\mathcal{C}), \mathcal{O}_\mathcal{C})$ be a ringed topos.
-A limp sheaf is right acyclic for the following functors:
+A totally acyclic sheaf is right acyclic for the following functors:
 \begin{enumerate}
 \item the functor $H^0(U, -)$ for any object $U$ of $\mathcal{C}$,
 \item the functor $\mathcal{F} \mapsto \mathcal{F}(K)$ for any
@@ -2280,9 +2285,9 @@ $f : (\Sh(\mathcal{C}), \mathcal{O}_\mathcal{C}) \to
 \end{lemma}
 
 \begin{proof}
-Part (2) is the definition of a limp sheaf.
+Part (2) is the definition of a totally acyclic sheaf.
 Part (1) is a consequence of (2) as pointed out in the discussion following the
-definition of limp sheaves.
+definition of totally acyclic sheaves.
 Part (3) is a special case of (2) where $K = e$ is the final object
 of $\Sh(\mathcal{C})$.
 
@@ -2291,7 +2296,7 @@ To prove (4) we may assume, by
 Modules on Sites, Lemma
 \ref{sites-modules-lemma-morphism-ringed-topoi-comes-from-morphism-ringed-sites}
 that $f$ is given by a morphism of sites. In this case we see that
-$R^if_*$, $i > 0$ of a limp sheaf are zero by the description of
+$R^if_*$, $i > 0$ of a totally acyclic sheaf are zero by the description of
 higher direct images in
 Lemma \ref{lemma-higher-direct-images}.
 \end{proof}
@@ -2308,9 +2313,9 @@ R\Gamma(\mathcal{D}, Rf_*\mathcal{F}) = R\Gamma(\mathcal{C}, \mathcal{F})
 $$
 for any sheaf of $\mathcal{O}_\mathcal{C}$-modules $\mathcal{F}$.
 Namely, for an injective $\mathcal{O}_\mathcal{X}$-module $\mathcal{I}$
-the $\mathcal{O}_\mathcal{D}$-module $f_*\mathcal{I}$ is limp by
+the $\mathcal{O}_\mathcal{D}$-module $f_*\mathcal{I}$ is totally acyclic by
 Lemma \ref{lemma-direct-image-injective-sheaf}
-and a limp sheaf is acyclic for $\Gamma(\mathcal{D}, -)$ by
+and a totally acyclic sheaf is acyclic for $\Gamma(\mathcal{D}, -)$ by
 Lemma \ref{lemma-limp-acyclic}.
 \end{remark}
 
@@ -2739,7 +2744,16 @@ in the setting of ringed sites and ringed topoi.
 \label{lemma-derived-tor-exact}
 Let $(\mathcal{C}, \mathcal{O})$ be a ringed site.
 Let $\mathcal{G}^\bullet$ be a complex of $\mathcal{O}$-modules.
-The functor
+The functors
+$$
+K(\textit{Mod}(\mathcal{O}))
+\longrightarrow
+K(\textit{Mod}(\mathcal{O})),
+\quad
+\mathcal{F}^\bullet \longmapsto
+\text{Tot}(\mathcal{G}^\bullet \otimes_\mathcal{O} \mathcal{F}^\bullet)
+$$
+and
 $$
 K(\textit{Mod}(\mathcal{O}))
 \longrightarrow
@@ -2748,13 +2762,12 @@ K(\textit{Mod}(\mathcal{O})),
 \mathcal{F}^\bullet \longmapsto
 \text{Tot}(\mathcal{F}^\bullet \otimes_\mathcal{O} \mathcal{G}^\bullet)
 $$
-is an exact functor of triangulated categories.
+are exact functors of triangulated categories.
 \end{lemma}
 
 \begin{proof}
-Omitted. Hint: See
-More on Algebra, Lemmas \ref{more-algebra-lemma-derived-tor-homotopy} and
-\ref{more-algebra-lemma-derived-tor-exact}.
+This follows from Derived Categories, Remark
+\ref{derived-remark-double-complex-as-tensor-product-of}.
 \end{proof}
 
 \begin{definition}
@@ -2856,6 +2869,29 @@ if two out of three are acyclic, so is the third.
 \end{proof}
 
 \begin{lemma}
+\label{lemma-K-flat-two-out-of-three-ses}
+Let $(\mathcal{C}, \mathcal{O})$ be a ringed site. Let
+$0 \to \mathcal{K}_1^\bullet \to \mathcal{K}_2^\bullet \to
+\mathcal{K}_3^\bullet \to 0$ be a short exact sequence of complexes
+such that the terms of $\mathcal{K}_3^\bullet$ are flat $\mathcal{O}$-modules.
+If two out of three of $\mathcal{K}_i^\bullet$ are K-flat, so is the third.
+\end{lemma}
+
+\begin{proof}
+By Modules on Sites, Lemma \ref{sites-modules-lemma-flat-tor-zero}
+for every complex $\mathcal{L}^\bullet$
+we obtain a short exact sequence
+$$
+0 \to
+\text{Tot}(\mathcal{L}^\bullet \otimes_\mathcal{O} \mathcal{K}_1^\bullet) \to
+\text{Tot}(\mathcal{L}^\bullet \otimes_\mathcal{O} \mathcal{K}_1^\bullet) \to
+\text{Tot}(\mathcal{L}^\bullet \otimes_\mathcal{O} \mathcal{K}_1^\bullet) \to 0
+$$
+of complexes. Hence the lemma follows from the long exact sequence of
+cohomology sheaves and the definition of K-flat complexes.
+\end{proof}
+
+\begin{lemma}
 \label{lemma-bounded-flat-K-flat}
 Let $(\mathcal{C}, \mathcal{O})$ be a ringed site. A bounded above complex
 of flat $\mathcal{O}$-modules is K-flat.
@@ -2921,7 +2957,8 @@ $$
 \tau_{\leq 2}\mathcal{G}^\bullet \ar[r] & \ldots
 }
 $$
-with the following properties: (1) the vertical arrows are quasi-isomorphisms,
+with the following properties: (1) the vertical arrows are quasi-isomorphisms
+and termwise surjective,
 (2) each $\mathcal{K}_n^\bullet$ is a bounded above complex whose terms
 are direct sums of $\mathcal{O}$-modules of the form $j_{U!}\mathcal{O}_U$, and
 (3) the maps $\mathcal{K}_n^\bullet \to \mathcal{K}_{n + 1}^\bullet$ are
@@ -2943,12 +2980,10 @@ is a quasi-isomorphism because filtered colimits are exact.
 
 \begin{lemma}
 \label{lemma-K-flat-resolution}
-Let $(\mathcal{C}, \mathcal{O})$ be a ringed site.
-For any complex $\mathcal{G}^\bullet$ of $\mathcal{O}$-modules
-there exists a $K$-flat complex
-$\mathcal{K}^\bullet$ and a quasi-isomorphism
-$\mathcal{K}^\bullet \to \mathcal{G}^\bullet$.
-Moreover, each $\mathcal{K}^n$ is a flat $\mathcal{O}$-module.
+Let $(\mathcal{C}, \mathcal{O})$ be a ringed site. For any complex
+$\mathcal{G}^\bullet$ there exists a $K$-flat complex $\mathcal{K}^\bullet$
+whose terms are flat $\mathcal{O}$-modules and a quasi-isomorphism
+$\mathcal{K}^\bullet \to \mathcal{G}^\bullet$ which is termwise surjective.
 \end{lemma}
 
 \begin{proof}
@@ -2959,12 +2994,12 @@ above complex of flat modules, see
 Modules on Sites, Lemma \ref{sites-modules-lemma-j-shriek-flat}.
 Hence $\mathcal{K}_n^\bullet$ is K-flat by
 Lemma \ref{lemma-bounded-flat-K-flat}.
+Thus $\colim \mathcal{K}_n^\bullet$ is K-flat by
+Lemma \ref{lemma-colimit-K-flat}.
 The induced map
 $\colim \mathcal{K}_n^\bullet \to \mathcal{G}^\bullet$
-is a quasi-isomorphism by construction. Thus
-$\colim \mathcal{K}_n^\bullet$ is K-flat by
-Lemma \ref{lemma-colimit-K-flat}. Property (3)
-of Lemma \ref{lemma-resolution-by-direct-sums-extensions-by-zero}
+is a quasi-isomorphism and termwise surjective by construction.
+Property (3) of Lemma \ref{lemma-resolution-by-direct-sums-extensions-by-zero}
 shows that $\colim \mathcal{K}_n^m$ is a direct sum of
 flat modules and hence flat which proves the final assertion.
 \end{proof}
@@ -3118,6 +3153,105 @@ $\text{Tor}_1^\mathcal{O}(\mathcal{F}, \mathcal{Q})$
 which is zero by assumption. Hence $\mathcal{F}$ is flat.
 \end{proof}
 
+\begin{lemma}
+\label{lemma-K-flat-flat-acyclic}
+Let $(\mathcal{C}, \mathcal{O})$ be a ringed site. Let $\mathcal{K}^\bullet$
+be a K-flat, acyclic complex with flat terms. Then
+$\mathcal{F} = \Ker(\mathcal{K}^n \to \mathcal{K}^{n + 1})$
+is a flat $\mathcal{O}$-module.
+\end{lemma}
+
+\begin{proof}
+Observe that
+$$
+\ldots \to \mathcal{K}^{n - 2} \to \mathcal{K}^{n - 1} \to
+\mathcal{F} \to 0
+$$
+is a flat resolution of our module $\mathcal{F}$. Since a bounded above complex
+of flat modules is K-flat (Lemma \ref{lemma-bounded-flat-K-flat})
+we may use this resolution to compute
+$\text{Tor}_i(\mathcal{F}, \mathcal{G})$ for any
+$\mathcal{O}$-module $\mathcal{G}$. On the one hand
+$\mathcal{K}^\bullet \otimes_\mathcal{O}^\mathbf{L} \mathcal{G}$
+is zero in $D(\mathcal{O})$ because $\mathcal{K}^\bullet$ is acyclic
+and on the other hand it is represented by
+$\mathcal{K}^\bullet \otimes_\mathcal{O} \mathcal{G}$.
+Hence we see that
+$$
+\mathcal{K}^{n - 3} \otimes_\mathcal{O} \mathcal{G} \to
+\mathcal{K}^{n - 2} \otimes_\mathcal{O} \mathcal{G} \to
+\mathcal{K}^{n - 1} \otimes_\mathcal{O} \mathcal{G}
+$$
+is exact. Thus $\text{Tor}_1(\mathcal{F}, \mathcal{G}) = 0$
+and we conclude by Lemma \ref{lemma-flat-tor-zero}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-factor-through-K-flat}
+Let $(\mathcal{C}, \mathcal{O})$ be a ringed space.
+Let $a : \mathcal{K}^\bullet \to \mathcal{L}^\bullet$ be a map of complexes
+of $\mathcal{O}$-modules. If $\mathcal{K}^\bullet$ is K-flat, then
+there exist a complex $\mathcal{N}^\bullet$ and maps of complexes
+$b : \mathcal{K}^\bullet \to \mathcal{N}^\bullet$
+and $c : \mathcal{N}^\bullet \to \mathcal{L}^\bullet$ such that
+\begin{enumerate}
+\item $\mathcal{N}^\bullet$ is K-flat,
+\item $c$ is a quasi-isomorphism,
+\item $a$ is homotopic to $c \circ b$.
+\end{enumerate}
+If the terms of $\mathcal{K}^\bullet$ are flat, then we may choose
+$\mathcal{N}^\bullet$, $b$, and $c$
+such that the same is true for $\mathcal{N}^\bullet$.
+\end{lemma}
+
+\begin{proof}
+We will use that the homotopy category $K(\textit{Mod}(\mathcal{O}))$
+is a triangulated category, see Derived Categories, Proposition
+\ref{derived-proposition-homotopy-category-triangulated}.
+Choose a distinguished triangle
+$\mathcal{K}^\bullet \to \mathcal{L}^\bullet \to
+\mathcal{C}^\bullet \to \mathcal{K}^\bullet[1]$.
+Choose a quasi-isomorphism $\mathcal{M}^\bullet \to \mathcal{C}^\bullet$ with
+$\mathcal{M}^\bullet$ K-flat with flat terms, see
+Lemma \ref{lemma-K-flat-resolution}.
+By the axioms of triangulated categories,
+we may fit the composition
+$\mathcal{M}^\bullet \to \mathcal{C}^\bullet \to \mathcal{K}^\bullet[1]$
+into a distinguished triangle
+$\mathcal{K}^\bullet \to \mathcal{N}^\bullet \to
+\mathcal{M}^\bullet \to \mathcal{K}^\bullet[1]$.
+By Lemma \ref{lemma-K-flat-two-out-of-three} we see that
+$\mathcal{N}^\bullet$ is K-flat.
+Again using the axioms of triangulated categories,
+we can choose a map $\mathcal{N}^\bullet \to \mathcal{L}^\bullet$ fitting into
+the following morphism of distinghuised triangles
+$$
+\xymatrix{
+\mathcal{K}^\bullet \ar[r] \ar[d] &
+\mathcal{N}^\bullet \ar[r] \ar[d] &
+\mathcal{M}^\bullet \ar[r] \ar[d] &
+\mathcal{K}^\bullet[1] \ar[d] \\
+\mathcal{K}^\bullet \ar[r] &
+\mathcal{L}^\bullet \ar[r] &
+\mathcal{C}^\bullet \ar[r] &
+\mathcal{K}^\bullet[1]
+}
+$$
+Since two out of three of the arrows are quasi-isomorphisms, so is
+the third arrow $\mathcal{N}^\bullet \to \mathcal{L}^\bullet$
+by the long exact sequences
+of cohomology associated to these distinguished triangles
+(or you can look at the image of this diagram in $D(\mathcal{O})$ and use
+Derived Categories, Lemma \ref{derived-lemma-third-isomorphism-triangle}
+if you like). This finishes the proof of (1), (2), and (3).
+To prove the final assertion, we may choose $\mathcal{N}^\bullet$ such that
+$\mathcal{N}^n \cong \mathcal{M}^n \oplus \mathcal{K}^n$, see
+Derived Categories, Lemma
+\ref{derived-lemma-improve-distinguished-triangle-homotopy}.
+Hence we get the desired flatness
+if the terms of $\mathcal{K}^\bullet$ are flat.
+\end{proof}
+
 
 
 
@@ -3144,47 +3278,91 @@ $$
 
 \begin{lemma}
 \label{lemma-pullback-K-flat}
-Let $(\Sh(\mathcal{C}), \mathcal{O}_\mathcal{C})$ be a ringed topos.
-For any complex of $\mathcal{O}_\mathcal{C}$-modules $\mathcal{G}^\bullet$
-there exists a quasi-isomorphism $\mathcal{K}^\bullet \to \mathcal{G}^\bullet$
-such that $f^*\mathcal{K}^\bullet$ is a K-flat complex of
-$\mathcal{O}_\mathcal{D}$-modules for any morphism
-$f : (\Sh(\mathcal{D}), \mathcal{O}_\mathcal{D}) \to
-(\Sh(\mathcal{C}), \mathcal{O}_\mathcal{C})$ of ringed topoi.
+Let $f : (\Sh(\mathcal{C}'), \mathcal{O}') \to (\Sh(\mathcal{C}), \mathcal{O})$
+be a morphism of ringed topoi. Let $\mathcal{K}^\bullet$ be a K-flat complex
+of $\mathcal{O}$-modules whose terms are flat $\mathcal{O}$-modules. Then
+$f^*\mathcal{K}^\bullet$ is a K-flat complex of $\mathcal{O}'$-modules whose
+terms are flat $\mathcal{O}'$-modules.
 \end{lemma}
 
 \begin{proof}
-In the proof of
-Lemma \ref{lemma-K-flat-resolution}
-we find a quasi-isomorphism
-$\mathcal{K}^\bullet = \colim_i \mathcal{K}_i^\bullet \to
-\mathcal{G}^\bullet$
-where each $\mathcal{K}_i^\bullet$ is a bounded above complex of
-flat $\mathcal{O}_\mathcal{C}$-modules. Let
-$f : (\Sh(\mathcal{D}), \mathcal{O}_\mathcal{D}) \to
-(\Sh(\mathcal{C}), \mathcal{O}_\mathcal{C})$ be a morphism
-of ringed topoi. By
-Modules on Sites, Lemma \ref{sites-modules-lemma-pullback-flat}
-we see that $f^*\mathcal{F}_i^\bullet$ is a bounded above complex
-of flat $\mathcal{O}_\mathcal{D}$-modules. Hence
-$f^*\mathcal{K}^\bullet  = \colim_i f^*\mathcal{K}_i^\bullet$
-is K-flat by
-Lemmas \ref{lemma-bounded-flat-K-flat} and \ref{lemma-colimit-K-flat}.
+The terms $f^*\mathcal{K}^n$ are flat $\mathcal{O}'$-modules by
+Modules on Sites, Lemma \ref{sites-modules-lemma-pullback-flat}.
+Choose a diagram
+$$
+\xymatrix{
+\mathcal{K}_1^\bullet \ar[d] \ar[r] &
+\mathcal{K}_2^\bullet \ar[d] \ar[r] & \ldots \\
+\tau_{\leq 1}\mathcal{K}^\bullet \ar[r] &
+\tau_{\leq 2}\mathcal{K}^\bullet \ar[r] & \ldots
+}
+$$
+as in Lemma \ref{lemma-resolution-by-direct-sums-extensions-by-zero}.
+We will use all of the properties stated in the
+lemma without further mention. Each $\mathcal{K}_n^\bullet$ is a bounded
+above complex of flat modules, see
+Modules on Sites, Lemma \ref{sites-modules-lemma-j-shriek-flat}.
+Consider the short exact sequence of complexes
+$$
+0 \to \mathcal{M}^\bullet \to
+\colim \mathcal{K}_n^\bullet \to
+\mathcal{K}^\bullet \to 0
+$$
+defining $\mathcal{M}^\bullet$. By Lemmas \ref{lemma-bounded-flat-K-flat} and
+\ref{lemma-colimit-K-flat} the complex $\colim \mathcal{K}_n^\bullet$
+is K-flat and by Modules on Sites, Lemma \ref{sites-modules-lemma-colimits-flat}
+it has flat terms. By Modules on Sites, Lemma \ref{sites-modules-lemma-flat-ses}
+$\mathcal{M}^\bullet$ has flat terms, by
+Lemma \ref{lemma-K-flat-two-out-of-three-ses}
+$\mathcal{M}^\bullet$ is K-flat, and by the long exact
+cohomology sequence $\mathcal{M}^\bullet$ is acyclic (because
+the second arrow is a quasi-isomorphism). The pullback
+$f^*(\colim \mathcal{K}_n^\bullet) = \colim f^*\mathcal{K}_n^\bullet$
+is a colimit of bounded below complexes of flat $\mathcal{O}'$-modules
+and hence is K-flat (by the same lemmas as above).
+The pullback of our short exact sequence
+$$
+0 \to f^*\mathcal{M}^\bullet \to
+f^*(\colim \mathcal{K}_n^\bullet) \to
+f^*\mathcal{K}^\bullet \to 0
+$$
+is a short exact sequence of complexes by
+Modules on Sites, Lemma \ref{sites-modules-lemma-pullback-ses}.
+Hence by Lemma \ref{lemma-K-flat-two-out-of-three-ses}
+it suffices to show that $f^*\mathcal{M}^\bullet$
+is K-flat. This reduces us to the case discussed in the next paragraph.
+
+\medskip\noindent
+Assume $\mathcal{K}^\bullet$ is acyclic as well as K-flat and
+with flat terms. Then Lemma \ref{lemma-K-flat-flat-acyclic}
+guarantees that all terms of $\tau_{\leq n}\mathcal{K}^\bullet$
+are flat $\mathcal{O}$-modules. We choose a diagram as above and
+we will use all the properties proven above for this diagram.
+Denote $\mathcal{M}_n^\bullet$ the kernel of the map of complexes
+$\mathcal{K}_n^\bullet \to \tau_{\leq n}\mathcal{K}^\bullet$
+so that we have short exact sequences of complexes
+$$
+0 \to \mathcal{M}_n^\bullet \to \mathcal{K}_n^\bullet \to
+\tau_{\leq n}\mathcal{K}^\bullet \to 0
+$$
+By Modules on Sites, Lemma \ref{sites-modules-lemma-flat-ses}
+we see that the terms of the complex $\mathcal{M}_n^\bullet$ are flat.
+Hence we see that $\mathcal{M} = \colim \mathcal{M}_n^\bullet$
+is a filtered colimit of bounded below complexes of flat modules
+in this case. Thus $f^*\mathcal{M}^\bullet$ is K-flat
+(same argument as above) and we win.
 \end{proof}
 
 \begin{lemma}
 \label{lemma-derived-base-change}
-Let
-$f : (\Sh(\mathcal{C}), \mathcal{O}) \to
-(\Sh(\mathcal{C}'), \mathcal{O}')$
-be a morphism of ringed topoi.
-There exists an exact functor
+Let $f : (\Sh(\mathcal{C}), \mathcal{O}) \to (\Sh(\mathcal{C}'), \mathcal{O}')$
+be a morphism of ringed topoi. There exists an exact functor
 $$
 Lf^* : D(\mathcal{O}') \longrightarrow D(\mathcal{O})
 $$
 of triangulated categories so that
-$Lf^*\mathcal{K}^\bullet = f^*\mathcal{K}^\bullet$ for any complex as in
-Lemma \ref{lemma-pullback-K-flat} and
+$Lf^*\mathcal{K}^\bullet = f^*\mathcal{K}^\bullet$ for any
+K-flat complex $\mathcal{K}^\bullet$ with flat terms and
 in particular for any bounded above complex of flat $\mathcal{O}'$-modules.
 \end{lemma}
 
@@ -3206,9 +3384,8 @@ applies. We claim that $LF$ is everywhere defined.
 This follows from
 Derived Categories, Lemma \ref{derived-lemma-find-existence-computes}
 with $\mathcal{P} \subset \Ob(\mathcal{D})$ the collection
-of complexes $\mathcal{K}^\bullet$ as in
-Lemma \ref{lemma-pullback-K-flat}. Namely, (1) follows from
-Lemma \ref{lemma-pullback-K-flat}
+of K-flat complexes $\mathcal{K}^\bullet$ with flat terms.
+Namely, (1) follows from Lemma \ref{lemma-K-flat-resolution}
 and to see (2) we have to show that for a quasi-isomorphism
 $\mathcal{K}_1^\bullet  \to \mathcal{K}_2^\bullet$ between
 elements of $\mathcal{P}$ the map
@@ -3223,8 +3400,9 @@ The functor $f^{-1}$ is exact, hence the map
 $f^{-1}\mathcal{K}_1^\bullet  \to f^{-1}\mathcal{K}_2^\bullet$ is a
 quasi-isomorphism. The complexes
 $f^{-1}\mathcal{K}_1^\bullet$ and $f^{-1}\mathcal{K}_2^\bullet$
-are K-flat complexes of $f^{-1}\mathcal{O}'$-modules by our choice of
-$\mathcal{P}$ because we can consider the morphism of ringed topoi
+are K-flat complexes of $f^{-1}\mathcal{O}'$-modules by
+Lemma \ref{lemma-pullback-K-flat}
+because we can consider the morphism of ringed topoi
 $(\Sh(\mathcal{C}), f^{-1}\mathcal{O}') \to
 (\Sh(\mathcal{C}'), \mathcal{O}')$. Hence
 Lemma \ref{lemma-derived-tor-quasi-isomorphism-other-side}
@@ -3243,10 +3421,9 @@ Derived Categories, Lemma \ref{derived-lemma-find-existence-computes}
 also guarantees that
 $LF(\mathcal{K}^\bullet) = F(\mathcal{K}^\bullet) = f^*\mathcal{K}^\bullet$
 when $\mathcal{K}^\bullet$ is in $\mathcal{P}$.
-Since the proof of
-Lemma \ref{lemma-pullback-K-flat}
-shows that bounded above complexes of flat modules are in $\mathcal{P}$
-we win.
+The proof is finished by observing that
+bounded above complexes of flat modules are in $\mathcal{P}$
+by Lemma \ref{lemma-bounded-flat-K-flat}.
 \end{proof}
 
 \begin{lemma}
@@ -3263,18 +3440,16 @@ $D(\mathcal{O}_\mathcal{E}) \to D(\mathcal{O}_\mathcal{C})$.
 
 \begin{proof}
 Let $E$ be an object of $D(\mathcal{O}_\mathcal{E})$.
-By construction $Lg^*E$ is computed by choosing a complex
-$\mathcal{K}^\bullet$ as in Lemma \ref{lemma-pullback-K-flat}
-representing $E$ and setting $Lg^*E = g^*\mathcal{K}^\bullet$.
-By transitivity of pullback functors the complex $g^*\mathcal{K}^\bullet$
-pulled back by any morphism of ringed topoi
-$(\Sh(\mathcal{C}'), \mathcal{O}') \to
-(\Sh(\mathcal{D}), \mathcal{O}_\mathcal{D})$
-is K-flat. Hence $g^*\mathcal{K}^\bullet$ is a complex as in
-Lemma \ref{lemma-pullback-K-flat} representing $Lg^*E$.
-We conclude $Lf^*Lg^*E$ is given by
-$f^*g^*\mathcal{K}^\bullet = (g \circ f)^*\mathcal{K}^\bullet$
-which also represents $L(g \circ f)^*E$.
+We may represent $E$ by a K-flat complex $\mathcal{K}^\bullet$
+with flat terms, see Lemma \ref{lemma-K-flat-resolution}.
+By construction $Lg^*E$ is computed by $g^*\mathcal{K}^\bullet$, see
+Lemma \ref{lemma-derived-base-change}.
+By Lemma \ref{lemma-pullback-K-flat} the complex
+$g^*\mathcal{K}^\bullet$ is K-flat with flat terms.
+Hence $Lf^*Lg^*E$ is represented by $f^*g^*\mathcal{K}^\bullet$.
+Since also $L(g \circ f)^*E$ is represented by
+$(g \circ f)^*\mathcal{K}^\bullet = f^*g^*\mathcal{K}^\bullet$
+we conclude.
 \end{proof}
 
 \begin{lemma}
@@ -3294,17 +3469,21 @@ for $\mathcal{F}^\bullet, \mathcal{G}^\bullet \in \Ob(D(\mathcal{O}'))$.
 \end{lemma}
 
 \begin{proof}
-By Lemma \ref{lemma-pullback-K-flat} we may assume that $\mathcal{F}^\bullet$
-and $\mathcal{G}^\bullet$ are K-flat complexes of $\mathcal{O}'$-modules
-such that $f^*\mathcal{F}^\bullet$ and $f^*\mathcal{G}^\bullet$
-are K-flat complexes of $\mathcal{O}$-modules. In this case
+By our construction of derived pullback in
+Lemma \ref{lemma-derived-base-change}.
+and the existence of resolutions in
+Lemma \ref{lemma-K-flat-resolution}
+we may replace $\mathcal{F}^\bullet$ and $\mathcal{G}^\bullet$
+by complexes of $\mathcal{O}'$-modules which are K-flat and have
+flat terms. In this case
 $\mathcal{F}^\bullet \otimes_{\mathcal{O}'}^{\mathbf{L}} \mathcal{G}^\bullet$
 is just the total complex associated to the double complex
-$\mathcal{F}^\bullet \otimes_{\mathcal{O}'} \mathcal{G}^\bullet$. By
-Lemma \ref{lemma-tensor-product-K-flat}
+$\mathcal{F}^\bullet \otimes_{\mathcal{O}'} \mathcal{G}^\bullet$.
+The complex
 $\text{Tot}(\mathcal{F}^\bullet \otimes_{\mathcal{O}'} \mathcal{G}^\bullet)$
-is K-flat also. Hence the isomorphism of the lemma comes from the
-isomorphism
+is K-flat with flat terms by Lemma \ref{lemma-tensor-product-K-flat} and
+Modules on Sites, Lemma \ref{sites-modules-lemma-tensor-flats}.
+Hence the isomorphism of the lemma comes from the isomorphism
 $$
 \text{Tot}(f^*\mathcal{F}^\bullet \otimes_{\mathcal{O}}
 f^*\mathcal{G}^\bullet)
@@ -3380,7 +3559,8 @@ Modules on Sites, Lemma \ref{sites-modules-lemma-check-exactness-stalks}.
 \medskip\noindent
 Proof of (1). Assume $\mathcal{K}^\bullet$ is K-flat.
 Choose a quasi-isomorphism $a : \mathcal{L}^\bullet \to \mathcal{K}^\bullet$
-such that $\mathcal{L}^\bullet$ is K-flat and such that any pullback
+such that $\mathcal{L}^\bullet$ is K-flat with flat terms, see
+Lemma \ref{lemma-K-flat-resolution}. Any pullback
 of $\mathcal{L}^\bullet$ is K-flat, see
 Lemma \ref{lemma-pullback-K-flat}. In particular the stalk
 $\mathcal{L}_p^\bullet$ is a K-flat complex of $\mathcal{O}_p$-modules.
@@ -3437,20 +3617,6 @@ and
 More on Algebra, Lemma \ref{more-algebra-lemma-base-change-K-flat}.
 \end{proof}
 
-\begin{remark}
-\label{remark-pullback-K-flat}
-The pullback of a K-flat complex is K-flat for a morphism of ringed topoi
-with enough points, see Lemma \ref{lemma-pullback-K-flat-points}.
-This slightly improves the result of Lemma \ref{lemma-pullback-K-flat}.
-However, in applications it seems rather that the explicit form of the K-flat
-complexes constructed in
-Lemma \ref{lemma-K-flat-resolution}
-is what is useful and not the plain fact that they
-are K-flat. Note for example that the terms of the complex constructed
-are each direct sums of modules of the form $j_{U!}\mathcal{O}_U$, see
-Lemma \ref{lemma-resolution-by-direct-sums-extensions-by-zero}.
-\end{remark}
-
 \begin{lemma}
 \label{lemma-tensor-pull-compatibility}
 Let $f : (\Sh(\mathcal{C}), \mathcal{O}_\mathcal{C}) \to
@@ -3481,8 +3647,11 @@ commutes.
 \end{lemma}
 
 \begin{proof}
-We will use the existence of K-flat resolutions as in
-Lemma \ref{lemma-pullback-K-flat}. If we choose such
+We will use the existence of K-flat resolutions with flat terms
+(Lemma \ref{lemma-K-flat-resolution}), we will use that derived pullback
+is computed by such complexes (Lemma \ref{lemma-derived-base-change}),
+and that pullbacks preserve these properties
+(Lemma \ref{lemma-pullback-K-flat}). If we choose such
 resolutions $\mathcal{P}^\bullet \to \mathcal{K}^\bullet$
 and $\mathcal{Q}^\bullet \to \mathcal{M}^\bullet$, then
 we see that
@@ -3717,14 +3886,17 @@ commutes in $D(\mathcal{O}_\mathcal{C})$.
 
 \begin{proof}
 We will use the existence of K-flat resolutions and
-K-injective resolutions, see Lemma \ref{lemma-pullback-K-flat}
-and the discussion above. Choose a quasi-isomorphism
+K-injective resolutions, see Lemmas
+\ref{lemma-K-flat-resolution}, \ref{lemma-derived-base-change}, and
+\ref{lemma-pullback-K-flat} and the discussion above.
+Choose a quasi-isomorphism
 $\mathcal{K}^\bullet \to \mathcal{I}^\bullet$ where $\mathcal{I}^\bullet$
 is K-injective as a complex of $\mathcal{O}_\mathcal{C}$-modules.
 Choose a quasi-isomorphism $\mathcal{Q}^\bullet \to f_*\mathcal{I}^\bullet$
-where $\mathcal{Q}^\bullet$ is K-flat as a complex of
-$\mathcal{O}_\mathcal{D}$-modules. We can choose a K-flat complex of
-$\mathcal{O}_\mathcal{D}$-modules $\mathcal{P}^\bullet$
+where $\mathcal{Q}^\bullet$ is a K-flat complex of
+$\mathcal{O}_\mathcal{D}$-modules with flat terms.
+We can choose a K-flat complex of
+$\mathcal{O}_\mathcal{D}$-modules $\mathcal{P}^\bullet$ with flat terms
 and a diagram of morphisms of complexes
 $$
 \xymatrix{
@@ -3737,8 +3909,8 @@ commutative up to homotopy where the top horizontal arrow
 is a quasi-isomorphism. Namely, we can first choose such a
 diagram for some complex $\mathcal{P}^\bullet$ because
 the quasi-isomorphisms form a multiplicative system in
-the homotopy category of complexes and then we can replace
-$\mathcal{P}^\bullet$ by a K-flat complex.
+the homotopy category of complexes and then we can choose
+a resolution of $\mathcal{P}^\bullet$ by a K-flat complex with flat terms.
 Taking pullbacks we obtain a diagram of morphisms of complexes
 $$
 \xymatrix{
@@ -8511,7 +8683,7 @@ defined in Remark \ref{remark-prepare-fancy-base-change}.
 
 \noindent
 In this section we study morphisms $g$ of ringed topoi where besides
-$Lg^*$ and $Rg_*$ there also a derived functor $Lg_!$.
+$Lg^*$ and $Rg_*$ there also exists a derived functor $Lg_!$.
 
 \begin{lemma}
 \label{lemma-pullback-injective-pre-limp}
@@ -8541,7 +8713,7 @@ $$
 $$
 because $g^{-1} = u^p$ by Sites, Lemma \ref{sites-lemma-when-shriek}.
 Since $\mathcal{I}$ is an injective
-$\mathcal{O}$-module these {\v C}ech cohomology groups vanish, see
+$\mathcal{O}_\mathcal{D}$-module these {\v C}ech cohomology groups vanish, see
 Lemma \ref{lemma-injective-module-trivial-cech}.
 \end{proof}
 
@@ -8717,7 +8889,7 @@ $g_!^{Sh} : \Sh(\mathcal{C}) \to \Sh(\mathcal{D})$
 commutes with fibre products\footnote{Holds if $\mathcal{C}$
 has finite connected limits and $u$ commutes with them, see
 Sites, Lemma \ref{sites-lemma-preserve-equalizers}.}, then
-$g^{-1}\mathcal{I}$ is limp.
+$g^{-1}\mathcal{I}$ is totally acyclic.
 \end{lemma}
 
 \begin{proof}
@@ -8735,8 +8907,8 @@ H^0(g_!^{Sh}(K' \times_K \ldots \times_K K'), \mathcal{I}) \\
 H^0(g_!^{Sh}K' \times_{g_!^{Sh}K} \ldots \times_{g_!^{Sh}K} g_!^{Sh}K',
 \mathcal{I})
 \end{align*}
-by our assumption on $g_!^{Sh}$. Since $\mathcal{I}$ is injective module
-it is limp by Lemma \ref{lemma-direct-image-injective-sheaf}
+by our assumption on $g_!^{Sh}$. Since $\mathcal{I}$ is an injective module
+it is totally acyclic by Lemma \ref{lemma-direct-image-injective-sheaf}
 (applied to the identity). Hence we can use the converse of
 Lemma \ref{lemma-characterize-limp} to see that the complex
 $$
@@ -11132,15 +11304,13 @@ Thus $\mathcal{L}^\bullet$ is a bounded
 above complex of flat modules, hence K-flat by
 Lemma \ref{lemma-bounded-flat-K-flat}.
 It follows that $\mathcal{E}^\bullet$ is K-flat by
-Lemma \ref{lemma-K-flat-two-out-of-three}.
+Lemma \ref{lemma-K-flat-two-out-of-three-ses}.
 
 \medskip\noindent
 Proof of the final assertion. Let
 $f : (\mathcal{C}', \mathcal{O}') \to (\mathcal{C}, \mathcal{O})$
-be a morphism of ringed sites. The proof of
-Lemma \ref{lemma-pullback-K-flat} shows that the complex
-$\mathcal{K}^\bullet$ (as constructed in Lemma \ref{lemma-K-flat-resolution})
-has the property that $f^*\mathcal{K}^\bullet$ is K-flat.
+be a morphism of ringed sites. By Lemma \ref{lemma-pullback-K-flat}
+the complex $f^*\mathcal{K}^\bullet$ is K-flat with flat terms.
 The complex $f^*\mathcal{L}^\bullet$ is K-flat as it is a bounded
 above complex of flat $\mathcal{O}'$-modules. We have a short exact
 sequence of complexes of $\mathcal{O}'$-modules
@@ -11151,8 +11321,8 @@ $$
 because the short exact sequence
 $0 \to \mathcal{I} \to \mathcal{K}^a \to \mathcal{N} \to 0$
 of flat modules pulls back to a short exact sequence.
-Then we can use the 2-out-of-3 property for K-flat
-complexes to conclude that $f^*\mathcal{E}^\bullet$ is K-flat.
+By Lemma \ref{lemma-K-flat-two-out-of-three-ses}.
+the complex $f^*\mathcal{E}^\bullet$ is K-flat and the proof is complete.
 \end{proof}
 
 \begin{lemma}

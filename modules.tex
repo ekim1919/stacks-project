@@ -575,29 +575,33 @@ Sheaves, Lemma \ref{sheaves-lemma-equivalence-categories-closed-abelian}.
 \end{proof}
 
 \noindent
-Let $\mathcal{F}$ be a sheaf on $X$. There is a canonical subsheaf
-of $\mathcal{F}$ which consists of exactly those sections whose
-support is contained in $Z$. Here is the exact statement.
+Let $\mathcal{F}$ be an abelian sheaf on the topological space $X$. Given
+a closed subset $Z$, there is a canonical abelian subsheaf of $\mathcal{F}$
+which consists of exactly those sections whose support is contained in $Z$.
+Here is the exact statement.
 
-\begin{lemma}
-\label{lemma-sections-support-in-closed}
+\begin{remark}
+\label{remark-sections-support-in-closed}
 Let $X$ be a topological space. Let $Z \subset X$ be a closed subset.
-Let $\mathcal{F}$ be a sheaf on $X$. For $U \subset X$ open set
+Let $\mathcal{F}$ be an abelian sheaf on $X$. For $U \subset X$ open set
 $$
-\Gamma(U, \mathcal{H}_Z(\mathcal{F})) =
+\mathcal{H}_Z(\mathcal{F})(U) =
 \{s \in \mathcal{F}(U) \mid
 \text{ the support of }s\text{ is contained in }Z \cap U\}
 $$
-Then $\mathcal{H}_Z(\mathcal{F})$ is an abelian subsheaf of
-$\mathcal{F}$. It is the largest abelian subsheaf of
-$\mathcal{F}$ whose support is contained in $Z$. The construction
-$\mathcal{F} \mapsto \mathcal{H}_Z(\mathcal{F})$ is functorial
-in the abelian sheaf $\mathcal{F}$.
-\end{lemma}
-
-\begin{proof}
-This follows from Lemma \ref{lemma-support-section-closed}.
-\end{proof}
+Then $\mathcal{H}_Z(\mathcal{F})$ is an abelian subsheaf of $\mathcal{F}$.
+It is the largest abelian subsheaf of $\mathcal{F}$ whose support is
+contained in $Z$. By Lemma \ref{lemma-i-star-exact} we may (and we do)
+view $\mathcal{H}_Z(\mathcal{F})$ as an abelian sheaf on $Z$.
+In this way we obtain a left exact functor
+$$
+\textit{Ab}(X) \longrightarrow \textit{Ab}(Z),\quad
+\mathcal{F} \longmapsto \mathcal{H}_Z(\mathcal{F})
+\text{ viewed as abelian sheaf on }Z
+$$
+All of the statements made above follow directly from
+Lemma \ref{lemma-support-section-closed}.
+\end{remark}
 
 \noindent
 This seems like a good opportunity to show that the functor
@@ -606,30 +610,22 @@ $i_*$ has a right adjoint on abelian sheaves.
 \begin{lemma}
 \label{lemma-i-star-right-adjoint}
 Let $i : Z \to X$ be the inclusion of a closed subset into the
-topological space $X$.
-Denote\footnote{This is likely nonstandard notation.}
-$i^! : \textit{Ab}(X) \to \textit{Ab}(Z)$ the functor
-$\mathcal{F} \mapsto i^{-1}\mathcal{H}_Z(\mathcal{F})$.
-Then $i^!$ is a right adjoint to $i_*$, in a formula
-$$
-\Mor_{\textit{Ab}(X)}(i_*\mathcal{G}, \mathcal{F})
-=
-\Mor_{\textit{Ab}(Z)}(\mathcal{G}, i^!\mathcal{F}).
-$$
+topological space $X$. The functor $\textit{Ab}(X) \to \textit{Ab}(Z)$,
+$\mathcal{F} \mapsto \mathcal{H}_Z(\mathcal{F})$ of
+Remark \ref{remark-sections-support-in-closed}
+is a right adjoint to $i_* : \textit{Ab}(Z) \to \textit{Ab}(Z)$.
 In particular $i_*$ commutes with arbitrary colimits.
 \end{lemma}
 
 \begin{proof}
-Note that $i_*i^!\mathcal{F} = \mathcal{H}_Z(\mathcal{F})$.
-Since $i_*$ is fully faithful we are reduced to showing that
+We have to show that for any abelian sheaf $\mathcal{F}$ on $X$ and any
+abelian sheaf $\mathcal{G}$ on $Z$ we have
 $$
-\Mor_{\textit{Ab}(X)}(i_*\mathcal{G}, \mathcal{F})
-=
-\Mor_{\textit{Ab}(X)}(i_*\mathcal{G}, \mathcal{H}_Z(\mathcal{F})).
+\Hom_{\textit{Ab}(X)}(i_*\mathcal{G}, \mathcal{F}) =
+\Hom_{\textit{Ab}(Z)}(\mathcal{G}, \mathcal{H}_Z(\mathcal{F}))
 $$
-This follows since the support of the image via any homomorphism
-of a section of $i_*\mathcal{G}$ is contained in $Z$, see
-Lemma \ref{lemma-support-section-closed}.
+This is clear because after all any section of $i_*\mathcal{G}$
+has support in $Z$. Details omitted.
 \end{proof}
 
 \begin{remark}
@@ -641,7 +637,7 @@ does not have a right adjoint simply because
 it is not exact. However, it is very close to being
 true, in fact, the functor $i_*$ is exact on sheaves
 of pointed sets, sections with support in $Z$ can
-be defined for sheaves of pointed sets, and $i^!$
+be defined for sheaves of pointed sets, and $\mathcal{H}_Z$
 makes sense and is a right adjoint to $i_*$.
 \end{remark}
 
@@ -2091,6 +2087,62 @@ because $\mathcal{O}_{Z, x} = \mathcal{O}_{X, x}/\mathcal{I}_x$
 and because $\mathcal{G}_x$ is annihilated by $\mathcal{I}_x$ by assumption.
 \end{proof}
 
+\begin{remark}
+\label{remark-sections-support-in-closed-modules}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $Z \subset X$ be
+a closed subset. For an $\mathcal{O}_X$-module $\mathcal{F}$ we can
+consider the {\it submodule of sections with support in $Z$}, denoted
+$\mathcal{H}_Z(\mathcal{F})$, defined by the rule
+$$
+\mathcal{H}_Z(\mathcal{F})(U) =
+\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset U \cap Z\}
+$$
+Observe that $\mathcal{H}_Z(\mathcal{F})(U)$ is a module over
+$\mathcal{O}_X(U)$, i.e., $\mathcal{H}_Z(\mathcal{F})$ is an
+$\mathcal{O}_X$-module. By construction $\mathcal{H}_Z(\mathcal{F})$
+is the largest $\mathcal{O}_X$-submodule of $\mathcal{F}$ whose support is
+contained in $Z$.
+Applying Lemma \ref{lemma-i-star-equivalence} to
+the morphism of ringed spaces $(Z, \mathcal{O}_X|_Z) \to (X, \mathcal{O}_X)$ we
+may (and we do) view
+$\mathcal{H}_Z(\mathcal{F})$ as an $\mathcal{O}_X|_Z$-module on $Z$.
+Thus we obtain a functor
+$$
+\textit{Mod}(\mathcal{O}_X) \longrightarrow \textit{Mod}(\mathcal{O}_X|_Z),
+\quad
+\mathcal{F} \longmapsto \mathcal{H}_Z(\mathcal{F})
+\text{ viewed as an }\mathcal{O}_X|_Z\text{-module on }Z
+$$
+This functor is left exact, but in general not exact.
+All of the statements made above follow directly from
+Lemma \ref{lemma-support-section-closed}.
+Clearly the construction is compatible with the construction in
+Remark \ref{remark-sections-support-in-closed}.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-adjoint-section-with-support}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $i : Z \to X$ be the
+inclusion of a closed subset. The functor
+$\mathcal{H}_Z : \textit{Mod}(\mathcal{O}_X) \to
+\textit{Mod}(\mathcal{O}_X|_Z)$ of
+Remark \ref{remark-sections-support-in-closed-modules}
+is right adjoint to
+$i_* : \textit{Mod}(\mathcal{O}_X|_Z) \to \textit{Mod}(\mathcal{O}_X)$.
+\end{lemma}
+
+\begin{proof}
+We have to show that for any $\mathcal{O}_X$-module $\mathcal{F}$
+and any $\mathcal{O}_X|_Z$-module $\mathcal{G}$ we have
+$$
+\Hom_{\mathcal{O}_X|_Z}(\mathcal{G}, \mathcal{H}_Z(\mathcal{F})) =
+\Hom_{\mathcal{O}_X}(i_*\mathcal{G}, \mathcal{F})
+$$
+This is clear
+because after all any section of $i_*\mathcal{G}$ has support in $Z$.
+Details omitted.
+\end{proof}
+
 
 
 
@@ -3117,7 +3169,7 @@ above.
 \begin{definition}
 \label{definition-flat-morphism}
 Let $f : X \to Y$ be a morphism of ringed spaces.
-Let $x \in X$. We say $f$ is said to be {\it flat at $x$}
+Let $x \in X$. We say $f$ is {\it flat at $x$}
 if the map of rings $\mathcal{O}_{Y, f(x)} \to \mathcal{O}_{X, x}$ is flat.
 We say $f$ is {\it flat} if $f$ is flat at every $x \in X$.
 \end{definition}
@@ -3596,8 +3648,8 @@ Note that $f^*\mathcal{F}$ is also finitely presented
 Let $x \in X$ map to $y \in Y$. Looking at the stalks
 at $x$ we get an isomorphism by
 Lemma \ref{lemma-stalk-internal-hom} and
-More on Algebra, Remark
-\ref{more-algebra-remark-pseudo-coherence-and-base-change-ext}
+More on Algebra, Lemma
+\ref{more-algebra-lemma-pseudo-coherence-and-base-change-ext}
 to see that in this case $\Hom$ commutes with base change by
 $\mathcal{O}_{Y, y} \to \mathcal{O}_{X, x}$.
 Second proof: use the exact same argument as given
@@ -4065,7 +4117,7 @@ Clearly, for every $x' \in U$ we see that $s$ generates
 the module $\mathcal{L}_{x'}$. Hence $U \subset X_s$.
 This proves that $X_s$ is open. Moreover, the section
 $t$ constructed over $U$ above is unique, and hence
-these glue to give te section $s'$ of the lemma.
+these glue to give the section $s'$ of the lemma.
 \end{proof}
 
 \noindent
@@ -4793,6 +4845,259 @@ Omitted.
 
 
 
+
+
+
+
+\section{Finite order differential operators}
+\label{section-differential-operators}
+
+\noindent
+In this section we introduce differential operators of finite order.
+We suggest the reader take a look at the corresponding section
+in the chapter on commutative algebra
+(Algebra, Section \ref{algebra-section-differential-operators}).
+
+\begin{definition}
+\label{definition-differential-operators}
+Let $X$ be a topological space. Let $\varphi : \mathcal{O}_1 \to \mathcal{O}_2$
+be a homomorphism of sheaves of rings on $X$. Let $k \geq 0$ be an integer.
+Let $\mathcal{F}$, $\mathcal{G}$ be sheaves of $\mathcal{O}_2$-modules.
+A {\it differential operator $D : \mathcal{F} \to \mathcal{G}$ of order $k$}
+is an is an $\mathcal{O}_1$-linear map such that for all local sections
+$g$ of $\mathcal{O}_2$ the map $s \mapsto D(gs) - gD(s)$ is a
+differential operator of order $k - 1$. For the base case $k = 0$
+we define a differential operator of order $0$ to be an
+$\mathcal{O}_2$-linear map.
+\end{definition}
+
+\noindent
+If $D : \mathcal{F} \to \mathcal{G}$ is a differential operator of order $k$,
+then for all local sections $g$ of $\mathcal{O}_2$ the map $gD$ is a
+differential operator of order $k$. The sum of two differential operators of
+order $k$ is another. Hence the set of all these
+$$
+\text{Diff}^k(\mathcal{F}, \mathcal{G}) =
+\text{Diff}^k_{\mathcal{O}_2/\mathcal{O}_1}(\mathcal{F}, \mathcal{G})
+$$
+is a $\Gamma(X, \mathcal{O}_2)$-module. We have
+$$
+\text{Diff}^0(\mathcal{F}, \mathcal{G}) \subset
+\text{Diff}^1(\mathcal{F}, \mathcal{G}) \subset
+\text{Diff}^2(\mathcal{F}, \mathcal{G}) \subset \ldots
+$$
+The rule which maps $U \subset X$ open to the module of
+differential operators $D : \mathcal{F}|_U \to \mathcal{G}|_U$
+of order $k$ is a sheaf of $\mathcal{O}_2$-modules on $X$.
+Thus we obtain a sheaf of differential operators (if we ever need this we will
+add a definition here).
+
+\begin{lemma}
+\label{lemma-composition-differential-operators}
+Let $X$ be a topological space.
+Let $\mathcal{O}_1 \to \mathcal{O}_2$ be a map of sheaves of rings on $X$.
+Let $\mathcal{E}, \mathcal{F}, \mathcal{G}$ be sheaves of
+$\mathcal{O}_2$-modules.
+If $D : \mathcal{E} \to \mathcal{F}$ and $D' : \mathcal{F} \to \mathcal{G}$
+are differential operators of order $k$ and $k'$, then $D' \circ D$ is a
+differential operator of order $k + k'$.
+\end{lemma}
+
+\begin{proof}
+Let $g$ be a local section of $\mathcal{O}_2$.
+Then the map which sends a local section $x$ of $\mathcal{E}$ to
+$$
+D'(D(gx)) - gD'(D(x)) = D'(D(gx)) - D'(gD(x)) + D'(gD(x)) - gD'(D(x))
+$$
+is a sum of two compositions of differential operators of lower order.
+Hence the lemma follows by induction on $k + k'$.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-module-principal-parts}
+Let $X$ be a topological space.
+Let $\mathcal{O}_1 \to \mathcal{O}_2$ be a map of sheaves of rings on $X$.
+Let $\mathcal{F}$ be a sheaf of $\mathcal{O}_2$-modules.
+Let $k \geq 0$. There exists a sheaf of $\mathcal{O}_2$-modules
+$\mathcal{P}^k_{\mathcal{O}_2/\mathcal{O}_1}(\mathcal{F})$
+and a canonical isomorphism
+$$
+\text{Diff}^k_{\mathcal{O}_2/\mathcal{O}_1}(\mathcal{F}, \mathcal{G}) =
+\Hom_{\mathcal{O}_2}(
+\mathcal{P}^k_{\mathcal{O}_2/\mathcal{O}_1}(\mathcal{F}), \mathcal{G})
+$$
+functorial in the $\mathcal{O}_2$-module $\mathcal{G}$.
+\end{lemma}
+
+\begin{proof}
+The existence follows from general category theoretic arguments
+(insert future reference here), but we will also give a direct
+construction as this construction will be useful in the future proofs.
+We will freely use the notation introduced in the proof of
+Lemma \ref{lemma-universal-module}.
+Given any differential operator $D : \mathcal{F} \to \mathcal{G}$
+we obtain an $\mathcal{O}_2$-linear map
+$L_D : \mathcal{O}_2[\mathcal{F}] \to \mathcal{G}$
+sending $[m]$ to $D(m)$. If $D$ has order $0$
+then $L_D$ annihilates the local sections
+$$
+[m + m'] - [m] - [m'],\quad
+g_0[m] - [g_0m]
+$$
+where $g_0$ is a local section of $\mathcal{O}_2$ and $m, m'$
+are local sections of $\mathcal{F}$. If $D$ has order $1$, then $L_D$
+annihilates the local sections
+$$
+[m + m' - [m] - [m'],\quad
+f[m] - [fm], \quad
+g_0g_1[m] - g_0[g_1m] - g_1[g_0m] + [g_1g_0m]
+$$
+where $f$ is a local section of $\mathcal{O}_1$,
+$g_0, g_1$ are local sections of $\mathcal{O}_2$, and
+$m, m'$ are local sections of $\mathcal{F}$.
+If $D$ has order $k$, then $L_D$ annihilates the local sections
+$[m + m'] - [m] - [m']$, $f[m] - [fm]$, and the local sections
+$$
+g_0g_1\ldots g_k[m] - \sum g_0 \ldots \hat g_i \ldots g_k[g_im] + \ldots
++(-1)^{k + 1}[g_0\ldots g_km]
+$$
+Conversely, if $L : \mathcal{O}_2[\mathcal{F}] \to \mathcal{G}$ is an
+$\mathcal{O}_2$-linear map annihilating all the local sections
+listed in the previous sentence, then $m \mapsto L([m])$ is a
+differential operator of order $k$. Thus we see that
+$\mathcal{P}^k_{\mathcal{O}_2/\mathcal{O}_1}(\mathcal{F})$
+is the quotient of $\mathcal{O}_2[\mathcal{F}]$
+by the $\mathcal{O}_2$-submodule generated by these local sections.
+\end{proof}
+
+\begin{definition}
+\label{definition-module-principal-parts}
+Let $X$ be a topoological space.
+Let $\mathcal{O}_1 \to \mathcal{O}_2$ be a map of sheaves of rings on $X$.
+Let $\mathcal{F}$ be a sheaf of $\mathcal{O}_2$-modules.
+The module $\mathcal{P}^k_{\mathcal{O}_2/\mathcal{O}_1}(\mathcal{F})$
+constructed in Lemma \ref{lemma-module-principal-parts}
+is called the {\it module of principal parts of order $k$} of $\mathcal{F}$.
+\end{definition}
+
+\noindent
+Note that the inclusions
+$$
+\text{Diff}^0(\mathcal{F}, \mathcal{G}) \subset
+\text{Diff}^1(\mathcal{F}, \mathcal{G}) \subset
+\text{Diff}^2(\mathcal{F}, \mathcal{G}) \subset \ldots
+$$
+correspond via Yoneda's lemma (Categories, Lemma \ref{categories-lemma-yoneda})
+to surjections
+$$
+\ldots \to \mathcal{P}^2_{\mathcal{O}_2/\mathcal{O}_1}(\mathcal{F})
+\to \mathcal{P}^1_{\mathcal{O}_2/\mathcal{O}_1}(\mathcal{F})
+\to \mathcal{P}^0_{\mathcal{O}_2/\mathcal{O}_1}(\mathcal{F}) = \mathcal{F}
+$$
+
+\begin{lemma}
+\label{lemma-differential-operators-sheafify}
+Let $X$ be a topological space. Let $\mathcal{O}_1 \to \mathcal{O}_2$
+be a homomorphism of presheaves of rings on $X$. Let $\mathcal{F}$ be a
+presheaf of $\mathcal{O}_2$-modules. Then
+$\mathcal{P}^k_{\mathcal{O}_2^\#/\mathcal{O}_1^\#}(\mathcal{F}^\#)$
+is the sheaf associated to the presheaf
+$U \mapsto P^k_{\mathcal{O}_2(U)/\mathcal{O}_1(U)}(\mathcal{F}(U))$.
+\end{lemma}
+
+\begin{proof}
+This can be proved in exactly the same way as is done for the sheaf
+of differentials in Lemma \ref{lemma-differentials-sheafify}.
+Perhaps a more pleasing approach is to use the universal property
+of Lemma \ref{lemma-module-principal-parts} directly to see the equality.
+We omit the details.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-sequence-of-principal-parts}
+Let $X$ be a topological space. Let $\mathcal{O}_1 \to \mathcal{O}_2$
+be a homomorphism of sheaves of rings on $X$. Let $\mathcal{F}$ be a
+sheaf of $\mathcal{O}_2$-modules. There is a
+canonical short exact sequence
+$$
+0 \to
+\Omega_{\mathcal{O}_2/\mathcal{O}_1} \otimes_{\mathcal{O}_2} \mathcal{F} \to
+\mathcal{P}^1_{\mathcal{O}_2/\mathcal{O}_1}(\mathcal{F}) \to
+\mathcal{F} \to 0
+$$
+functorial in $\mathcal{F}$ called the {\it sequence of principal parts}.
+\end{lemma}
+
+\begin{proof}
+Follows from the commutative algebra version
+(Algebra, Lemma \ref{algebra-lemma-sequence-of-principal-parts})
+and Lemmas \ref{lemma-differentials-sheafify} and
+\ref{lemma-differential-operators-sheafify}.
+\end{proof}
+
+\begin{remark}
+\label{remark-functoriality-principal-parts}
+Let $X$ be a topological space. Suppose given a commutative diagram of
+sheaves of rings
+$$
+\xymatrix{
+\mathcal{B} \ar[r] & \mathcal{B}' \\
+\mathcal{A} \ar[u] \ar[r] & \mathcal{A}' \ar[u]
+}
+$$
+on $X$, a $\mathcal{B}$-module $\mathcal{F}$,
+a $\mathcal{B}'$-module $\mathcal{F}'$, and
+a $\mathcal{B}$-linear map $\mathcal{F} \to \mathcal{F}'$.
+Then we get a compatible system of module maps
+$$
+\xymatrix{
+\ldots \ar[r] &
+\mathcal{P}^2_{\mathcal{B}'/\mathcal{A}'}(\mathcal{F}') \ar[r] &
+\mathcal{P}^1_{\mathcal{B}'/\mathcal{A}'}(\mathcal{F}') \ar[r] &
+\mathcal{P}^0_{\mathcal{B}'/\mathcal{A}'}(\mathcal{F}') \\
+\ldots \ar[r] &
+\mathcal{P}^2_{\mathcal{B}/\mathcal{A}}(\mathcal{F}) \ar[r] \ar[u] &
+\mathcal{P}^1_{\mathcal{B}/\mathcal{A}}(\mathcal{F}) \ar[r] \ar[u] &
+\mathcal{P}^0_{\mathcal{B}/\mathcal{A}}(\mathcal{F}) \ar[u]
+}
+$$
+These maps are compatible with further composition of maps of this type.
+The easiest way to see this is to use the description of the modules
+$\mathcal{P}^k_{\mathcal{B}/\mathcal{A}}(\mathcal{M})$ in terms of
+(local) generators and relations in the proof of
+Lemma \ref{lemma-module-principal-parts} but it can also be seen
+directly from the universal
+property of these modules. Moreover, these maps are compatible with
+the short exact sequences of Lemma \ref{lemma-sequence-of-principal-parts}.
+\end{remark}
+
+\noindent
+Next, we extend our definition to morphisms of ringed spaces.
+
+\begin{definition}
+\label{definition-relative-differential-operators}
+Let $(f, f^\sharp) : (X, \mathcal{O}_X) \to (S, \mathcal{O}_S)$
+be a morphism of ringed spaces.
+Let $\mathcal{F}$ and $\mathcal{G}$ be $\mathcal{O}_X$-modules.
+Let $k \geq 0$ be an integer.
+A {\it differential operator of order $k$ on $X/S$}
+is a differential operator $D : \mathcal{F} \to \mathcal{G}$
+with respect to $f^\sharp : f^{-1}\mathcal{O}_S \to \mathcal{O}_X$
+We denote $\text{Diff}^k_{X/S}(\mathcal{F}, \mathcal{G})$
+the set of these differential operators.
+\end{definition}
+
+
+
+
+
+
+
+
+
+
+
+
 \section{The de Rham complex}
 \label{section-de-rham-complex}
 
@@ -4870,6 +5175,22 @@ of de Rham complexes.
 Omitted. Hint: compare with Lemma \ref{lemma-pullback-differentials}.
 \end{proof}
 
+\begin{lemma}
+\label{lemma-differentials-de-rham-complex-order-1}
+Let $X$ be a topological space. Let $\mathcal{A} \to \mathcal{B}$
+be a homomorphism of sheaves of rings on $X$. The differentials
+$\text{d} : \Omega^i_{\mathcal{B}/\mathcal{A}}  \to
+\Omega^{i + 1}_{\mathcal{B}/\mathcal{A}}$
+are differential operators of order $1$.
+\end{lemma}
+
+\begin{proof}
+Via our construction of the de Rham complex above as the sheafification
+of the rule  $U \mapsto \Omega^\bullet_{\mathcal{B}(U)/\mathcal{A}(U)}$
+this follows from
+Algebra, Lemma \ref{algebra-lemma-differentials-de-rham-complex-order-1}.
+\end{proof}
+
 \noindent
 Let $X$ be a topological space. Let
 $$
@@ -4937,6 +5258,17 @@ $$
 (using Lemma \ref{lemma-pullback-de-rham-complex} for the first equality)
 and then we can use adjunction.
 
+\begin{lemma}
+\label{lemma-differentials-relative-de-rham-complex-order-1}
+Let $f : X \to Y$ be a morphism of ringed spaces. The differentials
+$\text{d} : \Omega^i_{X/Y}  \to \Omega^{i + 1}_{X/Y}$
+are differential operators of order $1$ on $X/Y$.
+\end{lemma}
+
+\begin{proof}
+Immediate from Lemma \ref{lemma-differentials-de-rham-complex-order-1}
+and the definition.
+\end{proof}
 
 
 

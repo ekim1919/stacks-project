@@ -8936,7 +8936,7 @@ the strict transform of $\mathcal{F}$ is flat over $S'$.
 \begin{proof}
 We claim that the hypotheses of the lemma are preserved under $U$-admissible
 blowups. Namely, suppose $b : S' \to S$ is a $U$-admissible blowup in
-the quasi-coherent sheaf of ideals $\mathcal{I}$. Moreover, let $S'_i \to S_i$
+the quasi-coherent sheaf of ideals $\mathcal{I}$. Moreover, let $S^*_i \to S_i$
 be the blowup in the quasi-coherent sheaf of ideals $\mathcal{J}_i$.
 Then the collection of morphisms $e'_i : S'_i = S_i \times_S S' \to S'$
 and $j'_i : X_i' = X_i \times_S S' \to X \times_S S'$ satisfy conditions
@@ -9406,7 +9406,10 @@ $\overline{X} \times_S Y \to Y$ is proper as a base change of
 $\overline{X} \to S$. On the other hand, since $Y$ is separated
 over $S$, the morphism $(1, f) : X \to X \times_S Y$ is a closed
 immersion (Schemes, Lemma \ref{schemes-lemma-semi-diagonal})
-and hence $X \to \overline{X}'$ is an open immersion.
+and hence $X \to \overline{X}'$ is an open immersion by Morphisms, Lemma
+\ref{morphisms-lemma-scheme-theoretic-image-of-partial-section} applied
+to the ``partial section'' $s = (j, f)$ to the projection
+$\overline{X} \times_S Y \to \overline{X}$.
 \end{proof}
 
 \noindent
@@ -9837,10 +9840,13 @@ Observe that this property is preserved if we replace $X_i$
 by a further $V_i$-admissible blowup.
 
 \medskip\noindent
-Consider the scheme theoretic image $X_{12} \subset X_1 \times_S X_2$
-of the immersion $(U_1 \cap U_2) \to X_1 \times_S X_2$ given by
-$(U_1 \cap U_2) \to U_1 \to X_1$ and $(U_1 \cap U_2) \to U_2 \to X_2$.
-The projection morphisms
+Set $V_{12} = V_1 \times_U V_2$. We have an immersion
+$V_{12} \to X_1 \times_S X_2$ which is the composition of the closed
+immersion $V_{12} = V_1 \times_U V_2 \to V_1 \times_S V_2$
+(Schemes, Lemma \ref{schemes-lemma-fibre-product-after-map})
+and the open immersion $V_1 \times_S V_2 \to X_1 \times_S X_2$.
+Let $X_{12} \subset X_1 \times_S X_2$ be the scheme theoretic
+image of $V_{12} \to X_1 \times_S X_2$. The projection morphisms
 $$
 p_1 : X_{12} \to X_1
 \quad\text{and}\quad
@@ -9852,20 +9858,19 @@ the strict transform with respect to this blowing up, see
 Lemma \ref{lemma-replaced-by-strict-transform}.
 
 \medskip\noindent
-Denote $V_{12} \subset X_{12}$ the open subscheme
-$V_{12} = p_1^{-1}(V_1) = p_2^{-1}(V_2)$ and denote
-$\psi : V_{12} \to U$ the compositions
+Denote $\psi : V_{12} \to U$ the compositions
 $\psi = \psi_1 \circ p_1|_{V_{12}} = \psi_2 \circ p_2|_{V_{12}}$.
 Consider the closed subscheme
 $$
-Z_{12, 2} = p_1^{-1}(Z_{1, 2}) = p_2^{-1}(Z_{2, 2}) = \psi^{-1}(Z_2)
-\subset V_{12}
+Z_{12, 2} =
+(p_1|_{V_{12}})^{-1}(Z_{1, 2}) =
+(p_2|_{V_{12}})^{-1}(Z_{2, 2}) =
+\psi^{-1}(Z_2) \subset V_{12}
 $$
 The morphism $p_1|_{V_{12}} : V_{12} \to V_1$ is an isomorphism
 over an open neighbourhood of $Z_{1, 2}$ because $\psi_2 : V_2 \to U$
-is an isomorphism over an open neighbourhood of $Z_2$, see
-Morphisms, Lemma
-\ref{morphisms-lemma-scheme-theoretic-image-of-partial-section}.
+is an isomorphism over an open neighbourhood of $Z_2$ and
+$V_{12} = V_1 \times_U V_2$.
 By Lemma \ref{lemma-blowup-iso-along}
 there exists a $V_1$-admissible blowing up $X_1' \to X_1$
 such that the strict tranform $p'_1 : X'_{12} \to X'_1$
@@ -10483,7 +10488,7 @@ Topologies, Lemma \ref{topologies-lemma-ph-induced}.
 
 \begin{definition}
 \label{definition-big-small-h}
-Let $S$ be a scheme. Let $\Sch_h$ be a big ph site containing $S$.
+Let $S$ be a scheme. Let $\Sch_h$ be a big h site containing $S$.
 \begin{enumerate}
 \item The {\it big h site of $S$}, denoted
 $(\Sch/S)_h$, is the site $\Sch_h/S$
@@ -11454,8 +11459,8 @@ be a finitely generated ideal annihilated by a power of $f$.
 Then
 $$
 \xymatrix{
-\Spec(A/fA + J) \ar[r] \ar[d] & \Spec(A/J) \ar[d] \\
-\Spec(A/fA) \ar[r] & \Spec(A)
+E = \Spec(A/fA + J) \ar[r] \ar[d] & \Spec(A/J) = X' \ar[d] \\
+Z = \Spec(A/fA) \ar[r] & \Spec(A) = X
 }
 $$
 is an almost blowup square.
@@ -11466,9 +11471,9 @@ is an almost blowup square.
 Let $A$ be a ring. Let $f_1, f_2 \in A$ be elements.
 $$
 \xymatrix{
-\text{Proj}(A/(f_1, f_2)[T_0, T_1]) \ar[r] \ar[d] &
-\text{Proj}(A[T_0, T_1]/(f_2 T_0 - f_1 T_1) \ar[d] \\
-\Spec(A/(f_1, f_2)) \ar[r] & \Spec(A)
+E = \text{Proj}(A/(f_1, f_2)[T_0, T_1]) \ar[r] \ar[d] &
+\text{Proj}(A[T_0, T_1]/(f_2 T_0 - f_1 T_1) = X' \ar[d] \\
+Z = \Spec(A/(f_1, f_2)) \ar[r] & \Spec(A) = X
 }
 $$
 is an almost blowup square.

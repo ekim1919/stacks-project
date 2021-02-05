@@ -91,7 +91,7 @@ with the fact that formation of exterior power commutes with base change.
 
 \begin{lemma}
 \label{lemma-etale}
-Consider a commutative diagram of schemss
+Consider a commutative diagram of schemes
 $$
 \xymatrix{
 X' \ar[r]_f \ar[d] & X \ar[d] \\
@@ -402,7 +402,7 @@ in $D(Y, q^{-1}\mathcal{O}_T)$.
 
 \noindent
 Let $p : X \to S$ be a morphism of schemes. We define the
-{\it de Hodge cohomology of $X$ over $S$} to be the cohomology groups
+{\it Hodge cohomology of $X$ over $S$} to be the cohomology groups
 $$
 H^n_{Hodge}(X/S) = \bigoplus\nolimits_{n = p + q} H^q(X, \Omega^p_{X/S})
 $$
@@ -450,7 +450,7 @@ compatible with gradings and with the cup product defined above.
 
 
 \section{Two spectral sequences}
-\label{section-hdoge-to-de-rham}
+\label{section-hodge-to-de-rham}
 
 \noindent
 Let $p : X \to S$ be a morphism of schemes. Since the category
@@ -579,7 +579,7 @@ The spectral sequence constructed in
 Cohomology, Lemma \ref{cohomology-lemma-spectral-sequence-filtered-object}
 for $\Omega^\bullet_{X/S}$ viewed as a filtered complex of sheaves
 is the same as the Hodge-to-de Rham spectral sequence constructed in
-Section \ref{section-hdoge-to-de-rham} by
+Section \ref{section-hodge-to-de-rham} by
 Cohomology, Example \ref{cohomology-example-spectral-sequence-bis}. Further the
 wedge product (\ref{equation-wedge}) sends
 $\text{Tot}(\sigma_{\geq i}\Omega^\bullet_{X/S} \otimes_{p^{-1}\mathcal{O}_S}
@@ -627,13 +627,33 @@ X \ar[rd]_a & & Y \ar[ld]^b \\
 & S
 }
 $$
+In this section, given an $\mathcal{O}_X$-module $\mathcal{F}$
+and an $\mathcal{O}_Y$-module $\mathcal{G}$ let us set
+$$
+\mathcal{F} \boxtimes \mathcal{G} =
+p^*\mathcal{F} \otimes_{\mathcal{O}_{X \times_S Y}} q^*\mathcal{G}
+$$
+The bifunctor
+$(\mathcal{F}, \mathcal{G}) \mapsto \mathcal{F} \boxtimes \mathcal{G}$
+on quasi-coherent modules extends to a bifunctor on quasi-coherent modules
+and differential operators of finite over over $S$, see
+Morphisms, Remark \ref{morphisms-remark-base-change-differential-operators}.
+Since the differentials of the de Rham complexes $\Omega^\bullet_{X/S}$ and
+$\Omega^\bullet_{Y/S}$ are differential operators of order $1$
+over $S$ by Modules, Lemma
+\ref{modules-lemma-differentials-relative-de-rham-complex-order-1}.
+Thus it makes sense to consider the complex
+$$
+\text{Tot}(\Omega^\bullet_{X/S} \boxtimes \Omega^\bullet_{Y/S})
+$$
+Please see the discussion in Derived Categories of Schemes, Section
+\ref{perfect-section-kunneth-complexes}.
 
 \begin{lemma}
 \label{lemma-de-rham-complex-product}
 In the situation above there is a canonical isomorphism
 $$
-\text{Tot}(p^{-1}\Omega^\bullet_{X/S}
-\otimes_{f^{-1}\mathcal{O}_S} q^{-1}\Omega^\bullet_{Y/S})
+\text{Tot}(\Omega^\bullet_{X/S} \boxtimes \Omega^\bullet_{Y/S})
 \longrightarrow
 \Omega^\bullet_{X \times_S Y/S}
 $$
@@ -641,13 +661,7 @@ of complexes of $f^{-1}\mathcal{O}_S$-modules.
 \end{lemma}
 
 \begin{proof}
-By Derived Categories of Schemes, Remark \ref{perfect-remark-silly}
-we have
-$$
-p^{-1}\Omega^i_{X/S} \otimes_{f^{-1}\mathcal{O}_S} q^{-1}\Omega^j_{Y/S} =
-p^*\Omega^i_{X/S} \otimes_{\mathcal{O}_{X \times_S Y}} q^*\Omega^j_{Y/S}
-$$
-for all $i, j$. On the other hand, we know that
+We know that
 $
 \Omega_{X \times_S Y/S} = p^*\Omega_{X/S} \oplus q^*\Omega_{Y/S}
 $
@@ -658,15 +672,19 @@ $$
 \bigoplus\nolimits_{i + j = n}
 p^*\Omega^i_{X/S} \otimes_{\mathcal{O}_{X \times_S Y}} q^*\Omega^j_{Y/S} =
 \bigoplus\nolimits_{i + j = n}
-p^{-1}\Omega^i_{X/S} \otimes_{f^{-1}\mathcal{O}_S} q^{-1}\Omega^j_{Y/S}
+\Omega^i_{X/S} \boxtimes \Omega^j_{Y/S}
 $$
-by elementary properties of exterior powers. This finishes the proof.
+by elementary properties of exterior powers. These identifications determine
+isomorphisms between the terms of the complexes on the left and the right
+of the arrow in the lemma. We omit the verification that these maps
+are compatible with differentials.
 \end{proof}
 
 \noindent
-If $S = \Spec(A)$ is affine, then combining the result of
-Lemma \ref{lemma-de-rham-complex-product} with the cup product map of
-Derived Categories of Schemes, Equation (\ref{perfect-equation-de-rham-kunneth})
+Set $A = \Gamma(S, \mathcal{O}_S)$. Combining the result of
+Lemma \ref{lemma-de-rham-complex-product} with the map
+Derived Categories of Schemes, Equation
+(\ref{perfect-equation-de-rham-kunneth})
 we obtain a cup product
 $$
 R\Gamma(X, \Omega^\bullet_{X/S})
@@ -689,7 +707,7 @@ first pulling back and then taking the cup product.
 
 \begin{lemma}
 \label{lemma-kunneth-de-rham}
-Assume $X$ and $Y$ are smooth, quasi-compact, and quasi-separated over
+Assume $X$ and $Y$ are smooth, quasi-compact, with affine diagonal over
 $S = \Spec(A)$. Then the map
 $$
 R\Gamma(X, \Omega^\bullet_{X/S})
@@ -713,9 +731,7 @@ Derived Categories of Schemes, Lemma \ref{perfect-lemma-kunneth-special}.
 \end{proof}
 
 \noindent
-Given a possibly non-affine base scheme $S$ we can do this
-construction over all affine opens and upon sheafification
-we obtain a relative cup product
+There is a relative version of the cup product, namely a map
 $$
 Ra_*\Omega^\bullet_{X/S}
 \otimes_{\mathcal{O}_S}^\mathbf{L}
@@ -723,8 +739,11 @@ Rb_*\Omega^\bullet_{Y/S}
 \longrightarrow
 Rf_*\Omega^\bullet_{X \times_S Y/S}
 $$
-in $D(\mathcal{O}_S)$. We can also define this as the composition
-of the maps
+in $D(\mathcal{O}_S)$. The construction combines
+Lemma \ref{lemma-de-rham-complex-product} with the map
+Derived Categories of Schemes, Equation
+(\ref{perfect-equation-relative-de-rham-kunneth}).
+The construction shows that this map is given by the diagram
 $$
 \xymatrix{
 Ra_*\Omega^\bullet_{X/S}
@@ -747,10 +766,13 @@ Rf_*(\Omega^\bullet_{X \times_S Y/S}
 \ar[d]^{\text{from derived to usual}} \\
 Rf_*\text{Tot}(p^{-1}\Omega^\bullet_{X/S}
 \otimes_{f^{-1}\mathcal{O}_S}
-q^{-1}\Omega^\bullet_{Y/S}) \ar@{=}[rd] \ar[r] &
+q^{-1}\Omega^\bullet_{Y/S}) \ar[r] \ar[d]^{\text{canonical map}} &
 Rf_*\text{Tot}(\Omega^\bullet_{X \times_S Y/S}
 \otimes_{f^{-1}\mathcal{O}_S}
-\Omega^\bullet_{X \times_S Y/S}) \ar[d] \\
+\Omega^\bullet_{X \times_S Y/S})
+\ar[d]^{\eta \otimes \omega \mapsto \eta \wedge \omega} \\
+Rf_*\text{Tot}(\Omega^\bullet_{X/S} \boxtimes \Omega^\bullet_{Y/S})
+\ar@{=}[r]
 &
 Rf_*\Omega^\bullet_{X \times_S Y/S}
 }
@@ -764,40 +786,13 @@ Cohomology, Remark \ref{cohomology-remark-cup-product}.
 The third arrow is the map sending a derived tensor product
 of complexes to the totalization of the tensor product of complexes.
 The final equality is Lemma \ref{lemma-de-rham-complex-product}.
-Using the identifications
-$R\Gamma(X, \Omega^\bullet_{X/S}) = R\Gamma(S, Ra_*\Omega^\bullet_{X/S})$
-and
-$R\Gamma(Y, \Omega^\bullet_{Y/S}) = R\Gamma(S, Rb_*\Omega^\bullet_{Y/S})$
-we obtain a map
-$$
-R\Gamma(X, \Omega^\bullet_{X/S}) \otimes_{H^0(S, \mathcal{O}_S)}^\mathbf{L}
-R\Gamma(Y, \Omega^\bullet_{Y/S}) \to
-R\Gamma(S, Ra_*\Omega^\bullet_{X/S}
-\otimes_{\mathcal{O}_S}^\mathbf{L}
-Rb_*\Omega^\bullet_{Y/S})
-$$
-by using the cup product of
-Cohomology, Section \ref{cohomology-section-cup-product} on $S$.
-Using the relative cup product for de Rham cohomology constructed
-by the large diagram above and taking $R\Gamma(S, -)$ this produces
-a cup product
-$$
-H^i_{dR}(X/S) \otimes_{H^0(S, \mathcal{O}_S)} H^j_{dR}(Y/S)
-\longrightarrow
-H^{i + j}_{dR}(X \times_S Y/S),\quad
-(\xi, \zeta) \longmapsto p^*\xi \cup q^*\zeta
-$$
-which as indicated is given by pulling back and then cupping.
-The reader can deduce this from the commutativity of the diagram
-and the compatibility of relative cup product with composition of
-morphisms given in Cohomology, Lemma
-\ref{cohomology-lemma-compose-cup-product} (take the second morphism
-equal to the morphism to a point).
+This construction recovers on global section the construction given earlier.
 
 \begin{lemma}
 \label{lemma-kunneth-de-rham-relative}
-Assume $X$ and $Y$ are smooth, quasi-compact, and quasi-separated over
-$S$. Then the relative cup product
+Assume $X \to S$ and $Y \to S$ are smooth and quasi-compact
+and the morphisms $X \to X \times_S X$ and $Y \to Y \times_S Y$ are affine.
+Then the relative cup product
 $$
 Ra_*\Omega^\bullet_{X/S}
 \otimes_{\mathcal{O}_S}^\mathbf{L}
@@ -818,7 +813,7 @@ Immediate consequence of Lemma \ref{lemma-kunneth-de-rham}.
 
 
 
-\section{First chern class in de Rham cohomology}
+\section{First Chern class in de Rham cohomology}
 \label{section-first-chern-class}
 
 \noindent
@@ -840,7 +835,7 @@ $\mathcal{L}$ is denoted $c^{dR}_1(\mathcal{L}) \in H^2_{dR}(X/S)$.
 
 \medskip\noindent
 We can also use the map $\text{d}\log : \mathcal{O}_X^* \to \Omega^1_{X/S}$
-to define a chern class in Hodge cohomology
+to define a Chern class in Hodge cohomology
 $$
 c_1^{Hodge} : \Pic(X) \longrightarrow H^1(X, \Omega^1_{X/S})
 \subset H^2_{Hodge}(X/S)
@@ -1596,11 +1591,11 @@ over $A$ is zero.
 
 \begin{proof}
 Consider the Hodge-to-de Rham spectral sequence of
-Section \ref{section-hdoge-to-de-rham}.
+Section \ref{section-hodge-to-de-rham}.
 By the computation of the Hodge cohomology of $\mathbf{P}^n_A$ over $A$
 done in Lemma \ref{lemma-hodge-cohomology-projective-space}
 we see that the spectral sequence degenerates on the $E_1$ page.
-In this way we see that $H^i_{dR}(\mathbf{P}^n_A/A)$ is a free
+In this way we see that $H^{2i}_{dR}(\mathbf{P}^n_A/A)$ is a free
 $A$-module of rank $1$ for $0 \leq i \leq n$ and zero else.
 Observe that $c_1^{dR}(\mathcal{O}(1))^i \in H^{2i}_{dR}(\mathbf{P}^n_A/A)$
 for $i = 0, \ldots, n$ and that for $i = n$ this element is the
@@ -2587,28 +2582,32 @@ In this section we calculate some Hodge and de Rham cohomology
 groups for a standard blowing up.
 
 \medskip\noindent
-We fix a base ring $R$. In this section all schemes are schemes
-over $\Spec(R)$ and all products of schemes are products over $\Spec(R)$.
-For $s \geq 0$ we denote $\mathbf{A}^s$ and $\mathbf{P}^s$ the affine
-and projective space over $\Spec(R)$.
-
-\medskip\noindent
-Fix integers $0 \leq m$ and $1 \leq n$. Consider the closed immersion
-$\mathbf{A}^m \subset \mathbf{A}^{m + n}$,
-$(a_1, \ldots, a_m) \mapsto (a_1, \ldots, a_m, 0, \ldots 0)$.
-We are going to consider the blowing up $L$ of $\mathbf{A}^{m + n}$
-along the closed subscheme $\mathbf{A}^m$. Write
+We fix a ring $R$ and we set $S = \Spec(R)$. Fix integers $0 \leq m$ and
+$1 \leq n$. Consider the closed immersion
 $$
-\mathbf{A}^{m + n} = \Spec(R[x_1, \ldots, x_m, y_1, \ldots, y_n])
+Z = \mathbf{A}^m_S \longrightarrow \mathbf{A}^{m + n}_S = X,\quad
+(a_1, \ldots, a_m) \mapsto (a_1, \ldots, a_m, 0, \ldots 0).
+$$
+We are going to consider the blowing up $L$ of $X$
+along the closed subscheme $Z$. Write
+$$
+X =
+\mathbf{A}^{m + n}_S =
+\Spec(A)
+\quad\text{with}\quad
+A = R[x_1, \ldots, x_m, y_1, \ldots, y_n]
 $$
 We will consider $A = R[x_1, \ldots, x_m, y_1, \ldots, y_n]$ as a
 graded $R$-algebra by setting $\deg(x_i) = 0$ and $\deg(y_j) = 1$.
 With this grading we have
 $$
-P = \text{Proj}(A) = \mathbf{A}^m \times \mathbf{P}^{n - 1}
+P =
+\text{Proj}(A) =
+\mathbf{A}^m_S \times_S \mathbf{P}^{n - 1}_S =
+Z \times_S \mathbf{P}^{n - 1}_S =
+\mathbf{P}^{n - 1}_Z
 $$
-Observe that the ideal cutting out $\mathbf{A}^m$ in
-$\mathbf{A}^{m + n} = \Spec(A)$ is the ideal $A_+$.
+Observe that the ideal cutting out $Z$ in $X$ is the ideal $A_+$.
 Hence $L$ is the Proj of the Rees algebra
 $$
 A \oplus A_+ \oplus (A_+)^2 \oplus \ldots =
@@ -2618,101 +2617,221 @@ Hence $L$ is an example of the phenomenon studied in
 more generality in More on Morphisms, Section
 \ref{more-morphisms-section-proj-spec};
 we will use the observations we made there without further mention.
-In particular, we can consider the diagram
+In particular, we have a commutative diagram
 $$
 \xymatrix{
 P \ar[r]_0 \ar[d]_p &
 L \ar[r]_-\pi \ar[d]^b &
-P \ar[d] \\
-\mathbf{A}^m \ar[r]^i &
-\mathbf{A}^{m + n} \ar[r] &
-\mathbf{A}^m
+P \ar[d]^p \\
+Z \ar[r]^i &
+X \ar[r] &
+Z
 }
 $$
-Thus we see that $L$ is a line bundle over
-$P = \mathbf{A}^m \times \mathbf{P}^{n - 1}$
-whose zero section is the exceptional divisor of the blowup $b$.
+such that $\pi : L \to P$ is a line bundle over
+$P = Z \times_S \mathbf{P}^{n - 1}_S$
+with zero section $0$ whose image $E = 0(P) \subset L$
+is the exceptional divisor of the blowup $b$.
 
 \begin{lemma}
 \label{lemma-comparison}
-Taking differentials over $\Spec(R)$ for $a \geq 0$ we have
+For $a \geq 0$ we have
 \begin{enumerate}
 \item the map
-$\Omega^a_{\mathbf{A}^{m + n}} \to b_*\Omega^a_L$ is an isomorphism,
-\item the map $\Omega^a_{\mathbf{A}^m} \to p_*\Omega^a_P$ is an isomorphism,
+$\Omega^a_{X/S} \to b_*\Omega^a_{L/S}$ is an isomorphism,
+\item the map $\Omega^a_{Z/S} \to p_*\Omega^a_{P/S}$ is an isomorphism,
 and
-\item the map $Rb_*\Omega^a_L \to i_*Rp_*\Omega^a_P$ is an isomorphism
+\item the map $Rb_*\Omega^a_{L/S} \to i_*Rp_*\Omega^a_{P/S}$ is an isomorphism
 on cohomology sheaves in degree $\geq 1$.
 \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-Let us first prove part (2). Since $P = \mathbf{A}^m \times \mathbf{P}^{n - 1}$
+Let us first prove part (2). Since
+$P = Z \times_S \mathbf{P}^{n - 1}_S$
 we see that
 $$
-\Omega^a_P = \bigoplus\nolimits_{a = r + s}
-\text{pr}_1^*\Omega^r_{\mathbf{A}^m} \otimes
-\text{pr}_2^*\Omega^s_{\mathbf{P}^{n - 1}}
+\Omega^a_{P/S} = \bigoplus\nolimits_{a = r + s}
+\text{pr}_1^*\Omega^r_{Z/S} \otimes
+\text{pr}_2^*\Omega^s_{\mathbf{P}^{n - 1}_S/S}
 $$
 Recalling that $p = \text{pr}_1$ by the projection formula
 (Cohomology, Lemma \ref{cohomology-lemma-projection-formula})
 we obtain
 $$
-p_*\Omega^a_P = \bigoplus\nolimits_{a = r + s}
-\Omega^r_{\mathbf{A}^m} \otimes
-\text{pr}_{1, *}\text{pr}_2^*\Omega^s_{\mathbf{P}^{n - 1}}
+p_*\Omega^a_{P/S} = \bigoplus\nolimits_{a = r + s}
+\Omega^r_{Z/S} \otimes
+\text{pr}_{1, *}\text{pr}_2^*\Omega^s_{\mathbf{P}^{n - 1}_S/S}
 $$
 By the calculations in Section \ref{section-projective-space}
 and in particular in
 the proof of Lemma \ref{lemma-hodge-cohomology-projective-space}
-we have $\text{pr}_{1, *}\text{pr}_2^*\Omega^s_{\mathbf{P}^{n - 1}} = 0$
+we have $\text{pr}_{1, *}\text{pr}_2^*\Omega^s_{\mathbf{P}^{n - 1}_S/S} = 0$
 except if $s = 0$ in which case we get
-$\text{pr}_{1, *}\mathcal{O}_P = \mathcal{O}_{\mathbf{A}^m}$.
+$\text{pr}_{1, *}\mathcal{O}_P = \mathcal{O}_Z$.
 This proves (2).
 
 \medskip\noindent
 By the material in Section \ref{section-line-bundle} and in particular
 Lemma \ref{lemma-push-omega-a} we have
-$\pi_*\Omega^a_L = \Omega^a_P \oplus \bigoplus_{k \geq 1} \Omega^a_{L, k}$
+$\pi_*\Omega^a_{L/S} = \Omega^a_{P/S} \oplus
+\bigoplus_{k \geq 1} \Omega^a_{L/S, k}$.
 Since the composition $\pi \circ 0$ in the diagram above
 is the identity morphism on $P$ to prove part (3) it suffices to show that
-$\Omega^a_{L, k}$ has vanishing higher cohomology for $k > 0$.
+$\Omega^a_{L/S, k}$ has vanishing higher cohomology for $k > 0$.
 By Lemmas \ref{lemma-the-complex-for-L-star} and \ref{lemma-push-omega-a}
 there are short exact sequences
 $$
-0 \to \Omega^a_P \otimes \mathcal{O}_P(k)
-\to \Omega^a_{L, k} \to
-\Omega^{a - 1}_P \otimes \mathcal{O}_P(k) \to 0
+0 \to \Omega^a_{P/S} \otimes \mathcal{O}_P(k)
+\to \Omega^a_{L/S, k} \to
+\Omega^{a - 1}_{P/S} \otimes \mathcal{O}_P(k) \to 0
 $$
-where $\Omega^{a - 1} = 0$ if $a = 0$. By
+where $\Omega^{a - 1}_{P/S} = 0$ if $a = 0$. Since
+$P = Z \times_S \mathbf{P}^{n - 1}_S$ we have
+$$
+\Omega^a_{P/S} = \bigoplus\nolimits_{i + j = a}
+\Omega^i_{Z/S} \boxtimes \Omega^j_{\mathbf{P}^{n - 1}_S/S}
+$$
+by Lemma \ref{lemma-de-rham-complex-product}.
+Since $\Omega^i_{Z/S}$ is free of finite rank
+we see that it suffices to show that the higher cohomology of
+$\mathcal{O}_Z \boxtimes \Omega^j_{\mathbf{P}^{n - 1}_S/S}(k)$
+is zero for $k > 0$. This follows from
 Lemma \ref{lemma-twisted-hodge-cohomology-projective-space}
-we obtain the desired vanishing of higher cohomology.
+applied to $P = Z \times_S \mathbf{P}^{n - 1}_S = \mathbf{P}^{n - 1}_Z$
+and the proof of (3) is complete.
 
 \medskip\noindent
 We still have to prove (1). If $n = 1$, then we are blowing
 up an effective Cartier divisor and $b$ is an isomorphism
 and we have (1). If $n > 1$, then the composition
 $$
-\Gamma(\mathbf{A}^{n + m}, \Omega^a_{\mathbf{A}^{n + m}})
+\Gamma(X, \Omega^a_{X/S})
 \to
-\Gamma(L, \Omega^a_L)
+\Gamma(L, \Omega^a_{L/S})
 \to
-\Gamma(L \setminus 0(P), \Omega^a_L)
+\Gamma(L \setminus E, \Omega^a_{L/S})
 =
-\Gamma(\mathbf{A}^{n + m} \setminus \mathbf{A}^m,
-\Omega^a_{\mathbf{A}^{n + m}})
+\Gamma(X \setminus Z, \Omega^a_{X/S})
 $$
-is an isomorphism as $\Omega^a_{\mathbf{A}^{m + n}}$ is finite free
+is an isomorphism as $\Omega^a_{X/S}$ is finite free
 (small detail omitted). Thus the only way (1) can fail is if
-there are nonzero elements of $\Gamma(L, \Omega^a_L)$ which vanish
-outside of $0(P)$. Since $L$ is a line bundle over $P$
+there are nonzero elements of $\Gamma(L, \Omega^a_{L/S})$ which vanish
+outside of $E = 0(P)$. Since $L$ is a line bundle over $P$
 with zero section $0 : P \to L$, it suffices to show that
 on a line bundle there are no nonzero sections of a sheaf
-of differentials which vanish outside the zero section.
+of differentials which vanish identically outside the zero section.
 The reader sees this is true either (preferably) by a local caculation
-or by using that
-$\Omega_{L, k} \subset \Omega_{L^\star, k}$
+or by using that $\Omega_{L/S, k} \subset \Omega_{L^\star/S, k}$
 (see references above).
+\end{proof}
+
+\noindent
+We suggest the reader skip to the next section at this point.
+
+\begin{lemma}
+\label{lemma-comparison-bis}
+For $a \geq 0$ there are canonical maps
+$$
+b^*\Omega^a_{X/S} \longrightarrow
+\Omega^a_{L/S} \longrightarrow
+b^*\Omega^a_{X/S} \otimes_{\mathcal{O}_L} \mathcal{O}_L((n - 1)E)
+$$
+whose composition is induced by the inclusion
+$\mathcal{O}_L \subset \mathcal{O}_L((n - 1)E)$.
+\end{lemma}
+
+\begin{proof}
+The first arrow in the displayed formula is
+discussed in Section \ref{section-de-rham-complex}.
+To get the second arrow we have to show that if we view
+a local section of $\Omega^a_{L/S}$ as a ``meromorphic section''
+of $b^*\Omega^a_{X/S}$, then it has a pole of order at most
+$n - 1$ along $E$. To see this we work on affine local charts
+on $L$. Namely, recall that $L$ is covered by the spectra of the
+affine blowup algebras $A[\frac{I}{y_i}]$ where $I = A_{+}$
+is the ideal generated by $y_1, \ldots, y_n$. See
+Algebra, Section \ref{algebra-section-blow-up} and
+Divisors, Lemma \ref{divisors-lemma-blowing-up-affine}.
+By symmetry it is enough to work on the
+chart corresponding to $i = 1$. Then
+$$
+A[\frac{I}{y_1}] = R[x_1, \ldots, x_m, y_1, t_2, \ldots, t_n]
+$$
+where $t_i = y_i/y_1$, see
+More on Algebra, Lemma \ref{more-algebra-lemma-blowup-regular-sequence}.
+Thus the module $\Omega^1_{L/S}$ is over the corresponding
+affine open freely generated by
+$\text{d}x_1, \ldots, \text{d}x_m$, $\text{d}y_1$, and
+$\text{d}t_1, \ldots, \text{d}t_n$.
+Of course, the first $m + 1$ of these generators come from
+$b^*\Omega^1_{X/S}$ and for the remaining $n - 1$ we have
+$$
+\text{d}t_j =
+\text{d}\frac{y_j}{y_1} =
+\frac{1}{y_1}\text{d}y_j - \frac{y_j}{y_1^2}\text{d}y_1 =
+\frac{\text{d}y_j - t_j \text{d}y_1}{y_1}
+$$
+which has a pole of order $1$ along $E$ since $E$ is cut out by $y_1$
+on this chart. Since the wedges of $a$ of these elements give a basis
+of $\Omega^a_{L/S}$ over this chart, and since there are at most
+$n - 1$ of the $\text{d}t_j$ involved this finishes the proof.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-blowup-twist-same-cohomology}
+Let $E = 0(P)$ be the exceptional divisor of the blowing up $b$.
+For any locally free $\mathcal{O}_X$-module $\mathcal{E}$ and
+$0 \leq i \leq n - 1$ the map
+$$
+\mathcal{E}
+\longrightarrow
+Rb_*(b^*\mathcal{E} \otimes_{\mathcal{O}_L} \mathcal{O}_L(iE))
+$$
+is an isomorphism in $D(\mathcal{O}_X)$.
+\end{lemma}
+
+\begin{proof}
+By the projection formula it is enough to show this for
+$\mathcal{E} = \mathcal{O}_X$, see Cohomology, Lemma
+\ref{cohomology-lemma-projection-formula}.
+Since $X$ is affine it suffices to show that the maps
+$$
+H^0(X, \mathcal{O}_X) \to
+H^0(L, \mathcal{O}_L) \to
+H^0(L, \mathcal{O}_L(iE))
+$$
+are isomorphisms and that $H^j(X, \mathcal{O}_L(iE)) = 0$
+for $j > 0$ and $0 \leq i \leq n - 1$, see Cohomology of Schemes, Lemma
+\ref{coherent-lemma-quasi-coherence-higher-direct-images-application}.
+Since $\pi$ is affine, we can compute global sections and
+cohomology after taking $\pi_*$, see Cohomology of Schemes, Lemma
+\ref{coherent-lemma-relative-affine-cohomology}. If $n = 1$, then
+$L \to X$ is an isomorphism and $i = 0$ hence the first statement holds.
+If $n > 1$, then we consider the composition
+$$
+H^0(X, \mathcal{O}_X) \to H^0(L, \mathcal{O}_L) \to
+H^0(L, \mathcal{O}_L(iE)) \to H^0(L \setminus E, \mathcal{O}_L) =
+H^0(X \setminus Z, \mathcal{O}_X)
+$$
+Since
+$H^0(X \setminus Z, \mathcal{O}_X) = H^0(X, \mathcal{O}_X)$ in this
+case as $Z$ has codimension $n \geq 2$ in $X$ (details omitted) we conclude
+the first statement holds. For the second, recall that
+$\mathcal{O}_L(E) = \mathcal{O}_L(-1)$, see Divisors, Lemma
+\ref{divisors-lemma-blowing-up-gives-effective-Cartier-divisor}.
+Hence we have
+$$
+\pi_*\mathcal{O}_L(iE) =
+\pi_*\mathcal{O}_L(-i) =
+\bigoplus\nolimits_{k \geq -i} \mathcal{O}_P(k)
+$$
+as discussed in
+More on Morphisms, Section \ref{more-morphisms-section-proj-spec}.
+Thus we conclude by the vanishing of the cohomology of twists
+of the structure sheaf on $P = \mathbf{P}^{n - 1}_Z$
+shown in Cohomology of Schemes, Lemma
+\ref{coherent-lemma-cohomology-projective-space-over-ring}.
 \end{proof}
 
 
@@ -3024,6 +3143,112 @@ $\Omega^\bullet_{Z/S} \oplus Rb_*(\Omega^\bullet_{X'/S}) \to
 Rp_*(\Omega^\bullet_{E/S})$ and the proof of the claim is complete.
 \end{proof}
 
+\noindent
+Lemma \ref{lemma-splitting-on-omega-a}
+shows that producing the splitting on Hodge
+cohomology is a good deal easier than the result of
+Proposition \ref{proposition-blowup-split}.
+We urge the reader to skip ahead to the next section.
+
+\begin{lemma}
+\label{lemma-ext-zero}
+Let $i : Z \to X$ be a closed immersion of schemes which is regular of
+codimension $c$. Then $\Ext^q_{\mathcal{O}_X}(i_*\mathcal{F}, \mathcal{E}) = 0$
+for $q < c$ for $\mathcal{E}$ locally free on $X$ and $\mathcal{F}$
+any $\mathcal{O}_Z$-module.
+\end{lemma}
+
+\begin{proof}
+By the local to global spectral sequence of $\Ext$ it suffices
+to prove this affine locally on $X$. See
+Cohomology, Section \ref{cohomology-section-ext}.
+Thus we may assume $X = \Spec(A)$
+and there exists a regular sequence $f_1, \ldots, f_c$ in $A$
+such that $Z = \Spec(A/(f_1, \ldots, f_c))$. We may assume $c \geq 1$.
+Then we see that $f_1 : \mathcal{E} \to \mathcal{E}$
+is injective. Since $i_*\mathcal{F}$ is annihilated by $f_1$
+this shows that the lemma holds for $i = 0$ and that we have
+a surjection
+$$
+\Ext^{q - 1}_{\mathcal{O}_X}(i_*\mathcal{F}, \mathcal{E}/f_1\mathcal{E})
+\longrightarrow
+\Ext^q_{\mathcal{O}_X}(i_*\mathcal{F}, \mathcal{E})
+$$
+Thus it suffices to show that the source of this arrow is zero.
+Next we repeat this argument: if $c \geq 2$ the map
+$f_2 : \mathcal{E}/f_1\mathcal{E} \to \mathcal{E}/f_1\mathcal{E}$
+is injective. Since $i_*\mathcal{F}$ is annihilated by $f_2$
+this shows that the lemma holds for $q = 1$ and that we have a
+surjection
+$$
+\Ext^{q - 2}_{\mathcal{O}_X}(i_*\mathcal{F},
+\mathcal{E}/f_1\mathcal{E} + f_2\mathcal{E})
+\longrightarrow
+\Ext^{q - 1}_{\mathcal{O}_X}(i_*\mathcal{F}, \mathcal{E}/f_1\mathcal{E})
+$$
+Continuing in this fashion the lemma is proved.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-splitting-on-omega-a}
+With notation as in Lemma \ref{lemma-blowup} for $a \geq 0$
+there is a unique arrow
+$Rb_*\Omega^a_{X'/S} \to \Omega^a_{X/S}$ in $D(\mathcal{O}_X)$
+whose composition with $\Omega^a_{X/S} \to Rb_*\Omega^a_{X'/S}$
+is the identity on $\Omega^a_{X/S}$.
+\end{lemma}
+
+\begin{proof}
+We may decompose $X$ into open and closed subschemes
+having fixed relative dimension to $S$, see
+Morphisms, Lemma \ref{morphisms-lemma-smooth-omega-finite-locally-free}.
+Since the derived category $D(X, f^{-1}\mathcal{O})_S)$ correspondingly
+decomposes as a product of categories, we may assume $X$ has
+fixed relative dimension $N$ over $S$. We may decompose
+$Z = \coprod Z_m$ into open and closed subschemes of relative
+dimension $m \geq 0$ over $S$. The restriction $i_m : Z_m \to X$ of
+$i$ to $Z_m$ is a regular immersion of codimension $N - m$, see Divisors, Lemma
+\ref{divisors-lemma-immersion-smooth-into-smooth-regular-immersion}.
+Let $E = \coprod E_m$ be the corresponding decomposition, i.e.,
+we set $E_m = p^{-1}(Z_m)$. We claim that there are natural maps
+$$
+b^*\Omega^a_{X/S} \to \Omega^a_{X'/S} \to
+b^*\Omega^a_{X/S} \otimes_{\mathcal{O}_{X'}}
+\mathcal{O}_{X'}(\sum (N - m - 1)E_m)
+$$
+whose composition is induced by the inclusion
+$\mathcal{O}_{X'} \to \mathcal{O}_{X'}(\sum (N - m - 1)E_m)$.
+Namely, in order to prove this, it suffices to show that the
+cokernel of the first arrow is locally on $X'$ annihilated by
+a local equation of the effective Cartier divisor $\sum (N - m - 1)E_m$.
+To see this in turn we can work \'etale locally on $X$ as in the
+proof of Lemma \ref{lemma-comparison-general} and apply
+Lemma \ref{lemma-comparison-bis}.
+Computing \'etale locally using Lemma \ref{lemma-blowup-twist-same-cohomology}
+we see that the induced composition
+$$
+\Omega^a_{X/S} \to Rb_*\Omega^a_{X'/S} \to
+Rb_*\left(b^*\Omega^a_{X/S} \otimes_{\mathcal{O}_{X'}}
+\mathcal{O}_{X'}(\sum (N - m - 1)E_m)\right)
+$$
+is an isomorphism in $D(\mathcal{O}_X)$
+which is how we obtain the existence of the map in the lemma.
+
+\medskip\noindent
+For uniqueness, it suffices to show that there are no nonzero maps from
+$\tau_{\geq 1}Rb_*\Omega_{X'/S}$ to $\Omega^a_{X/S}$ in $D(\mathcal{O}_X)$.
+For this it suffices in turn to show that there are no nonzero maps
+from $R^qb_*\Omega_{X'/s}[-q]$ to $\Omega^a_{X/S}$ in $D(\mathcal{O}_X)$
+for $q \geq 1$ (details omitted). By
+Lemma \ref{lemma-comparison-general}
+we see that $R^qb_*\Omega_{X'/s} \cong i_*R^qp_*\Omega^a_{E/S}$
+is the pushforward of a module on $Z = \coprod Z_m$.
+Moreover, observe that the restriction of $R^qp_*\Omega^a_{E/S}$
+to $Z_m$ is nonzero only for $q < N - m$. Namely, the fibres of
+$E_m \to Z_m$ have dimension $N - m - 1$ and we can apply Limits, Lemma
+\ref{limits-lemma-higher-direct-images-zero-above-dimension-fibre}.
+Thus the desired vanishing follows from Lemma \ref{lemma-ext-zero}.
+\end{proof}
 
 
 
@@ -3643,8 +3868,8 @@ $\text{Trace}_f : f_*\mathcal{O}_Y \to \mathcal{O}_X$, see
 Discriminants, Section \ref{discriminant-section-discriminant},
 \item we have
 $\Theta_{Y/X}(\omega \wedge \eta) = \omega \wedge \Theta_{Y/X}(\eta)$
-for $\omega$ in $\Omega^\bullet_{X/S}$ and $\eta$
-in $f_*\Omega^\bullet_{Y/S}$,
+for $\omega$ in $\Omega^\bullet_{X/\mathbf{Z}}$ and $\eta$
+in $f_*\Omega^\bullet_{Y/\mathbf{Z}}$,
 \item if $f$ is a morphism over a base scheme $S$, then
 $\Theta_{Y/X}$ induces a map of complexes
 $f_*\Omega^\bullet_{Y/S} \to \Omega^\bullet_{X/S}$.
@@ -4130,7 +4355,7 @@ is zero by the case of positive characteristic handled above.
 Let $k$ be a field. Let $X$ be a nonempty smooth proper scheme over $k$
 equidimensional of dimension $d$. There exists a $k$-linear map
 $$
-t : H^d_{dR}(X/k) \longrightarrow k
+t : H^{2d}_{dR}(X/k) \longrightarrow k
 $$
 unique up to precomposing by multiplication by a unit of
 $H^0(X, \mathcal{O}_X)$ with the following property: for all $i$ the pairing
@@ -4145,7 +4370,7 @@ is perfect.
 
 \begin{proof}
 By the Hodge-to-de Rham spectral sequence
-(Section \ref{section-hdoge-to-de-rham}), the vanishing
+(Section \ref{section-hodge-to-de-rham}), the vanishing
 of $\Omega^i_{X/k}$ for $i > d$, the vanishing in
 Cohomology, Proposition \ref{cohomology-proposition-vanishing-Noetherian}
 and the results of Lemmas \ref{lemma-bottom-part-degenerates} and
@@ -4176,11 +4401,11 @@ $$
 $$
 For every integer $p = 0, 1, \ldots, d$ this map
 annihilates the subcomplex
-$\text{Tot}(\sigma_{\leq p} \Omega^\bullet \otimes_{\underline{k}}
-\sigma_{< d - p} \Omega^\bullet)$ for degree reasons.
+$\text{Tot}(\sigma_{> p} \Omega^\bullet \otimes_{\underline{k}}
+\sigma_{\geq d - p} \Omega^\bullet)$ for degree reasons.
 Hence we find that the restriction of $\wedge$ to the subcomplex
-$\text{Tot}(\sigma_{\geq p}\Omega^\bullet \otimes_{\underline{k}}
-\Omega^\bullet)$ factors through a map of complexes
+$\text{Tot}(\Omega^\bullet \otimes_{\underline{k}}
+\sigma_{\geq d - p}\Omega^\bullet)$ factors through a map of complexes
 $$
 \gamma_p :
 \text{Tot}(\sigma_{\leq p} \Omega^\bullet \otimes_{\underline{k}}
@@ -4329,12 +4554,12 @@ precomposing by multiplication by a unit in $H^0(X, \mathcal{O}_X)$.
 \noindent
 The results proved so far suffice to use the discussion in
 Weil Cohomology Theories, Section \ref{weil-section-chern}
-to produce chern classes in de Rham cohomology.
+to produce Chern classes in de Rham cohomology.
 
 \begin{lemma}
 \label{lemma-chern-classes}
 There is a unique rule which assigns to every quasi-compact and
-quasi-separated scheme $X$ a total chern class
+quasi-separated scheme $X$ a total Chern class
 $$
 c^{dR} :
 K_0(\textit{Vect}(X))
@@ -4391,7 +4616,7 @@ is constructed by taking the cohomology of a sheaf of differential
 graded algebras (in the Zariski topology).
 
 \medskip\noindent
-Axiom (3) for $A$ is just the statement that taking first chern
+Axiom (3) for $A$ is just the statement that taking first Chern
 classes of invertible modules is compatible with pullbacks.
 This follows from the more general Lemma \ref{lemma-pullback-c1}.
 
@@ -4419,7 +4644,7 @@ This finishes the proof.
 The analogues of Weil Cohomology Theories, Lemmas
 \ref{weil-lemma-splitting-principle} (splitting principle) and
 \ref{weil-lemma-chern-classes-E-tensor-L} (chern classes of tensor products)
-hold for de Rham chern classes on quasi-compact and quasi-separated schemes.
+hold for de Rham Chern classes on quasi-compact and quasi-separated schemes.
 This is clear as we've shown in the proof of
 Lemma \ref{lemma-chern-classes}
 that all the axioms of Weil Cohomology Theories, Section
@@ -4427,7 +4652,7 @@ that all the axioms of Weil Cohomology Theories, Section
 \end{remark}
 
 \noindent
-Working with schemes over $\mathbf{Q}$ we can construct a chern character.
+Working with schemes over $\mathbf{Q}$ we can construct a Chern character.
 
 \begin{lemma}
 \label{lemma-chern-character}
@@ -4501,7 +4726,7 @@ and the cup product in Section \ref{section-cup-product}.
 We obtain graded commutative $F$-algebras by
 Lemma \ref{lemma-cup-product-graded-commutative}.
 \item[(D2')] For the maps $c_1^H : \Pic(X) \to H^2(X)(1)$ we
-use the de Rham first chern class introduced in
+use the de Rham first Chern class introduced in
 Section \ref{section-first-chern-class}.
 \end{enumerate}
 We are going to show axioms (A1) -- (A9) hold.
@@ -4543,7 +4768,7 @@ is constructed by taking the cohomology of a sheaf of differential
 graded algebras (in the Zariski topology).
 
 \medskip\noindent
-Axiom (A2). This is just the statement that taking first chern
+Axiom (A2). This is just the statement that taking first Chern
 classes of invertible modules is compatible with pullbacks.
 This follows from the more general Lemma \ref{lemma-pullback-c1}.
 
@@ -4558,7 +4783,7 @@ Lemma \ref{lemma-log-complex-consequence}.
 \medskip\noindent
 Already at this point, using
 Weil Cohomology Theories, Lemmas \ref{weil-lemma-chern-classes} and
-\ref{weil-lemma-cycle-classes}, we obtain a chern character and
+\ref{weil-lemma-cycle-classes}, we obtain a Chern character and
 cycle class maps
 $$
 \gamma :
@@ -4639,8 +4864,7 @@ closed we have $H^0_{dR}(X/k) = k$ because $H^0(X, \mathcal{O}_X) = k$
 as $X$ is a projective variety over an algebraically closed field
 (see Varieties, Lemma
 \ref{varieties-lemma-proper-geometrically-reduced-global-sections}
-for example). Hence it clearly suffices to show that
-$\gamma([\Delta])$ is nonzero. Let $x \in X$ be any closed point.
+for example). Let $x \in X$ be any closed point.
 Consider the cartesian diagram
 $$
 \xymatrix{
@@ -4649,10 +4873,12 @@ X \ar[r]^-{x \times \text{id}} & X \times_{\Spec(k)} X
 }
 $$
 Compatibility of $\gamma$ with pullbacks implies that
-$\gamma([\Delta])$ maps to $\gamma([x])$ in $H_{dR}^{2d}(X/k)$.
+$\gamma([\Delta])$ maps to $\gamma([x])$ in $H_{dR}^{2d}(X/k)$,
+in other words, we have $\gamma_0 = 1 \otimes \gamma([x])$.
 We conclude two things from this: (a) the class
-$\gamma([x])$ is indepdendent of $x$, and (b) it suffices
-to find any zero cycle $\alpha$ on $X$ such that
+$\gamma([x])$ is independent of $x$, (b) it suffices
+to show the class $\gamma([x])$ is nonzero, and hence (c)
+it suffices to find any zero cycle $\alpha$ on $X$ such that
 $\gamma(\alpha) \not = 0$. To do this we choose a finite
 morphism
 $$
@@ -4689,6 +4915,16 @@ Lemma \ref{lemma-de-rham-cohomology-projective-space} and this
 finishes the proof of axiom (A6).
 
 \medskip\noindent
+Below we will use the following without further mention.
+First, by Weil Cohomology Theories, Remark \ref{weil-remark-trace}
+the map $\lambda_X : H^{2d}_{dR}(X/k) \to k$ is unique.
+Second, in the proof of axiom (A6) we have
+seen that $\lambda_X(\gamma([x])) = 1$ when $X$ is irreducible, i.e.,
+the composition of the cycle class map
+$\gamma : \CH^d(X) \to H_{dR}^{2d}(X/k)$ with $\lambda_X$
+is the degree map.
+
+\medskip\noindent
 Axiom (A9). Let $Y \subset X$ be a nonempty smooth divisor on a
 nonempty smooth equidimensional projective scheme $X$ over $k$
 of dimension $d$. We have to show that the diagram
@@ -4701,8 +4937,6 @@ H_{dR}^{2d - 2}(Y/k) \ar[rrr]^-{\lambda_Y} & & & k
 }
 $$
 commutes where $\lambda_X$ and $\lambda_Y$ are as in axiom (A6).
-By Weil Cohomology Theories, Remark \ref{weil-remark-trace}
-the maps $\lambda_X$ and $\lambda_Y$ are unique.
 Above we have seen that if we decompose $X = \coprod X_i$ into connected
 (equivalently irreducible) components, then
 we have correspondingly $\lambda_X = \sum \lambda_{X_i}$.
@@ -4716,9 +4950,9 @@ c^{dR}_1(\mathcal{O}_X(Y_j))
 $$
 in $H_{dR}^2(X/k)$. A straightforward diagram chase shows that it suffices
 to prove the commutativity of the diagram in case $X$ and $Y$ are both
-irreducible. In this case $H_{dR}^{2d - 2}(Y/k)$ is $1$-dimensional
-(namely, we have Poincar'e duality for $Y$ by
-Weil Cohomology Theories, Lemma \ref{weil-lemma-poincare-duality}).
+irreducible. Then $H_{dR}^{2d - 2}(Y/k)$ is $1$-dimensional as
+we have Poincar'e duality for $Y$ by
+Weil Cohomology Theories, Lemma \ref{weil-lemma-poincare-duality}.
 By axiom (A4) the kernel of restriction (left vertical arrow)
 is contained in the kernel of cupping with $c^{dR}_1(\mathcal{O}_X(Y))$.
 This means it suffices to find one cohomology class
@@ -4734,7 +4968,7 @@ $$
 \lambda_Y(a|_Y) = \deg(c_1(\mathcal{L}|_Y)^{d - 1} \cap [Y])
 $$
 by our description of $\lambda_Y$ above. This is a positive integer
-for by Chow Homology, Lemma
+by Chow Homology, Lemma
 \ref{chow-lemma-degrees-and-numerical-intersections} combined with
 Varieties, Lemma \ref{varieties-lemma-ample-positive}.
 Similarly, we find
@@ -4814,6 +5048,1128 @@ and as far as we know is still an open problem. See
 Weil Cohomology Theories, Remark
 \ref{weil-remark-betti-numbers-in-some-sense} for a related question.
 \end{remark}
+
+
+
+
+
+
+
+\section{Gysin maps for closed immersions}
+\label{section-gysin}
+
+\noindent
+In this section we define the gysin map for closed immersions.
+
+\begin{remark}
+\label{remark-gysin-equations}
+Let $X \to S$ be a morphism of schemes. Let
+$f_1, \ldots, f_c \in \Gamma(X, \mathcal{O}_X)$. Let $Z \subset X$
+be the closed subscheme cut out by $f_1, \ldots, f_c$. Below we will
+study the {\it gysin map}
+\begin{equation}
+\label{equation-gysin}
+\gamma^p_{f_1, \ldots, f_c} :
+\Omega^p_{Z/S}
+\longrightarrow
+\mathcal{H}_Z^c(\Omega^{p + c}_{X/S})
+\end{equation}
+defined as follows. Given a local section $\omega$ of $\Omega^p_{Z/S}$
+which is the restriction of a section $\tilde \omega$ of $\Omega^p_{X/S}$
+we set
+$$
+\gamma^p_{f_1, \ldots, f_c}(\omega) =
+c_{f_1, \ldots, f_c}(\tilde \omega|_Z) \wedge
+\text{d}f_1 \wedge \ldots \wedge \text{d}f_c
+$$
+where $c_{f_1, \ldots, f_c} : \Omega^p_{X/S} \otimes \mathcal{O}_Z \to
+\mathcal{H}_Z^c(\Omega^p_{X/S})$ is the map constructed in
+Derived Categories of Schemes, Remark
+\ref{perfect-remark-supported-map-c-equations}.
+This is well defined: given $\omega$ we can change our choice of
+$\tilde \omega$ by elements of the form
+$\sum f_i \omega'_i + \sum \text{d}(f_i) \wedge \omega''_i$
+which are mapped to zero by the construction.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-gysin-differential}
+The gysin map (\ref{equation-gysin}) is compatible with the de Rham
+differentials on $\Omega^\bullet_{X/S}$ and $\Omega^\bullet_{Z/S}$.
+\end{lemma}
+
+\begin{proof}
+This follows from an almost trivial calculation once
+we correctly interpret this. First, we recall that the functor
+$\mathcal{H}^c_Z$ computed on the category of $\mathcal{O}_X$-modules
+agrees with the similarly defined functor on the category of abelian
+sheaves on $X$, see
+Cohomology, Lemma \ref{cohomology-lemma-sections-support-abelian-unbounded}.
+Hence, the differential $\text{d} : \Omega^p_{X/S} \to \Omega^{p + 1}_{X/S}$
+induces a map
+$\mathcal{H}^c_Z(\Omega^p_{X/S}) \to \mathcal{H}^c_Z(\Omega^{p + 1}_{X/S})$.
+Moreover, the formation of the extended alternating {\v C}ech complex in
+Derived Categories of Schemes, Remark \ref{perfect-remark-support-c-equations}
+works on the category of abelian sheaves. The map
+$$
+\Coker\left(\bigoplus \mathcal{F}_{1 \ldots \hat i \ldots c} \to
+\mathcal{F}_{1 \ldots c}\right)
+\longrightarrow
+i_*\mathcal{H}^c_Z(\mathcal{F})
+$$
+used in the construction of $c_{f_1, \ldots, f_c}$ in
+Derived Categories of Schemes, Remark
+\ref{perfect-remark-supported-map-c-equations}
+is well defined and
+functorial on the category of all abelian sheaves on $X$.
+Hence we see that the lemma follows from the equality
+$$
+\text{d}\left(
+\frac{\tilde \omega \wedge \text{d}f_1 \wedge \ldots \wedge
+\text{d}f_c}{f_1 \ldots f_c}\right) =
+\frac{\text{d}(\tilde \omega) \wedge
+\text{d}f_1 \wedge \ldots \wedge \text{d}f_c}{f_1 \ldots f_c}
+$$
+which is clear.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-gysin-global}
+Let $X \to S$ be a morphism of schemes. Let $Z \to X$ be a closed immersion
+of finite presentation whose conormal sheaf $\mathcal{C}_{Z/X}$ is
+locally free of rank $c$. Then there is a canonical map
+$$
+\gamma^p : \Omega^p_{Z/S} \to \mathcal{H}^c_Z(\Omega^{p + c}_{X/S})
+$$
+which is locally given by the maps $\gamma^p_{f_1, \ldots, f_c}$
+of Remark \ref{remark-gysin-equations}.
+\end{lemma}
+
+\begin{proof}
+The assumptions imply that given $x \in Z \subset X$ there exists an
+open neighbourhood $U$ of $x$ such that $Z$ is cut out by $c$
+elements $f_1, \ldots, f_c \in \mathcal{O}_X(U)$. Thus
+it suffices to show that given $f_1, \ldots, f_c$ and
+$g_1, \ldots, g_c$ in $\mathcal{O}_X(U)$ cutting out $Z \cap U$,
+the maps $\gamma^p_{f_1, \ldots, f_c}$
+and $\gamma^p_{g_1, \ldots, g_c}$ are the same. To do this, after shrinking
+$U$ we may assume $g_j = \sum a_{ji} f_i$ for some
+$a_{ji} \in \mathcal{O}_X(U)$. Then we have
+$c_{f_1, \ldots, f_c} = \det(a_{ji}) c_{g_1, \ldots, g_c}$ by
+Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-supported-map-determinant}.
+On the other hand we have
+$$
+\text{d}(g_1) \wedge \ldots \wedge \text{d}(g_c) \equiv
+\det(a_{ji}) \text{d}(f_1) \wedge \ldots \wedge \text{d}(f_c)
+\bmod (f_1, \ldots, f_c)\Omega^c_{X/S}
+$$
+Combining these relations, a straightforward calculation gives the
+desired equality.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-gysin-differential-global}
+Let $X \to S$ and $i : Z \to X$ be as in Lemma \ref{lemma-gysin-global}.
+The gysin map $\gamma^p$ is compatible with the de Rham
+differentials on $\Omega^\bullet_{X/S}$ and $\Omega^\bullet_{Z/S}$.
+\end{lemma}
+
+\begin{proof}
+We may check this locally and then it follows from
+Lemma \ref{lemma-gysin-differential}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-gysin-projection}
+Let $X \to S$ and $i : Z \to X$ be as in Lemma \ref{lemma-gysin-global}.
+Given $\alpha \in H^q(X, \Omega^p_{X/S})$ we have
+$\gamma^p(\alpha|_Z) = i^{-1}\alpha \wedge \gamma^0(1)$ in
+$H^q(Z, \mathcal{H}^c_Z(\Omega^{p + c}_{X/S}))$.
+Please see proof for notation.
+\end{lemma}
+
+\begin{proof}
+The restriction $\alpha|_Z$ is the element of $H^q(Z, \Omega^p_{Z/S})$
+given by functoriality for Hodge cohomology. Applying functoriality
+for cohomology using
+$\gamma^p : \Omega^p_{Z/S} \to \mathcal{H}^c_Z(\Omega^{p + c}_{X/S})$
+we get get $\gamma^p(\alpha|_Z)$ in
+$H^q(Z, \mathcal{H}^c_Z(\Omega^{p + c}_{X/S}))$.
+This explains the left hand side of the formula.
+
+\medskip\noindent
+To explain the right hand side, we first pullback by the map
+of ringed spaces $i : (Z, i^{-1}\mathcal{O}_X) \to (X, \mathcal{O}_X)$
+to get the element $i^{-1}\alpha \in H^q(Z, i^{-1}\Omega^p_{X/S})$.
+Let $\gamma^0(1) \in H^0(Z, \mathcal{H}_Z^c(\Omega^c_{X/S}))$
+be the image of $1 \in H^0(Z, \mathcal{O}_Z) = H^0(Z, \Omega^0_{Z/S})$
+by $\gamma^0$. Using cup product we obtain an element
+$$
+i^{-1}\alpha \cup \gamma^0(1)
+\in
+H^{q + c}(Z, 
+i^{-1}\Omega^p_{X/S} \otimes_{i^{-1}\mathcal{O}_X}
+\mathcal{H}^c_Z(\Omega^c_{X/S}))
+$$
+Using Cohomology, Remark \ref{cohomology-remark-support-cup-product}
+and wedge product there are canonical maps
+$$
+i^{-1}\Omega^p_{X/S} \otimes_{i^{-1}\mathcal{O}_X}^\mathbf{L}
+R\mathcal{H}_Z(\Omega^c_{X/S}) \to
+R\mathcal{H}_Z(\Omega^p_{X/S} \otimes_{\mathcal{O}_X}^\mathbf{L}
+\Omega^c_{X/S}) \to
+R\mathcal{H}_Z(\Omega^{p + c}_{X/S})
+$$
+By Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-supported-trivial-vanishing}
+the objects $R\mathcal{H}_Z(\Omega^j_{X/S})$ have vanishing
+cohomology sheaves in degrees $> c$. Hence on cohomology
+sheaves in degree $c$ we obtain a map
+$$
+i^{-1}\Omega^p_{X/S} \otimes_{i^{-1}\mathcal{O}_X}
+\mathcal{H}^c_Z(\Omega^c_{X/S}) \longrightarrow
+\mathcal{H}^c_Z(\Omega^{p + c}_{X/S})
+$$
+The expression $i^{-1}\alpha \wedge \gamma^0(1)$ is the image
+of the cup product $i^{-1}\alpha \cup \gamma^0(1)$ by the
+functoriality of cohomology.
+
+\medskip\noindent
+Having explained the content of the formula in this manner, by
+general properties of cup products
+(Cohomology, Section \ref{cohomology-section-cup-product}),
+it now suffices to prove that the diagram
+$$
+\xymatrix{
+i^{-1}\Omega^p_X \otimes \Omega^0_Z \ar[rr]_{\text{id} \otimes \gamma^0}
+\ar[d] & &
+i^{-1}\Omega^p_X \otimes \mathcal{H}^c_Z(\Omega^c_X) \ar[d]^\wedge \\
+\Omega^p_Z \otimes \Omega^0_Z \ar[r]^\wedge &
+\Omega^p_Z \ar[r]^{\gamma^p} &
+\mathcal{H}^c_Z(\Omega^{p + c}_X)
+}
+$$
+is commutative in the category of sheaves on $Z$ (with obvious abuse of
+notation). This boils down to a simple computation for the maps
+$\gamma^j_{f_1, \ldots, f_c}$ which we omit; in fact these maps
+are chosen exactly such that this works and such that $1$ maps to
+$\frac{\text{d}f_1 \wedge \ldots \wedge \text{d}f_c}{f_1 \ldots f_c}$.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-gysin-transverse}
+Let $c \geq 0$ be a integer. Let
+$$
+\xymatrix{
+Z' \ar[d]_h \ar[r] & X' \ar[d]_g \ar[r] & S' \ar[d] \\
+Z \ar[r] & X \ar[r] & S
+}
+$$
+be a commutative diagram of schemes.
+Assume
+\begin{enumerate}
+\item $Z \to X$ and $Z' \to X'$
+satisfy the assumptions of Lemma \ref{lemma-gysin-global},
+\item the left square in the diagram is cartesian, and
+\item $h^*\mathcal{C}_{Z/X} \to \mathcal{C}_{Z'/X'}$
+(Morphisms, Lemma \ref{morphisms-lemma-conormal-functorial})
+is an isomorphism.
+\end{enumerate}
+Then the diagram
+$$
+\xymatrix{
+h^*\Omega^p_{Z/S} \ar[rr]_-{h^{-1}\gamma^p} \ar[d] & &
+\mathcal{O}_{X'}|_{Z'} \otimes_{h^{-1}\mathcal{O}_X|_Z}
+h^{-1}\mathcal{H}^c_Z(\Omega^{p + c}_{X/S}) \ar[d] \\
+\Omega^p_{Z'/S'} \ar[rr]^{\gamma^p} & &
+\mathcal{H}^c_{Z'}(\Omega^{p + c}_{X'/S'})
+}
+$$
+is commutative. The left vertical arrow is functoriality of modules of
+differentials and the right vertical arrow uses
+Cohomology, Remark \ref{cohomology-remark-support-functorial}.
+\end{lemma}
+
+\begin{proof}
+More precisely, consider the composition
+\begin{align*}
+\mathcal{O}_{X'}|_{Z'} \otimes_{h^{-1}\mathcal{O}_X|_Z}^\mathbf{L}
+h^{-1}R\mathcal{H}_Z(\Omega^{p + c}_{X/S})
+& \to
+R\mathcal{H}_{Z'}(Lg^*\Omega^{p + c}_{X/S}) \\
+& \to
+R\mathcal{H}_{Z'}(g^*\Omega^{p + c}_{X/S}) \\
+& \to
+R\mathcal{H}_{Z'}(\Omega^{p + c}_{X'/S'})
+\end{align*}
+where the first arrow is given by
+Cohomology, Remark \ref{cohomology-remark-support-functorial}
+and the last one by functoriality of differentials.
+Since we have the vanishing of cohomology sheaves in degrees $> c$
+by Derived Categories of Schemes, Lemma
+\ref{perfect-lemma-supported-trivial-vanishing}
+this induces the right vertical arrow.
+We can check the commutativity locally.
+Thus we may assume $Z$ is cut out by
+$f_1, \ldots, f_c \in \Gamma(X, \mathcal{O}_X)$.
+Then $Z'$ is cut out by $f'_i = g^\sharp(f_i)$.
+The maps $c_{f_1, \ldots, f_c}$ and $c_{f'_1, \ldots, f'_c}$
+fit into the commutative diagram
+$$
+\xymatrix{
+h^*i^*\Omega^p_{X/S} \ar[rr]_-{h^{-1}c_{f_1, \ldots, f_c}} \ar[d] & &
+\mathcal{O}_{X'}|_{Z'} \otimes_{h^{-1}\mathcal{O}_X|_Z}
+h^{-1}\mathcal{H}^c_Z(\Omega^p_{X/S}) \ar[d] \\
+(i')^*\Omega^p_{X'/S'} \ar[rr]^{c_{f'_1, \ldots, f'_c}} & &
+\mathcal{H}^c_{Z'}(\Omega^p_{X'/S'})
+}
+$$
+See Derived Categories of Schemes, Remark
+\ref{perfect-remark-supported-functorial}.
+Recall given a $p$-form $\omega$ on $Z$ we define
+$\gamma^p(\omega)$ by choosing (locally on $X$ and $Z$)
+a $p$-form $\tilde \omega$ on $X$ lifting $\omega$ and taking
+$\gamma^p(\omega) =
+c_{f_1, \ldots, f_c}(\tilde \omega) \wedge
+\text{d}f_1 \wedge \ldots \wedge \text{d}f_c$.
+Since the form $\text{d}f_1 \wedge \ldots \wedge \text{d}f_c$
+pulls back to
+$\text{d}f'_1 \wedge \ldots \wedge \text{d}f'_c$ we conclude.
+\end{proof}
+
+\begin{remark}
+\label{remark-how-to-use}
+Let $X \to S$, $i : Z \to X$, and $c \geq 0$ be as in
+Lemma \ref{lemma-gysin-global}.
+Let $p \geq 0$ and assume that $\mathcal{H}^i_Z(\Omega^{p + c}_{X/S}) = 0$
+for $i = 0, \ldots, c - 1$. This vanishing holds if $X \to S$ is smooth
+and $Z \to X$ is a Koszul regular immersion, see
+Derived Categories of Schemes, Lemma \ref{perfect-lemma-supported-vanishing}.
+Then we obtain a map
+$$
+\gamma^{p, q} :
+H^q(Z, \Omega^p_{Z/S})
+\longrightarrow
+H^{q + c}(X, \Omega^{p + c}_{X/S})
+$$
+by first using
+$\gamma^p : \Omega^p_{Z/S} \to \mathcal{H}^c_Z(\Omega^{p + c}_{X/S})$
+to map into
+$$
+H^q(Z, \mathcal{H}^c_Z(\Omega^{p + c}_{X/S})) =
+H^q(Z, R\mathcal{H}_Z(\Omega^{p + c}_{X/S})[c]) =
+H^q(X, i_*R\mathcal{H}_Z(\Omega^{p + c}_{X/S})[c])
+$$
+and then using the adjunction map
+$i_*R\mathcal{H}_Z(\Omega^{p + c}_{X/S}) \to \Omega^{p + c}_{X/S}$
+to continue on to the desired Hodge cohomology module.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-gysin-differential-hodge}
+Let $X \to S$ and $i : Z \to X$ be as in Lemma \ref{lemma-gysin-global}.
+Assume $X \to S$ is smooth and $Z \to X$ Koszul regular.
+The gysin maps $\gamma^{p, q}$ are compatible with the de Rham
+differentials on $\Omega^\bullet_{X/S}$ and $\Omega^\bullet_{Z/S}$.
+\end{lemma}
+
+\begin{proof}
+This follows immediately from
+Lemma \ref{lemma-gysin-differential-global}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-gysin-projection-global}
+Let $X \to S$, $i : Z \to X$, and $c \geq 0$ be as in
+Lemma \ref{lemma-gysin-global}. Assume $X \to S$ smooth and
+$Z \to X$ Koszul regular. Given $\alpha \in H^q(X, \Omega^p_{X/S})$ we have
+$\gamma^{p, q}(\alpha|_Z) = \alpha \cup \gamma^{0, 0}(1)$ in
+$H^{q + c}(X, \Omega^{p + c}_{X/S})$ with $\gamma^{a, b}$ as in
+Remark \ref{remark-how-to-use}.
+\end{lemma}
+
+\begin{proof}
+This lemma follows from Lemma \ref{lemma-gysin-projection}
+and Cohomology, Lemma \ref{cohomology-lemma-support-cup-product}.
+We suggest the reader skip over the more detailed discussion below.
+
+\medskip\noindent
+We will use without further mention that
+$R\mathcal{H}_Z(\Omega^j_{X/S}) = \mathcal{H}^c_Z(\Omega^j_{X/S})[-c]$
+for all $j$ as pointed out in Remark \ref{remark-how-to-use}.
+We will also silently use the identifications
+$H^{q + c}_Z(X, \Omega^j_{X/S}) = H^{q + c}(Z, R\mathcal{H}_Z(\Omega^j_{X/S}) =
+H^q(Z, \mathcal{H}^c_Z(\Omega^j_{X/S}))$, see
+Cohomology, Lemma \ref{cohomology-lemma-local-to-global-sections-with-support}
+for the first one. With these identifications
+\begin{enumerate}
+\item $\gamma^0(1) \in H^c_Z(X, \Omega^c_{X/S})$ maps to $\gamma^{0, 0}(1)$
+in $H^c(X, \Omega^c_{X/S})$,
+\item the right hand side $i^{-1}\alpha \wedge \gamma^0(1)$
+of the equality in Lemma \ref{lemma-gysin-projection}
+is the (image by wedge product of the) cup product of
+Cohomology, Remark \ref{cohomology-remark-support-cup-product-global} 
+of the elements $\alpha$ and $\gamma^0(1)$, in other words, the constructions
+in the proof of Lemma \ref{lemma-gysin-projection} and in
+Cohomology, Remark \ref{cohomology-remark-support-cup-product-global} match,
+\item by Cohomology, Lemma \ref{cohomology-lemma-support-cup-product}
+this maps to $\alpha \cup \gamma^{0, 0}(1)$ in
+$H^{q + c}(X, \Omega^p_{X/S} \otimes \Omega^c_{X/S})$, and
+\item the left hand side $\gamma^p(\alpha|_Z)$ of the equality in
+Lemma \ref{lemma-gysin-projection} maps to
+$\gamma^{p, q}(\alpha|_Z)$.
+\end{enumerate}
+This finishes the proof.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-gysin-transverse-global}
+Let $c \geq 0$ and
+$$
+\xymatrix{
+Z' \ar[d]_h \ar[r] & X' \ar[d]_g \ar[r] & S' \ar[d] \\
+Z \ar[r] & X \ar[r] & S
+}
+$$
+satisfy the assumptions of Lemma \ref{lemma-gysin-transverse} and assume
+in addition that $X \to S$ and $X' \to S'$ are smooth and that
+$Z \to X$ and $Z' \to X'$ are Koszul regular immersions.
+Then the diagram
+$$
+\xymatrix{
+H^q(Z, \Omega^p_{Z/S}) \ar[rr]_-{\gamma^{p, q}} \ar[d] & &
+H^{q + c}(X, \Omega^{p + c}_{X/S}) \ar[d] \\
+H^q(Z', \Omega^p_{Z'/S'}) \ar[rr]^{\gamma^{p, q}} & &
+H^{q + c}(X', \Omega^{p + c}_{X'/S'})
+}
+$$
+is commutative where $\gamma^{p, q}$ is as in Remark \ref{remark-how-to-use}.
+\end{lemma}
+
+\begin{proof}
+This follows on combining Lemma \ref{lemma-gysin-transverse}
+and Cohomology, Lemma \ref{cohomology-lemma-support-functorial}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-class-of-a-point}
+Let $k$ be a field. Let $X$ be an irreducible smooth proper scheme over $k$
+of dimension $d$. Let $Z \subset X$ be the reduced closed subscheme consisting
+of a single $k$-rational point $x$. Then the image of
+$1 \in k = H^0(Z, \mathcal{O}_Z) = H^0(Z, \Omega^0_{Z/k})$
+by the map $H^0(Z, \Omega^0_{Z/k}) \to H^d(X, \Omega^d_{X/k})$
+of Remark \ref{remark-how-to-use} is nonzero.
+\end{lemma}
+
+\begin{proof}
+The map $\gamma^0 : \mathcal{O}_Z \to
+\mathcal{H}^d_Z(\Omega^d_{X/k}) = R\mathcal{H}_Z(\Omega^d_{X/k})[d]$
+is adjoint to a map
+$$
+g^0 : i_*\mathcal{O}_Z \longrightarrow \Omega^d_{X/k}[d]
+$$
+in $D(\mathcal{O}_X)$. Recall that $\Omega^d_{X/k} = \omega_X$ is a
+dualizing sheaf for $X/k$, see
+Duality for Schemes, Lemma \ref{duality-lemma-duality-proper-over-field}.
+Hence the $k$-linear dual of the map in the statement
+of the lemma is the map
+$$
+H^0(X, \mathcal{O}_X) \to \Ext^d_X(i_*\mathcal{O}_Z, \omega_X)
+$$
+which sends $1$ to $g^0$. Thus it suffices to show that $g^0$ is nonzero.
+This we may do in any neighbourhood $U$ of the point $x$. Choose $U$
+such that there exist $f_1, \ldots, f_d \in \mathcal{O}_X(U)$
+vanishing only at $x$ and generating the maximal ideal
+$\mathfrak m_x \subset \mathcal{O}_{X, x}$. We may assume
+assume $U = \Spec(R)$ is affine. Looking over the
+construction of $\gamma^0$ we find that our extension is given by
+$$
+k \to
+(R \to \bigoplus\nolimits_{i_0} R_{f_{i_0}} \to
+\bigoplus\nolimits_{i_0 < i_1} R_{f_{i_0}f_{i_1}} \to
+\ldots \to R_{f_1\ldots f_r})[d] \to R[d]
+$$
+where $1$ maps to $1/f_1 \ldots f_c$ under the first map.
+This is nonzero because $1/f_1 \ldots f_c$ is a nonzero element
+of local cohomology group $H^d_{(f_1, \ldots, f_d)}(R)$ in this case,
+\end{proof}
+
+
+
+
+
+
+\section{Relative Poincar\'e duality}
+\label{section-relative-poincare-duality}
+
+\noindent
+In this section we prove Poincar'e duality for the relative de Rham cohomology
+of a proper smooth scheme over a base. We strongly urge the reader to
+look at Section \ref{section-poincare-duality} first.
+
+\begin{situation}
+\label{situation-relative-duality}
+Here $S$ is a quasi-compact and quasi-separated scheme and
+$f : X \to S$ is a proper smooth morphism of schemes all of whose
+fibres are nonempty and equidimensional of dimension $d$.
+\end{situation}
+
+\begin{lemma}
+\label{lemma-relative-bottom-part-degenerates}
+In Situation \ref{situation-relative-duality} the psuhforward
+$f_*\mathcal{O}_X$ is a finite \'etale $\mathcal{O}_S$-algebra
+and locally on $S$ we have $Rf_*\mathcal{O}_X = f_*\mathcal{O}_X \oplus P$
+in $D(\mathcal{O}_S)$ with $P$ perfect of tor amplitude in $[1, \infty)$.
+The map $\text{d} : f_*\mathcal{O}_X \to f_*\Omega_{X/S}$ is zero.
+\end{lemma}
+
+\begin{proof}
+The first part of the statement follows from
+Derived Categories of Schemes, Lemma \ref{perfect-lemma-proper-flat-geom-red}.
+Setting $S' = \underline{\Spec}_S(f_*\mathcal{O}_X)$ we get a factorization
+$X \to S' \to S$ (this is the Stein factorization, see
+More on Morphisms, Section \ref{more-morphisms-section-stein-factorization},
+although we don't need this)
+and we see that $\Omega_{X/S} = \Omega_{X/S'}$ for example by
+Morphisms, Lemma \ref{morphisms-lemma-triangle-differentials} and
+\ref{morphisms-lemma-etale-at-point}. This of course implies that
+$\text{d} : f_*\mathcal{O}_X \to f_*\Omega_{X/S}$ is zero.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-duality-hodge}
+In Situation \ref{situation-relative-duality} there exists an
+$\mathcal{O}_S$-module map
+$$
+t : Rf_*\Omega^d_{X/S}[d] \longrightarrow \mathcal{O}_S
+$$
+unique up to precomposing by multiplication by a unit of
+$H^0(X, \mathcal{O}_X)$ with the following property: for all $p$ the pairing
+$$
+Rf_*\Omega^p_{X/S}
+\otimes_{\mathcal{O}_S}^\mathbf{L}
+Rf_*\Omega^{d - p}_{X/S}[d]
+\longrightarrow
+\mathcal{O}_S
+$$
+given by the relative cup product composed with $t$
+is a perfect pairing of perfect complexes on $S$.
+\end{lemma}
+
+\begin{proof}
+Let $\omega^\bullet_{X/S}$ be the relative dualizing complex of $X$ over $S$ as
+in Duality for Schemes, Remark \ref{duality-remark-relative-dualizing-complex}
+and let $Rf_*\omega_{X/S}^\bullet \to \mathcal{O}_S$ be its trace map. By
+Duality for Schemes, Lemma \ref{duality-lemma-smooth-proper}
+there exists an isomorphism $\omega^\bullet_{X/S} \cong \Omega^d_{X/S}[d]$
+and using this isomorphism we obtain $t$. The complexes $Rf_*\Omega^p_{X/S}$
+are perfect by Lemma \ref{lemma-proper-smooth-de-Rham}.
+Since $\Omega^p_{X/S}$ is locally free and since
+$\Omega^p_{X/S} \otimes_{\mathcal{O}_X} \Omega^{d - p}_{X/S} \to
+\Omega^d_{X/S}$ exhibits an isomorphism $\Omega^p_{X/S} \cong
+\SheafHom_{\mathcal{O}_X}(\Omega^{d - p}_{X/S}, \Omega^d_{X/S})$
+we see that the pairing induced by the relative cup product is perfect by
+Duality for Schemes, Remark
+\ref{duality-remark-relative-dualizing-complex-relative-cup-product}.
+
+\medskip\noindent
+Uniqueness of $t$. Choose a distinguished triangle
+$f_*\mathcal{O}_X \to Rf_*\mathcal{O}_X \to P \to f_*\mathcal{O}_X[1]$.
+By Lemma \ref{lemma-relative-bottom-part-degenerates}
+the object $P$ is perfect of tor amplitude in $[1, \infty)$
+and the triangle is locally on $S$ split.
+Thus $R\SheafHom_{\mathcal{O}_X}(P, \mathcal{O}_X)$ is perfect
+of tor amplitude in $(-\infty, -1]$. Hence duality (above) shows that
+locally on $S$ we have
+$$
+Rf_*\Omega^d_{X/S}[d] \cong
+R\SheafHom_{\mathcal{O}_S}(f_*\mathcal{O}_X, \mathcal{O}_S)
+\oplus R\SheafHom_{\mathcal{O}_X}(P, \mathcal{O}_X)
+$$
+This shows that $R^df_*\Omega^d_{X/S}$ is finite locally free and
+that we obtain a perfect $\mathcal{O}_S$-bilinear pairing
+$$
+f_*\mathcal{O}_X \times R^df_*\Omega^d_{X/S} \longrightarrow \mathcal{O}_S
+$$
+using $t$.
+This implies that any $\mathcal{O}_S$-linear map
+$t' : R^df_*\Omega^d_{X/S} \to \mathcal{O}_S$ is of the form
+$t' = t \circ g$ for some
+$g \in \Gamma(S, f_*\mathcal{O}_X) = \Gamma(X, \mathcal{O}_X)$.
+In order for $t'$ to still determine a perfect pairing $g$ will have
+to be a unit. This finishes the proof.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-top-part-degenerates}
+In Situation \ref{situation-relative-duality} the map
+$\text{d} : R^df_*\Omega^{d - 1}_{X/S} \to R^df_*\Omega^d_{X/S}$
+is zero.
+\end{lemma}
+
+\noindent
+As we mentioned in the proof of Lemma \ref{lemma-top-part-degenerates}
+this lemma is not an easy consequence of Lemmas
+\ref{lemma-relative-duality-hodge} and
+\ref{lemma-relative-bottom-part-degenerates}.
+
+\begin{proof}[Proof in case $S$ is reduced]
+Assume $S$ is reduced. Observe that
+$\text{d} : R^df_*\Omega^{d - 1}_{X/S} \to R^df_*\Omega^d_{X/S}$
+is an $\mathcal{O}_S$-linear map of (quasi-coherent) $\mathcal{O}_S$-modules.
+The $\mathcal{O}_S$-module $R^df_*\Omega^d_{X/S}$ is finite locally free
+(as the dual of the finite locally free $\mathcal{O}_S$-module
+$f_*\mathcal{O}_X$ by Lemmas
+\ref{lemma-relative-duality-hodge} and
+\ref{lemma-relative-bottom-part-degenerates}).
+Since $S$ is reduced it suffices to show that
+the stalk of $\text{d}$ in every generic point $\eta \in S$
+is zero; this follows by looking at sections over affine opens,
+using that the target of $\text{d}$ is locally free, and
+Algebra, Lemma \ref{algebra-lemma-reduced-ring-sub-product-fields} part (2).
+Since $S$ is reduced we have $\mathcal{O}_{S, \eta} = \kappa(\eta)$, see
+Algebra, Lemma \ref{algebra-lemma-minimal-prime-reduced-ring}.
+Thus $\text{d}_\eta$ is identified with the map
+$$
+\text{d} :
+H^d(X_\eta, \Omega^{d - 1}_{X_\eta/\kappa(\eta)})
+\longrightarrow
+H^d(X_\eta, \Omega^d_{X_\eta/\kappa(\eta)})
+$$
+which is zero by Lemma \ref{lemma-top-part-degenerates}.
+\end{proof}
+
+\begin{proof}[Proof in the general case]
+Observe that the question is flat local on $S$: if $S' \to S$ is a surjective
+flat morphism of schemes and the map is zero after pullback to $S'$,
+then the map is zero. Also, formation of the map commutes with base change
+by flat morphisms by flat base change (Cohomology of Schemes, Lemma
+\ref{coherent-lemma-flat-base-change-cohomology}).
+
+\medskip\noindent
+Consider the Stein factorization $X \to S' \to S$ as in
+More on Morphisms, Theorem
+\ref{more-morphisms-theorem-stein-factorization-general}.
+By Lemma \ref{lemma-relative-bottom-part-degenerates} the morphism
+$\pi : S' \to S$ is finite \'etale.
+The morphism $f : X \to S'$ is proper (by the theorem),
+smooth (by More on Morphisms, Lemma
+\ref{more-morphisms-lemma-smooth-etale-permanence}) with geometrically
+connected fibres by the theorem on Stein factorization.
+In the proof of Lemma \ref{lemma-relative-bottom-part-degenerates}
+we saw that $\Omega_{X/S} = \Omega_{X/S'}$ because $S' \to S$ is \'etale.
+Hence $\Omega^\bullet_{X/S} = \Omega^\bullet_{X/S'}$.
+We have
+$$
+R^qf_*\Omega^p_{X/S} = \pi_*R^qf'_*\Omega^p_{X/S'}
+$$
+for all $p, q$ by the Leray spectral sequence
+(Cohomology, Lemma \ref{cohomology-lemma-relative-Leray}),
+the fact that $\pi$ is finite hence affine, and
+Cohomology of Schemes, Lemma \ref{coherent-lemma-relative-affine-vanishing}
+(of course we also use that $R^qf'_*\Omega^p_{X'/S}$ is
+quasi-coherent).
+Thus the map of the lemma is $\pi_*$ applied to
+$\text{d} : R^df'_*\Omega^{d - 1}_{X/S'} \to R^df'_*\Omega^d_{X/S'}$.
+In other words, in order to prove the lemma we may replace
+$f : X \to S$ by $f' : X \to S'$ to reduce to the case discussed
+in the next pargraph.
+
+\medskip\noindent
+Assume $f$ has geometrically connected fibres and
+$f_*\mathcal{O}_X = \mathcal{O}_S$.
+For every $s \in S$ we can choose an \'etale neighbourhood
+$(S', s') \to (S, s)$ such that the base change $X' \to S'$ of $S$
+has a section. See More on Morphisms, Lemma
+\ref{more-morphisms-lemma-etale-nbhd-dominates-smooth}.
+By the initial remarks of the proof this reduces us to the case
+discussed in the next paragraph.
+
+\medskip\noindent
+Assume $f$ has geometrically connected fibres,
+$f_*\mathcal{O}_X = \mathcal{O}_S$, and we have
+a section $s : S \to X$ of $f$. We may and do assume $S = \Spec(A)$
+is affine. The map
+$s^* : R\Gamma(X, \mathcal{O}_X) \to R\Gamma(S, \mathcal{O}_S) = A$
+is a splitting of the map $A \to R\Gamma(X, \mathcal{O}_X)$. Thus we can write
+$$
+R\Gamma(X, \mathcal{O}_X) = A \oplus P
+$$
+where $P$ is the ``kernel'' of $s^*$. By
+Lemma \ref{lemma-relative-bottom-part-degenerates} the object $P$
+of $D(A)$ is perfect of tor amplitude in $[1, d]$. As in the proof
+of Lemma \ref{lemma-relative-duality-hodge} we see that
+$H^d(X, \Omega^d_{X/S})$ is a locally free $A$-module of rank $1$
+(and in fact dual to $A$ so free of rank $1$ -- we will soon choose
+a generator but we don't want to check it is the same generator
+nor will it be necessary to do so).
+
+\medskip\noindent
+Denote $Z \subset X$ the image of $s$ which is a closed subscheme of $X$ by
+Schemes, Lemma \ref{schemes-lemma-section-immersion}.
+Observe that $Z \to X$ is a regular (and a fortiori Koszul regular by
+Divisors, Lemma \ref{divisors-lemma-regular-quasi-regular-immersion})
+closed immersion by
+Divisors, Lemma \ref{divisors-lemma-section-smooth-regular-immersion}.
+Of course $Z \to X$ has codimension $d$. Thus by
+Remark \ref{remark-how-to-use}
+we can consider the map
+$$
+\gamma^{0, 0} : H^0(Z, \Omega^0_{Z/S}) \longrightarrow H^d(X, \Omega^d_{X/S})
+$$
+and we set $\xi = \gamma^{0, 0}(1) \in H^d(X, \Omega^d_{X/S})$.
+
+\medskip\noindent
+We claim $\xi$ is a basis element. Namely, since we have base change in
+top degree (see for example Limits, Lemma
+\ref{limits-lemma-higher-direct-images-zero-above-dimension-fibre})
+we see that
+$H^d(X, \Omega^d_{X/S}) \otimes_A k = H^d(X_k, \Omega^d_{X_k/k})$
+for any ring map $A \to k$. By the compatibility of
+the construction of $\xi$ with base change,
+see Lemma \ref{lemma-gysin-transverse-global},
+we see that the image of $\xi$ in $H^d(X_k, \Omega_{X_k/k})$
+is nonzero by Lemma \ref{lemma-class-of-a-point} if $k$ is a field.
+Thus $\xi$ is a nowhere vanishing section of an invertible module
+and hence a generator.
+
+\medskip\noindent
+Let $\theta \in H^d(X, \Omega^{d - 1}_{X/S})$. We have to show that
+$\text{d}(\theta)$ is zero in $H^d(X, \Omega^d_{X/S})$.
+We may write $\text{d}(\theta) = a \xi$ for some $a \in A$
+as $\xi$ is a basis element. Then we have to show $a = 0$.
+
+\medskip\noindent
+Consider the closed immersion
+$$
+\Delta : X \to X \times_S X
+$$
+This is also a section of a smooth morphism (namely either projection)
+and hence a regular and Koszul immersion of codimension $d$ as well.
+Thus we can consider the maps
+$$
+\gamma^{p, q} :
+H^q(X, \Omega^p_{X/S})
+\longrightarrow
+H^{q + d}(X \times_S X, \Omega^{p + d}_{X \times_S X/S})
+$$
+of Remark \ref{remark-how-to-use}. Consider the image
+$$
+\gamma^{d - 1, d}(\theta) \in
+H^{2d}(X \times_S X, \Omega^{2d - 1}_{X \times_S X})
+$$
+By Lemma \ref{lemma-de-rham-complex-product} we have
+$$
+\Omega^{2d - 1}_{X \times_S X} =
+\Omega^{d - 1}_{X/S} \boxtimes \Omega^d_{X/S} \oplus
+\Omega^d_{X/S} \boxtimes \Omega^{d - 1}_{X/S}
+$$
+By the K\"unneth formula (either
+Derived Categories of Schemes, Lemma \ref{perfect-lemma-kunneth} or
+Derived Categories of Schemes, Lemma \ref{perfect-lemma-kunneth-single-sheaf})
+we see that
+$$
+H^{2d}(X \times_S X, \Omega^{d - 1}_{X/S} \boxtimes \Omega^d_{X/S}) =
+H^d(X, \Omega^{d - 1}_{X/S}) \otimes_A H^d(X, \Omega^d_{X/S})
+$$
+and
+$$
+H^{2d}(X \times_S X, \Omega^d_{X/S} \boxtimes \Omega^{d - 1}_{X/S}) =
+H^d(X, \Omega^d_{X/S}) \otimes_A H^d(X, \Omega^{d - 1}_{X/S})
+$$
+Namely, since we are looking in top degree there no higher tor groups
+that intervene. Combined with the fact that $\xi$ is a generator this means
+we can write
+$$
+\gamma^{d - 1, d}(\theta) = \theta_1 \otimes \xi + \xi \otimes \theta_2
+$$
+with $\theta_1, \theta_2 \in H^d(X, \Omega^{d - 1}_{X/S})$.
+Arguing in exactly the same manner we can write
+$$
+\gamma^{d, d}(\xi) = b \xi \otimes \xi
+$$
+in
+$H^{2d}(X \times_S X, \Omega^{2d}_{X \times_S X/S}) =
+H^d(X, \Omega^d_{X/S}) \otimes_A H^d(X, \Omega^d_{X/S})$
+for some $b \in H^0(S, \mathcal{O}_S)$.
+
+\medskip\noindent
+{\bf Claim:} $\theta_1 = \theta$, $\theta_2 = \theta$, and $b = 1$.
+Let us show that the claim implies the desired result $a = 0$.
+Namely, by Lemma \ref{lemma-gysin-differential-global}
+we have
+$$
+\gamma^{d, d}(\text{d}(\theta)) = \text{d}(\gamma^{d - 1, d}(\theta))
+$$
+By our choices above this gives
+$$
+a \xi \otimes \xi =
+\gamma^{d, d}(a\xi) =
+\text{d}(\theta \otimes \xi + \xi \otimes \theta) =
+a \xi \otimes \xi + (-1)^d a \xi \otimes \xi
+$$
+The right most equality comes from the fact that the map
+$\text{d} : \Omega^{2d - 1}_{X \otimes_S X/S} \to \Omega^{2d}_{X \times_S X/S}$
+by Lemma \ref{lemma-de-rham-complex-product}
+is the sum of the differential
+$\text{d} \boxtimes 1 : \Omega^{d - 1}_{X/S} \boxtimes \Omega^d_{X/S}
+\to \Omega^d_{X/S} \boxtimes \Omega^d_{X/S}$
+and the differential
+$(-1)^d 1 \boxtimes \text{d} : \Omega^d_{X/S} \boxtimes \Omega^{d - 1}_{X/S}
+\to \Omega^d_{X/S} \boxtimes \Omega^d_{X/S}$. Please see discussion in
+Section \ref{section-kunneth} and
+Derived Categories of Schemes, Section
+\ref{perfect-section-kunneth-complexes} for more information.
+Since $\xi \otimes \xi$ is a basis for the rank $1$ free $A$-module
+$H^d(X, \Omega^d_{X/S}) \otimes_A H^d(X, \Omega^d_{X/S})$
+we conclude
+$$
+a = a + (-1)^d a \Rightarrow a = 0
+$$
+as desired.
+
+\medskip\noindent
+In the rest of the proof we prove the claim above. Let us denote
+$\eta = \gamma^{0, 0}(1) \in H^d(X \times_S X, \Omega^d_{X \times_S X/S})$.
+Since $\Omega^d_{X \times_S X/S} =
+\bigoplus_{p + p' = d} \Omega^p_{X/S} \boxtimes \Omega^{p'}_{X/S}$
+we may write
+$$
+\eta = \eta_0 + \eta_1 + \ldots + \eta_d
+$$
+where $\eta_p$ is in
+$H^d(X \times_S X, \Omega^p_{X/S} \boxtimes \Omega^{d - p}_{X/S})$.
+For $p = 0$ we can write
+\begin{align*}
+H^d(X \times_S X, \mathcal{O}_X \boxtimes \Omega^d_{X/S})
+& =
+H^d(R\Gamma(X, \mathcal{O}_X) \otimes_A^\mathbf{L}
+R\Gamma(X, \Omega^d_{X/S})) \\
+& =
+A \otimes_A H^d(X, \Omega^d_{X/S}) \oplus
+H^d(P \otimes_A^\mathbf{L} R\Gamma(X, \Omega^d_{X/S}))
+\end{align*}
+by our previously given decomposition $R\Gamma(X, \mathcal{O}_X) = A \oplus P$.
+Consider the morphism $(s, \text{id}) : X \to X \times_S X$.
+Then $(s, \text{id})^{-1}(\Delta) = Z$ scheme theoretically.
+Hence we see that $(s, \text{id})^*\eta = \xi$ by
+Lemma \ref{lemma-gysin-transverse-global}. This means that
+$$
+\xi = (s, \text{id})^*\eta = (s^* \otimes \text{id})(\eta_0)
+$$
+This means exactly that the first component of $\eta_0$
+in the direct sum decomposition above is $\xi$. In other words, we can write
+$$
+\eta_0 = 1 \otimes \xi + \eta'_0
+$$
+with $\eta'_0 \in H^d(P \otimes_A^\mathbf{L} R\Gamma(X, \Omega^d_{X/S})$.
+In exactly the same manner for $p = d$ we can write
+\begin{align*}
+H^d(X \times_S X, \Omega^d_{X/S} \boxtimes \mathcal{O}_X)
+& =
+H^d(R\Gamma(X, \Omega^d_{X/S}) \otimes_A^\mathbf{L}
+R\Gamma(X, \mathcal{O}_X)) \\
+& =
+H^d(X, \Omega^d_{X/S}) \otimes_A A \oplus
+H^d(R\Gamma(X, \Omega^d_{X/S}) \otimes_A^\mathbf{L} P)
+\end{align*}
+and we can write
+$$
+\eta_d = \xi \otimes 1 + \eta'_d
+$$
+with $\eta'_d \in H^d(R\Gamma(X, \Omega^d_{X/S}) \otimes_A^\mathbf{L} P)$.
+
+\medskip\noindent
+Observe that $\text{pr}_1^*\theta = \theta \otimes 1$
+and $\text{pr}_2^*\theta = 1 \otimes \theta$ are
+Hodge cohomology classes on
+$X \times_S X$ which pull back to $\theta$ by $\Delta$.
+Hence by Lemma \ref{lemma-gysin-projection-global} we have
+$$
+\theta_1 \otimes \xi + \xi \otimes \theta_2 =
+\gamma^{d - 1, d}(\theta) =
+(\theta \otimes 1) \cup \eta =
+(1 \otimes \theta) \cup \eta
+$$
+in the Hodge cohomology ring of $X \times_S X$ over $S$.
+In terms of the direct sum decomposition on the modules
+of differentials of $X \times_S X/S$ we obtain
+$$
+\theta_1 \otimes \xi =
+(\theta \otimes 1) \cup \eta_0
+\quad\text{and}\quad
+\xi \otimes \theta_2 =
+(1 \otimes \theta) \cup \eta_d
+$$
+Looking at the formula $\eta_0 = 1 \otimes \xi + \eta'_0$ we found above,
+we see that to show that $\theta_1 = \theta$ it suffices to prove that
+$$
+(\theta \otimes 1) \cup \eta'_0 = 0
+$$
+To do this, observe that cupping with $\theta \otimes 1$ is given
+by the action on cohomology of the map
+$$
+(P \otimes_A^\mathbf{L} R\Gamma(X, \Omega^d_{X/S}))[-d]
+\xrightarrow{\theta \otimes 1}
+R\Gamma(X, \Omega^{d - 1}_{X/S}) \otimes_A^\mathbf{L}
+R\Gamma(X, \Omega^d_{X/S})
+$$
+in the derived category, see Cohomology, Remark
+\ref{cohomology-remark-cup-with-element-map-total-cohomology}.
+This map is the derived tensor product of the two maps
+$$
+\theta : P[-d] \to R\Gamma(X, \Omega^{d - 1}_{X/S})
+\quad\text{and}\quad
+1 : R\Gamma(X, \Omega^d_{X/S}) \to R\Gamma(X, \Omega^d_{X/S})
+$$
+by Derived Categories of Schemes, Remark
+\ref{perfect-remark-annoying-compatibility}.
+However, the first of these is zero in $D(A)$ because it is a map from
+a perfect complex of tor amplitude in $[d + 1, 2d]$ to a complex
+with cohomology only in degrees $0, 1, \ldots, d$, see
+More on Algebra, Lemma \ref{more-algebra-lemma-splitting-unique}.
+A similar argument works to show the vanishing of
+$(1 \otimes \theta) \cup \eta'_d$. Finally, 
+in exactly the same manner we obtain
+$$
+b \xi \otimes \xi = \gamma^{d, d}(\xi) = (\xi \otimes 1) \cup \eta_0
+$$
+and we conclude as before by showing that
+$(\xi \otimes 1) \cup \eta'_0 = 0$ in the same manner as above.
+This finishes the proof.
+\end{proof}
+
+\begin{proposition}
+\label{proposition-relative-poincare-duality}
+Let $S$ be a quasi-compact and quasi-separated scheme. Let $f : X \to S$
+be a proper smooth morphism of schemes all of whose fibres are nonempty
+and equidimensional of dimension $d$. There exists an
+$\mathcal{O}_S$-module map
+$$
+t : R^{2d}f_*\Omega^\bullet_{X/S} \longrightarrow \mathcal{O}_S
+$$
+unique up to precomposing by multiplication by a unit of
+$H^0(X, \mathcal{O}_X)$ with the following property: the pairing
+$$
+Rf_*\Omega^\bullet_{X/S}
+\otimes_{\mathcal{O}_S}^\mathbf{L}
+Rf_*\Omega^\bullet_{X/S}[2d]
+\longrightarrow
+\mathcal{O}_S, \quad
+(\xi, \xi') \longmapsto t(\xi \cup \xi')
+$$
+is a perfect pairing of perfect complexes on $S$.
+\end{proposition}
+
+\begin{proof}
+The proof is exactly the same as the proof of
+Proposition \ref{proposition-poincare-duality}.
+
+\medskip\noindent
+By the relative Hodge-to-de Rham spectral sequence
+$$
+E_1^{p, q} = R^qf_*\Omega^p_{X/S} \Rightarrow R^{p + q}f_*\Omega^\bullet_{X/S}
+$$
+(Section \ref{section-hodge-to-de-rham}), the vanishing
+of $\Omega^i_{X/S}$ for $i > d$, the vanishing in for example Limits, Lemma
+\ref{limits-lemma-higher-direct-images-zero-above-dimension-fibre}
+and the results of Lemmas \ref{lemma-relative-bottom-part-degenerates} and
+\ref{lemma-relative-top-part-degenerates}
+we see that $R^0f_*\Omega_{X/S} = R^0f_*\mathcal{O}_X$
+and $R^df_*\Omega^d_{X/S} = R^{2d}f_*\Omega^\bullet_{X/S}$.
+More precisesly, these identifications come from the maps
+of complexes
+$$
+\Omega^\bullet_{X/S} \to \mathcal{O}_X[0]
+\quad\text{and}\quad
+\Omega^d_{X/S}[-d] \to \Omega^\bullet_{X/S}
+$$
+Let us choose $t : R^{2d}f_*\Omega_{X/S} \to \mathcal{O}_S$
+which via this identification corresponds to a $t$ as in
+Lemma \ref{lemma-relative-duality-hodge}.
+
+\medskip\noindent
+Let us abbreviate $\Omega^\bullet = \Omega^\bullet_{X/S}$.
+Consider the map (\ref{equation-wedge}) which in our situation reads
+$$
+\wedge :
+\text{Tot}(\Omega^\bullet \otimes_{f^{-1}\mathcal{O}_S} \Omega^\bullet)
+\longrightarrow
+\Omega^\bullet
+$$
+For every integer $p = 0, 1, \ldots, d$ this map annihilates the subcomplex
+$\text{Tot}(\sigma_{> p} \Omega^\bullet \otimes_{f^{-1}\mathcal{O}_S}
+\sigma_{\geq d - p} \Omega^\bullet)$ for degree reasons.
+Hence we find that the restriction of $\wedge$ to the subcomplex
+$\text{Tot}(\Omega^\bullet \otimes_{f^{-1}\mathcal{O}_S}
+\geq_{d - p}\Omega^\bullet)$ factors through a map of complexes
+$$
+\gamma_p :
+\text{Tot}(\sigma_{\leq p} \Omega^\bullet \otimes_{f^{-1}\mathcal{O}_S}
+\sigma_{\geq d - p} \Omega^\bullet)
+\longrightarrow
+\Omega^\bullet
+$$
+Using the same procedure as in Section \ref{section-cup-product} we obtain
+relative cup products
+$$
+Rf_*\sigma_{\leq p} \Omega^\bullet
+\otimes_{\mathcal{O}_S}^\mathbf{L}
+Rf_*\sigma_{\geq d - p}\Omega^\bullet
+\longrightarrow
+Rf_*\Omega^\bullet
+$$
+We will prove by induction on $p$ that these cup products via $t$
+induce perfect pairings between $Rf_*\sigma_{\leq p} \Omega^\bullet$
+and $Rf_*\sigma_{\geq d - p}\Omega^\bullet[2d]$. For $p = d$
+this is the assertion of the proposition.
+
+\medskip\noindent
+The base case is $p = 0$. In this case we have
+$$
+Rf_*\sigma_{\leq p}\Omega^\bullet = Rf_*\mathcal{O}_X
+\quad\text{and}\quad
+Rf_*\sigma_{\geq d - p}\Omega^\bullet[2d] = Rf_*(\Omega^d[-d])[2d] =
+Rf_*\Omega^d[d]
+$$
+In this case we simply obtain the pairing
+between $Rf_*\mathcal{O}_X$ and $Rf_*\Omega^d[d]$ of
+Lemma \ref{lemma-relative-duality-hodge} and the result is true.
+
+\medskip\noindent
+Induction step. Say we know the result is true for $p$. Then
+we consider the distinguished triangle
+$$
+\Omega^{p + 1}[-p - 1] \to
+\sigma_{\leq p + 1}\Omega^\bullet \to
+\sigma_{\leq p}\Omega^\bullet \to
+\Omega^{p + 1}[-p]
+$$
+and the distinguished triangle
+$$
+\sigma_{\geq d - p}\Omega^\bullet \to
+\sigma_{\geq d - p - 1}\Omega^\bullet \to
+\Omega^{d - p - 1}[-d + p + 1] \to
+(\sigma_{\geq d - p}\Omega^\bullet)[1]
+$$
+Observe that both are distinguished triangles in the homotopy category
+of complexes of sheaves of $f^{-1}\mathcal{O}_S$-modules; in particular the
+maps $\sigma_{\leq p}\Omega^\bullet \to \Omega^{p + 1}[-p]$ and
+$\Omega^{d - p - 1}[-d + p + 1] \to (\sigma_{\geq d - p}\Omega^\bullet)[1]$
+are given by actual maps of complexes, namely using the differential
+$\Omega^p \to \Omega^{p + 1}$ and the differential
+$\Omega^{d - p - 1} \to \Omega^{d - p}$.
+Consider the distinguished triangles associated gotten from these
+distinguished triangles by applying $Rf_*$
+$$
+\xymatrix{
+Rf_*\sigma_{\leq p}\Omega^\bullet \ar[d]_a \\
+Rf_*\Omega^{p + 1}[-p - 1] \ar[d]_b \\
+Rf_*\sigma_{\leq p + 1}\Omega^\bullet \ar[d]_c \\
+Rf_*\sigma_{\leq p}\Omega^\bullet \ar[d]_d \\
+Rf_*\Omega^{p + 1}[-p - 1]
+}
+\quad\quad
+\xymatrix{
+Rf_*\sigma_{\geq d - p}\Omega^\bullet \\
+Rf_*\Omega^{d - p - 1}[-d + p + 1] \ar[u]_{a'} \\
+Rf_*\sigma_{\geq d - p - 1}\Omega^\bullet \ar[u]_{b'} \\
+Rf_*\sigma_{\geq d - p}\Omega^\bullet \ar[u]_{c'} \\
+Rf_*\Omega^{d - p - 1}[-d + p + 1] \ar[u]_{d'}
+}
+$$
+We will show below that the pairs $(a, a')$, $(b, b')$, $(c, c')$, and
+$(d, d')$ are compatible with the given pairings. This means we obtain a
+map from the distinguished triangle on the left to the distuiguished triangle
+obtained by applying $R\SheafHom(-, \mathcal{O}_S)$ to the distinguished
+triangle on the right. By induction and Lemma \ref{lemma-duality-hodge}
+we know that the pairings constructed above between the
+complexes on the first, second, fourth, and fifth
+rows are perfect, i.e., determine isomorphisms after taking duals.
+By Derived Categories, Lemma \ref{derived-lemma-third-isomorphism-triangle}
+we conclude the pairing between the complexes in the middle row
+is perfect as desired.
+
+\medskip\noindent
+Let $e : K \to K'$ and $e' : M' \to M$ be maps of objects
+of $D(\mathcal{O}_S)$ and let
+$K \otimes_{\mathcal{O}_S}^\mathbf{L} M \to \mathcal{O}_S$ and
+$K' \otimes_{\mathcal{O}_S}^\mathbf{L} M' \to \mathcal{O}_S$
+be pairings. Then we say these pairings are compatible if the
+diagram
+$$
+\xymatrix{
+K' \otimes_{\mathcal{O}_S}^\mathbf{L} M' \ar[d] &
+K \otimes_{\mathcal{O}_S}^\mathbf{L} M'
+\ar[l]^{e \otimes 1} \ar[d]^{1 \otimes e'} \\
+\mathcal{O}_S &
+K \otimes_{\mathcal{O}_S}^\mathbf{L} M \ar[l]
+}
+$$
+commutes. This indeed means that the diagram
+$$
+\xymatrix{
+K \ar[r] \ar[d]_e & R\SheafHom(M, \mathcal{O}_S) \ar[d]^{R\SheafHom(e', -)} \\
+K' \ar[r] & R\SheafHom(M', \mathcal{O}_S)
+}
+$$
+commutes and hence is sufficient for our purposes.
+
+\medskip\noindent
+Let us prove this for the pair $(c, c')$. Here we observe simply
+that we have a commutative diagram
+$$
+\xymatrix{
+\text{Tot}(\sigma_{\leq p} \Omega^\bullet \otimes_{f^{-1}\mathcal{O}_S}
+\sigma_{\geq d - p} \Omega^\bullet) \ar[d]_{\gamma_p} &
+\text{Tot}(\sigma_{\leq p + 1} \Omega^\bullet \otimes_{f^{-1}\mathcal{O}_S}
+\sigma_{\geq d - p} \Omega^\bullet) \ar[l] \ar[d] \\
+\Omega^\bullet &
+\text{Tot}(\sigma_{\leq p + 1} \Omega^\bullet \otimes_{f^{-1}\mathcal{O}_S}
+\sigma_{\geq d - p - 1} \Omega^\bullet) \ar[l]_-{\gamma_{p + 1}}
+}
+$$
+By functoriality of the cup product we obtain commutativity of the
+desired diagram.
+
+\medskip\noindent
+Similarly for the pair $(b, b')$ we use the commutative diagram
+$$
+\xymatrix{
+\text{Tot}(\sigma_{\leq p + 1} \Omega^\bullet \otimes_{f^{-1}\mathcal{O}_S}
+\sigma_{\geq d - p - 1} \Omega^\bullet) \ar[d]_{\gamma_{p + 1}} &
+\text{Tot}(\Omega^{p + 1}[-p - 1] \otimes_{f^{-1}\mathcal{O}_S}
+\sigma_{\geq d - p - 1} \Omega^\bullet) \ar[l] \ar[d] \\
+\Omega^\bullet &
+\Omega^{p + 1}[-p - 1]
+\otimes_{f^{-1}\mathcal{O}_S}
+\Omega^{d - p - 1}[-d + p + 1] \ar[l]_-\wedge
+}
+$$
+
+\medskip\noindent
+For the pairs $(d, d')$ and $(a, a')$ we use the commutative diagram
+$$
+\xymatrix{
+\Omega^{p + 1}[-p] \otimes_{f^{-1}\mathcal{O}_S}
+\Omega^{d - p - 1}[-d + p] \ar[d] &
+\text{Tot}(\sigma_{\leq p}\Omega^\bullet \otimes_{f^{-1}\mathcal{O}_S}
+\Omega^{d - p - 1}[-d + p]) \ar[l] \ar[d] \\
+\Omega^\bullet &
+\text{Tot}(\sigma_{\leq p}\Omega^\bullet \otimes_{f^{-1}\mathcal{O}_S}
+\sigma_{\geq d - p}\Omega^\bullet) \ar[l]
+}
+$$
+
+\medskip\noindent
+We omit the argument showing the uniqueness of $t$ up to
+precomposing by multiplication by a unit in $H^0(X, \mathcal{O}_X)$.
+\end{proof}
+
+
+
+
 
 
 

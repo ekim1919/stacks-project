@@ -93,8 +93,12 @@ from $\textit{Mod}(\mathcal{O}_X) \to \textit{Mod}(\mathcal{O}_Y)$.
 \label{section-derived-functors}
 
 \noindent
-We briefly explain an approach to right derived functors using resolution
-functors. Let $(X, \mathcal{O}_X)$ be a ringed space. The category
+We briefly explain how to get right derived functors using resolution
+functors. For the unbounded derived functors, please see
+Section \ref{section-unbounded}.
+
+\medskip\noindent
+Let $(X, \mathcal{O}_X)$ be a ringed space. The category
 $\textit{Mod}(\mathcal{O}_X)$ is abelian, see
 Modules, Lemma \ref{modules-lemma-abelian}.
 In this chapter we will write
@@ -933,6 +937,64 @@ $\mathcal{F}(U) \to \check{H}^0(\mathcal{U}, \mathcal{F})$
 is bijective for every open covering.
 \end{proof}
 
+\begin{lemma}
+\label{lemma-cech-trivial}
+Let $X$ be a topological space. Let $\mathcal{F}$ be an abelian presheaf on $X$.
+Let $\mathcal{U} : U = \bigcup_{i \in I} U_i$ be an open covering. If
+$U_i = U$ for some $i \in I$, then the extended {\v C}ech complex
+$$
+\mathcal{F}(U) \to \check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{F})
+$$
+obtained by putting $\mathcal{F}(U)$ in degree $-1$ with differential given by
+the canonical map of $\mathcal{F}(U)$ into
+$\check{\mathcal{C}}^0(\mathcal{U}, \mathcal{F})$
+is homotopy equivalent to $0$.
+\end{lemma}
+
+\begin{proof}
+Fix an element $i \in I$ with $U = U_i$. Observe that
+$U_{i_0 \ldots i_p} = U_{i_0 \ldots \hat i_j \ldots i_p}$ if $i_j = i$.
+Let us define a homotopy
+$$
+h :
+\prod\nolimits_{i_0 \ldots i_{p + 1}} \mathcal{F}(U_{i_0 \ldots i_{p + 1}})
+\longrightarrow
+\prod\nolimits_{i_0 \ldots i_p} \mathcal{F}(U_{i_0 \ldots i_p})
+$$
+by the rule
+$$
+h(s)_{i_0 \ldots i_p} = s_{i i_0 \ldots i_p}
+$$
+In other words, $h : \prod_{i_0} \mathcal{F}(U_{i_0}) \to \mathcal{F}(U)$
+is projection onto the factor $\mathcal{F}(U_i) = \mathcal{F}(U)$
+and in general the map $h$ equals the projection onto the factors
+$\mathcal{F}(U_{i i_1 \ldots i_{p + 1}}) =
+\mathcal{F}(U_{i_1 \ldots i_{p + 1}})$.
+We compute
+\begin{align*}
+(dh + hd)(s)_{i_0 \ldots i_p}
+& =
+\sum\nolimits_{j = 0}^p
+(-1)^j
+h(s)_{i_0 \ldots \hat i_j \ldots i_p}
++
+d(s)_{i i_0 \ldots i_p}\\
+& =
+\sum\nolimits_{j = 0}^p
+(-1)^j
+s_{i i_0 \ldots \hat i_j \ldots i_p}
++
+s_{i_0 \ldots i_p}
++
+\sum\nolimits_{j = 0}^p
+(-1)^{j + 1}
+s_{i i_0 \ldots \hat i_j \ldots i_p} \\
+& =
+s_{i_0 \ldots i_p}
+\end{align*}
+This proves the identity map is homotopic to zero as desired.
+\end{proof}
+
 
 
 
@@ -1289,30 +1351,30 @@ and the reader is suggested to skip the rest of the proof.
 Let $\mathcal{F}$ be any presheaf of $\mathcal{O}_X$-modules.
 Choose an injective resolution $\mathcal{F} \to \mathcal{I}^\bullet$
 in the category $\textit{PMod}(\mathcal{O}_X)$.
-Consider the double complex $A^{\bullet, \bullet}$ with terms
-$$
-A^{p, q} =
-\check{\mathcal{C}}^p(\mathcal{U}, \mathcal{I}^q).
-$$
-Consider the simple complex $sA^\bullet$ associated to this double
-complex. There is a map of complexes
+Consider the double complex
+$\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^\bullet)$ with terms
+$\check{\mathcal{C}}^p(\mathcal{U}, \mathcal{I}^q)$.
+Consider the associated total complex
+$\text{Tot}(\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^\bullet))$,
+see Homology, Definition \ref{homology-definition-associated-simple-complex}.
+There is a map of complexes
 $$
 \check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{F})
 \longrightarrow
-sA^\bullet
+\text{Tot}(\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^\bullet))
 $$
 coming from the maps
 $\check{\mathcal{C}}^p(\mathcal{U}, \mathcal{F})
-\to A^{p, 0} = \check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^0)$
+\to \check{\mathcal{C}}^p(\mathcal{U}, \mathcal{I}^0)$
 and there is a map of complexes
 $$
 \check{H}^0(\mathcal{U}, \mathcal{I}^\bullet)
 \longrightarrow
-sA^\bullet
+\text{Tot}(\check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{I}^\bullet))
 $$
 coming from the maps
 $\check{H}^0(\mathcal{U}, \mathcal{I}^q) \to
-A^{0, q} = \check{\mathcal{C}}^0(\mathcal{U}, \mathcal{I}^q)$.
+\check{\mathcal{C}}^0(\mathcal{U}, \mathcal{I}^q)$.
 Both of these maps are quasi-isomorphisms by an application of
 Homology, Lemma \ref{homology-lemma-double-complex-gives-resolution}.
 Namely, the columns of the double complex are exact in positive degrees
@@ -2532,21 +2594,22 @@ $$
 \xymatrix{
 \check{\mathcal{C}}^\bullet(\mathcal{U}, \mathcal{F})
 \ar[r] &
-sA^\bullet & & &
+\text{Tot}(A^{\bullet, \bullet}) & & &
 \Gamma(X, \mathcal{I}^\bullet) \ar[lll]^{qis}
 \ar@{=}[ddl]\\
 \check{\mathcal{C}}^\bullet(\mathcal{V}, \mathcal{G})
 \ar[r] \ar[u]^\gamma &
-sB^\bullet \ar[r]^\beta &
-s(B')^\bullet &
-s(B'')^\bullet \ar[l] \ar[llu]_{s\gamma} \\
+\text{Tot}(B^{\bullet, \bullet}) \ar[r]^\beta &
+\text{Tot}((B')^{\bullet, \bullet}) &
+\text{Tot}((B'')^{\bullet, \bullet}) \ar[l] \ar[llu]_{s\gamma} \\
 & \Gamma(Y, \mathcal{J}^\bullet) \ar[u]^{qis} \ar[r]^\beta &
 \Gamma(Y, (\mathcal{J}')^\bullet) \ar[u] &
 \Gamma(Y, f_*\mathcal{I}^\bullet) \ar[u] \ar[l]_{qis}
 }
 $$
-The two horizontal arrows with targets $sA^\bullet$ and
-$sB^\bullet$ are the ones explained in Lemma \ref{lemma-cech-cohomology}.
+The two horizontal arrows with targets $\text{Tot}(A^{\bullet, \bullet})$ and
+$\text{Tot}(B^{\bullet, \bullet})$
+are the ones explained in Lemma \ref{lemma-cech-cohomology}.
 The left upper shape (a pentagon) is commutative simply
 because (\ref{equation-choice}) is commutative.
 The two lower squares are trivially commutative.
@@ -2645,6 +2708,7 @@ $$
 such that $h_{i_0 \ldots i_n}|_{W_{i_0 \ldots i_n, k}}$
 lifts to a section of $\mathcal{G}$ over $W_{i_0 \ldots i_n, k}$.
 By Topology, Lemma \ref{topology-lemma-refine-covering}
+(this is where we use the assumption that $X$ is hausdorff and quasi-compact)
 we can choose an open covering $\mathcal{V} : X = \bigcup_{j \in J} V_j$
 and $\alpha : J \to I$ such that $V_j \subset U_{\alpha(j)}$
 (it is a refinement) and such that for all $j_0, \ldots, j_n \in J$
@@ -2962,7 +3026,7 @@ and everything was done on the level of complexes.
 
 \begin{remark}
 \label{remark-correct-version-base-change-map}
-The ``correct'' version of the base change map is map
+The ``correct'' version of the base change map is the map
 $$
 Lg^* Rf_* \mathcal{F}^\bullet
 \longrightarrow
@@ -3656,60 +3720,101 @@ for $p \geq d$. Hence we win by the long exact cohomology sequence.
 \label{section-cohomology-support}
 
 \noindent
+This section just discusses the bare minimum -- the discussion
+will be continued in Section \ref{section-cohomology-support-bis}.
+
+\medskip\noindent
 Let $X$ be a topological space and let $Z \subset X$ be a closed subset.
 Let $\mathcal{F}$ be an abelian sheaf on $X$. We let
 $$
 \Gamma_Z(X, \mathcal{F}) =
 \{s \in \mathcal{F}(X) \mid \text{Supp}(s) \subset Z\}
 $$
-be the sections with support in $Z$
-(Modules, Definition \ref{modules-definition-support}).
-This is a left exact functor which is not exact in general.
-Hence we obtain a derived functor
+be the subset of sections whose support is contained in $Z$.
+The support of a section is defined in
+Modules, Definition \ref{modules-definition-support}.
+Modules, Lemma \ref{modules-lemma-support-section-closed}
+implies that $\Gamma_Z(X, \mathcal{F})$ is a subgroup of
+$\Gamma(X, \mathcal{F})$. The same lemma guarantees that
+the assignment $\mathcal{F} \mapsto \Gamma_Z(X, \mathcal{F})$
+is a functor in $\mathcal{F}$.
+This functor is left exact but not exact in general.
+
+\medskip\noindent
+Since the category of abelian sheaves has enough injectives
+(Injectives, Lemma \ref{injectives-lemma-abelian-sheaves-space})
+we we obtain a right derived functor
 $$
-R\Gamma_Z(X, -) : D(X) \longrightarrow D(\textit{Ab})
+R\Gamma_Z(X, -) : D^+(X) \longrightarrow D^+(\textit{Ab})
 $$
-and cohomology groups with support in $Z$ defined by
+by
+Derived Categories, Lemma \ref{derived-lemma-enough-injectives-right-derived}.
+The value of $R\Gamma_Z(X, -)$ on an object $K$ is computed by representing
+$K$ by a bounded below complex $\mathcal{I}^\bullet$ of injective abelian
+sheaves and taking $\Gamma_Z(X, \mathcal{I}^\bullet)$, see
+Derived Categories, Lemma \ref{derived-lemma-injective-acyclic}.
+The cohomology groups of an abelian sheaf $\mathcal{F}$
+with support in $Z$ defined by
 $H^q_Z(X, \mathcal{F}) = R^q\Gamma_Z(X, \mathcal{F})$.
 
 \medskip\noindent
 Let $\mathcal{I}$ be an injective abelian sheaf on $X$. Let
-$U = X \setminus Z$. Then the
-restriction map $\mathcal{I}(X) \to \mathcal{I}(U)$ is surjective
+$U = X \setminus Z$. Then the restriction map
+$\mathcal{I}(X) \to \mathcal{I}(U)$ is surjective
 (Lemma \ref{lemma-injective-restriction-surjective})
 with kernel $\Gamma_Z(X, \mathcal{I})$. It immediately follows that
-for $K \in D(X)$ there is a distinguished triangle
+for $K \in D^+(X)$ there is a distinguished triangle
 $$
 R\Gamma_Z(X, K) \to R\Gamma(X, K) \to R\Gamma(U, K) \to R\Gamma_Z(X, K)[1]
 $$
-in $D(\textit{Ab})$. As a consequence we obtain a long exact cohomology
+in $D^+(\textit{Ab})$. As a consequence we obtain a long exact cohomology
 sequence
 $$
 \ldots \to H^i_Z(X, K) \to H^i(X, K) \to H^i(U, K) \to
 H^{i + 1}_Z(X, K) \to \ldots
 $$
-for any $K$ in $D(X)$.
+for any $K$ in $D^+(X)$.
 
 \medskip\noindent
-For an abelian sheaf $\mathcal{F}$ on $X$ we can consider
-the {\it subsheaf of sections with support in $Z$}, denoted
+For an abelian sheaf $\mathcal{F}$ on $X$ we can consider the
+{\it subsheaf of sections with support in $Z$}, denoted
 $\mathcal{H}_Z(\mathcal{F})$, defined by the rule
 $$
 \mathcal{H}_Z(\mathcal{F})(U) =
-\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset U \cap Z\}
+\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset U \cap Z\} =
+\Gamma_{Z \cap U}(U, \mathcal{F}|_U)
 $$
 Using the equivalence of Modules, Lemma \ref{modules-lemma-i-star-exact}
-we may view $\mathcal{H}_Z(\mathcal{F})$ as an abelian sheaf on
-$Z$ (see also Modules, Lemmas
-\ref{modules-lemma-sections-support-in-closed} and
-\ref{modules-lemma-i-star-right-adjoint}).
+we may view $\mathcal{H}_Z(\mathcal{F})$ as an abelian sheaf on $Z$, see
+Modules, Remark \ref{modules-remark-sections-support-in-closed}.
 Thus we obtain a functor
 $$
 \textit{Ab}(X) \longrightarrow \textit{Ab}(Z),\quad
 \mathcal{F} \longmapsto
 \mathcal{H}_Z(\mathcal{F})\text{ viewed as a sheaf on }Z
 $$
-which is left exact, but in general not exact.
+This functor is left exact, but in general not exact. Exactly as above
+we obtain a right derived functor
+$$
+R\mathcal{H}_Z : D^+(X) \longrightarrow D^+(Z)
+$$
+the derived functor. We set
+$\mathcal{H}^q_Z(\mathcal{F}) = R^q\mathcal{H}_Z(\mathcal{F})$ so that
+$\mathcal{H}^0_Z(\mathcal{F}) = \mathcal{H}_Z(\mathcal{F})$.
+
+\medskip\noindent
+Observe that we have
+$\Gamma_Z(X, \mathcal{F}) = \Gamma(Z, \mathcal{H}_Z(\mathcal{F}))$
+for any abelian sheaf $\mathcal{F}$. By
+Lemma \ref{lemma-sections-with-support-acyclic} below
+the functor $\mathcal{H}_Z$ transforms injective abelian sheaves
+into sheaves right acyclic for $\Gamma(Z, -)$. Thus by
+Derived Categories, Lemma \ref{derived-lemma-grothendieck-spectral-sequence}
+we obtain a convergent Grothendieck spectral sequence
+$$
+E_2^{p, q} = H^p(Z, \mathcal{H}^q_Z(K)) \Rightarrow H^{p + q}_Z(X, K)
+$$
+functorial in $K$ in $D^+(X)$.
 
 \begin{lemma}
 \label{lemma-sections-with-support-acyclic}
@@ -3719,84 +3824,11 @@ Then $\mathcal{H}_Z(\mathcal{I})$ is an injective abelian sheaf on $Z$.
 \end{lemma}
 
 \begin{proof}
-Observe that for any abelian sheaf $\mathcal{G}$ on $Z$
-we have
-$$
-\Hom_Z(\mathcal{G}, \mathcal{H}_Z(\mathcal{F})) =
-\Hom_X(i_*\mathcal{G}, \mathcal{F})
-$$
-because after all any section of $i_*\mathcal{G}$ has support in $Z$.
-Since $i_*$ is exact (Modules, Lemma \ref{modules-lemma-i-star-exact})
-and $\mathcal{I}$ injective on $X$ we conclude that
-$\mathcal{H}_Z(\mathcal{I})$ is injective on $Z$.
-\end{proof}
-
-\noindent
-Denote
-$$
-R\mathcal{H}_Z : D(X) \longrightarrow D(Z)
-$$
-the derived functor. We set
-$\mathcal{H}^q_Z(\mathcal{F}) = R^q\mathcal{H}_Z(\mathcal{F})$ so that
-$\mathcal{H}^0_Z(\mathcal{F}) = \mathcal{H}_Z(\mathcal{F})$.
-By the lemma above we have a Grothendieck spectral sequence
-$$
-E_2^{p, q} = H^p(Z, \mathcal{H}^q_Z(\mathcal{F}))
-\Rightarrow H^{p + q}_Z(X, \mathcal{F})
-$$
-
-\begin{lemma}
-\label{lemma-cohomology-with-support-sheaf-on-support}
-Let $i : Z \to X$ be the inclusion of a closed subset.
-Let $\mathcal{G}$ be an injective abelian sheaf on $Z$.
-Then $\mathcal{H}^p_Z(i_*\mathcal{G}) = 0$ for $p > 0$.
-\end{lemma}
-
-\begin{proof}
-This is true because the functor $i_*$ is exact and transforms
-injective abelian sheaves into injective abelian sheaves by Lemma
-\ref{lemma-pushforward-injective-flat}.
-\end{proof}
-
-\noindent
-Let $X$ be a topological space and let $Z \subset X$ be a closed subset.
-We denote $D_Z(X)$ the strictly full saturated triangulated subcategory of
-$D(X)$ consisting of complexes whose cohomology sheaves are supported on
-$Z$.
-
-\begin{lemma}
-\label{lemma-complexes-with-support-on-closed}
-Let $i : Z \to X$ be the inclusion of a closed subset of a topological
-space $X$. The map $Ri_* = i_* : D(Z) \to D(X)$ induces an equivalence
-$D(Z) \to D_Z(X)$ with quasi-inverse
-$$
-i^{-1}|_{D_Z(X)} = R\mathcal{H}_Z|_{D_Z(X)}
-$$
-\end{lemma}
-
-\begin{proof}
-Recall that $i^{-1}$ and $i_*$ is an adjoint pair of exact functors such
-that $i^{-1}i_*$ is isomorphic to the identify functor on abelian sheaves. See
-Modules, Lemmas \ref{modules-lemma-exactness-pushforward-pullback} and
-\ref{modules-lemma-i-star-exact}. Thus
-$i_* : D(Z) \to D_Z(X)$ is fully faithful and $i^{-1}$ determines
-a left inverse. On the other hand, suppose that $K$ is an object of
-$D_Z(X)$ and consider the adjunction map $K \to i_*i^{-1}K$.
-Using exactness of $i_*$ and $i^{-1}$ this induces the adjunction maps
-$H^n(K) \to i_*i^{-1}H^n(K)$ on cohomology sheaves. Since these cohomology
-sheaves are supported on $Z$ we see these adjunction maps are isomorphisms
-and we conclude that $D(Z) \to D_Z(X)$ is an equivalence.
-
-\medskip\noindent
-To finish the proof we have to show that $R\mathcal{H}_Z(K) = i^{-1}K$ if
-$K$ is an object of $D_Z(X)$. To do this we can use that $K = i_*i^{-1}K$
-as we've just proved this is the case. Then we
-can choose a K-injective representative $\mathcal{I}^\bullet$ for $i^{-1}K$.
-Since $i_*$ is the right adjoint to the exact functor $i^{-1}$, the
-complex $i_*\mathcal{I}^\bullet$ is K-injective
-(Derived Categories, Lemma \ref{derived-lemma-adjoint-preserve-K-injectives}).
-We see that $R\mathcal{H}_Z(K)$ is computed by
-$\mathcal{H}_Z(i_*\mathcal{I}^\bullet) = \mathcal{I}^\bullet$ as desired.
+This follows from
+Homology, Lemma \ref{homology-lemma-adjoint-preserve-injectives}
+as $\mathcal{H}_Z(-)$ is right adjoint to the exact functor $i_*$.
+See Modules, Lemmas \ref{modules-lemma-i-star-exact} and
+\ref{modules-lemma-i-star-right-adjoint}.
 \end{proof}
 
 
@@ -3945,7 +3977,7 @@ $H^d(W \setminus Z, \mathcal{F}|_{W \setminus Z})$ is zero.
 By the displayed formula, there exists a $Z \subset V \subset X$
 quasi-compact open such that $\xi|_{V \setminus Z} = 0$.
 Since $V \setminus Z = V \cap U$ we conclude by the Mayer-Vietoris
-(Lemma \ref{lemma-mayer-vietoris}) for the covering $X = U \cap V$
+(Lemma \ref{lemma-mayer-vietoris}) for the covering $X = U \cup V$
 that there exists a $\tilde \xi \in H^d(X, \mathcal{F})$ which restricts
 to $\xi$ on $U$ and to zero on $V$. In other words, part (2) is true.
 
@@ -4406,6 +4438,111 @@ $$
 $$
 of the projection with the natural inclusion
 is homotopic to the identity map as desired.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-alternating-cech-trivial}
+Let $X$ be a topological space. Let $\mathcal{F}$ be an abelian presheaf on $X$.
+Let $\mathcal{U} : U = \bigcup_{i \in I} U_i$ be an open covering. If
+$U_i = U$ for some $i \in I$, then the extended alternating {\v C}ech complex
+$$
+\mathcal{F}(U) \to \check{\mathcal{C}}_{alt}^\bullet(\mathcal{U}, \mathcal{F})
+$$
+obtained by putting $\mathcal{F}(U)$ in degree $-1$ with differential given by
+the canonical map of $\mathcal{F}(U)$ into
+$\check{\mathcal{C}}^0(\mathcal{U}, \mathcal{F})$
+is homotopy equivalent to $0$. Similarly, for any total ordering on $I$
+the extended ordered {\v C}ech complex
+$$
+\mathcal{F}(U) \to
+\check{\mathcal{C}}_{ord}^\bullet(\mathcal{U}, \mathcal{F})
+$$
+is homotopy equivalent to $0$.
+\end{lemma}
+
+\begin{proof}[First proof]
+Combine Lemmas \ref{lemma-cech-trivial} and \ref{lemma-alternating-usual}.
+\end{proof}
+
+\begin{proof}[Second proof]
+Since the alternating and ordered {\v C}ech complexes are isomorphic
+it suffices to prove this for the ordered one.
+We will use standard notation: a cochain $s$ of degree $p$
+in the extended ordered {\v C}ech complex has the form
+$s = (s_{i_0 \ldots i_p})$ where $s_{i_0 \ldots i_p}$ is in
+$\mathcal{F}(U_{i_0 \ldots i_p})$ and $i_0 < \ldots < i_p$.
+With this notation we have
+$$
+d(x)_{i_0 \ldots i_{p + 1}} =
+\sum\nolimits_j (-1)^j x_{i_0 \ldots \hat i_j \ldots i_p}
+$$
+Fix an index $i \in I$ with $U = U_i$.
+As homotopy we use the maps
+$$
+h : \text{cochains of degree }p + 1 \to \text{cochains of degree }p
+$$
+given by the rule
+$$
+h(s)_{i_0 \ldots i_p} = 0 \text{ if } i \in \{i_0, \ldots, i_p\}
+\text{ and }
+h(s)_{i_0 \ldots i_p} = 
+(-1)^j s_{i_0 \ldots i_j i i_{j + 1} \ldots i_p} \text{ if not}
+$$
+Here $j$ is the unique index such that $i_j < i < i_{j + 1}$ in the
+second case; also, since $U = U_i$ we have the equality
+$$
+\mathcal{F}(U_{i_0 \ldots i_p}) =
+\mathcal{F}(U_{i_0 \ldots i_j i i_{j + 1} \ldots i_p})
+$$
+which we can use to make sense of thinking of
+$(-1)^j s_{i_0 \ldots i_j i i_{j + 1} \ldots i_p}$
+as an element of $\mathcal{F}(U_{i_0 \ldots i_p})$.
+We will show by a computation that $d h + h d$ equals
+the negative of the identity map which finishes the proof.
+To do this fix $s$ a cochain of degree $p$ and let
+$i_0 < \ldots < i_p$ be elements of $I$.
+
+\medskip\noindent
+Case I: $i \in \{i_0, \ldots, i_p\}$. Say $i = i_t$. Then we have
+$h(d(s))_{i_0 \ldots i_p} = 0$. On the other hand we have
+$$
+d(h(s))_{i_0 \ldots i_p} =
+\sum (-1)^j h(s)_{i_0 \ldots \hat i_j \ldots i_p} =
+(-1)^t h(s)_{i_0 \ldots \hat i \ldots i_p} =
+(-1)^t (-1)^{t - 1} s_{i_0 \ldots i_p}
+$$
+Thus $(dh + hd)(s)_{i_0 \ldots i_p} = -s_{i_0 \ldots i_p}$ as desired.
+
+\medskip\noindent
+Case II: $i \not \in \{i_0, \ldots, i_p\}$. Let $j$ be such that
+$i_j < i < i_{j + 1}$. Then we see that
+\begin{align*}
+h(d(s))_{i_0 \ldots i_p}
+& =
+(-1)^j d(s)_{i_0 \ldots i_j i i_{j + 1} \ldots i_p} \\
+& =
+\sum\nolimits_{j' \leq j} (-1)^{j + j'}
+s_{i_0 \ldots \hat i_{j'} \ldots i_j i i_{j + 1} \ldots i_p} -
+s_{i_0 \ldots i_p} \\
+&
++ \sum\nolimits_{j' > j} (-1)^{j + j' + 1}
+s_{i_0 \ldots i_j i i_{j + 1} \ldots \hat i_{j'} \ldots i_p}
+\end{align*}
+On the other hand we have
+\begin{align*}
+d(h(s))_{i_0 \ldots i_p}
+& =
+\sum\nolimits_{j'} (-1)^{j'} h(s)_{i_0 \ldots \hat i_{j'} \ldots i_p} \\
+& =
+\sum\nolimits_{j' \leq j} (-1)^{j' + j - 1}
+s_{i_0 \ldots \hat i_{j'} \ldots i_j i i_{j + 1} \ldots i_p} \\
+& +
+\sum\nolimits_{j' > j} (-1)^{j' + j}
+s_{i_0 \ldots i_j i i_{j + 1} \ldots \hat i_{j'} \ldots i_p}
+\end{align*}
+Adding these up we obtain
+$(dh + hd)(s)_{i_0 \ldots i_p} = - s_{i_0 \ldots i_p}$
+as desired.
 \end{proof}
 
 
@@ -5659,7 +5796,16 @@ aren't good enough.
 \label{lemma-derived-tor-exact}
 Let $(X, \mathcal{O}_X)$ be a ringed space.
 Let $\mathcal{G}^\bullet$ be a complex of $\mathcal{O}_X$-modules.
-The functor
+The functors
+$$
+K(\textit{Mod}(\mathcal{O}_X))
+\longrightarrow
+K(\textit{Mod}(\mathcal{O}_X)),
+\quad
+\mathcal{F}^\bullet \longmapsto
+\text{Tot}(\mathcal{G}^\bullet \otimes_{\mathcal{O}_X} \mathcal{F}^\bullet)
+$$
+and
 $$
 K(\textit{Mod}(\mathcal{O}_X))
 \longrightarrow
@@ -5668,13 +5814,12 @@ K(\textit{Mod}(\mathcal{O}_X)),
 \mathcal{F}^\bullet \longmapsto
 \text{Tot}(\mathcal{F}^\bullet \otimes_{\mathcal{O}_X} \mathcal{G}^\bullet)
 $$
-is an exact functor of triangulated categories.
+are exact functors of triangulated categories.
 \end{lemma}
 
 \begin{proof}
-Omitted. Hint: See
-More on Algebra, Lemmas \ref{more-algebra-lemma-derived-tor-homotopy} and
-\ref{more-algebra-lemma-derived-tor-exact}.
+This follows from Derived Categories, Remark
+\ref{derived-remark-double-complex-as-tensor-product-of}.
 \end{proof}
 
 \begin{definition}
@@ -5774,6 +5919,32 @@ if two out of three are acyclic, so is the third.
 \end{proof}
 
 \begin{lemma}
+\label{lemma-K-flat-two-out-of-three-ses}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let
+$0 \to \mathcal{K}_1^\bullet \to \mathcal{K}_2^\bullet \to
+\mathcal{K}_3^\bullet \to 0$ be a short exact sequence of complexes
+such that the terms of $\mathcal{K}_3^\bullet$ are flat $\mathcal{O}_X$-modules.
+If two out of three of $\mathcal{K}_i^\bullet$ are K-flat, so is the third.
+\end{lemma}
+
+\begin{proof}
+By Modules, Lemma \ref{modules-lemma-flat-tor-zero}
+for every complex $\mathcal{L}^\bullet$
+we obtain a short exact sequence
+$$
+0 \to
+\text{Tot}(\mathcal{L}^\bullet \otimes_{\mathcal{O}_X} \mathcal{K}_1^\bullet)
+\to
+\text{Tot}(\mathcal{L}^\bullet \otimes_{\mathcal{O}_X} \mathcal{K}_1^\bullet)
+\to
+\text{Tot}(\mathcal{L}^\bullet \otimes_{\mathcal{O}_X} \mathcal{K}_1^\bullet)
+\to 0
+$$
+of complexes. Hence the lemma follows from the long exact sequence of
+cohomology sheaves and the definition of K-flat complexes.
+\end{proof}
+
+\begin{lemma}
 \label{lemma-pullback-K-flat}
 Let $f : (X, \mathcal{O}_X) \to (Y, \mathcal{O}_Y)$ be a morphism of
 ringed spaces. The pullback of a K-flat complex of $\mathcal{O}_Y$-modules
@@ -5842,7 +6013,8 @@ $$
 \tau_{\leq 2}\mathcal{G}^\bullet \ar[r] & \ldots
 }
 $$
-with the following properties: (1) the vertical arrows are quasi-isomorphisms,
+with the following properties: (1) the vertical arrows are quasi-isomorphisms
+and termwise surjective,
 (2) each $\mathcal{K}_n^\bullet$ is a bounded above complex whose terms
 are direct sums of $\mathcal{O}_X$-modules of the form
 $j_{U!}\mathcal{O}_U$, and
@@ -5867,9 +6039,9 @@ is a quasi-isomorphism because filtered colimits are exact.
 \label{lemma-K-flat-resolution}
 Let $(X, \mathcal{O}_X)$ be a ringed space.
 For any complex $\mathcal{G}^\bullet$ there exists a $K$-flat complex
-$\mathcal{K}^\bullet$ and a quasi-isomorphism
-$\mathcal{K}^\bullet \to \mathcal{G}^\bullet$.
-Moreover, each $\mathcal{K}^n$ is a flat $\mathcal{O}_X$-module.
+$\mathcal{K}^\bullet$ whose terms are flat $\mathcal{O}_X$-modules
+and a quasi-isomorphism $\mathcal{K}^\bullet \to \mathcal{G}^\bullet$
+which is termwise surjective.
 \end{lemma}
 
 \begin{proof}
@@ -5880,12 +6052,12 @@ above complex of flat modules, see
 Modules, Lemma \ref{modules-lemma-j-shriek-flat}.
 Hence $\mathcal{K}_n^\bullet$ is K-flat by
 Lemma \ref{lemma-bounded-flat-K-flat}.
+Thus $\colim \mathcal{K}_n^\bullet$ is K-flat by
+Lemma \ref{lemma-colimit-K-flat}.
 The induced map
 $\colim \mathcal{K}_n^\bullet \to \mathcal{G}^\bullet$
-is a quasi-isomorphism by construction. Thus
-$\colim \mathcal{K}_n^\bullet$ is K-flat by
-Lemma \ref{lemma-colimit-K-flat}. Property (3)
-of Lemma \ref{lemma-resolution-by-direct-sums-extensions-by-zero}
+is a quasi-isomorphism and termwise surjective by construction.
+Property (3) of Lemma \ref{lemma-resolution-by-direct-sums-extensions-by-zero}
 shows that $\colim \mathcal{K}_n^m$ is a direct sum of
 flat modules and hence flat which proves the final assertion.
 \end{proof}
@@ -6042,6 +6214,76 @@ is a quotient of
 $\text{Tor}_1^{\mathcal{O}_X}(\mathcal{F}, \mathcal{Q})$
 which is zero by assumption. Hence $\mathcal{F}$ is flat.
 \end{proof}
+
+\begin{lemma}
+\label{lemma-factor-through-K-flat}
+Let $(X, \mathcal{O}_X)$ be a ringed space.
+Let $a : \mathcal{K}^\bullet \to \mathcal{L}^\bullet$ be a map of complexes
+of $\mathcal{O}_X$-modules. If $\mathcal{K}^\bullet$ is K-flat, then
+there exist a complex $\mathcal{N}^\bullet$ and maps of complexes
+$b : \mathcal{K}^\bullet \to \mathcal{N}^\bullet$
+and $c : \mathcal{N}^\bullet \to \mathcal{L}^\bullet$ such that
+\begin{enumerate}
+\item $\mathcal{N}^\bullet$ is K-flat,
+\item $c$ is a quasi-isomorphism,
+\item $a$ is homotopic to $c \circ b$.
+\end{enumerate}
+If the terms of $\mathcal{K}^\bullet$ are flat, then we may choose
+$\mathcal{N}^\bullet$, $b$, and $c$
+such that the same is true for $\mathcal{N}^\bullet$.
+\end{lemma}
+
+\begin{proof}
+We will use that the homotopy category $K(\textit{Mod}(\mathcal{O}_X))$
+is a triangulated category, see Derived Categories, Proposition
+\ref{derived-proposition-homotopy-category-triangulated}.
+Choose a distinguished triangle
+$\mathcal{K}^\bullet \to \mathcal{L}^\bullet \to
+\mathcal{C}^\bullet \to \mathcal{K}^\bullet[1]$.
+Choose a quasi-isomorphism $\mathcal{M}^\bullet \to \mathcal{C}^\bullet$ with
+$\mathcal{M}^\bullet$ K-flat with flat terms, see
+Lemma \ref{lemma-K-flat-resolution}.
+By the axioms of triangulated categories,
+we may fit the composition
+$\mathcal{M}^\bullet \to \mathcal{C}^\bullet \to \mathcal{K}^\bullet[1]$
+into a distinguished triangle
+$\mathcal{K}^\bullet \to \mathcal{N}^\bullet \to
+\mathcal{M}^\bullet \to \mathcal{K}^\bullet[1]$.
+By Lemma \ref{lemma-K-flat-two-out-of-three} we see that
+$\mathcal{N}^\bullet$ is K-flat.
+Again using the axioms of triangulated categories,
+we can choose a map $\mathcal{N}^\bullet \to \mathcal{L}^\bullet$ fitting into
+the following morphism of distinghuised triangles
+$$
+\xymatrix{
+\mathcal{K}^\bullet \ar[r] \ar[d] &
+\mathcal{N}^\bullet \ar[r] \ar[d] &
+\mathcal{M}^\bullet \ar[r] \ar[d] &
+\mathcal{K}^\bullet[1] \ar[d] \\
+\mathcal{K}^\bullet \ar[r] &
+\mathcal{L}^\bullet \ar[r] &
+\mathcal{C}^\bullet \ar[r] &
+\mathcal{K}^\bullet[1]
+}
+$$
+Since two out of three of the arrows are quasi-isomorphisms, so is
+the third arrow $\mathcal{N}^\bullet \to \mathcal{L}^\bullet$
+by the long exact sequences
+of cohomology associated to these distinguished triangles
+(or you can look at the image of this diagram in $D(\mathcal{O}_X)$ and use
+Derived Categories, Lemma \ref{derived-lemma-third-isomorphism-triangle}
+if you like). This finishes the proof of (1), (2), and (3).
+To prove the final assertion, we may choose $\mathcal{N}^\bullet$
+such that $\mathcal{N}^n \cong \mathcal{M}^n \oplus \mathcal{K}^n$, see
+Derived Categories, Lemma
+\ref{derived-lemma-improve-distinguished-triangle-homotopy}.
+Hence we get the desired flatness
+if the terms of $\mathcal{K}^\bullet$ are flat.
+\end{proof}
+
+
+
+
 
 
 
@@ -6305,7 +6547,8 @@ Injectives, Theorem
 for every complex $\mathcal{F}^\bullet$ of $\mathcal{O}_X$-modules
 there exists an injective quasi-isomorphism
 $\mathcal{F}^\bullet \to \mathcal{I}^\bullet$ to a K-injective complex
-of $\mathcal{O}_X$-modules. Hence we can define
+of $\mathcal{O}_X$-modules all of whose terms are injective
+$\mathcal{O}_X$-modules. Hence we can define
 $$
 R\Gamma(X, \mathcal{F}^\bullet) = \Gamma(X, \mathcal{I}^\bullet)
 $$
@@ -6890,7 +7133,7 @@ $$
 Namely, given $\xi \in H^i(X, K) = H^i(R\Gamma(X, K))$ and
 $\eta \in H^j(X, M) = H^j(R\Gamma(X, M))$ we can
 first ``tensor'' them to get an element $\xi \otimes \eta$ in
-$H^{i + j}(R\Gamma(X, K) \otimes_R^\mathbf{L} R\Gamma(X, M))$, see
+$H^{i + j}(R\Gamma(X, K) \otimes_A^\mathbf{L} R\Gamma(X, M))$, see
 More on Algebra, Section \ref{more-algebra-section-products-tor}.
 Then we can apply $\mu$ to get the desired element
 $\xi \cup \eta = \mu(\xi \otimes \eta)$
@@ -6973,6 +7216,32 @@ $\epsilon_M \circ Lf^*\eta = \tilde \eta$.
 We conclude that $\widetilde{\xi \cup \eta} = \tilde \xi \otimes \tilde \eta$
 which means we have the desired agreement.
 \end{proof}
+
+\begin{remark}
+\label{remark-cup-with-element-map-total-cohomology}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $K, M$ be objects
+of $D(\mathcal{O}_X)$. Set $A = \Gamma(X, \mathcal{O}_X)$.
+Given $\xi \in H^i(X, K)$ we get an associated map
+$$
+\xi = ``\xi \cup -'' :
+R\Gamma(X, M)[-i]
+\to
+R\Gamma(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} M)
+$$
+by representing $\xi$ as a map $\xi : A[-i] \to R\Gamma(X, K)$ as in the
+proof of Lemma \ref{lemma-second-cup-equals-first}
+and then using the composition
+$$
+R\Gamma(X, M)[-i] = A[-i] \otimes_A^\mathbf{L} R\Gamma(X, M)
+\xrightarrow{\xi \otimes 1}
+R\Gamma(X, K) \otimes_A^\mathbf{L} R\Gamma(X, M)
+\to
+R\Gamma(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} M)
+$$
+where the second arrow is the global cup product $\mu$ above.
+On cohomology this recovers the cup product by $\xi$ as is clear
+from Lemma \ref{lemma-second-cup-equals-first} and its proof.
+\end{remark}
 
 \noindent
 Let us formulate and prove a natural compatibility of the
@@ -7974,8 +8243,597 @@ from the definition of extension by zero). Since both
 $(Rj_*F)|_U = F$ and $(j_!F)|_U = F$ we see that (2) holds.
 \end{proof}
 
+\begin{lemma}
+\label{lemma-mayer-vietoris-cup}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Set $A = \Gamma(X, \mathcal{O}_X)$.
+Suppose that $X = U \cup V$ is a union of two open subsets. For objects
+$K$ and $M$ of $D(\mathcal{O}_X)$ we have a map of distinguished triangles
+$$
+\xymatrix{
+R\Gamma(X, K) \otimes_A^\mathbf{L} R\Gamma(X, M) \ar[r] \ar[d] &
+R\Gamma(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} M) \ar[d] \\
+R\Gamma(X, K) \otimes_A^\mathbf{L}
+(R\Gamma(U, M) \oplus R\Gamma(V, M)) \ar[r] \ar[d] &
+R\Gamma(U, K \otimes_{\mathcal{O}_X}^\mathbf{L} M)
+\oplus R\Gamma(V, K \otimes_{\mathcal{O}_X}^\mathbf{L} M)) \ar[d] \\
+R\Gamma(X, K) \otimes_A^\mathbf{L} R\Gamma(U \cap V, M) \ar[r] \ar[d] &
+R\Gamma(U \cap V, K \otimes_{\mathcal{O}_X}^\mathbf{L} M) \ar[d] \\
+R\Gamma(X, K) \otimes_A^\mathbf{L} R\Gamma(X, M)[1] \ar[r] &
+R\Gamma(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} M)[1]
+}
+$$
+where
+\begin{enumerate}
+\item the horizontal arrows are given by cup product,
+\item on the right hand side we have the distinguished triangle
+of Lemma \ref{lemma-unbounded-mayer-vietoris} for
+$K \otimes_{\mathcal{O}_X}^\mathbf{L} M$, and
+\item on the left hand side we have the exact functor
+$R\Gamma(X, K) \otimes_A^\mathbf{L} - $ applied to the
+distinguished triangle of Lemma \ref{lemma-unbounded-mayer-vietoris} for $M$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Choose a K-flat complex $T^\bullet$ of flat $A$-modules representing
+$R\Gamma(X, K)$, see
+More on Algebra, Lemma \ref{more-algebra-lemma-K-flat-resolution}.
+Denote $T^\bullet \otimes_A \mathcal{O}_X$ the pullback of $T^\bullet$
+by the morphism of ringed spaces $(X, \mathcal{O}_X) \to (pt, A)$.
+There is a natural adjunction map
+$\epsilon : T^\bullet \otimes_A \mathcal{O}_X \to K$ in $D(\mathcal{O}_X)$.
+Observe that $T^\bullet \otimes_A \mathcal{O}_X$ is a K-flat
+complex of $\mathcal{O}_X$-modules with flat terms, see
+Lemma \ref{lemma-pullback-K-flat} and
+Modules, Lemma \ref{modules-lemma-pullback-flat}.
+By Lemma \ref{lemma-factor-through-K-flat} we can find a morphism of complexes
+$$
+T^\bullet \otimes_A \mathcal{O}_X \longrightarrow \mathcal{K}^\bullet
+$$
+of $\mathcal{O}_X$-modules representing $\epsilon$
+such that $\mathcal{K}^\bullet$ is a
+K-flat complex with flat terms. Namely, by the construction of
+$D(\mathcal{O}_X)$ we can first represent $\epsilon$ by some map of complexes
+$e : T^\bullet \otimes_A \mathcal{O}_X \to \mathcal{L}^\bullet$
+of $\mathcal{O}_X$-modules representing $\epsilon$
+and then we can apply the lemma to $e$. Choose a K-injective
+complex $\mathcal{I}^\bullet$ whose terms are injective $\mathcal{O}_X$-modules
+representing $M$. Finally, choose a quasi-isomorphism
+$$
+\text{Tot}(\mathcal{K}^\bullet \otimes_\mathcal{O} \mathcal{I}^\bullet)
+\longrightarrow
+\mathcal{J}^\bullet
+$$
+into a K-injective complex whose terms are injective $\mathcal{O}_X$-modules.
+Observe that source and target of this arrow represent
+$K \otimes_{\mathcal{O}_X}^\mathbf{L} M$ in $D(\mathcal{O}_X)$.
+At this point, for any open $W \subset X$ we obtain a map of complexes
+$$
+\text{Tot}(T^\bullet \otimes_A \mathcal{I}^\bullet(W))
+\to
+\text{Tot}(\mathcal{K}^\bullet(W) \otimes_A \mathcal{I}^\bullet(W))
+\to
+\mathcal{J}^\bullet(W)
+$$
+of $A$-modules whose composition represents the map
+$$
+R\Gamma(X, K) \otimes_A^\mathbf{L} R\Gamma(W, M)
+\longrightarrow
+R\Gamma(W, K \otimes_{\mathcal{O}_X}^\mathbf{L} M)
+$$
+in $D(A)$. Clearly, these maps are compatible with restriction mappings.
+OK, so now we can consider the following commutative(!) diagram
+of complexes of $A$-modules
+$$
+\xymatrix{
+0 \ar[d] & 0 \ar[d] \\
+\text{Tot}(T^\bullet \otimes_A \mathcal{I}^\bullet(X)) \ar[d] \ar[r] &
+\mathcal{J}^\bullet(X) \ar[d] \\
+\text{Tot}(T^\bullet \otimes_A
+(\mathcal{I}^\bullet(U) \oplus \mathcal{I}^\bullet(V)) \ar[d] \ar[r] &
+\mathcal{J}^\bullet(U) \oplus \mathcal{J}^\bullet(V) \ar[d] \\
+\text{Tot}(T^\bullet \otimes_A \mathcal{I}^\bullet(U \cap V)) \ar[r] \ar[d] &
+\mathcal{J}^\bullet(U \cap V) \ar[d] \\
+0 & 0
+}
+$$
+By the proof of Lemma \ref{lemma-mayer-vietoris} the columns are
+exact sequences of complexes of $A$-modules (this also uses that
+$\text{Tot}(T^\bullet \otimes_A -)$ transforms short exact sequences
+of complexes of $A$-modules into short exact sequences as the terms
+of $T^\bullet$ are flat $A$-modules). Since the distinguished triangles
+of Lemma \ref{lemma-unbounded-mayer-vietoris}
+are the distinguished triangles associated to these
+short exact sequences of complexes, the desired result follows from
+the functoriality of ``taking the associated distinguished triangle''
+discussed in
+Derived Categories, Section \ref{derived-section-canonical-delta-functor}.
+\end{proof}
 
 
+
+
+
+
+
+
+
+
+
+
+\section{Cohomology with support in a closed, II}
+\label{section-cohomology-support-bis}
+
+\noindent
+We continue the discussion started in
+Section \ref{section-cohomology-support}.
+
+\medskip\noindent
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $Z \subset X$ be
+a closed subset. In this situation we can consider the functor
+$\textit{Mod}(\mathcal{O}_X) \to \text{Mod}(\mathcal{O}_X(X))$
+given by $\mathcal{F} \mapsto \Gamma_Z(X, \mathcal{F})$. See
+Modules, Definition \ref{modules-definition-support}
+and
+Modules, Lemma \ref{modules-lemma-support-section-closed}.
+Using K-injective resolutions, see Section \ref{section-unbounded},
+we obtain the right derived functor
+$$
+R\Gamma_Z(X, - ) : D(\mathcal{O}_X) \to D(\mathcal{O}_X(X))
+$$
+Given an object $K$ in $D(\mathcal{O}_X)$ we denote
+$H^q_Z(X, K) = H^q(R\Gamma_Z(X, K))$ the cohomology module with
+support in $Z$. We will see later
+(Lemma \ref{lemma-sections-support-abelian-unbounded}) that this
+agrees with the construction in Section \ref{section-cohomology-support}.
+
+\medskip\noindent
+For an $\mathcal{O}_X$-module $\mathcal{F}$ we can consider the
+{\it subsheaf of sections with support in $Z$}, denoted
+$\mathcal{H}_Z(\mathcal{F})$, defined by the rule
+$$
+\mathcal{H}_Z(\mathcal{F})(U) =
+\{s \in \mathcal{F}(U) \mid \text{Supp}(s) \subset U \cap Z\} =
+\Gamma_{Z \cap U}(U, \mathcal{F}|_U)
+$$
+As discussed in
+Modules, Remark \ref{modules-remark-sections-support-in-closed-modules}
+we may view $\mathcal{H}_Z(\mathcal{F})$ as an $\mathcal{O}_X|_Z$-module
+on $Z$ and we obtain a functor
+$$
+\textit{Mod}(\mathcal{O}_X) \longrightarrow \textit{Mod}(\mathcal{O}_X|_Z),
+\quad
+\mathcal{F} \longmapsto \mathcal{H}_Z(\mathcal{F})
+\text{ viewed as an }\mathcal{O}_X|_Z\text{-module on }Z
+$$
+This functor is left exact, but in general not exact. Exactly as above
+we obtain a right derived functor
+$$
+R\mathcal{H}_Z : D(\mathcal{O}_X) \longrightarrow D(\mathcal{O}_X|_Z)
+$$
+We set $\mathcal{H}^q_Z(K) = H^q(R\mathcal{H}_Z(K))$ so that
+$\mathcal{H}^0_Z(\mathcal{F}) = \mathcal{H}_Z(\mathcal{F})$
+for any sheaf of $\mathcal{O}_X$-modules $\mathcal{F}$.
+
+\begin{lemma}
+\label{lemma-cohomology-with-support-sheaf-on-support}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $i : Z \to X$ be the
+inclusion of a closed subset.
+\begin{enumerate}
+\item $R\mathcal{H}_Z : D(\mathcal{O}_X) \to D(\mathcal{O}_X|_Z)$
+is right adjoint to $i_* : D(\mathcal{O}_X|_Z) \to D(\mathcal{O}_X)$.
+\item For $K$ in $D(\mathcal{O}_X|_Z)$ we have $R\mathcal{H}_Z(i_*K) = K$.
+\item Let $\mathcal{G}$ be a sheaf of
+$\mathcal{O}_X|_Z$-modules on $Z$. Then
+$\mathcal{H}^p_Z(i_*\mathcal{G}) = 0$ for $p > 0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The functor $i_*$ is exact, so $i_* = Ri_* = Li_*$. Hence part (1)
+of the lemma follows from
+Modules, Lemma \ref{modules-lemma-adjoint-section-with-support}
+and
+Derived Categories, Lemma \ref{derived-lemma-derived-adjoint-functors}.
+Let $K$ be as in (2). We can represent $K$ by a K-injective complex
+$\mathcal{I}^\bullet$ of $\mathcal{O}_X|_Z$-modules. By
+Lemma \ref{lemma-K-injective-flat}
+the complex $i_*\mathcal{I}^\bullet$, which represents $i_*K$,
+is a K-injective complex of $\mathcal{O}_X$-modules. Thus
+$R\mathcal{H}_Z(i_*K)$ is computed by
+$\mathcal{H}_Z(i_*\mathcal{I}^\bullet) = \mathcal{I}^\bullet$
+which proves (2). Part (3) is a special case of (2).
+\end{proof}
+
+\noindent
+Let $(X, \mathcal{O}_X)$ be a ringed space and let $Z \subset X$
+be a closed subset. The category of $\mathcal{O}_X$-modules whose
+support is contained in $Z$ is a Serre subcategory of the
+category of all $\mathcal{O}_X$-modules, see
+Homology, Definition \ref{homology-definition-serre-subcategory}
+and
+Modules, Lemma \ref{modules-lemma-support-section-closed}.
+We denote $D_Z(\mathcal{O}_X)$
+the strictly full saturated triangulated subcategory of
+$D(\mathcal{O}_X)$ consisting of complexes whose cohomology sheaves
+are supported on $Z$, see
+Derived Categories, Section \ref{derived-section-triangulated-sub}.
+
+\begin{lemma}
+\label{lemma-complexes-with-support-on-closed}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $i : Z \to X$ be the
+inclusion of a closed subset.
+\begin{enumerate}
+\item For $K$ in $D(\mathcal{O}_X|_Z)$ we have $i_*K$ in $D_Z(\mathcal{O}_X)$.
+\item The functor $i_* : D(\mathcal{O}_X|_Z) \to D_Z(\mathcal{O}_X)$
+is an equivalence with quasi-inverse
+$i^{-1}|_{D_Z(\mathcal{O}_X)} = R\mathcal{H}_Z|_{D_Z(\mathcal{O}_X)}$.
+\item The functor
+$i_* \circ R\mathcal{H}_Z : D(\mathcal{O}_X) \to D_Z(\mathcal{O}_X)$
+is right adjoint to the inclusion functor
+$D_Z(\mathcal{O}_X) \to D(\mathcal{O}_X)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Part (1) is immediate from the definitions. Part (3) is a formal
+consequence of part (2) and
+Lemma \ref{lemma-cohomology-with-support-sheaf-on-support}.
+In the rest of the proof we prove part (2).
+
+\medskip\noindent
+Let us think of $i$ as the morphism of ringed spaces
+$i : (Z, \mathcal{O}_X|_Z) \to (X, \mathcal{O}_X)$.
+Recall that $i^*$ and $i_*$ is an adjoint pair of functors.
+Since $i$ is a closed immersion, $i_*$ is exact.
+Since $i^{-1}\mathcal{O}_X = \mathcal{O}_X|_Z$ is the structure
+sheaf of $(Z, \mathcal{O}_X|_Z)$ we see that $i^* = i^{-1}$
+is exact and we see that that $i^*i_* = i^{-1}i_*$
+is isomorphic to the identify functor. See
+Modules, Lemmas \ref{modules-lemma-exactness-pushforward-pullback} and
+\ref{modules-lemma-i-star-exact}. Thus
+$i_* : D(\mathcal{O}_X|_Z) \to D_Z(\mathcal{O}_X)$
+is fully faithful and $i^{-1}$ determines
+a left inverse. On the other hand, suppose that $K$ is an object of
+$D_Z(\mathcal{O}_X)$ and consider the adjunction map
+$K \to i_*i^{-1}K$.
+Using exactness of $i_*$ and $i^{-1}$ this induces the adjunction maps
+$H^n(K) \to i_*i^{-1}H^n(K)$ on cohomology sheaves. Since these cohomology
+sheaves are supported on $Z$ we see these adjunction maps are isomorphisms
+and we conclude that $i_* : D(\mathcal{O}_X|_Z) \to D_Z(\mathcal{O}_X)$
+is an equivalence.
+
+\medskip\noindent
+To finish the proof it suffices to show that $R\mathcal{H}_Z(K) = i^{-1}K$ if
+$K$ is an object of $D_Z(\mathcal{O}_X)$. To do this we can use that
+$K = i_*i^{-1}K$ as we've just proved this is the case. Then
+Lemma \ref{lemma-cohomology-with-support-sheaf-on-support}
+tells us what we want.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-sections-with-support-K-injective}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $i : Z \to X$
+be the inclusion of a closed subset. If $\mathcal{I}^\bullet$ is a K-injective
+complex of $\mathcal{O}_X$-modules, then
+$\mathcal{H}_Z(\mathcal{I}^\bullet)$ is K-injective complex of
+$\mathcal{O}_X|_Z$-modules.
+\end{lemma}
+
+\begin{proof}
+Since $i_* : \textit{Mod}(\mathcal{O}_X|_Z) \to \textit{Mod}(\mathcal{O}_X)$
+is exact and left adjoint to $\mathcal{H}_Z$
+(Modules, Lemma \ref{modules-lemma-adjoint-section-with-support})
+this follows from
+Derived Categories, Lemma \ref{derived-lemma-adjoint-preserve-K-injectives}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-local-to-global-sections-with-support}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $i : Z \to X$ be the
+inclusion of a closed subset. Then
+$R\Gamma(Z, - ) \circ R\mathcal{H}_Z = R\Gamma_Z(X, - )$
+as functors $D(\mathcal{O}_X) \to D(\mathcal{O}_X(X))$.
+\end{lemma}
+
+\begin{proof}
+Follows from the construction of right derived functors using
+K-injective resolutions, Lemma \ref{lemma-sections-with-support-K-injective},
+and the fact that $\Gamma_Z(X, -) = \Gamma(Z, -) \circ \mathcal{H}_Z$.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-triangle-sections-with-support}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $i : Z \to X$ be the
+inclusion of a closed subset. Let $U = X \setminus Z$.
+There is a distinguished triangle
+$$
+R\Gamma_Z(X, K) \to R\Gamma(X, K) \to R\Gamma(U, K) \to
+R\Gamma_Z(X, K)[1]
+$$
+in $D(\mathcal{O}_X(X))$ functorial for $K$ in $D(\mathcal{O}_X)$.
+\end{lemma}
+
+\begin{proof}
+Choose a K-injective complex $\mathcal{I}^\bullet$ all of whose terms
+are injective $\mathcal{O}_X$-modules representing $K$. See
+Section \ref{section-unbounded}. Recall that $\mathcal{I}^\bullet|_U$
+is a K-injective complex of $\mathcal{O}_U$-modules, see
+Lemma \ref{lemma-restrict-K-injective-to-open}. Hence each
+of the derived functors in the distinguished triangle is gotten
+by applying the underlying functor to $\mathcal{I}^\bullet$.
+Hence we find that it suffices to prove that
+for an injective $\mathcal{O}_X$-module $\mathcal{I}$ we have
+a short exact sequence
+$$
+0 \to \Gamma_Z(X, \mathcal{I}) \to \Gamma(X, \mathcal{I})
+\to \Gamma(U, \mathcal{I}) \to 0
+$$
+This follows from Lemma \ref{lemma-injective-restriction-surjective}
+and the definitions.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-triangle-sections-with-support-sheaves}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $i : Z \to X$ be the
+inclusion of a closed subset. Denote $j : U = X \setminus Z \to X$
+the inclusion of the complement. There is a distinguished triangle
+$$
+i_*R\mathcal{H}_Z(K) \to K \to Rj_*(K|_U) \to
+i_*R\mathcal{H}_Z(K)[1]
+$$
+in $D(\mathcal{O}_X)$ functorial for $K$ in $D(\mathcal{O}_X)$.
+\end{lemma}
+
+\begin{proof}
+Choose a K-injective complex $\mathcal{I}^\bullet$ all of whose terms
+are injective $\mathcal{O}_X$-modules representing $K$. See
+Section \ref{section-unbounded}. Recall that $\mathcal{I}^\bullet|_U$
+is a K-injective complex of $\mathcal{O}_U$-modules, see
+Lemma \ref{lemma-restrict-K-injective-to-open}. Hence each
+of the derived functors in the distinguished triangle is gotten
+by applying the underlying functor to $\mathcal{I}^\bullet$.
+Hence it suffices to prove that
+for an injective $\mathcal{O}_X$-module $\mathcal{I}$ we have
+a short exact sequence
+$$
+0 \to i_*\mathcal{H}_Z(\mathcal{I}) \to \mathcal{I}
+\to j_*(\mathcal{I}|_U) \to 0
+$$
+This follows from Lemma \ref{lemma-injective-restriction-surjective}
+and the definitions.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-sections-support-in-closed-disjoint-open}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $Z \subset X$
+be a closed subset. Let $j : U \to X$ be the inclusion of
+an open subset with $U \cap Z = \emptyset$. Then
+$R\mathcal{H}_Z(Rj_*K) = 0$ for all $K$ in $D(\mathcal{O}_U)$.
+\end{lemma}
+
+\begin{proof}
+Choose a K-injective complex $\mathcal{I}^\bullet$ of $\mathcal{O}_U$-modules
+representing $K$. Then $j_*\mathcal{I}^\bullet$ represents $Rj_*K$. By
+Lemma \ref{lemma-K-injective-flat} the complex $j_*\mathcal{I}^\bullet$ is a
+K-injective complex of $\mathcal{O}_X$-modules. Hence
+$\mathcal{H}_Z(j_*\mathcal{I}^\bullet)$ represents $R\mathcal{H}_Z(Rj_*K)$.
+Thus it suffices to show that $\mathcal{H}_Z(j_*\mathcal{G}) = 0$
+for any abelian sheaf $\mathcal{G}$ on $U$. Thus we have to show that
+a section $s$ of $j_*\mathcal{G}$ over some open $W$ which is supported
+on $W \cap Z$ is zero. The support condition means that
+$s|_{W \setminus W \cap Z} = 0$. Since $j_*\mathcal{G}(W) =
+\mathcal{G}(U \cap W) = j_*\mathcal{G}(W \setminus W \cap Z)$
+this implies that $s$ is zero as desired.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-sections-support-abelian-unbounded}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $Z \subset X$
+be a closed subset. Let $K$ be an object of $D(\mathcal{O}_X)$
+and denote $K_{ab}$ its image in $D(\underline{\mathbf{Z}}_X)$.
+\begin{enumerate}
+\item There is a canonical map $R\Gamma_Z(X, K) \to R\Gamma_Z(X, K_{ab})$
+which is an isomorphism in $D(\textit{Ab})$.
+\item There is a canonical map
+$R\mathcal{H}_Z(K) \to R\mathcal{H}_Z(K_{ab})$
+which is an isomorphism in $D(\underline{\mathbf{Z}}_Z)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Proof of (1). The map is constructed as follows. Choose a K-injective complex
+of $\mathcal{O}_X$-modules $\mathcal{I}^\bullet$ representing $K$.
+Choose a quasi-isomorpism
+$\mathcal{I}^\bullet \to \mathcal{J}^\bullet$ where $\mathcal{J}^\bullet$
+is a K-injective complex of abelian groups. Then the map in (1)
+is given by
+$$
+\Gamma_Z(X, \mathcal{I}^\bullet) \to \Gamma_Z(X, \mathcal{J}^\bullet)
+$$
+determined by the fact that $\Gamma_Z$ is a functor on abelian sheaves.
+An easy check shows that the resulting map combined with the canonical
+maps of Lemma \ref{lemma-modules-abelian-unbounded}
+fit into a morphism of distinguished triangles
+$$
+\xymatrix{
+R\Gamma_Z(X, K) \ar[r] \ar[d] &
+R\Gamma(X, K) \ar[r] \ar[d] &
+R\Gamma(U, K) \ar[d] \\
+R\Gamma_Z(X, K_{ab}) \ar[r] &
+R\Gamma(X, K_{ab}) \ar[r] &
+R\Gamma(U, K_{ab})
+}
+$$
+of Lemma \ref{lemma-triangle-sections-with-support}.
+Since two of the three arrows are isomorphisms by the lemma cited,
+we conclude by Derived Categories, Lemma
+\ref{derived-lemma-third-isomorphism-triangle}.
+
+\medskip\noindent
+The proof of (2) is omitted. Hint: use the same argument with
+Lemma \ref{lemma-triangle-sections-with-support-sheaves}
+for the distinguished triangle.
+\end{proof}
+
+\begin{remark}
+\label{remark-support-cup-product}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $i : Z \to X$
+be the inclusion of a closed subset. Given $K$ and $M$ in
+$D(\mathcal{O}_X)$ there is a canonical map
+$$
+K|_Z \otimes_{\mathcal{O}_X|_Z}^\mathbf{L} R\mathcal{H}_Z(M)
+\longrightarrow
+R\mathcal{H}_Z(K \otimes_{\mathcal{O}_X}^\mathbf{L} M)
+$$
+in $D(\mathcal{O}_X|_Z)$. Here $K|_Z = i^{-1}K$ is the restriction of
+$K$ to $Z$ viewed as an object of $D(\mathcal{O}_X|_Z)$. By adjointness
+of $i_*$ and $R\mathcal{H}_Z$ of
+Lemma \ref{lemma-cohomology-with-support-sheaf-on-support} to construct this
+map it suffices to produce a canonical map
+$$
+i_*\left(K|_Z \otimes_{\mathcal{O}_X|_Z}^\mathbf{L} R\mathcal{H}_Z(M)\right)
+\longrightarrow
+K \otimes_{\mathcal{O}_X}^\mathbf{L} M
+$$
+To construct this map, we choose a K-injective complex $\mathcal{I}^\bullet$
+of $\mathcal{O}_X$-modules representing $M$ and a K-flat complex
+$\mathcal{K}^\bullet$ of $\mathcal{O}_X$-modules representing $K$.
+Observe that $\mathcal{K}^\bullet|_Z$ is a K-flat complex of
+$\mathcal{O}_X|_Z$-modules representing $K|_Z$, see
+Lemma \ref{lemma-pullback-K-flat}. Hence we need to produce a map
+of complexes
+$$
+i_*\text{Tot}\left(
+\mathcal{K}^\bullet|_Z \otimes_{\mathcal{O}_X|_Z}
+\mathcal{H}_Z(\mathcal{I}^\bullet)\right)
+\longrightarrow
+\text{Tot}(\mathcal{K}^\bullet \otimes_{\mathcal{O}_X} \mathcal{I}^\bullet)
+$$
+of $\mathcal{O}_X$-modules. For this it suffices to produce maps
+$$
+i_*(\mathcal{K}^a|_Z \otimes_{\mathcal{O}_X|_Z}
+\mathcal{H}_Z(\mathcal{I}^b))
+\longrightarrow
+\mathcal{K}^a \otimes_{\mathcal{O}_X} \mathcal{I}^b
+$$
+Looking at stalks (for example), we see that the left hand side of this
+formula is equal to
+$\mathcal{K}^a \otimes_{\mathcal{O}_X} i_*\mathcal{H}_Z(\mathcal{I}^b)$
+and we can use the inclusion
+$\mathcal{H}_Z(\mathcal{I}^b) \to \mathcal{I}^b$ to get our map.
+\end{remark}
+
+\begin{remark}
+\label{remark-support-cup-product-global}
+With notation as in Remark \ref{remark-support-cup-product}
+we obtain a canonical cup product
+\begin{align*}
+H^a(X, K) \times H^b_Z(X, M)
+& =
+H^a(X, K) \times H^b(Z, R\mathcal{H}_Z(M)) \\
+& \to
+H^a(Z, K|_Z) \times H^b(Z, R\mathcal{H}_Z(M)) \\
+& \to
+H^{a + b}(Z, K|_Z \otimes_{\mathcal{O}_X|_Z}^\mathbf{L} R\mathcal{H}_Z(M)) \\
+& \to
+H^{a + b}(Z, R\mathcal{H}_Z(K \otimes_{\mathcal{O}_X}^\mathbf{L} M)) \\
+& =
+H^{a + b}_Z(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} M)
+\end{align*}
+Here the equal signs are given by
+Lemma \ref{lemma-local-to-global-sections-with-support},
+the first arrow is restriction to $Z$, the second
+arrow is the cup product (Section \ref{section-cup-product}),
+and the third arrow is the map from Remark \ref{remark-support-cup-product}.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-support-cup-product}
+With notation as in Remark \ref{remark-support-cup-product} the diagram
+$$
+\xymatrix{
+H^i(X, K) \times H^j_Z(X, M) \ar[r] \ar[d] &
+H^{i + j}_Z(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} M) \ar[d] \\
+H^i(X, K) \times H^j(X, M) \ar[r] &
+H^{i + j}(X, K \otimes_{\mathcal{O}_X}^\mathbf{L} M)
+}
+$$
+commutes where the top horizontal arrow is the cup product of
+Remark \ref{remark-support-cup-product-global}.
+\end{lemma}
+
+\begin{proof}
+Omitted.
+\end{proof}
+
+\begin{remark}
+\label{remark-support-functorial}
+Let $f : (X', \mathcal{O}_{X'}) \to (X, \mathcal{O}_X)$ be a morphism
+of ringed spaces. Let $Z \subset X$ be a closed subset and $Z' = f^{-1}(Z)$.
+Denote $f|_{Z'} : (Z', \mathcal{O}_{X'}|_{Z'}) \to (Z, \mathcal{O}_X|Z)$ be the
+induced morphism of ringed spaces. For any $K$ in $D(\mathcal{O}_X)$ there
+is a canonical map
+$$
+L(f|_{Z'})^*R\mathcal{H}_Z(K) \longrightarrow R\mathcal{H}_{Z'}(Lf^*K)
+$$
+in $D(\mathcal{O}_{X'}|_{Z'})$. Denote $i : Z \to X$ and $i' : Z' \to X'$
+the inclusion maps. By
+Lemma \ref{lemma-complexes-with-support-on-closed} part (2)
+applied to $i'$ it is the same thing to give a map
+$$
+i'_* L(f|_{Z'})^* R\mathcal{H}_Z(K)
+\longrightarrow
+i'_*R\mathcal{H}_{Z'}(Lf^*K)
+$$
+in $D_{Z'}(\mathcal{O}_{X'})$. The map of functors
+$Lf^* \circ i_* \to i'_* \circ L(f|_{Z'})^*$ of
+Remark \ref{remark-base-change} is an isomorphism in this case
+(follows by checking what happens on stalks using that $i_*$ and $i'_*$
+are exact and that $\mathcal{O}_{Z, z} = \mathcal{O}_{X, z}$
+and similarly for $Z'$). Hence it suffices to construct a the top
+horizonal arrow in the following diagram
+$$
+\xymatrix{
+Lf^* i_* R\mathcal{H}_Z(K) \ar[rr] \ar[rd] & &
+i'_* R\mathcal{H}_{Z'}(Lf^*K) \ar[ld] \\
+& Lf^*K
+}
+$$
+The complex $Lf^* i_* R\mathcal{H}_Z(K)$ is supported on $Z'$. The south-east
+arrow comes from the adjunction mapping $i_*R\mathcal{H}_Z(K) \to K$
+(Lemma \ref{lemma-cohomology-with-support-sheaf-on-support}). Since the
+adjunction mapping $i'_* R\mathcal{H}_{Z'}(Lf^*K) \to Lf^*K$ is universal by
+Lemma \ref{lemma-complexes-with-support-on-closed} part (3), we find that
+the south-east arrow factors uniquely over the south-west arrow and
+we obtain the desired arrow.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-support-functorial}
+With notation and assumptions as in Remark \ref{remark-support-functorial}
+the diagram
+$$
+\xymatrix{
+H^p_Z(X, K) \ar[r] \ar[d] & H^p_{Z'}(X, Lf^*K) \ar[d] \\
+H^p(X, K) \ar[r] & H^p(X', Lf^*K)
+}
+$$
+commutes. Here the top horizontal arrow comes from the identifications
+$H^p_Z(X, K) = H^p(Z, R\mathcal{H}_Z(K))$ and
+$H^p_{Z'}(X', Lf^*K) = H^p(Z', R\mathcal{H}_{Z'}(K'))$,
+the pullback map
+$H^p(Z, R\mathcal{H}_Z(K)) \to H^p(Z', L(f|_{Z'})^*R\mathcal{H}_Z(K))$,
+and the map constructed in Remark \ref{remark-support-functorial}.
+\end{lemma}
+
+\begin{proof}
+Omitted. Hints:
+Using that $H^p(Z, R\mathcal{H}_Z(K)) = H^p(X, i_*R\mathcal{H}_Z(K))$
+and similarly for $R\mathcal{H}_{Z'}(Lf^*K)$ this follows from
+the functoriality of the pullback maps and the commutative diagram
+used to define the map of Remark \ref{remark-support-functorial}.
+\end{proof}
 
 
 
@@ -9290,6 +10148,32 @@ coming from Lemma \ref{lemma-internal-hom-composition}
 \end{remark}
 
 \begin{remark}
+\label{remark-relative-cup-and-composition}
+Let $h : X \to Y$ be a morphism of ringed spaces.
+Let $K, L, M$ be objects of $D(\mathcal{O}_Y)$.
+The diagram
+$$
+\xymatrix{
+Rf_*R\SheafHom_{\mathcal{O}_X}(K, M)
+\otimes_{\mathcal{O}_Y}^\mathbf{L} Rf_*M
+\ar[r] \ar[d] &
+Rf_*\left(R\SheafHom_{\mathcal{O}_X}(K, M)
+\otimes_{\mathcal{O}_X}^\mathbf{L} M\right)
+\ar[d] \\
+R\SheafHom_{\mathcal{O}_Y}(Rf_*K, Rf_*M) \otimes_{\mathcal{O}_Y}^\mathbf{L}
+Rf_*M \ar[r] &
+Rf_*M
+}
+$$
+is commutative. Here the left vertical arrow comes from
+Remark \ref{remark-projection-formula-for-internal-hom}.
+The top horizontal arrow is Remark \ref{remark-cup-product}.
+The other two arrows are instances of the map in
+Lemma \ref{lemma-internal-hom-composition} (with one of the entries
+replaced with $\mathcal{O}_X$ or $\mathcal{O}_Y$).
+\end{remark}
+
+\begin{remark}
 \label{remark-prepare-fancy-base-change}
 Let $h : X \to Y$ be a morphism of ringed spaces.
 Let $K, L$ be objects of $D(\mathcal{O}_Y)$. We claim there is a
@@ -9855,7 +10739,7 @@ Lemma \ref{lemma-glueing-increasing-union}.
 \medskip\noindent
 First we use transfinite induction to choose opens $W_\alpha \subset X$
 for any ordinal $\alpha$. Namely, we set $W_0 = \emptyset$.
-If $\alpha = \beta + 1$ is a sucessor, then either $W_\beta = X$
+If $\alpha = \beta + 1$ is a successor, then either $W_\beta = X$
 and we set $W_\alpha = X$ or $W_\beta \not = X$ and we set
 $W_\alpha = W_\beta \cup U_\alpha$ where
 $U_\alpha \in \mathcal{B}$ is not contained in $W_\beta$.
@@ -11143,6 +12027,61 @@ $\mathcal{F}^\bullet$ is locally bounded.
 \end{proof}
 
 \begin{lemma}
+\label{lemma-internal-hom-evaluate-isom}
+Let $(X, \mathcal{O}_X)$ be a ringed space. Let $K, L, M \in D(\mathcal{O}_X)$.
+If $K$ is perfect, then the map
+$$
+R\SheafHom(L, M) \otimes_{\mathcal{O}_X}^\mathbf{L} K
+\longrightarrow
+R\SheafHom(R\SheafHom(K, L), M)
+$$
+of Lemma \ref{lemma-internal-hom-evaluate} is an isomorphism.
+\end{lemma}
+
+\begin{proof}
+Since the map is globally defined and since formation of the right and
+left hand side commute with localization
+(see Lemma \ref{lemma-restriction-RHom-to-U}), to prove this we may work
+locally on $X$. Thus we may assume $K$ is represented by a strictly
+perfect complex $\mathcal{E}^\bullet$.
+
+\medskip\noindent
+If $K_1 \to K_2 \to K_3$ is a distinguished triangle in $D(\mathcal{O}_X)$,
+then we get distinguished triangles
+$$
+R\SheafHom(L, M) \otimes_{\mathcal{O}_X}^\mathbf{L} K_1 \to
+R\SheafHom(L, M) \otimes_{\mathcal{O}_X}^\mathbf{L} K_2 \to
+R\SheafHom(L, M) \otimes_{\mathcal{O}_X}^\mathbf{L} K_3
+$$
+and
+$$
+R\SheafHom(R\SheafHom(K_1, L), M) \to
+R\SheafHom(R\SheafHom(K_2, L), M)
+R\SheafHom(R\SheafHom(K_3, L), M)
+$$
+See Section \ref{section-flat} and
+Lemma \ref{lemma-RHom-triangulated}.
+The arrow of Lemma \ref{lemma-internal-hom-evaluate} is functorial in $K$
+hence we get a morphism between these distinguished triangles.
+Thus, if the result holds for $K_1$ and $K_3$, then the result holds for
+$K_2$ by Derived Categories, Lemma
+\ref{derived-lemma-third-isomorphism-triangle}.
+
+\medskip\noindent
+Combining the remarks above with the distinguished triangles
+$$
+\sigma_{\geq n}\mathcal{E}^\bullet \to \mathcal{E}^\bullet \to
+\sigma_{\leq n - 1}\mathcal{E}^\bullet
+$$
+of stupid trunctions, we reduce to the case where $K$ consists
+of a direct summand of a finite free $\mathcal{O}_X$-module placed
+in some degree. By an obvious compatibility of the problem with direct sums
+(similar to what was said above) and shifts this reduces us to the case
+where $K = \mathcal{O}_X^{\oplus n}$ for some integer $n$.
+This case is clear.
+\end{proof}
+
+\begin{lemma}
 \label{lemma-dual-perfect-complex}
 Let $(X, \mathcal{O}_X)$ be a ringed space. Let $K$ be a perfect object of
 $D(\mathcal{O}_X)$. Then $K^\vee = R\SheafHom(K, \mathcal{O}_X)$ is a
@@ -11160,18 +12099,19 @@ for $M$ in $D(\mathcal{O}_X)$.
 \end{lemma}
 
 \begin{proof}
-We will use without further mention that formation of internal hom commutes
-with restriction to opens (Lemma \ref{lemma-restriction-RHom-to-U}).
-We may check $K^\vee$ is perfect locally on $X$. There is a canonical
-map
+By Lemma \ref{lemma-internal-hom-evaluate} there is a canonical map
 $$
 K = R\SheafHom(\mathcal{O}_X, \mathcal{O}_X)
 \otimes_{\mathcal{O}_X}^\mathbf{L} K \longrightarrow
 R\SheafHom(R\SheafHom(K, \mathcal{O}_X), \mathcal{O}_X) =
 (K^\vee)^\vee
 $$
-see Lemma \ref{lemma-internal-hom-evaluate}. It suffices to prove
-this map is an isomorphism locally. By Lemma \ref{lemma-dual}
+which is an isomorphism by Lemma \ref{lemma-internal-hom-evaluate-isom}.
+To check the other statements we will use without further mention that
+formation of internal hom commutes with restriction to opens
+(Lemma \ref{lemma-restriction-RHom-to-U}).
+We may check $K^\vee$ is perfect locally on $X$.
+By Lemma \ref{lemma-dual}
 to see the final statement it suffices to check that the map
 (\ref{equation-eval})
 $$
@@ -11180,7 +12120,7 @@ M \otimes^\mathbf{L}_{\mathcal{O}_X} K^\vee
 R\SheafHom(K, M)
 $$
 is an isomorphism. This is local on $X$ as well.
-Hence it suffices to prove the lemma when $K$ is represented
+Hence it suffices to prove these two statements $K$ is represented
 by a strictly perfect complex.
 
 \medskip\noindent
@@ -11194,10 +12134,6 @@ in degree $n$. Since $\mathcal{E}^{-n}$ is a direct summand of a finite
 free $\mathcal{O}_X$-module, so is $(\mathcal{E}^{-n})^\vee$.
 Hence $K^\vee$ is represented by a strictly perfect complex too
 and we see that $K^\vee$ is perfect.
-The map $K \to (K^\vee)^\vee$ is an isomorphism as it is given
-up to sign by the evaluation maps
-$\mathcal{E}^n \to ((\mathcal{E}^{-n})^\vee)^\vee$
-which are isomorphisms.
 To see that (\ref{equation-eval}) is an isomorphism, represent
 $M$ by a complex $\mathcal{F}^\bullet$.
 By Lemma \ref{lemma-Rhom-strictly-perfect} the complex

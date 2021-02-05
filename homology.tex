@@ -2098,12 +2098,16 @@ Categories, Lemma \ref{categories-lemma-properties-left-localization}.
 \label{lemma-quotient-by-kernel-exact-functor}
 Let $\mathcal{A}$, $\mathcal{B}$ be abelian categories.
 Let $F : \mathcal{A} \to \mathcal{B}$ be an exact functor.
+Let $\mathcal{C} \subset \mathcal{A}$ be a Serre subcategory
+contained in the kernel of $F$.
 Then $\mathcal{C} = \Ker(F)$ if and only if the induced functor
-$\overline{F} : \mathcal{A}/\mathcal{C} \to \mathcal{B}$ is
-faithful.
+$\overline{F} : \mathcal{A}/\mathcal{C} \to \mathcal{B}$
+(Lemma \ref{lemma-serre-subcategory-is-kernel}) is faithful.
 \end{lemma}
 
 \begin{proof}
+We will use the results of Lemma \ref{lemma-serre-subcategory-is-kernel}
+without further mention.
 The ``only if'' direction is true because the kernel of $\overline{F}$ is zero
 by construction. Namely, if $f : X \to Y$ is a morphism in
 $\mathcal{A}/\mathcal{C}$ such that $\overline{F}(f) = 0$, then
@@ -3952,7 +3956,7 @@ the squares in the diagram anti-commute.
 
 \begin{example}
 \label{example-double-complex-as-tensor-product-of}
-Let $\mathcal{A}$, $\mathcal{B}$, $\mathcal{C}$ be additve categories.
+Let $\mathcal{A}$, $\mathcal{B}$, $\mathcal{C}$ be additive categories.
 Suppose that
 $$
 \otimes : \mathcal{A} \times \mathcal{B} \longrightarrow \mathcal{C},
@@ -3978,23 +3982,25 @@ Similarly for the second differential.
 \label{definition-associated-simple-complex}
 Let $\mathcal{A}$ be an additive category.
 Let $A^{\bullet, \bullet}$ be a double complex.
-The {\it associated simple complex $sA^\bullet$}, also
-sometimes called the {\it associated total complex} is
+The {\it associated simple complex}, denoted $sA^\bullet$, also
+often called the {\it associated total complex}, denoted
+$\text{Tot}(A^{\bullet, \bullet})$, is
 given by
 $$
-sA^n = \bigoplus\nolimits_{n = p + q} A^{p, q}
+sA^n = \text{Tot}^n(A^{\bullet, \bullet}) =
+\bigoplus\nolimits_{n = p + q} A^{p, q}
 $$
 (if it exists) with differential
 $$
-d_{sA}^n = \sum\nolimits_{n = p + q} (d_1^{p, q} + (-1)^p d_2^{p, q})
+d_{sA^\bullet}^n = d_{\text{Tot}(A^{\bullet, \bullet})}^n =
+\sum\nolimits_{n = p + q} (d_1^{p, q} + (-1)^p d_2^{p, q})
 $$
-Alternatively, we often write $\text{Tot}(A^{\bullet, \bullet})$
-to denote this complex.
 \end{definition}
 
 \noindent
 If countable direct sums exist in $\mathcal{A}$ or if for each $n$ at most
-finitely many $A^{p, n - p}$ are nonzero, then $sA^\bullet$ exists. Note that
+finitely many $A^{p, n - p}$ are nonzero, then
+$\text{Tot}(A^{\bullet, \bullet})$ exists. Note that
 the definition is {\it not} symmetric in the indices $(p, q)$.
 
 \begin{remark}
@@ -4080,6 +4086,355 @@ $$
 \epsilon(p, q, a, b) = \epsilon(p, q + 1, a, b)
 $$
 Thus we choose $\epsilon(p, q, a, b) = (-1)^{pb}$.
+\end{remark}
+
+\begin{remark}
+\label{remark-double-complex-complex-of-complexes-first}
+Let $\mathcal{A}$ be an additive category with countable direct sums.
+Let $\text{DoubleComp}(\mathcal{A})$ denote the category of double complexes.
+We can consider an object $A^{\bullet, \bullet}$ of
+$\text{DoubleComp}(\mathcal{A})$ as a complex of complexes
+as follows
+$$
+\ldots \to A^{\bullet, -1} \to A^{\bullet, 0} \to A^{\bullet, 1} \to \ldots
+$$
+For the variant where we switch the role of the indices, see
+Remark \ref{remark-double-complex-complex-of-complexes-second}.
+In this remark we show that taking the associated total complex
+is compatible with all the structures on complexes we have studied
+in the chapter so far.
+
+\medskip\noindent
+First, observe that the shift functor on double complexes viewed
+as complexes of complexes in the manner given above is the functor
+$[0, 1]$ defined in Remark \ref{remark-shift-double-complex}.
+By Remark \ref{remark-shift-double-complex} the functor
+$$
+\text{Tot} : \text{DoubleComp}(\mathcal{A}) \to \text{Comp}(\mathcal{A})
+$$
+is compatible with shift functors, in the sense that we have a functorial
+isomorphism $\gamma : \text{Tot}(A^{\bullet, \bullet})[1] \to
+\text{Tot}(A^{\bullet, \bullet}[0, 1])$.
+
+\medskip\noindent
+Second, if
+$$
+f, g : A^{\bullet, \bullet} \to B^{\bullet, \bullet}
+$$
+are homotopic when $f$ and $g$ are viewed as morphisms of complexes
+of complexes in the manner given above, then
+$$
+\text{Tot}(f), \text{Tot}(g) :
+\text{Tot}(A^{\bullet, \bullet}) \to \text{Tot}(B^{\bullet, \bullet})
+$$
+are homotopic maps of complexes. Indeed, let $h = (h^q)$
+be a homotopy between $f$ and $g$. If we denote
+$h^{p, q} : A^{p, q} \to B^{p, q - 1}$ the component in degree $p$ of $h^q$,
+then this means that
+$$
+f^{p, q} - g^{p, q} = d_2^{p, q - 1} \circ h^{p, q} +
+h^{p, q + 1} \circ d_2^{p, q}
+$$
+The fact that $h^q : A^{\bullet, q} \to B^{\bullet, q - 1}$ is a map of
+complexes means that
+$$
+d_1^{p, q - 1} \circ h^{p, q} = h^{p + 1, q} \circ d_1^{p, q}
+$$
+Let us define $h' = ((h')^n)$ the homotopy given by the maps
+$(h')^n : \text{Tot}^n(A^{\bullet, \bullet}) \to
+\text{Tot}^{n - 1}(B^{\bullet, \bullet})$
+using $(-1)^ph^{p, q}$ on the summand $A^{p, q}$ for $p + q = n$.
+Then we see that
+$$
+d_{\text{Tot}(B^{\bullet, \bullet})} \circ h' +
+h' \circ d_{\text{Tot}(A^{\bullet, \bullet})}
+$$
+restricted to the summand $A^{p, q}$ is equal to
+$$
+d_1^{p, q - 1} \circ (-1)^p h^{p, q} +
+(-1)^p d_2^{p, q - 1} \circ (-1)^p h^{p, q} +
+(-1)^{p + 1} h^{p + 1, q} \circ d_1^{p, q} +
+(-1)^p h^{p, q + 1} \circ (-1)^p d_2^{p, q}
+$$
+which evaluates to $f^{p, q} - g^{p, q}$ by the equations given above.
+This proves the second compatibility.
+
+\medskip\noindent
+Third, suppose that in the paragraph above we have $f = g$.
+Then the assignment $h \leadsto h'$ above is compatible with
+the identification of Lemma \ref{lemma-homotopy-shift-cochain}.
+More precisely, if we view $h$ as a morphism of complexes
+of complexes $A^{\bullet, \bullet} \to B^{\bullet, \bullet}[0, -1]$
+via this lemma then
+$$
+\text{Tot}(A^{\bullet, \bullet})
+\xrightarrow{\text{Tot}(h)}
+\text{Tot}(B^{\bullet, \bullet}[0, -1])
+\xrightarrow{\gamma^{-1}}
+\text{Tot}(B^{\bullet, \bullet})[-1]
+$$
+is equal to $h'$ viewed as a morphism of complexes via the lemma.
+Here $\gamma$ is the identification of
+Remark \ref{remark-shift-double-complex}.
+The verification of this third point is immediate.
+
+\medskip\noindent
+Fourth, let
+$$
+0 \to A^{\bullet, \bullet} \to B^{\bullet, \bullet} \to
+C^{\bullet, \bullet} \to 0
+$$
+be a complex of double complexes and suppose we are given splittings
+$s^q : C^{\bullet, q} \to B^{\bullet, q}$ and
+$\pi^q : B^{\bullet, q} \to A^{\bullet, q}$
+of this as in Lemma \ref{lemma-ses-termwise-split-cochain}
+when we view double complexes
+as complexes of complexes in the manner given above.
+This on the one hand produces a map
+$$
+\delta : C^{\bullet, \bullet} \longrightarrow A^{\bullet, \bullet}[0, 1]
+$$
+by the procedure in Lemma \ref{lemma-ses-termwise-split-cochain}.
+On the other hand taking $\text{Tot}$ we obtain a complex
+$$
+0 \to \text{Tot}(A^{\bullet, \bullet}) \to
+\text{Tot}(B^{\bullet, \bullet}) \to
+\text{Tot}(C^{\bullet, \bullet}) \to 0
+$$
+which is termwise split (see below) and hence comes with a morphism
+$$
+\delta' :
+\text{Tot}(C^{\bullet, \bullet})
+\longrightarrow
+\text{Tot}(A^{\bullet, \bullet})[1]
+$$
+well defined up to homotopy by Lemmas \ref{lemma-ses-termwise-split-cochain}
+and \ref{lemma-ses-termwise-split-homotopy-cochain}. Claim:
+these maps agree in the sense that
+$$
+\text{Tot}(C^{\bullet, \bullet})
+\xrightarrow{\text{Tot}(\delta)}
+\text{Tot}(A^{\bullet, \bullet}[0, 1]) \xrightarrow{\gamma^{-1}}
+\text{Tot}(A^{\bullet, \bullet})[1]
+$$
+is equal to $\delta'$ where $\gamma$ is as in
+Remark \ref{remark-shift-double-complex}. To see this denote
+$s^{p, q} : C^{p, q} \to B^{\bullet, q}$ and
+$\pi^{p, q} : B^{p, q} \to A^{p, q}$ the components of $s^q$ and $\pi^q$.
+As splittings
+$(s')^n : \text{Tot}^n(C^{\bullet, \bullet}) \to
+\text{Tot}^n(B^{\bullet, \bullet})$
+and
+$(\pi')^n : \text{Tot}^n(B^{\bullet, \bullet}) \to
+\text{Tot}^n(A^{\bullet, \bullet})$
+we use the maps whose components are $s^{p, q}$ and $\pi^{p, q}$
+for $p + q = n$. We recall that
+$$
+(\delta')^n =
+(\pi')^{n + 1} \circ d_{\text{Tot}(B^{\bullet, \bullet})}^n \circ (s')^n :
+\text{Tot}^n(C^{\bullet, \bullet}) \to
+\text{Tot}^{n + 1}(A^{\bullet, \bullet})
+$$
+The restriction of this to the summand $C^{p, q}$ is equal to
+$$
+\pi^{p + 1, q} \circ
+d_1^{p, q} \circ
+s^{p, q} +
+\pi^{p, q + 1} \circ
+(-1)^p d_2^{p, q} \circ
+s^{p, q} =
+\pi^{p, q + 1} \circ
+(-1)^p d_2^{p, q} \circ
+s^{p, q}
+$$
+The equality holds because $s^q$ is a morphism of complexes (with $d_1$
+as differential) and because $\pi^{p + 1, q} \circ s^{p + 1, q} = 0$
+as $s$ and $\pi$ correspond to a direct sum decomposition of $B$
+in every bidegree. On the other hand, for $\delta$ we have
+$$
+\delta^q =  \pi^q \circ d_2 \circ s^q :
+C^{\bullet, q} \to A^{\bullet, q + 1}
+$$
+whose restriction to the summand $C^{p, q}$ is equal to
+$\pi^{p, q + 1} \circ d_2^{p, q} \circ s^{p, q}$.
+The difference in signs is exactly canceled out by the sign
+of $(-1)^p$ in the isomorphism $\gamma$ and the fourth claim is proven.
+\end{remark}
+
+\begin{remark}
+\label{remark-double-complex-complex-of-complexes-second}
+Let $\mathcal{A}$ be an additive category with countable direct sums.
+Let $\text{DoubleComp}(\mathcal{A})$ denote the category of double complexes.
+We can consider an object $A^{\bullet, \bullet}$ of
+$\text{DoubleComp}(\mathcal{A})$ as a complex of complexes
+as follows
+$$
+\ldots \to A^{-1, \bullet} \to A^{0, \bullet} \to A^{1, \bullet} \to \ldots
+$$
+For the variant where we switch the role of the indices, see
+Remark \ref{remark-double-complex-complex-of-complexes-first}.
+In this remark we show that taking the associated total complex
+is compatible with all the structures on complexes we have studied
+in the chapter so far.
+
+\medskip\noindent
+First, observe that the shift functor on double complexes viewed
+as complexes of complexes in the manner given above is the functor
+$[1, 0]$ defined in Remark \ref{remark-shift-double-complex}.
+By Remark \ref{remark-shift-double-complex} the functor
+$$
+\text{Tot} : \text{DoubleComp}(\mathcal{A}) \to \text{Comp}(\mathcal{A})
+$$
+is compatible with shift functors, in the sense that we have a functorial
+isomorphism $\gamma : \text{Tot}(A^{\bullet, \bullet})[1] \to
+\text{Tot}(A^{\bullet, \bullet}[1, 0])$.
+
+\medskip\noindent
+Second, if
+$$
+f, g : A^{\bullet, \bullet} \to B^{\bullet, \bullet}
+$$
+are homotopic when $f$ and $g$ are viewed as morphisms of complexes
+of complexes in the manner given above, then
+$$
+\text{Tot}(f), \text{Tot}(g) :
+\text{Tot}(A^{\bullet, \bullet}) \to \text{Tot}(B^{\bullet, \bullet})
+$$
+are homotopic maps of complexes. Indeed, let $h = (h^p)$
+be a homotopy between $f$ and $g$. If we denote
+$h^{p, q} : A^{p, q} \to B^{p - 1, q}$ the component in degree $p$ of $h^q$,
+then this means that
+$$
+f^{p, q} - g^{p, q} = d_1^{p - 1, q} \circ h^{p, q} +
+h^{p + 1, q} \circ d_1^{p, q}
+$$
+The fact that $h^p : A^{p, \bullet} \to B^{p - 1, \bullet}$ is a map of
+complexes means that
+$$
+d_2^{p - 1, q} \circ h^{p, q} = h^{p, q + 1} \circ d_2^{p, q}
+$$
+Let us define $h' = ((h')^n)$ the homotopy given by the maps
+$(h')^n : \text{Tot}^n(A^{\bullet, \bullet}) \to
+\text{Tot}^{n - 1}(B^{\bullet, \bullet})$
+using $h^{p, q}$ on the summand $A^{p, q}$ for $p + q = n$.
+Then we see that
+$$
+d_{\text{Tot}(B^{\bullet, \bullet})} \circ h' +
+h' \circ d_{\text{Tot}(A^{\bullet, \bullet})}
+$$
+restricted to the summand $A^{p, q}$ is equal to
+$$
+d_1^{p - 1, q} \circ h^{p, q} +
+(-1)^{p - 1} d_2^{p - 1, q} \circ h^{p, q} +
+h^{p + 1, q} \circ d_1^{p, q} +
+h^{p, q + 1} \circ (-1)^p d_2^{p, q}
+$$
+which evaluates to $f^{p, q} - g^{p, q}$ by the equations given above.
+This proves the second compatibility.
+
+\medskip\noindent
+Third, suppose that in the paragraph above we have $f = g$.
+Then the assignment $h \leadsto h'$ above is compatible with
+the identification of Lemma \ref{lemma-homotopy-shift-cochain}.
+More precisely, if we view $h$ as a morphism of complexes
+of complexes $A^{\bullet, \bullet} \to B^{\bullet, \bullet}[-1, 0]$
+via this lemma then
+$$
+\text{Tot}(A^{\bullet, \bullet})
+\xrightarrow{\text{Tot}(h)}
+\text{Tot}(B^{\bullet, \bullet}[-1, 0])
+\xrightarrow{\gamma^{-1}}
+\text{Tot}(B^{\bullet, \bullet})[-1]
+$$
+is equal to $h'$ viewed as a morphism of complexes via the lemma.
+Here $\gamma$ is the identification of
+Remark \ref{remark-shift-double-complex}.
+The verification of this third point is immediate.
+
+\medskip\noindent
+Fourth, let
+$$
+0 \to A^{\bullet, \bullet} \to B^{\bullet, \bullet} \to
+C^{\bullet, \bullet} \to 0
+$$
+be a complex of double complexes and suppose we are given splittings
+$s^p : C^{p, \bullet} \to B^{p, \bullet}$ and
+$\pi^p : B^{p, \bullet} \to A^{p, \bullet}$
+of this as in Lemma \ref{lemma-ses-termwise-split-cochain}
+when we view double complexes
+as complexes of complexes in the manner given above.
+This on the one hand produces a map
+$$
+\delta : C^{\bullet, \bullet} \longrightarrow A^{\bullet, \bullet}[0, 1]
+$$
+by the procedure in Lemma \ref{lemma-ses-termwise-split-cochain}.
+On the other hand taking $\text{Tot}$ we obtain a complex
+$$
+0 \to \text{Tot}(A^{\bullet, \bullet}) \to
+\text{Tot}(B^{\bullet, \bullet}) \to
+\text{Tot}(C^{\bullet, \bullet}) \to 0
+$$
+which is termwise split (see below) and hence comes with a morphism
+$$
+\delta' :
+\text{Tot}(C^{\bullet, \bullet})
+\longrightarrow
+\text{Tot}(A^{\bullet, \bullet})[1]
+$$
+well defined up to homotopy by Lemmas \ref{lemma-ses-termwise-split-cochain}
+and \ref{lemma-ses-termwise-split-homotopy-cochain}. Claim:
+these maps agree in the sense that
+$$
+\text{Tot}(C^{\bullet, \bullet})
+\xrightarrow{\text{Tot}(\delta)}
+\text{Tot}(A^{\bullet, \bullet}[1, 0]) \xrightarrow{\gamma^{-1}}
+\text{Tot}(A^{\bullet, \bullet})[1]
+$$
+is equal to $\delta'$ where $\gamma$ is as in
+Remark \ref{remark-shift-double-complex}. To see this denote
+$s^{p, q} : C^{p, q} \to B^{\bullet, q}$ and
+$\pi^{p, q} : B^{p, q} \to A^{p, q}$ the components of $s^q$ and $\pi^q$.
+As splittings
+$(s')^n : \text{Tot}^n(C^{\bullet, \bullet}) \to
+\text{Tot}^n(B^{\bullet, \bullet})$
+and
+$(\pi')^n : \text{Tot}^n(B^{\bullet, \bullet}) \to
+\text{Tot}^n(A^{\bullet, \bullet})$
+we use the maps whose components are $s^{p, q}$ and $\pi^{p, q}$
+for $p + q = n$. We recall that
+$$
+(\delta')^n =
+(\pi')^{n + 1} \circ d_{\text{Tot}(B^{\bullet, \bullet})}^n \circ (s')^n :
+\text{Tot}^n(C^{\bullet, \bullet}) \to
+\text{Tot}^{n + 1}(A^{\bullet, \bullet})
+$$
+The restriction of this to the summand $C^{p, q}$ is equal to
+$$
+\pi^{p + 1, q} \circ
+d_1^{p, q} \circ
+s^{p, q} +
+\pi^{p, q + 1} \circ
+(-1)^p d_2^{p, q} \circ
+s^{p, q} =
+\pi^{p + 1, q} \circ
+d_1^{p, q} \circ
+s^{p, q}
+$$
+The equality holds because $s^p$ is a morphism of complexes (with $d_2$
+as differential) and because $\pi^{p, q + 1} \circ s^{p, q + 1} = 0$
+as $s$ and $\pi$ correspond to a direct sum decomposition of $B$
+in every bidegree. On the other hand, for $\delta$ we have
+$$
+\delta^p =  \pi^p \circ d_1 \circ s^p :
+C^{p, \bullet} \to A^{p + 1, \bullet}
+$$
+whose restriction to the summand $C^{p, q}$ is equal to
+$\pi^{p + 1, q} \circ d_1^{p, q} \circ s^{p, q}$.
+Thus we get the same as before which matches with the fact that
+the isomorphism
+$\gamma : \text{Tot}(A^{\bullet, \bullet})[1] \to
+\text{Tot}(A^{\bullet, bullet}[1, 0])$
+is defined without the intervetion of signs.
 \end{remark}
 
 
@@ -5502,7 +5857,7 @@ $$
 \alpha : A \to A[-1, 1]
 $$
 which is given in degree $(p, q)$ by the inclusion
-$F^{p + 1}K^{p + q} \to F^pK^{p + q}$.
+$F^{p + 1}K^{p + 1 + q} \to F^pK^{p + 1 + q}$.
 This is an injective morphism of differential objects
 $\alpha : (A, d) \to (A, d)[-1, 1]$. Hence, we can apply
 Remark \ref{remark-differential-object-selfmap}
@@ -5996,34 +6351,37 @@ that (2) and (3) are true.
 \label{section-double-complex}
 
 \noindent
-Let $A^{\bullet, \bullet}$ be a double complex, see
+Let $K^{\bullet, \bullet}$ be a double complex, see
 Section \ref{section-double-complexes}. It is customary to denote
-$H^p_I(A^{\bullet, \bullet})$
+$H^p_I(K^{\bullet, \bullet})$
 the complex with terms $\Ker(d_1^{p, q})/\Im(d_1^{p - 1, q})$
 (varying $q$) and differential induced by $d_2$.
-Then $H^q_{II}(H^p_I(A^{\bullet, \bullet}))$ denotes its cohomology in
-degree $q$. It is also customary to denote $H^q_{II}(A^{\bullet, \bullet})$
+Then $H^q_{II}(H^p_I(K^{\bullet, \bullet}))$ denotes its cohomology in
+degree $q$. It is also customary to denote $H^q_{II}(K^{\bullet, \bullet})$
 the complex with terms $\Ker(d_2^{p, q})/\Im(d_2^{p, q - 1})$
 (varying $p$) and differential induced by $d_1$.
-Then $H^p_I(H^q_{II}(A^{\bullet, \bullet}))$ denotes its cohomology in
+Then $H^p_I(H^q_{II}(K^{\bullet, \bullet}))$ denotes its cohomology in
 degree $p$. It will turn out that these cohomology groups show up
 as the terms in the spectral sequence for a filtration on the
 associated total complex or simple complex, see
 Definition \ref{definition-associated-simple-complex}.
 
 \medskip\noindent
-There are two natural filtrations on the simple complex $sA^\bullet$
-associated to the double complex $A^{\bullet, \bullet}$. Namely, we
+There are two natural filtrations on the total complex
+$\text{Tot}(K^{\bullet, \bullet})$
+associated to the double complex $K^{\bullet, \bullet}$. Namely, we
 define
 $$
-F_I^p(sA^n) = \bigoplus\nolimits_{i + j = n, \ i \geq p} A^{i, j}
+F_I^p(\text{Tot}^n(K^{\bullet, \bullet})) =
+\bigoplus\nolimits_{i + j = n, \ i \geq p} K^{i, j}
 \quad
 \text{and}
 \quad
-F_{II}^p(sA^n) = \bigoplus\nolimits_{i + j = n, \ j \geq p} A^{i, j}.
+F_{II}^p(\text{Tot}^n(K^{\bullet, \bullet})) =
+\bigoplus\nolimits_{i + j = n, \ j \geq p} K^{i, j}.
 $$
-It is immediately verified that $(sA^\bullet, F_I)$ and
-$(sA^\bullet, F_{II})$ are filtered complexes.
+It is immediately verified that $(\text{Tot}(K^{\bullet, \bullet}), F_I)$ and
+$(\text{Tot}(K^{\bullet, \bullet}), F_{II})$ are filtered complexes.
 By Section \ref{section-filtered-complex}
 we obtain two spectral sequences. It is customary to
 denote $({}'E_r, {}'d_r)_{r \geq 0}$ the spectral sequence associated
@@ -6056,7 +6414,8 @@ Omitted.
 \end{proof}
 
 \noindent
-These spectral sequences define two filtrations on $H^n(sK^\bullet)$.
+These spectral sequences define two filtrations on
+$H^n(\text{Tot}(K^{\bullet, \bullet}))$.
 We will denote these $F_I$ and $F_{II}$.
 
 \begin{definition}
@@ -6064,14 +6423,14 @@ We will denote these $F_I$ and $F_{II}$.
 Let $\mathcal{A}$ be an abelian category.
 Let $K^{\bullet, \bullet}$ be a double complex.
 We say the spectral sequence $({}'E_r, {}'d_r)_{r \geq 0}$
-{\it weakly converges to $H^n(sK^\bullet)$},
-{\it abuts to $H^n(sK^\bullet)$}, or
-{\it converges to $H^n(sK^\bullet)$}
+{\it weakly converges to $H^n(\text{Tot}(K^{\bullet, \bullet}))$},
+{\it abuts to $H^n(\text{Tot}(K^{\bullet, \bullet}))$}, or
+{\it converges to $H^n(\text{Tot}(K^{\bullet, \bullet}))$}
 if Definition \ref{definition-filtered-complex-ss-converges} applies.
 Similarly we say the spectral sequence $({}''E_r, {}''d_r)_{r \geq 0}$
-{\it weakly converges to $H^n(sK^\bullet)$},
-{\it abuts to $H^n(sK^\bullet)$}, or
-{\it converges to $H^n(sK^\bullet)$}
+{\it weakly converges to $H^n(\text{Tot}(K^{\bullet, \bullet}))$},
+{\it abuts to $H^n(\text{Tot}(K^{\bullet, \bullet}))$}, or
+{\it converges to $H^n(\text{Tot}(K^{\bullet, \bullet}))$}
 if Definition \ref{definition-filtered-complex-ss-converges} applies.
 \end{definition}
 
@@ -6080,14 +6439,16 @@ As mentioned above there is no consistent terminology regarding these
 notions in the literature. In the situation of the definition, we have
 weak convergence of the first spectral sequence if for all $n$
 $$
-\text{gr}_{F_I}(H^n(sK^\bullet)) = \oplus_{p + q = n} {}'E_\infty^{p, q}
+\text{gr}_{F_I}(H^n(\text{Tot}(K^{\bullet, \bullet}))) =
+\oplus_{p + q = n} {}'E_\infty^{p, q}
 $$
 via the canonical comparison of
 Lemma \ref{lemma-compute-cohomology-filtered-complex}.
 Similarly the second spectral sequence $({}''E_r, {}''d_r)_{r \geq 0}$
 weakly converges if for all $n$
 $$
-\text{gr}_{F_{II}}(H^n(sK^\bullet)) = \oplus_{p + q = n} {}''E_\infty^{p, q}
+\text{gr}_{F_{II}}(H^n(\text{Tot}(K^{\bullet, \bullet}))) =
+\oplus_{p + q = n} {}''E_\infty^{p, q}
 $$
 via the canonical comparison of
 Lemma \ref{lemma-compute-cohomology-filtered-complex}.
@@ -6102,11 +6463,12 @@ only finitely many nonzero $K^{p, q}$ with $p + q = n$. Then
 are bounded,
 \item the filtrations $F_I$, $F_{II}$ on each $H^n(K^\bullet)$ are finite,
 \item the spectral sequences $({}'E_r, {}'d_r)_{r \geq 0}$ and
-$({}''E_r, {}''d_r)_{r \geq 0}$ converge to $H^*(sK^\bullet)$,
+$({}''E_r, {}''d_r)_{r \geq 0}$ converge to
+$H^*(\text{Tot}(K^{\bullet, \bullet}))$,
 \item if $\mathcal{C} \subset \mathcal{A}$ is a weak Serre subcategory
 and for some $r$ we have ${}'E_r^{p, q} \in \mathcal{C}$ for all
-$p, q \in \mathbf{Z}$, then $H^n(sK^\bullet)$ is in $\mathcal{C}$.
-Similarly for $({}''E_r, {}''d_r)_{r \geq 0}$.
+$p, q \in \mathbf{Z}$, then $H^n(\text{Tot}(K^{\bullet, \bullet}))$
+is in $\mathcal{C}$. Similarly for $({}''E_r, {}''d_r)_{r \geq 0}$.
 \end{enumerate}
 \end{lemma}
 
@@ -6136,7 +6498,7 @@ an isomorphism $K^p \to \Ker(d_2^{p, 0})$.
 \end{enumerate}
 Then $\alpha$ induces a quasi-isomorphism
 $$
-K^\bullet \longrightarrow sA^\bullet
+K^\bullet \longrightarrow \text{Tot}(A^{\bullet, \bullet})
 $$
 of complexes.
 Moreover, there is a variant of this lemma involving the second
@@ -6145,20 +6507,23 @@ variable $q$ instead of $p$.
 
 \begin{proof}
 The map is simply the map given by the morphisms
-$K^n \to A^{n, 0} \to sA^n$, which are easily seen to define
-a morphism of complexes.
+$K^n \to A^{n, 0} \to \text{Tot}^n(A^{\bullet, \bullet})$,
+which are easily seen to define a morphism of complexes.
 Consider the spectral sequence $({}'E_r, {}'d_r)_{r \geq 0}$
 associated to the double complex $A^{\bullet, \bullet}$.
 By Lemma \ref{lemma-first-quadrant-ss} this spectral sequence converges
-and the induced filtration on $H^n(sA^\bullet)$ is finite for each $n$.
+and the induced filtration on $H^n(\text{Tot}(A^{\bullet, \bullet}))$
+is finite for each $n$.
 By Lemma \ref{lemma-ss-double-complex} and assumption (4) we have
 ${}'E_1^{p, q} = 0$ unless $q = 0$ and $'E_1^{p, 0} = K^p$
 with differential ${}'d_1^{p, 0}$ identified with $d_K^p$.
 Hence ${}'E_2^{p, 0} = H^p(K^\bullet)$ and zero otherwise.
 This clearly implies $d_2^{p, q} = d_3^{p, q} = \ldots = 0$
-for degree reasons. Hence we conclude that $H^n(sA^\bullet) = H^n(K^\bullet)$.
+for degree reasons. Hence we conclude that
+$H^n(\text{Tot}(A^{\bullet, \bullet})) = H^n(K^\bullet)$.
 We omit the verification that this identification is given by the
-morphism of complexes $K^\bullet \to sA^\bullet$ introduced above.
+morphism of complexes $K^\bullet \to \text{Tot}(A^{\bullet, \bullet})$
+introduced above.
 \end{proof}
 
 \begin{lemma}
@@ -6214,7 +6579,8 @@ $$
 given by $h^{n, m}$ on the summand $A^{n, m}$. Then we compute
 that the map
 $$
-d_{sA} \circ h' + h' \circ d_{sA}
+d_{\text{Tot}(A^{\bullet, \bullet})} \circ h' +
+h' \circ d_{\text{Tot}(A^{\bullet, \bullet})}
 $$
 restricted to the summand $A^{n, m}$ is equal to
 $$
@@ -6686,6 +7052,9 @@ injectives. See also Lemma \ref{lemma-adjoint-get-abelian}.
 
 \begin{lemma}
 \label{lemma-adjoint-preserve-injectives}
+\begin{slogan}
+A functor with an exact left adjoint preserves injectives
+\end{slogan}
 Let $\mathcal{A}$ and $\mathcal{B}$ be abelian categories.
 Let $u : \mathcal{A} \to \mathcal{B}$ and
 $v : \mathcal{B} \to \mathcal{A}$ be additive functors. Assume
@@ -6917,8 +7286,8 @@ $\mathcal{I}' \subset \mathcal{I}$ and for $i' \in \Ob(\mathcal{I}')$
 a direct sum decomposition $M_{i'} = X_{i'} \oplus Z_{i'}$
 as stated in the lemma. To see that $M$ is essentially constant
 we can replace $\mathcal{I}$ by $\mathcal{I}'$, see
-Categories, Lemmas \ref{categories-lemma-cofinal-essentially-constant} and
-\ref{categories-lemma-cofinal}. Pick any $i \in \Ob(\mathcal{I})$
+Categories, Lemma \ref{categories-lemma-cofinal-essentially-constant}.
+Pick any $i \in \Ob(\mathcal{I})$
 and denote $X \to M_i$ the inverse of the isomorphism $X_i \to X$
 followed by the inclusion map $X_i \to M_i$. If $j$ is
 a second object, then choose $j \to k$ such that $Z_j \to M_k$ is
@@ -7149,7 +7518,8 @@ $Z_{j'} \to Z_j$ is zero.
 
 \begin{proof}
 Assume $(A_i)$ is essentially constant. Then there exists an $i$ and
-a morphism $A_i \to A$ such that for all $j \geq i$ there exists
+a morphism $A_i \to A$ such that $A \to A_i \to A$ is the identity and
+for all $j \geq i$ there exists
 a $j' \geq j$ such that $A_{j'} \to A_j$ factors as
 $A_{j'} \to A_i \to A \to A_j$ (the last map comes from $A = \lim A_i$).
 Hence setting $Z_j = \Ker(A_j \to A)$ for all $j \geq i$ works.

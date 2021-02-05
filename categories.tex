@@ -496,16 +496,15 @@ sometimes referred to as the
 
 \noindent
 Note that given a morphism $\phi : U \to V$ in $\mathcal{C}$ we get a
-corresponding natural transformation of functors
-$h(\phi) : h_U \to h_V$ defined simply by composing with the morphism
-$U \to V$. It is trivial to see that this turns
+corresponding natural transformation of functors $h(\phi) : h_U \to h_V$
+defined by composing with the morphism $U \to V$. This turns
 composition of morphisms in $\mathcal{C}$ into composition of
 transformations of functors. In other words we get a functor
 $$
 h :
 \mathcal{C}
 \longrightarrow
-\text{Fun}(\mathcal{C}^{opp}, \textit{Sets}) = \textit{PSh}(\mathcal{C})
+\textit{PSh}(\mathcal{C})
 $$
 Note that the target is a ``big'' category, see
 Remark \ref{remark-big-categories}. On the other hand,
@@ -853,7 +852,7 @@ Let $F, G, H : \mathcal{C}^{opp} \to \textit{Sets}$
 be functors. Let $a : F \to G$ and $b : H \to G$ be
 transformations of functors. Then the fibre product
 $F \times_{a, G, b} H$ in the category
-$\text{Fun}(\mathcal{C}^{opp}, \textit{Sets})$
+$\textit{PSh}(\mathcal{C})$
 exists and is given by the formula
 $$
 (F \times_{a, G, b} H)(X) =
@@ -1247,6 +1246,34 @@ with value in the category of sets.
 \end{enumerate}
 By the Yoneda lemma (and its dual) this formula completely determines the
 limit, respectively the colimit.
+\end{remark}
+
+\begin{remark}
+\label{remark-cones-and-cocones}
+Let $M : \mathcal{I} \to \mathcal{C}$ be a diagram. In this setting a
+{\it cone} for $M$ is given by an object $W$ and a family of morphisms
+$q_i : W \to M_i$, $i \in \Ob(\mathcal{I})$ such that for all morphisms
+$\phi : i \to i'$ of $\mathcal{I}$ the diagram
+$$
+\xymatrix{
+& W \ar[dl]_{q_i} \ar[dr]^{q_{i'}} \\
+M_i \ar[rr]^{M(\phi)} & & M_{i'}
+}
+$$
+is commutative. The collection of cones forms a category with an obvious
+notion of morphisms. Clearly, the limit of $M$, if it exists, is a final
+object in the category of cones. Dually, a {\it cocone} for $M$ is given
+by an object $W$ and a family of morphisms $t_i : M_i \to W$ such that for
+all morphisms $\phi : i \to i'$ in $\mathcal{I}$ the diagram
+$$
+\xymatrix{
+M_i \ar[rr]^{M(\phi)} \ar[dr]_{t_i} & & M_{i'} \ar[dl]^{t_{i'}} \\
+& W
+}
+$$
+commutes. The collection of cocones forms a category with an obvious notion
+of morphisms. Similarly to the above the colimit of $M$ exists
+if and only if the category of cocones has an initial object.
 \end{remark}
 
 \noindent
@@ -2760,27 +2787,30 @@ $$
 Then $X$ comes equipped with the coprojections $M_i \to X$.
 A stronger condition would be to require that $X$ is the colimit and
 that there exists an $i \in \mathcal{I}$ and a morphism $X \to M_i$ such
-that the composition $X \to M_i \to X$ is $\text{id}_X$. A stronger condition
-is the following.
+that the composition $X \to M_i \to X$ is $\text{id}_X$. An even
+stronger condition is the following.
 
 \begin{definition}
 \label{definition-essentially-constant-diagram}
 Let $M : \mathcal{I} \to \mathcal{C}$ be a diagram in a category
 $\mathcal{C}$.
 \begin{enumerate}
-\item Assume the index category $\mathcal{I}$ is filtered.
-We say $M$ {\it is essentially constant} with {\it value} $X$ if
-$X = \colim_i M_i$ and there exists an $i \in \mathcal{I}$
-and a morphism $X \to M_i$ such that
+\item Assume the index category $\mathcal{I}$ is filtered and
+let $(X, \{M_i \to X\}_i)$ be a cocone for $M$, see
+Remark \ref{remark-cones-and-cocones}. We say $M$ is
+{\it essentially constant} with {\it value} $X$ if there exists an
+$i \in \mathcal{I}$ and a morphism $X \to M_i$ such that
 \begin{enumerate}
 \item $X \to M_i \to X$ is $\text{id}_X$, and
 \item for all $j$ there exist $k$ and morphisms $i \to k$ and $j \to k$
 such that the morphism $M_j \to M_k$ equals the composition
 $M_j \to X \to M_i \to M_k$.
 \end{enumerate}
-\item Assume the index category $\mathcal{I}$ is cofiltered. We say
+\item Assume the index category $\mathcal{I}$ is cofiltered and let
+$(X, \{X \to M_i\}_i)$ be a cone for $M$, see
+Remark \ref{remark-cones-and-cocones}. We say
 $M$ is {\it essentially constant} with {\it value} $X$ if
-$X = \lim_i M_i$ and there exists an $i \in \mathcal{I}$
+there exists an $i \in \mathcal{I}$
 and a morphism $M_i \to X$ such that
 \begin{enumerate}
 \item $X \to M_i \to X$ is $\text{id}_X$, and
@@ -2789,6 +2819,8 @@ such that the morphism $M_k \to M_j$ equals the composition
 $M_k \to M_i \to X \to M_j$.
 \end{enumerate}
 \end{enumerate}
+Please keep in mind Lemma \ref{lemma-essentially-constant-is-limit-colimit}
+when using this definition.
 \end{definition}
 
 \noindent
@@ -2828,6 +2860,24 @@ case the system $M \to M \to M \to \ldots$ with transition maps $S$
 has colimit $0$ and the composition $0 \to M \to 0$ is the identity,
 but the system is not essentially constant.
 
+\medskip\noindent
+The following lemma is a sanity check.
+
+\begin{lemma}
+\label{lemma-essentially-constant-is-limit-colimit}
+Let $M : \mathcal{I} \to \mathcal{C}$ be a diagram.
+If $\mathcal{I}$ is filtered and $M$ is essentially
+constant as an ind-object, then $X = \colim M_i$ exists and $M$
+is essentially constant with value $X$.
+If $\mathcal{I}$ is cofiltered and $M$ is essentially
+constant as a pro-object, then $X = \lim M_i$ exists and $M$ is
+essentially constant with value $X$.
+\end{lemma}
+
+\begin{proof}
+Omitted. This is a good excercise in the definitions.
+\end{proof}
+
 \begin{remark}
 \label{remark-ind-category}
 Let $\mathcal{C}$ be a category. There exists a big category
@@ -2864,6 +2914,70 @@ faithful embedding. In this language one sees that a diagram $F$ is
 essentially constant if and only if $F$ is isomorphic to a constant system.
 If we ever need this material, then we will formulate this into a lemma
 and prove it here.
+\end{remark}
+
+\begin{example}
+\label{example-pro-morphism-inverse-systems}
+Let $\mathcal{C}$ be a category. Let $(X_n)$ and $(Y_n)$ be inverse
+systems in $\mathcal{C}$ over $\mathbf{N}$ with the usual ordering.
+Picture:
+$$
+\ldots \to X_3 \to X_2 \to X_1
+\quad\text{and}\quad
+\ldots \to Y_3 \to Y_2 \to Y_1
+$$
+Let $a : (X_n) \to (Y_n)$ be a morphism of pro-objects of $\mathcal{C}$.
+What does $a$ amount to? Well, for each $n \in \mathbf{N}$ there should
+exist an $m(n)$ and a morphism $a_n : X_{m(n)} \to Y_n$. These morphisms
+ought to agree in the following sense: for all $n' \geq n$ there exists an
+$m(n', n) \geq m(n'), m(n)$ such that the diagram
+$$
+\xymatrix{
+X_{m(n, n')} \ar[rr] \ar[d] & & X_{m(n)} \ar[d]^{a_n} \\
+X_{m(n')} \ar[r]^{a_{n'}} & Y_{n'} \ar[r] & Y_n
+}
+$$
+commutes. After replacing $m(n)$ by $\max_{k, l \leq n}\{m(n, k), m(k, l)\}$
+we see that we obtain $\ldots \geq m(3) \geq m(2) \geq m(1)$ and a commutative
+diagram
+$$
+\xymatrix{
+\ldots \ar[r] &
+X_{m(3)} \ar[d]^{a_3} \ar[r] &
+X_{m(2)} \ar[d]^{a_2} \ar[r] &
+X_{m(1)} \ar[d]^{a_1} \\
+\ldots \ar[r] &
+Y_3 \ar[r] &
+Y_2 \ar[r] &
+Y_1
+}
+$$
+Given an increasing map $m' : \mathbf{N} \to \mathbf{N}$ with $m' \geq m$
+and setting $a'_i : X_{m'(i)} \to X_{m(i)} \to Y_i$ the pair
+$(m', a')$ defines the same morphism of pro-systems. Conversely, given
+two pairs $(m_1, a_1)$ and $(m_1, a_2)$ as above then these define the same
+morphism of pro-objects if and only if we can find $m' \geq m_1, m_2$
+such that $a'_1 = a'_2$.
+\end{example}
+
+\begin{remark}
+\label{remark-pro-category-copresheaves}
+Let $\mathcal{C}$ be a category. Let $F : \mathcal{I} \to \mathcal{C}$ and
+$G : \mathcal{J} \to \mathcal{C}$ be cofiltered diagrams in $\mathcal{C}$.
+Consider the functors $A, B : \mathcal{C} \to \textit{Sets}$ defined by
+$$
+A(X) = \colim_i \Mor_\mathcal{C}(F(i), X)
+\quad\text{and}\quad
+B(X) = \colim_j \Mor_\mathcal{C}(G(j), X)
+$$
+We claim that a morphism of pro-systems from $F$ to $G$ is the same thing
+as a transformation of functors $t : B \to A$. Namely, given $t$
+we can apply $t$ to the class of $\text{id}_{G(j)}$ in $B(G(j))$
+to get a compatible system of elements
+$\xi_j \in A(G(j)) = \colim_i \Mor_\mathcal{C}(F(i), G(j))$
+which is exactly our definition of a morphism in $\text{Pro-}\mathcal{C}$ in
+Remark \ref{remark-pro-category}. We omit the construction of a
+transformation $B \to A$ given a morphism of pro-objects from $F$ to $G$.
 \end{remark}
 
 \begin{lemma}
@@ -3095,9 +3209,9 @@ a morphism $u(v(Y)) \to Y$ corresponding to $\text{id}_{v(Y)}$.
 These maps are called the {\it adjunction maps}. The adjunction maps
 are functorial in $X$ and $Y$, hence we obtain morphisms of functors
 $$
-\text{id}_\mathcal{C} \to v \circ u\quad (\text{unit})
+\eta : \text{id}_\mathcal{C} \to v \circ u\quad (\text{unit})
 \quad\text{and}\quad
-u \circ v \to \text{id}_\mathcal{D}\quad (\text{counit}).
+\epsilon : u \circ v \to \text{id}_\mathcal{D}\quad (\text{counit}).
 $$
 Moreover, if $\alpha : u(X) \to Y$
 and $\beta : X \to v(Y)$ are morphisms, then the following are equivalent
@@ -3134,58 +3248,19 @@ it is right adjoint to $u$.
 \end{proof}
 
 \begin{lemma}
-\label{lemma-adjoint-fully-faithful}
-Let $u$ be a left adjoint to $v$ as in Definition \ref{definition-adjoint}.
-Then
-\begin{enumerate}
-\item $u$ is fully faithful $\Leftrightarrow \text{id} \cong v \circ u$.
-\item $v$ is fully faithful $\Leftrightarrow u \circ v \cong \text{id}$.
-\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-Assume $u$ is fully faithful. We have to show the adjunction map
-$X \to v(u(X))$ is an isomorphism. Let $X' \to v(u(X))$ be any morphism.
-By adjointness this corresponds to a morphism $u(X') \to u(X)$. By fully
-faithfulness of $u$ this corresponds to a morphism $X' \to X$. Thus we
-see that $X \to v(u(X))$ defines a bijection
-$\Mor(X', X) \to \Mor(X', v(u(X)))$. Hence it is an isomorphism.
-Conversely, if $\varphi : \text{id} \to v \circ u$ is a natural
-isomorphism, then $u$
-is faithful for the trivial reason that the composition $\Mor(X,X') \to
-\Mor(u(X),u(X')) \to \Mor(v(u(X)),v(u(X')))$ is a bijection. Furthermore, $u$
-is full: A preimage for a morphism $\gamma : u(X) \to u(X')$ is
-$u(\varphi_{X'}^{-1} \circ v(\varepsilon_{u(X')} \circ u(\varphi_{X'}) \circ
-\gamma) \circ \eta_X)$, where $\eta : \text{id}_C \to v \circ u$ is the
-unit and $\varepsilon : u \circ v \to \text{id}_D$ is the counit of the
-adjunction.
-
-\medskip\noindent
-Part (2) is dual to part (1).
-\end{proof}
-
-\begin{remark}
-\label{remark-composition-of-adjoints-isomorphic-to-identity}
-The proof of Lemma \ref{lemma-adjoint-fully-faithful} shows that, in the
-situation of Definition \ref{definition-adjoint}, the composition $v \circ u$
-is isomorphic to the identity via \emph{some} natural isomorphism if and only
-if the unit is a natural isomorphism. Dually, the composition $u \circ v$ is
-isomorphic to the identity via some natural isomorphism if and only if the
-counit is a natural isomorphism. In fact, it even suffices if the composition
-$u \circ v$ is fully faithful, see
-Lemma \ref{lemma-left-adjoint-composed-fully-faithful}.
-\end{remark}
-
-\begin{lemma}
 \label{lemma-left-adjoint-composed-fully-faithful}
 \begin{reference}
 Bhargav Bhatt, private communication.
 \end{reference}
 Let $u$ be a left adjoint to $v$ as in Definition \ref{definition-adjoint}.
-If $u \circ v$ is fully faithful, then $v$ is fully faithful.
+\begin{enumerate}
+\item If $v \circ u$ is fully faithful, then $u$ is fully faithful.
+\item If $u \circ v$ is fully faithful, then $v$ is fully faithful.
+\end{enumerate}
 \end{lemma}
 
 \begin{proof}
+Proof of (2). Assume $u \circ v$ is fully faithful.
 Say we have $X$, $Y$ in $\mathcal{D}$.
 Then the natural composite map
 $$
@@ -3201,7 +3276,39 @@ is a bijection, where the first map is natural one and
 the second map comes from the counit $u(v(Y)) \to Y$ of the adjunction.
 So this says that
 $\Mor(v(X), v(Y)) \to \Mor(u(v(X)), u(v(Y)))$
-is also injective, as wanted.
+is also injective, as wanted. The proof of (1) is dual to this.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-adjoint-fully-faithful}
+Let $u$ be a left adjoint to $v$ as in Definition \ref{definition-adjoint}.
+Then
+\begin{enumerate}
+\item $u$ is fully faithful $\Leftrightarrow$ $\text{id} \cong v \circ u$
+$\Leftrightarrow$ $\eta : \textit{id} \to v \circ u$ is an isomorphism,
+\item $v$ is fully faithful $\Leftrightarrow$
+$u \circ v \cong \text{id}$ $\Leftrightarrow$
+$\epsilon : u \circ v \to \text{id}$ is an isomorphism.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Proof of (1).
+Assume $u$ is fully faithful. We will show $\eta_X : X \to v(u(X))$
+is an isomorphism. Let $X' \to v(u(X))$ be any morphism.
+By adjointness this corresponds to a morphism $u(X') \to u(X)$. By fully
+faithfulness of $u$ this corresponds to a unique morphism $X' \to X$.
+Thus we see that post-composing by $\eta_X$ defines a bijection
+$\Mor(X', X) \to \Mor(X', v(u(X)))$. Hence $\eta_X$ is an isomorphism.
+If there exists an isomorphism $\text{id} \cong v \circ u$ of functors,
+then $v \circ u$ is fully faithful. By
+Lemma \ref{lemma-left-adjoint-composed-fully-faithful} we see
+that $u$ is fully faithful. By the above this implies $\eta$
+is an isomorphism. Thus all $3$ conditions are equivalent (and these
+conditions are also equivalent to $v \circ u$ being fully faithful).
+
+\medskip\noindent
+Part (2) is dual to part (1).
 \end{proof}
 
 \begin{lemma}
@@ -4882,8 +4989,8 @@ in the following list of cases (to be updated as we go along):
 \begin{enumerate}
 \item The $2$-category of categories $\textit{Cat}$.
 \item The $(2, 1)$-category of categories $\textit{Cat}$.
-\item The $2$-category of groupoids $\textit{Groupoids}$.
-\item The $(2, 1)$-category of groupoids $\textit{Groupoids}$.
+\item The $2$-category of groupoids $\textit{Groupoids}$;
+this is a $(2, 1)$-category.
 \item The $2$-category of fibred categories over a fixed category.
 \item The $(2, 1)$-category of fibred categories over a fixed category.
 \end{enumerate}
@@ -6233,7 +6340,7 @@ Since $\phi : F(x) \to G(y)$ is an isomorphism, by the uniqueness
 of strongly cartesian morphisms we find a unique isomorphism
 $f^*\phi : F(f^*x) \to G(f^*y)$ such that
 $G(b) \circ f^*\phi = \phi \circ F(a)$. In other words
-$(G(a), G(b)) : (V, f^*x, f^*y, f^*\phi) \to (U, x, y, \phi)$
+$(a, b) : (V, f^*x, f^*y, f^*\phi) \to (U, x, y, \phi)$
 is a morphism in $\mathcal{X} \times_\mathcal{S} \mathcal{Y}$.
 We omit the verification that this is a strongly cartesian morphism
 (and that these are in fact the only strongly cartesian morphisms).
