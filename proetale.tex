@@ -996,7 +996,7 @@ We obtain a continuous map $Y \to X'$ of underlying topological spaces
 over $X$ identifying $\pi_0(Y)$ with $\pi_0(X')$. By
 Lemma \ref{lemma-local-isomorphism-fully-faithful}
 (and Lemma \ref{lemma-ind-zariski-implies})
-this is corresponds to a morphism of affine schemes $Y \to X'$
+this corresponds to a morphism of affine schemes $Y \to X'$
 over $X$. Since $Y \to X$ maps $Y_0$ into $X_0$ we see that
 $Y \to X'$ maps $Y_0$ into $X'_0$, i.e., $Y \to X'$ is w-local.
 By Lemma \ref{lemma-w-local-morphism-equal-points-stalks-is-iso}
@@ -1057,7 +1057,7 @@ Proposition \ref{proposition-maps-wich-identify-local-rings}.
 Assume (3)(a) and (3)(b). Let $A \to B$ be faithfully flat and ind-Zariski.
 We will use without further mention the fact that a flat map
 $A \to B$ is faithfully flat if and only if every closed point
-of $\Spec(A)$ is in the image of $\Spec(B) \to \Spec(A)$
+of $\Spec(A)$ is in the image of $\Spec(B) \to \Spec(A)$.
 We will show that $A \to B$ has a section.
 
 \medskip\noindent
@@ -1076,7 +1076,7 @@ continuous map $V(IB) \to V(I)$. This is possible as
 $V(I) \cong \pi_0(\Spec(A))$ is extremally disconnected, see
 Topology, Proposition
 \ref{topology-proposition-projective-in-category-hausdorff-qc}.
-The image is a closed subspace $T \subset \pi_0(\Spec(B)) \cong V(JB)$
+The image is a closed subspace $T \subset \pi_0(\Spec(B)) \cong V(IB)$
 mapping homeomorphically onto $\pi_0(A)$. Replacing $B$ by the ind-Zariski
 quotient ring constructed in Lemma \ref{lemma-construct}
 we see that we may assume $\pi_0(\Spec(B)) \to \pi_0(\Spec(A))$
@@ -1476,9 +1476,8 @@ maps are isomorphisms as desired.
 \begin{lemma}
 \label{lemma-have-sections-localize}
 Let $A$ be a ring such that every faithfully flat \'etale ring map
-$A \to B$ has a section. Let $Z \subset \Spec(A)$ be a closed subscheme
-of the form $D(f) \cap V(I)$ and let $A \to A_Z^\sim$ be as constructed
-in Lemma \ref{lemma-localization}.
+$A \to B$ has a section. Let $Z \subset \Spec(A)$ be a closed subscheme.
+Let $A \to A_Z^\sim$ be as constructed in Lemma \ref{lemma-localization}.
 Then every faithfully flat \'etale ring map $A_Z^\sim \to C$ has
 a section.
 \end{lemma}
@@ -1980,7 +1979,7 @@ that $D$ has at most the size displayed above.
 \label{lemma-finite-finitely-presented-over-extremally-disconnected}
 Let $A \to B$ be a quasi-finite and finitely presented ring map.
 If the residue fields of $A$ are separably algebraically closed
-and $\Spec(A)$ is extremally disconnected, then $\Spec(B)$ is
+and $\Spec(A)$ is Hausdorff and extremally disconnected, then $\Spec(B)$ is
 extremally disconnected.
 \end{lemma}
 
@@ -1989,13 +1988,15 @@ Set $X = \Spec(A)$ and $Y = \Spec(B)$. Choose a finite partition
 $X = \coprod X_i$ and $X'_i \to X_i$ as in
 \'Etale Cohomology, Lemma
 \ref{etale-cohomology-lemma-decompose-quasi-finite-morphism}.
-Because $X$ is extremally disconnected, every constructible
-locally closed subset is open and closed, hence we see that $X$
-is topologically the disjoint union of the strata $X_i$. Thus we may
-replace $X$ by the $X_i$ and assume there exists a surjective finite
-locally free morphism $X' \to X$ such that $(X' \times_X Y)_{red}$
-is isomorphic to a finite disjoint union of copies of $X'_{red}$.
-Picture
+The map of topological spaces $\coprod X_i \to X$ (where the source
+is the disjoint union in the category of topological spaces)
+has a section by Topology, Proposition
+\ref{topology-proposition-projective-in-category-hausdorff-qc}.
+Hence we see that $X$ is topologically the disjoint union of the
+strata $X_i$. Thus we may replace $X$ by the $X_i$ and assume there
+exists a surjective finite locally free morphism $X' \to X$ such that
+$(X' \times_X Y)_{red}$ is isomorphic to a finite disjoint union of
+copies of $X'_{red}$. Picture
 $$
 \xymatrix{
 \coprod_{i = 1, \ldots, r} X' \ar[r] \ar[d] & Y \ar[d] \\
@@ -2023,12 +2024,24 @@ If $A$ is w-contractible, so is $B$.
 \begin{proof}
 We will use the criterion of
 Lemma \ref{lemma-w-local-strictly-henselian-extremally-disconnected}.
-Set $X = \Spec(A)$ and $Y = \Spec(B)$.
-As $Y \to X$ is a finite morphism, we see that the set of closed
+Set $X = \Spec(A)$ and $Y = \Spec(B)$ and denote $f : Y \to X$
+the induced morphism.
+As $f : Y \to X$ is a finite morphism, we see that the set of closed
 points $Y_0$ of $Y$ is the inverse image of the set of closed points
-$X_0$ of $X$. Moreover, every point of $Y$ specializes to a unique
-point of $Y_0$ as (a) this is true for $X$ and (b) the map
-$X \to Y$ is separated. For every $y \in Y_0$ with image $x \in X_0$
+$X_0$ of $X$. Let $y \in Y$ with image $x \in X$. Then
+$x$ specializes to a unique closed point $x_0 \in X$.
+Say $f^{-1}(\{x_0\}) = \{y_1, \ldots, y_n\}$ with $y_i$
+closed in $Y$. Since $R = \mathcal{O}_{X, x_0}$ is strictly henselian
+and since $f$ is finite, we see that $Y \times_{f, X} \Spec(R)$ is
+equal to $\coprod_{i = 1, \ldots, n} \Spec(R_i)$ where
+each $R_i$ is a local ring finite over $R$
+whose maximal ideal corresponds to $y_i$, see
+Algebra, Lemma \ref{algebra-lemma-characterize-henselian} part (10).
+Then $y$ is a point of exactly one of these $\Spec(R_i)$
+and we see that $y$ specializes to exactly one of the $y_i$.
+In other words, every point of $Y$ specializes to a unique
+point of $Y_0$. Thus $Y$ is w-local.
+For every $y \in Y_0$ with image $x \in X_0$
 we see that $\mathcal{O}_{Y, y}$ is strictly henselian by
 Algebra, Lemma \ref{algebra-lemma-finite-over-henselian}
 applied to $\mathcal{O}_{X, x} \to B \otimes_A \mathcal{O}_{X, x}$.

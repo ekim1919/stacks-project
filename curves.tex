@@ -3830,7 +3830,8 @@ Assume $I \not = 0$. Write $I = (f_1, \ldots, f_r)$. As $A$ is a UFD
 we can write $f_i = fg_i$ where $f$ is the gcd of $f_1, \ldots, f_r$.
 Thus the gcd of $g_1, \ldots, g_r$ is $1$ which means that
 there is no height $1$ prime ideal over $g_1, \ldots, g_r$.
-Since $\dim(A) = 2$ this implies that
+Then either $(g_1, \ldots, g_r) = A$ which implies $I = (f)$ or
+if not, then $\dim(A) = 2$ implies that
 $V(g_1, \ldots, g_r) = \{\mathfrak m\}$, i.e.,
 $\mathfrak m = \sqrt{(g_1, \ldots, g_r)}$.
 
@@ -5117,12 +5118,9 @@ the closed point of $\Spec(\mathcal{O}_{S, s}^\wedge)$
 and having coordinates $u, v$ equal to zero. Since
 $\mathcal{O}_{S, s}$ is a G-ring by
 More on Algebra, Proposition \ref{more-algebra-proposition-ubiquity-G-ring}
-we may apply More on Morphisms, Lemmas
-\ref{more-morphisms-lemma-relative-map-approximation} and
-\ref{more-morphisms-lemma-relative-isomorphism-approximation}
-with $T = S \times \Spec(\mathbf{Z}[a])$ and
-$Y = S \times \Spec(\mathbf{Z}[u, v, a]/(uv -a))$
-to get the conclusion of the lemma.
+we may apply More on Morphisms, Lemma
+\ref{more-morphisms-lemma-relative-map-approximation-pre}
+to conclude.
 \end{proof}
 
 

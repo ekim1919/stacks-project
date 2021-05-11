@@ -1131,17 +1131,24 @@ so forth.
 \section{Faithfully flat descent}
 \label{section-fpqc-descent}
 
+\noindent
+In this section we discuss faithfully flat descent for quasi-coherent
+modules. More precisely, we will prove quasi-coherent modules satisfy
+effect descent with respect to fpqc coverings.
+
 \begin{definition}
 \label{definition-descent-datum}
 Let $\mathcal{U} = \{ t_i : T_i \to T\}_{i \in I}$ be a family of
 morphisms of schemes with fixed target. A {\it descent datum} for
-quasi-coherent sheaves with respect to
-$\mathcal{U}$ is a family $(\mathcal{F}_i, \varphi_{ij})_{i, j\in I}$ where
+quasi-coherent sheaves with respect to $\mathcal{U}$ is a collection
+$((\mathcal{F}_i)_{i \in I}, (\varphi_{ij})_{i, j \in I})$ where
 \begin{enumerate}
-\item for all $i$, $\mathcal{F}_i$ is a quasi-coherent sheaf on $T_i$, and
-\item for all $i, j \in I$ the map
-$\varphi_{ij} : \text{pr}_0^* \mathcal{F}_i \cong \text{pr}_1^* \mathcal{F}_j$
-is an isomorphism on $T_i \times_T T_j$ such that the diagrams
+\item $\mathcal{F}_i$ is a quasi-coherent sheaf on $T_i$, and
+\item $\varphi_{ij} : \text{pr}_0^* \mathcal{F}_i \to
+\text{pr}_1^* \mathcal{F}_j$ is an isomorphism of modules
+on $T_i \times_T T_j$,
+\end{enumerate}
+such that the {\it cocycle condition} holds: the diagrams
 $$
 \xymatrix{
 \text{pr}_0^*\mathcal{F}_i \ar[dr]_{\text{pr}_{02}^*\varphi_{ik}}
@@ -1151,11 +1158,10 @@ $$
 }
 $$
 commute on $T_i \times_T T_j \times_T T_k$.
-\end{enumerate}
 This descent datum is called {\it effective} if there exist a quasi-coherent
 sheaf $\mathcal{F}$ over $T$ and $\mathcal{O}_{T_i}$-module isomorphisms
-$\varphi_i : t_i^* \mathcal{F} \cong \mathcal{F}_i$ satisfying the cocycle
-condition, namely
+$\varphi_i : t_i^* \mathcal{F} \cong \mathcal{F}_i$ compatible with
+the maps $\varphi_{ij}$, namely
 $$
 \varphi_{ij} = \text{pr}_1^* (\varphi_j) \circ \text{pr}_0^* (\varphi_i)^{-1}.
 $$
@@ -3467,8 +3473,8 @@ that $a$ defines a morphism $a : p \to p'$ between the points $p, p'$ of
 the site $S_\etale$ associated to $\overline{s}, \overline{s}'$ by
 Lemma \ref{lemma-stalk-gives-point}. There are more general morphisms of
 points (corresponding to specializations of points of $S$) which we will
-describe later, and which will not be isomorphisms (insert future
-reference here).
+describe later, and which will not be isomorphisms, see Section
+\ref{section-specialization}.
 \end{remark}
 
 \begin{lemma}
@@ -4285,7 +4291,7 @@ Then there is a canonical identification
 $$
 (\mathcal{O}_{S, s})^{sh}
 \cong
-\mathcal{O}_{S, \overline{s}}
+(\mathcal{O}_S)_{\overline{s}}
 $$
 where the left hand side is the strict henselization of the local ring
 $\mathcal{O}_{S, s}$ as described in
@@ -4304,7 +4310,7 @@ Thus we have
 $\kappa(\mathfrak p) \subset \kappa^{sep} \subset \kappa(\overline{s})$.
 Recall that
 $$
-\mathcal{O}_{S, \overline{s}} =
+(\mathcal{O}_S)_{\overline{s}} =
 \colim_{(U, \overline{u})} \mathcal{O}(U)
 $$
 where the limit is over the \'etale neighbourhoods of $(S, \overline{s})$.
@@ -4312,7 +4318,7 @@ A cofinal system is given by those \'etale neighbourhoods $(U, \overline{u})$
 such that $U$ is affine and $U \to S$ factors through $\Spec(A)$.
 In other words, we see that
 $$
-\mathcal{O}_{S, \overline{s}} = \colim_{(B, \mathfrak q, \phi)} B
+(\mathcal{O}_S)_{\overline{s}} = \colim_{(B, \mathfrak q, \phi)} B
 $$
 where the colimit is over \'etale $A$-algebras $B$ endowed with a prime
 $\mathfrak q$ lying over $\mathfrak p$ and a
@@ -4335,8 +4341,7 @@ is the stalk of the structure sheaf $\mathcal{O}_S$ on $S_\etale$
 at $\overline{s}$. We sometimes call this the
 {\it strict henselization of $\mathcal{O}_{S, s}$} relative
 to the geometric point $\overline{s}$.
-Notation used:
-$\mathcal{O}_{S, \overline{s}} = \mathcal{O}_{S, s}^{sh}$.
+Notation used: $\mathcal{O}_{S, \overline{s}}^{sh}$.
 \item The {\it henselization of $\mathcal{O}_{S, s}$} is the
 henselization of the local ring of $S$ at $s$. See
 Algebra, Definition \ref{algebra-definition-henselization},
@@ -4344,11 +4349,32 @@ and
 Theorem \ref{theorem-henselization}.
 Notation: $\mathcal{O}_{S, s}^h$.
 \item The {\it strict henselization of $S$ at $\overline{s}$}
-is the scheme $\Spec(\mathcal{O}_{S, s}^{sh})$.
+is the scheme $\Spec(\mathcal{O}_{S, \overline{s}}^{sh})$.
 \item The {\it henselization of $S$ at $s$} is the scheme
 $\Spec(\mathcal{O}_{S, s}^h)$.
 \end{enumerate}
 \end{definition}
+
+\noindent
+Let $f : T \to S$ be a morphism of schemes. Let $\overline{t}$
+be a geometric point of $T$ with image $\overline{s}$ in $S$.
+Let $t \in T$ and $s \in S$ be their images.
+Then we obtain a canonical commutative diagram
+$$
+\xymatrix{
+\Spec(\mathcal{O}^h_{T, t}) \ar[r] \ar[d] &
+\Spec(\mathcal{O}^{sh}_{T, \overline{t}}) \ar[r] \ar[d] &
+T \ar[d]^f \\
+\Spec(\mathcal{O}^h_{S, s}) \ar[r] &
+\Spec(\mathcal{O}^{sh}_{S, \overline{s}}) \ar[r] &
+S
+}
+$$
+of henselizations and strict henselizations of $T$ and $S$. You can
+prove this by choosing affine neighbourhoods of $t$ and $s$ and using
+the functoriality of (strict) henselizations given by
+Algebra, Lemmas \ref{algebra-lemma-henselian-functorial-improve} and
+\ref{algebra-lemma-strictly-henselian-functorial-improve}.
 
 \begin{lemma}
 \label{lemma-describe-henselization}
@@ -4395,7 +4421,7 @@ Modules on Sites, Definition \ref{sites-modules-definition-locally-ringed}.
 
 \begin{proof}
 This follows because the stalks
-$\mathcal{O}_{S, s}^{sh} = \mathcal{O}_{S, \overline{s}}$ are
+$(\mathcal{O}_S)_{\overline{s}} = \mathcal{O}^{sh}_{S, \overline{s}}$ are
 local, and because $S_\etale$ has enough points, see
 Lemma \ref{lemma-describe-etale-local-ring},
 Theorem \ref{theorem-exactness-stalks},
@@ -5200,20 +5226,20 @@ geometric point $\overline{y} = f \circ \overline{x}$ of $Y$.
 Hence the assertion we have to prove is that the induced map
 of stalks
 $$
-\mathcal{O}_{Y, \overline{y}} \longrightarrow \mathcal{O}_{X, \overline{x}}
+(\mathcal{O}_Y)_{\overline{y}} \longrightarrow (\mathcal{O}_X)_{\overline{x}}
 $$
-is a local ring map. Suppose that $a \in \mathcal{O}_{Y, \overline{y}}$
+is a local ring map. Suppose that $a \in (\mathcal{O}_Y)_{\overline{y}}$
 is an element of the left hand side which maps to an element of the maximal
 ideal of the right hand side. Suppose that $a$ is the equivalence class
 of a triple $(V, \overline{v}, a)$ with $V \to Y$ \'etale,
 $\overline{v} : \overline{x} \to V$ over $Y$, and $a \in \mathcal{O}(V)$.
 It maps to the equivalence class of
 $(X \times_Y V, \overline{x} \times \overline{v}, \text{pr}_V^\sharp(a))$
-in the local ring $\mathcal{O}_{X, \overline{x}}$. But it is clear that
+in the local ring $(\mathcal{O}_X)_{\overline{x}}$. But it is clear that
 being in the maximal ideal means that pulling back $\text{pr}_V^\sharp(a)$
 to an element of $\kappa(\overline{x})$ gives zero. Hence also pulling back
 $a$ to $\kappa(\overline{x})$ is zero. Which means that $a$ lies in the
-maximal ideal of $\mathcal{O}_{Y, \overline{y}}$.
+maximal ideal of $(\mathcal{O}_Y)_{\overline{y}}$.
 \end{proof}
 
 \begin{lemma}
@@ -5428,12 +5454,12 @@ we see that $q$ corresponds to a geometric point $\overline{y}$ of
 $Y$. Consider the map of stalks
 $$
 (g^\sharp)_p :
-\mathcal{O}_{Y, \overline{y}} =
+(\mathcal{O}_Y)_{\overline{y}} =
 \mathcal{O}_{Y, q} =
 (g^{-1}\mathcal{O}_Y)_p
 \longrightarrow
 \mathcal{O}_{X, p} =
-\mathcal{O}_{X, \overline{x}}
+(\mathcal{O}_X)_{\overline{x}}
 $$
 Since $(g, g^\sharp)$ is a morphism of {\it locally} ringed topoi
 $(g^\sharp)_p$ is a local ring homomorphism of strictly henselian
@@ -7504,14 +7530,21 @@ associated to the presheaf
 $$
 (V \to Y) \longmapsto H_\etale^p(X \times_Y V, \mathcal{F}|_{X \times_Y V}).
 $$
+More generally, for $K \in D(X_\etale)$ we have that $R^pf_*K$ is the
+sheaf associated to the presheaf
+$$
+(V \to Y) \longmapsto H_\etale^p(X \times_Y V, K|_{X \times_Y V}).
+$$
 \end{lemma}
 
 \begin{proof}
 This lemma is valid for topological spaces, and the proof in this case is the
-same. See
-Cohomology on Sites, Lemma
+same. See Cohomology on Sites, Lemma
 \ref{sites-cohomology-lemma-higher-direct-images}
-for details.
+for the case of a sheaf and see
+Cohomology on Sites, Lemma
+\ref{sites-cohomology-lemma-sheafification-cohomology}
+for the case of a complex of abelian sheaves.
 \end{proof}
 
 \begin{lemma}
@@ -7742,24 +7775,247 @@ Formal combination of Lemmas \ref{lemma-relative-colimit-general}
 and \ref{lemma-linus-hamann}.
 \end{proof}
 
-\begin{remark}
-\label{remark-colimit-variant-complexes}
-Many of the results above have variants for bounded below
-complexes, but one has to be careful that the bounds have
-to be uniform. We explain this in the simplest case.
-Let $X$ be a quasi-compact and quasi-separated scheme.
-Let $I$ be a directed set. Let $\mathcal{F}_i^\bullet$ be a
-system over $I$ of complexes of sheaves on $X_\etale$.
-Assume there is an integer $a$ such that
+
+
+
+
+
+
+
+
+
+
+\section{Colimits and complexes}
+\label{section-colimit-complexes}
+
+\noindent
+In this section we discuss taking cohomology of systems of complexes
+in various settings, continuing the discussion for sheaves started
+in Section \ref{section-colimit}.
+We strongly urge the reader not to read this section unless absolutely
+necessary.
+
+\begin{lemma}
+\label{lemma-colimit-variant-complexes}
+Let $X = \lim_{i \in I} X_i$ be a limit of a directed system of schemes
+with affine transition morphisms $f_{i'i} : X_{i'} \to X_i$. We assume
+that $X_i$ is quasi-compact and quasi-separated for all $i \in I$.
+Let $\mathcal{F}_i^\bullet$ be a complex of abelian sheaves on
+$X_{i, \etale}$. Let $\varphi_{i'i} : f_{i'i}^{-1}\mathcal{F}_i^\bullet \to
+\mathcal{F}_{i'}^\bullet$ be a map of complexes on $X_{i, \etale}$
+such that $\varphi_{i''i} = \varphi_{i''i'} \circ f_{i'' i'}^{-1}\varphi_{i'i}$
+whenever $i'' \geq i' \geq i$. Assume there is an integer $a$ such that
 $\mathcal{F}_i^n = 0$ for $n < a$ and all $i \in I$.
 Then we have
 $$
-H^p_\etale(X, \colim \mathcal{F}_i^\bullet) =
-\colim H^p_\etale(X, \mathcal{F}^\bullet_i)
+H^p_\etale(X, \colim f_i^{-1}\mathcal{F}_i^\bullet) =
+\colim H^p_\etale(X_i, \mathcal{F}^\bullet_i)
 $$
-If we ever need this we will state a precise lemma with
-full proof here.
-\end{remark}
+where $f_i : X \to X_i$ is the projection.
+\end{lemma}
+
+\begin{proof}
+This is a consequence of Theorem \ref{theorem-colimit}. Set
+$\mathcal{F}^\bullet = \colim f_i^{-1}\mathcal{F}_i^\bullet$.
+The theorem tells us that
+$$
+\colim_{i \in I} H_\etale^p(X_i, \mathcal{F}_i^n) =
+H_\etale^p(X, \mathcal{F}^n)
+$$
+for all $n, p \in \mathbf{Z}$. Let us use the spectral sequences
+$$
+E_{1, i}^{s, t} = H_\etale^t(X_i, \mathcal{F}_i^s) \Rightarrow
+H_\etale^{s + t}(X_i, \mathcal{F}_i^\bullet)
+$$
+and
+$$
+E_1^{s, t} = H_\etale^t(X, \mathcal{F}^s) \Rightarrow
+H_\etale^{s + t}(X, \mathcal{F}^\bullet)
+$$
+of Derived Categories, Lemma \ref{derived-lemma-two-ss-complex-functor}.
+Since $\mathcal{F}_i^n = 0$ for $n < a$ (with $a$ independent of $i$)
+we see that only a fixed finite number of terms $E_{1, i}^{s, t}$
+(independent of $i$) and $E_1^{s, t}$ contribute to
+$H^q_\etale(X_i, \mathcal{F}_i^\bullet)$ and
+$H^q_\etale(X, \mathcal{F}^\bullet)$ and $E_1^{s, t} = \colim E_{i, i}^{s, t}$.
+This implies what we want. Some details omitted.
+(There is an alternative argument using ``stupid'' truncations
+of complexes which avoids using spectral sequences.)
+\end{proof}
+
+\begin{lemma}
+\label{lemma-direct-sum-bounded-below-cohomology}
+Let $X$ be a quasi-compact and quasi-sepated scheme. Let
+$K_i \in D(X_\etale)$, $i \in I$ be a family of objects.
+Assume given $a \in \mathbf{Z}$ such that $H^n(K_i) = 0$ for $n < a$
+and $i \in I$. Then $R\Gamma(X, \bigoplus_i K_i) =
+\bigoplus_i R\Gamma(X, K_i)$.
+\end{lemma}
+
+\begin{proof}
+We have to show that $H^p(X, \bigoplus_i K_i) =
+\bigoplus_i H^p(X, K_i)$ for all $p \in \mathbf{Z}$.
+Choose complexes $\mathcal{F}_i^\bullet$ representing $K_i$
+such that $\mathcal{F}_i^n = 0$ for $n < a$.
+The direct sum of the complexes $\mathcal{F}_i^\bullet$
+represents the object $\bigoplus K_i$ by
+Injectives, Lemma \ref{injectives-lemma-derived-products}.
+Since $\bigoplus \mathcal{F}^\bullet$ is the filtered
+colimit of the finite direct sums, the result follows
+from Lemma \ref{lemma-colimit-variant-complexes}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-colimit-complexes}
+Let $S$ be a scheme. Let $X = \lim_{i \in I} X_i$ be a limit of a
+directed system of schemes over $S$ with affine transition morphisms
+$f_{i'i} : X_{i'} \to X_i$. We assume that $X_i$ is quasi-compact and
+quasi-separated for all $i \in I$. Let $K \in D^+(S_\etale)$. Then
+$$
+\colim_{i \in I} H_\etale^p(X_i, K|_{X_i}) = H_\etale^p(X, K|_X).
+$$
+for all $p \in \mathbf{Z}$ where $K|_{X_i}$ and $K|_X$
+are the pullbacks of $K$ to $X_i$ and $X$.
+\end{lemma}
+
+\begin{proof}
+We may represent $K$ by a bounded below complex $\mathcal{G}^\bullet$
+of abelian sheaves on $S_\etale$. Say $\mathcal{G}^n = 0$ for $n < a$.
+Denote $\mathcal{F}^\bullet_i$ and $\mathcal{F}^\bullet$ the pullbacks
+of this complex of $X_i$ and $X$. These complexes represent the
+objects $K|_{X_i}$ and $K|_X$ and we have
+$\mathcal{F}^\bullet = \colim f_i^{-1}\mathcal{F}_i^\bullet$
+termwise. Hence the lemma follows from
+Lemma \ref{lemma-colimit-variant-complexes}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-colimit-general-complexes}
+Let $I$, $g_i : X_i \to S_i$, $g : X \to S$, $f_i$, $g_i$, $h_i$ be as in
+Lemma \ref{lemma-relative-colimit-general}.
+Let $0 \in I$ and $K_0 \in D^+(X_{0, \etale})$.
+For $i \geq 0$ denote $K_i$ the pullback of $K_0$ to $X_i$.
+Denote $K$ the pullback of $K$ to $X$. Then
+$$
+R^pg_*K = \colim_{i \geq 0} h_i^{-1}R^pg_{i, *}K_i
+$$
+for all $p \in \mathbf{Z}$.
+\end{lemma}
+
+\begin{proof}
+Fix an integer $p_0 \in \mathbf{Z}$.
+Let $a$ be an integer such that $H^j(K_0) = 0$ for $j < a$.
+We will prove the formula holds for all $p \leq p_0$
+by descending induction on $a$. If
+$a > p_0$, then we see that the left and right hand side of
+the formula are zero for $p \leq p_0$ by trivial vanishing, see
+Derived Categories, Lemma \ref{derived-lemma-negative-vanishing}.
+Assume $a \leq p_0$. Consider the distinguished triangle
+$$
+H^a(K_0)[-a] \to K_0 \to \tau_{\geq a + 1}K_0
+$$
+Pulling back this distinguished triangle to $X_i$ and $X$
+gives compatible distinguished triangles for $K_i$ and $K$.
+For $p \leq p_0$ we consider the commutative diagram
+$$
+\xymatrix{
+\colim_{i \geq 0} h_i^{-1}R^{p - 1}g_{i, *}(\tau_{\geq a + 1}K_i)
+\ar[r]_-\alpha \ar[d] &
+R^{p - 1}g_*(\tau_{\geq a + 1}K) \ar[d] \\
+\colim_{i \geq 0} h_i^{-1}R^pg_{i, *}(H^a(K_i)[-a])
+\ar[r]_-\beta \ar[d] &
+R^pg_*(H^a(K)[-a]) \ar[d] \\
+\colim_{i \geq 0} h_i^{-1}R^pg_{i, *}K_i
+\ar[r]_-\gamma \ar[d] &
+R^pg_*K \ar[d] \\
+\colim_{i \geq 0} R^pg_{i, *}\tau_{\geq a + 1}K_i
+\ar[r]_-\delta \ar[d] &
+R^pg_*\tau_{\geq a + 1}K \ar[d] \\
+\colim_{i \geq 0} R^{p + 1}g_{i, *}(H^a(K_i)[-a])
+\ar[r]^-\epsilon &
+R^{p + 1}g_*(H^a(K)[-a])
+}
+$$
+with exact columns. The arrows $\beta$ and $\epsilon$ are isomorphisms by
+Lemma \ref{lemma-relative-colimit-general}.
+The arrows $\alpha$ and $\delta$ are isomorphisms
+by induction hypothesis.
+Hence $\gamma$ is an isomorphism as desired.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-relative-colimit-general-really-complexes}
+Let $I$, $g_i : X_i \to S_i$, $g : X \to S$, $f_{ii'}$, $f_i$, $g_i$, $h_i$
+be as in Lemma \ref{lemma-relative-colimit-general}.
+Let $\mathcal{F}_i^\bullet$ be a complex of abelian sheaves on
+$X_{i, \etale}$. Let $\varphi_{i'i} : f_{i'i}^{-1}\mathcal{F}_i^\bullet \to
+\mathcal{F}_{i'}^\bullet$ be a map of complexes on $X_{i, \etale}$
+such that $\varphi_{i''i} = \varphi_{i''i'} \circ f_{i'' i'}^{-1}\varphi_{i'i}$
+whenever $i'' \geq i' \geq i$. Assume there is an integer $a$ such that
+$\mathcal{F}_i^n = 0$ for $n < a$ and all $i \in I$. Then
+$$
+R^pg_*(\colim f_i^{-1}\mathcal{F}_i^\bullet) =
+\colim_{i \geq 0} h_i^{-1}R^pg_{i, *}\mathcal{F}_i^\bullet
+$$
+for all $p \in \mathbf{Z}$.
+\end{lemma}
+
+\begin{proof}
+This is a consequence of Lemma \ref{lemma-relative-colimit-general}. Set
+$\mathcal{F}^\bullet = \colim f_i^{-1}\mathcal{F}_i^\bullet$.
+The lemma tells us that
+$$
+\colim_{i \in I} h_i^{-1}R^pg_{i, *}\mathcal{F}_i^n = R^pg_*\mathcal{F}^n
+$$
+for all $n, p \in \mathbf{Z}$. Let us use the spectral sequences
+$$
+E_{1, i}^{s, t} = R^tg_{i, *}\mathcal{F}_i^s \Rightarrow
+R^{s + t}g_{i, *}\mathcal{F}_i^\bullet
+$$
+and
+$$
+E_1^{s, t} = R^tg_*\mathcal{F}^s \Rightarrow
+R^{s + t}g_*\mathcal{F}^\bullet
+$$
+of Derived Categories, Lemma \ref{derived-lemma-two-ss-complex-functor}.
+Since $\mathcal{F}_i^n = 0$ for $n < a$ (with $a$ independent of $i$)
+we see that only a fixed finite number of terms $E_{1, i}^{s, t}$
+(independent of $i$) and $E_1^{s, t}$ contribute and
+$E_1^{s, t} = \colim E_{i, i}^{s, t}$.
+This implies what we want. Some details omitted.
+(There is an alternative argument using ``stupid'' truncations
+of complexes which avoids using spectral sequences.)
+\end{proof}
+
+\begin{lemma}
+\label{lemma-direct-sum-bounded-below-pushforward}
+Let $f : X \to Y$ be a quasi-compact and quasi-sepated morphism of
+schemes. Let $K_i \in D(X_\etale)$, $i \in I$ be a family of objects.
+Assume given $a \in \mathbf{Z}$ such that $H^n(K_i) = 0$ for $n < a$
+and $i \in I$. Then $Rf_*(\bigoplus_i K_i) = \bigoplus_i Rf_*K_i$.
+\end{lemma}
+
+\begin{proof}
+We have to show that $R^pf_*(\bigoplus_i K_i) =
+\bigoplus_i R^pf_*K_i$ for all $p \in \mathbf{Z}$.
+Choose complexes $\mathcal{F}_i^\bullet$ representing $K_i$
+such that $\mathcal{F}_i^n = 0$ for $n < a$.
+The direct sum of the complexes $\mathcal{F}_i^\bullet$
+represents the object $\bigoplus K_i$ by
+Injectives, Lemma \ref{injectives-lemma-derived-products}.
+Since $\bigoplus \mathcal{F}^\bullet$ is the filtered
+colimit of the finite direct sums, the result follows
+from Lemma \ref{lemma-relative-colimit-general-really-complexes}.
+\end{proof}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -7768,6 +8024,9 @@ full proof here.
 \section{Stalks of higher direct images}
 \label{section-stalks-direct-image}
 
+\noindent
+The stalks of higher direct images can often be computed as follows.
+
 \begin{theorem}
 \label{theorem-higher-direct-images}
 Let $f: X \to S$ be a quasi-compact and quasi-separated morphism of schemes,
@@ -7775,11 +8034,23 @@ $\mathcal{F}$ an abelian sheaf on $X_\etale$, and $\overline{s}$ a
 geometric point of $S$ lying over $s \in S$. Then
 $$
 \left(R^nf_* \mathcal{F}\right)_{\overline{s}} =
-H_\etale^n( X \times_S \Spec(\mathcal{O}_{S, s}^{sh}),
+H_\etale^n( X \times_S \Spec(\mathcal{O}_{S, \overline{s}}^{sh}),
 p^{-1}\mathcal{F})
 $$
-where $p : X \times_S \Spec(\mathcal{O}_{S, s}^{sh}) \to X$
-is the projection.
+where $p : X \times_S \Spec(\mathcal{O}_{S, \overline{s}}^{sh}) \to X$
+is the projection. For $K \in D^+(X_\etale)$ and $n \in \mathbf{Z}$
+we have
+$$
+\left(R^nf_*K\right)_{\overline{s}} =
+H_\etale^n(X \times_S \Spec(\mathcal{O}_{S, \overline{s}}^{sh}), p^{-1}K)
+$$
+In fact, we have
+$$
+\left(Rf_*K\right)_{\overline{s}}
+=
+R\Gamma_\etale(X \times_S \Spec(\mathcal{O}_{S, \overline{s}}^{sh}), p^{-1}K)
+$$
+in $D^+(\textit{Ab})$.
 \end{theorem}
 
 \begin{proof}
@@ -7794,7 +8065,7 @@ $$
 We may replace $\mathcal{I}$ by the initial subcategory consisting
 of affine \'etale neighbourhoods of $\overline{s}$. Observe that
 $$
-\Spec(\mathcal{O}_{S, s}^{sh}) =
+\Spec(\mathcal{O}_{S, \overline{s}}^{sh}) =
 \lim_{(V, \overline{v}) \in \mathcal{I}} V
 $$
 by Lemma \ref{lemma-describe-etale-local-ring} and
@@ -7802,11 +8073,83 @@ Limits, Lemma
 \ref{limits-lemma-directed-inverse-system-affine-schemes-has-limit}.
 Since fibre products commute with limits we also obtain
 $$
-X \times_S \Spec(\mathcal{O}_{S, s}^{sh}) =
+X \times_S \Spec(\mathcal{O}_{S, \overline{s}}^{sh}) =
 \lim_{(V, \overline{v}) \in \mathcal{I}} X \times_S V
 $$
 We conclude by Lemma \ref{lemma-directed-colimit-cohomology}.
+For the second variant, use the same argument using
+Lemma \ref{lemma-colimit-complexes} instead of
+Lemma \ref{lemma-directed-colimit-cohomology}.
+
+\medskip\noindent
+To see that the last statement is true, it suffices to produce a map
+$\left(Rf_*K\right)_{\overline{s}} \to
+R\Gamma_\etale(X \times_S \Spec(\mathcal{O}_{S, \overline{s}}^{sh}), p^{-1}K)$
+in $D^+(\textit{Ab})$ which realizes the ismorphisms on cohomology
+groups in degree $n$ above for all $n$. To do this, choose a
+bounded below complex $\mathcal{J}^\bullet$ of injective abelian
+sheaves on $X_\etale$ representing $K$. The complex
+$f_*\mathcal{J}^\bullet$ represents $Rf_*K$. Thus the complex
+$$
+(f_*\mathcal{J}^\bullet)_{\overline{s}} =
+\colim_{(V, \overline{v}) \in \mathcal{I}^{opp}}
+(f_*\mathcal{J}^\bullet)(V)
+$$
+represents $(Rf_*K)_{\overline{s}}$. For each $V$ we have maps
+$$
+(f_*\mathcal{J}^\bullet)(V) =
+\Gamma(X \times_S V, \mathcal{J}^\bullet)
+\longrightarrow
+\Gamma(X \times_S \Spec(\mathcal{O}_{S, \overline{s}}^{sh}),
+p^{-1}\mathcal{J}^\bullet)
+$$
+and the target complex represents
+$R\Gamma_\etale(X \times_S \Spec(\mathcal{O}_{S, \overline{s}}^{sh}), p^{-1}K)$
+in $D^+(\textit{Ab})$.
+Taking the colimit of these maps we obtain the result.
 \end{proof}
+
+\begin{remark}
+\label{remark-stalk-fibre}
+Let $f : X \to S$ be a morphism of schemes.
+Let $K \in D(X_\etale)$.
+Let $\overline{s}$ be a geometric point of $S$.
+There are always canonical maps
+$$
+(Rf_*K)_{\overline{s}}
+\longrightarrow
+R\Gamma(X \times_S \Spec(\mathcal{O}_{S, \overline{s}}^{sh}), p^{-1}K)
+\longrightarrow
+R\Gamma(X_{\overline{s}}, K|_{X_{\overline{s}}})
+$$
+where $p : X \times_S \Spec(\mathcal{O}_{S, \overline{s}}^{sh}) \to X$
+is the projection. Namely, consider the commutative diagram
+$$
+\xymatrix{
+X_{\overline{s}} \ar[r] \ar[d]^{f_{\overline{s}}} &
+X \times_S \Spec(\mathcal{O}_{S, \overline{s}}^{sh}) \ar[r]_-p \ar[d]^{f'} &
+X \ar[d]^f \\
+\overline{s} \ar[r]^-i &
+\Spec(\mathcal{O}_{S, \overline{s}}^{sh}) \ar[r]^-j &
+S
+}
+$$
+We have the base change maps
+$$
+i^{-1}Rf'_*(p^{-1}K) \to Rf_{\overline{s}, *}(K|_{X_{\overline{s}}})
+\quad\text{and}\quad
+j^{-1}Rf_*K \to Rf'_*(p^{-1}K)
+$$
+(Cohomology on Sites, Remark \ref{sites-cohomology-remark-base-change})
+for the two squares in this diagram.
+Taking global sections we obtain the desired maps.
+By Cohomology on Sites, Remark
+\ref{sites-cohomology-remark-compose-base-change-horizontal}
+the composition of these two maps is the
+usual (base change) map
+$(Rf_*K)_{\overline{s}} \to R\Gamma(X_{\overline{s}}, K|_{X_{\overline{s}}})$.
+\end{remark}
+
 
 
 
@@ -10509,8 +10852,8 @@ to get the vanishing.
 
 \medskip\noindent
 Assume that $\bar x = \bar \eta$ lies over the generic point $\eta$ of $X$ (in
-fact, this case is superfluous). Then $\mathcal{O}_{X, \bar \eta} =
-\kappa(\eta)^{sep}$ and thus
+fact, this case is superfluous). Then
+$\mathcal{O}^{sh}_{X, \bar \eta} = \kappa(\eta)^{sep}$ and thus
 \begin{eqnarray*}
 (R^q j_*\mathbf{G}_{m, \eta})_{\bar \eta}
 & = &
@@ -12093,11 +12436,12 @@ $j_*\underline{E} = \underline{E}$.
 \end{lemma}
 
 \begin{proof}
-Proof of (1). Let $x \in X$ be a point. Let $\mathcal{O}_{X, \overline{x}}$
+Proof of (1). Let $x \in X$ be a point. Let
+$\mathcal{O}^{sh}_{X, \overline{x}}$
 be a strict henselization of $\mathcal{O}_{X, x}$. 
 By More on Algebra, Lemma \ref{more-algebra-lemma-henselization-normal}
-we see that $\mathcal{O}_{X, \overline{x}}$ is a normal domain.
-Hence $\Spec(K) \times_X \Spec(\mathcal{O}_{X, \overline{x}})$
+we see that $\mathcal{O}^{sh}_{X, \overline{x}}$ is a normal domain.
+Hence $\Spec(K) \times_X \Spec(\mathcal{O}^{sh}_{X, \overline{x}})$
 is irreducible. It follows that
 the stalk $(g_*\underline{E}_{\underline{x}}$ is equal to $E$,
 see Theorem \ref{theorem-higher-direct-images}.
@@ -12508,6 +12852,355 @@ Topology, Lemma
 \medskip\noindent
 The proof in case (2) is exactly the same and we omit it.
 \end{proof}
+
+
+
+
+
+
+
+
+\section{Specializations and \'etale sheaves}
+\label{section-specialization}
+
+\noindent
+Topological picture: Let $X$ be a topological space and let $x' \leadsto x$
+be a specialization of points in $X$. Then every open neighbourhood of $x$
+contains $x'$. Hence for any sheaf $\mathcal{F}$ on $X$ there is a
+{\it specialization map}
+$$
+sp : \mathcal{F}_x \longrightarrow \mathcal{F}_{x'}
+$$
+of stalks sending the equivalence class of the pair $(U, s)$ in
+$\mathcal{F}_x$ to the equivalence class of the pair $(U, s)$ in
+$\mathcal{F}_{x'}$; see Sheaves, Section \ref{sheaves-section-stalks}
+for the description of stalks in terms of equivalence classes of pairs.
+Of course this map is functorial in $\mathcal{F}$, i.e., $sp$
+is a transformation of functors.
+
+\medskip\noindent
+For sheaves in the \'etale topology we can mimick this construction, see
+\cite[Exposee VII, 7.7, page 397]{SGA4}. To do this suppose we have
+a scheme $S$, a geometric point $\overline{s}$ of $S$, and a geometric
+point $\overline{t}$ of $\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$.
+For any sheaf $\mathcal{F}$ on $S_\etale$ we will construct the
+{\it specialization map}
+$$
+sp : \mathcal{F}_{\overline{s}} \longrightarrow \mathcal{F}_{\overline{t}}
+$$
+Here we have abused language: instead of writing
+$\mathcal{F}_{\overline{t}}$ we should write $\mathcal{F}_{p(\overline{t})}$
+where $p : \Spec(\mathcal{O}^{sh}_{S, \overline{s}}) \to S$ is the canonical
+morphism. Recall that
+$$
+\mathcal{F}_{\overline{s}} = \colim_{(U, \overline{u})} \mathcal{F}(U)
+$$
+where the colimit is over all \'etale neighbourhoods $(U, \overline{u})$
+of $(S, \overline{s})$, see Section \ref{section-stalks}. Since
+$\mathcal{O}^{sh}_{S, \overline{s}}$ is the stalk of the
+structure sheaf, we find for every \'etale neighbourhood
+$(U, \overline{u})$ of $(S, \overline{s})$ a canonical map
+$\mathcal{O}_{U, u} \to \mathcal{O}^{sh}_{S, \overline{s}}$.
+Hence we get a unique factorization
+$$
+\Spec(\mathcal{O}^{sh}_{S, \overline{s}}) \to U \to S
+$$
+If $\overline{v}$ denotes the image of $\overline{t}$ in $U$, then we see that
+$(U, \overline{v})$ is an \'etale neighbourhood of $(S, \overline{t})$.
+This construction defines a functor from the category of \'etale neighbourhoods
+of $(S, \overline{s})$ to the category of \'etale neighbourhoods of
+$(S, \overline{t})$. Thus we may define the map
+$sp : \mathcal{F}_{\overline{s}} \to \mathcal{F}_{\overline{t}}$
+by sending the equivalence class of
+$(U, \overline{u}, \sigma)$ where $\sigma \in \mathcal{F}(U)$
+to the equivalence class of $(U, \overline{v}, \sigma)$.
+
+\medskip\noindent
+Let $K \in D(S_\etale)$. With $\overline{s}$ and $\overline{t}$
+as above we have the {\it specialization map}
+$$
+sp : K_{\overline{s}} \longrightarrow K_{\overline{t}}
+\quad\text{in}\quad D(\textit{Ab})
+$$
+Namely, if $K$ is represented by the complex $\mathcal{F}^\bullet$
+of abelian sheaves, then we simply that the map
+$$
+K_{\overline{s}} = \mathcal{F}^\bullet_{\overline{s}}
+\longrightarrow
+\mathcal{F}^\bullet_{\overline{t}} = K_{\overline{t}}
+$$
+which is termwise given by the specialization maps for sheaves
+constructed above. This is independent of the choice of complex
+representing $K$ by the exactness of the stalk functors (i.e.,
+taking stalks of complexes is well defined on the derived category).
+
+\medskip\noindent
+Clearly the construction is functorial in the sheaf $\mathcal{F}$ on
+$S_\etale$. If we think of the stalk functors as morphisms of topoi
+$\overline{s}, \overline{t} : \textit{Sets} \to \Sh(S_\etale)$, then
+we may think of $sp$ as a $2$-morphism
+$$
+\xymatrix{
+\textit{Sets}
+\rrtwocell^{\overline{t}}_{\overline{s}}{\ sp}
+&
+&
+\Sh(S_\etale)
+}
+$$
+of topoi.
+
+\begin{remark}[Alternative description of sp]
+\label{remark-alternative-sp}
+Let $S$, $\overline{s}$, and $\overline{t}$ be as above.
+Another way to describe the specialization map is to use that
+$$
+\mathcal{F}_{\overline{s}} =
+\Gamma(\Spec(\mathcal{O}^{sh}_{S, \overline{s}}), p^{-1}\mathcal{F})
+\quad\text{and}\quad
+\mathcal{F}_{\overline{t}} = \Gamma(\overline{t},
+\overline{t}^{-1}p^{-1}\mathcal{F})
+$$
+The first equality follows from Theorem \ref{theorem-higher-direct-images}
+applied to $\text{id}_S : S \to S$ and the second equality follows
+from Lemma \ref{lemma-stalk-pullback}. Then we can think of $sp$
+as the map
+$$
+sp :
+\mathcal{F}_{\overline{s}} =
+\Gamma(\Spec(\mathcal{O}^{sh}_{S, \overline{s}}), p^{-1}\mathcal{F})
+\xrightarrow{\text{pullback by }\overline{t}}
+\Gamma(\overline{t}, \overline{t}^{-1}p^{-1}\mathcal{F}) =
+\mathcal{F}_{\overline{t}}
+$$
+\end{remark}
+
+\begin{remark}[Yet another description of sp]
+\label{remark-another-sp}
+Let $S$, $\overline{s}$, and $\overline{t}$ be as above.
+Another alternative is to use the unique morphism
+$$
+c :
+\Spec(\mathcal{O}^{sh}_{S, \overline{t}})
+\longrightarrow
+\Spec(\mathcal{O}^{sh}_{S, \overline{s}})
+$$
+over $S$ which is compatible with the given morphism
+$\overline{t} \to \Spec(\mathcal{O}^{sh}_{S, \overline{s}})$
+and the morphism
+$\overline{t} \to \Spec(\mathcal{O}^{sh}_{t, \overline{t}})$.
+The uniqueness and existence of the displayed arrow
+follows from Algebra, Lemma \ref{algebra-lemma-map-into-henselian-colimit}
+applied to $\mathcal{O}_{S, s}$, $\mathcal{O}^{sh}_{S, \overline{t}}$, and
+$\mathcal{O}^{sh}_{S, \overline{s}} \to \kappa(\overline{t})$.
+We obtain
+$$
+sp :
+\mathcal{F}_{\overline{s}} =
+\Gamma(\Spec(\mathcal{O}^{sh}_{S, \overline{s}}), \mathcal{F})
+\xrightarrow{\text{pullback by }c}
+\Gamma(\Spec(\mathcal{O}^{sh}_{S, \overline{t}}), \mathcal{F}) =
+\mathcal{F}_{\overline{t}}
+$$
+(with obvious notational conventions).
+In fact this procedure also works for objects $K$ in $D(S_\etale)$:
+the specialization map for $K$ is equal to the map
+$$
+sp :
+K_{\overline{s}} =
+R\Gamma(\Spec(\mathcal{O}^{sh}_{S, \overline{s}}), K)
+\xrightarrow{\text{pullback by }c}
+R\Gamma(\Spec(\mathcal{O}^{sh}_{S, \overline{t}}), K) =
+K_{\overline{t}}
+$$
+The equality signs are valid as taking global sections over
+the striclty henselian schemes
+$\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$ and
+$\Spec(\mathcal{O}^{sh}_{S, \overline{t}})$
+is exact (and the same as taking stalks at $\overline{s}$ and $\overline{t}$)
+and hence no subtleties related to the fact that $K$ may be unbounded
+arise.
+\end{remark}
+
+\begin{remark}[Lifting specializations]
+\label{remark-can-lift}
+Let $S$ be a scheme and let $t \leadsto s$ be a specialization of
+point on $S$. Choose geometric points $\overline{t}$ and $\overline{s}$
+lying over $t$ and $s$. Since $t$ corresponds to a point of
+$\Spec(\mathcal{O}_{S, s})$ by
+Schemes, Lemma \ref{schemes-lemma-specialize-points}
+and since $\mathcal{O}_{S, s} \to \mathcal{O}^{sh}_{S, \overline{s}}$
+is faithfully flat, we can find a point
+$t' \in \Spec(\mathcal{O}^{sh}_{S, \overline{s}})$ mapping to $t$.
+As $\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$ is a limit of
+schemes \'etale over $S$ we see that $\kappa(t')/\kappa(t)$
+is a separable algebraic extension (usually not finite of course).
+Since $\kappa(\overline{t})$ is algebraically closed, we can
+choose an embedding $\kappa(t') \to \kappa(\overline{t})$
+as extensions of $\kappa(t)$. This choice gives us a
+commutative diagram
+$$
+\xymatrix{
+\overline{t} \ar[d] \ar[r] &
+\Spec(\mathcal{O}^{sh}_{S, \overline{s}}) \ar[d] &
+\overline{s} \ar[l] \ar[d] \\
+t \ar[r] & S & s \ar[l]
+}
+$$
+of points and geometric points. Thus if $t \leadsto s$
+we can always ``lift'' $\overline{t}$ to a geometric point
+of the strict henselization of $S$ at $\overline{s}$
+and get specialization maps as above.
+\end{remark}
+
+\begin{lemma}
+\label{lemma-specialization-map-pullback}
+Let $g : S' \to S$ be a morphism of schemes. Let $\mathcal{F}$ be a sheaf
+on $S_\etale$. Let $\overline{s}'$ be a geometric point of $S'$, and let
+$\overline{t}'$ be a geometric point of
+$\Spec(\mathcal{O}^{sh}_{S', \overline{s}'})$. Denote
+$\overline{s} = g(\overline{s}')$ and $\overline{t} = h(\overline{t}')$
+where $h : \Spec(\mathcal{O}^{sh}_{S', \overline{s}'}) \to
+\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$ is the canonical morphism.
+For any sheaf $\mathcal{F}$ on $S_\etale$ the specialization map
+$$
+sp :
+(f^{-1}\mathcal{F})_{\overline{s}'}
+\longrightarrow
+(f^{-1}\mathcal{F})_{\overline{t}'}
+$$
+is equal to the specialization map
+$sp : \mathcal{F}_{\overline{s}} \to \mathcal{F}_{\overline{t}}$
+via the identifications
+$(f^{-1}\mathcal{F})_{\overline{s}'} = \mathcal{F}_{\overline{s}}$ and
+$(f^{-1}\mathcal{F})_{\overline{t}'} = \mathcal{F}_{\overline{t}}$
+of Lemma \ref{lemma-stalk-pullback}.
+\end{lemma}
+
+\begin{proof}
+Omitted.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-locally-constant}
+Let $S$ be a scheme such that every quasi-compact open of $S$ has
+finite number of irreducible components (for example if $S$ has a
+Noetherian underlying topological space, or if $S$ is locally Noetherian).
+Let $\mathcal{F}$ be a sheaf of sets on $S_\etale$.
+The following are equivalent
+\begin{enumerate}
+\item $\mathcal{F}$ is finite locally constant, and
+\item all stalks of $\mathcal{F}$ are finite sets and all specialization maps
+$sp : \mathcal{F}_{\overline{s}} \to \mathcal{F}_{\overline{t}}$
+are bijective.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Assume (2). Let $\overline{s}$ be a geometric point of $S$ lying over
+$s \in S$. In order to prove (1) we have to find an \'etale neighbourhood
+$(U, \overline{u})$ of $(S, \overline{s})$ such that $\mathcal{F}|_U$
+is constant. We may and do assume $S$ is affine.
+
+\medskip\noindent
+Since $\mathcal{F}_{\overline{s}}$ is finite, we can choose
+$(U, \overline{u})$, $n \geq 0$, and pairwise distinct elements
+$\sigma_1, \ldots, \sigma_n \in \mathcal{F}(U)$
+such that $\{\sigma_1, \ldots, \sigma_n\} \subset \mathcal{F}(U)$ maps
+bijectively to $\mathcal{F}_{\overline{s}}$ via the map
+$\mathcal{F}(U) \to \mathcal{F}_{\overline{s}}$.
+Consider the map
+$$
+\varphi : \underline{\{1, \ldots, n\}} \longrightarrow \mathcal{F}|_U
+$$
+on $U_\etale$ defined by $\sigma_1, \ldots, \sigma_n$.
+This map is a bijection on stalks at $\overline{u}$
+by construction. Let us consider the subset
+$$
+E = \{u' \in U \mid \varphi_{\overline{u}'}\text{ is bijective}\} \subset U
+$$
+Here $\overline{u}'$ is any geometric point of $U$ lying over $u'$
+(the condition is independent of the choice by Remark \ref{remark-map-stalks}).
+The image $u \in U$ of $\overline{u}$ is in $E$.
+By our assumption on the specialization maps for $\mathcal{F}$,
+by Remark \ref{remark-can-lift}, and by
+Lemma \ref{lemma-specialization-map-pullback}
+we see that $E$ is closed under specializations
+and generalizations in the topological space $U$.
+
+\medskip\noindent
+After shrinking $U$ we may assume $U$ is affine too. By
+Descent, Lemma \ref{descent-lemma-locally-finite-nr-irred-local-fppf}
+we see that $U$ has a finite number of irreducible components.
+After removing the irreducible components which do not pass
+through $u$, we may assume every irreducible component of $U$
+passes through $u$. Since $U$ is a sober topological space
+it follows that $E = U$ and we conclude that $\varphi$ is an isomorphism by
+Theorem \ref{theorem-exactness-stalks}. Thus (1) follows.
+
+\medskip\noindent
+We omit the proof that (1) implies (2).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-specialization-map-pushforward}
+Let $f : X \to S$ be a quasi-compact and quasi-separated morphism of schemes.
+Let $K \in D^+(X_\etale)$. Let $\overline{s}$ be a geometric point of $S$
+and let $\overline{t}$ be a geometric point of
+$\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$. We have a commutative
+diagram
+$$
+\xymatrix{
+(Rf_*K)_{\overline{s}} \ar[r]_{sp} \ar@{=}[d] &
+(Rf_*K)_{\overline{t}} \ar@{=}[d] \\
+R\Gamma(X \times_S \Spec(\mathcal{O}^{sh}_{S, \overline{s}}), K)
+\ar[r] &
+R\Gamma(X \times_S \Spec(\mathcal{O}^{sh}_{S, \overline{t}}), K)
+}
+$$
+where the bottom horizontal arrow arises as pullback by the morphism
+$\text{id}_X \times c$ where
+$c : \Spec(\mathcal{O}^{sh}_{S, \overline{t}}) \to
+\Spec(\mathcal{O}^{sh}_{S, \overline{S}})$
+is the morphism introduced in Remark \ref{remark-another-sp}.
+The vertical arrows are given by
+Theorem \ref{theorem-higher-direct-images}.
+\end{lemma}
+
+\begin{proof}
+This follows immediately from the description
+of $sp$ in Remark \ref{remark-another-sp}.
+\end{proof}
+
+\begin{remark}
+\label{remark-specialization-map-and-fibres}
+Let $f : X \to S$ be a morphism of schemes. Let $K \in D(X_\etale)$.
+Let $\overline{s}$ be a geometric point of $S$ and let $\overline{t}$
+be a geometric point of $\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$.
+Let $c$ be as in Remark \ref{remark-another-sp}.
+We can always make a commutative diagram
+$$
+\xymatrix{
+(Rf_*K)_{\overline{s}} \ar[r] \ar[d]_{sp} &
+R\Gamma(X \times_S \Spec(\mathcal{O}_{S, \overline{s}}^{sh}), K)
+\ar[r] \ar[d]_{(\text{id}_X \times c)^{-1}} &
+R\Gamma(X_{\overline{s}}, K) \\
+(Rf_*K)_{\overline{t}} \ar[r] &
+R\Gamma(X \times_S \Spec(\mathcal{O}_{S, \overline{t}}^{sh}), K) \ar[r] &
+R\Gamma(X_{\overline{t}}, K)
+}
+$$
+where the horizontal arrows are those of Remark \ref{remark-stalk-fibre}.
+In general there won't be a vertical map on the right
+between the cohomologies of $K$ on the fibres fitting into this
+diagram, even in the case of Lemma \ref{lemma-specialization-map-pushforward}.
+\end{remark}
+
+
+
+
+
+
 
 
 
@@ -14506,8 +15199,7 @@ X \ar[d]_f & Y \ar[l]^h \ar[d]^e \\
 S & T \ar[l]_g
 }
 $$
-and a sheaf $\mathcal{F}$ on $T_\etale$. Let $\{U_i \to X\}$ be an
-\'etale covering such that $U_i \to S$
+Let $\{U_i \to X\}$ be an \'etale covering such that $U_i \to S$
 factors as $U_i \to V_i \to S$ with $V_i \to S$ \'etale
 and consider the cartesian diagrams
 $$
@@ -14516,11 +15208,14 @@ U_i \ar[d]_{f_i} & U_i \times_X Y \ar[l]^{h_i} \ar[d]^{e_i} \\
 V_i & V_i \times_S T \ar[l]_{g_i}
 }
 $$
-Set $\mathcal{F}_i = \mathcal{F}|_{V_i \times_S T}$.
+Let $\mathcal{F}$ be a sheaf on $T_\etale$. Let $K$ in $D(T_\etale)$.
+Set $K_i = K|_{V_i \times_S T}$ and
+$\mathcal{F}_i = \mathcal{F}|_{V_i \times_S T}$.
 \begin{enumerate}
 \item If $f_i^{-1}g_{i, *}\mathcal{F}_i = h_{i, *}e_i^{-1}\mathcal{F}_i$
-for all $i$, then
-$f^{-1}g_*\mathcal{F} = h_*e^{-1}\mathcal{F}$.
+for all $i$, then $f^{-1}g_*\mathcal{F} = h_*e^{-1}\mathcal{F}$.
+\item If $f_i^{-1}Rg_{i, *}K_i = Rh_{i, *}e_i^{-1}K_i$
+for all $i$, then $f^{-1}Rg_*K = Rh_*e^{-1}K$.
 \item If $\mathcal{F}$ is an abelian sheaf and
 $f_i^{-1}R^qg_{i, *}\mathcal{F}_i = R^qh_{i, *}e_i^{-1}\mathcal{F}_i$
 for all $i$, then
@@ -14529,14 +15224,34 @@ $f^{-1}R^qg_*\mathcal{F} = R^qh_*e^{-1}\mathcal{F}$.
 \end{lemma}
 
 \begin{proof}
-We have
-$f^{-1}R^qg_*\mathcal{F}|_{U_i} = f_i^{-1}R^qg_{i, *}\mathcal{F}_i$
-and
-$R^qh_*e^{-1}\mathcal{F}|_{U_i} = R^qh_{i, *}e_i^{-1}\mathcal{F}_i$
-as follows from the compatibility of localization with
-morphisms of sites, see
+Proof of (1). First we observe that
+$$
+(f^{-1}g_*\mathcal{F})|_{U_i} =
+f_i^{-1}(g_*\mathcal{F}|_{V_i}) =
+f_i^{-1}g_{i, *}\mathcal{F}_i
+$$
+The first equality because $U_i \to X \to S$ is equal to
+$U_i \to V_i \to S$ and the second equality because
+$g_*\mathcal{F}|_{V_i} = g_{i, *}\mathcal{F}_i$ by
+Sites, Lemma \ref{sites-lemma-localize-morphism-strong}.
+Similarly we have
+$$
+(h_*e^{-1}\mathcal{F})|_{U_i} =
+h_{i, *}(e^{-1}\mathcal{F}|_{U_i \times_X Y}) =
+h_{i, *}e_i^{-1}\mathcal{F}_i
+$$
+Thus if the base change maps
+$f_i^{-1}g_{i, *}\mathcal{F}_i \to h_{i, *}e_i^{-1}\mathcal{F}_i$
+are isomorphisms for all $i$, then the base change map
+$f^{-1}g_*\mathcal{F} \to h_*e^{-1}\mathcal{F}$
+restricts to an isomorphism over $U_i$ for all $i$
+and we conclude it is an isomorphism as $\{U_i \to X\}$
+is an \'etale covering.
+
+\medskip\noindent
+For the other two statements we replace the appeal to
 Sites, Lemma \ref{sites-lemma-localize-morphism-strong}
-and
+by an appeal to
 Cohomology on Sites, Lemma
 \ref{sites-cohomology-lemma-restrict-direct-image-open}.
 \end{proof}
@@ -14638,6 +15353,34 @@ where $s_i : S \to S_i$ is the projection. The lemma follows.
 \end{proof}
 
 \begin{lemma}
+\label{lemma-base-change-Rf-star-colim-complexes}
+Let $I$, $X_i$, $Y_i$, $S_i$, $T_i$, $f_i$, $h_i$, $e_i$, $g_i$,
+$X$, $Y$, $S$, $T$, $f$, $h$, $e$, $g$ be as in the statement
+of Lemma \ref{lemma-base-change-Rf-star-colim}.
+Let $0 \in I$ and let $K_0 \in D^+(T_{0, \etale})$.
+For $i \in I$, $i \geq 0$ denote $K_i$ the pullback of
+$K_0$ to $T_i$. Denote $K$ the pullback of $K_0$ to $T$.
+If $f_i^{-1}Rg_{i, *}K_i = Rh_{i, *}e_i^{-1}K_i$
+for all $i \geq 0$, then $f^{-1}Rg_*K = Rh_*e^{-1}K$.
+\end{lemma}
+
+\begin{proof}
+It suffices to show that the base change map
+$f^{-1}Rg_*K \to Rh_*e^{-1}K$ induces an isomorphism
+on cohomology sheaves. In other words, we have to show
+that $f^{-1}R^pg_*K \to R^ph_*e^{-1}K$ is an isomorphism
+for all $p \in \mathbf{Z}$ if we are given that
+$f_i^{-1}R^pg_{i, *}K_i \to R^ph_{i, *}e_i^{-1}K_i$
+is an isomorphism for all $i \geq 0$ and $p \in \mathbf{Z}$.
+At this point we can argue exactly as in the proof of
+Lemma \ref{lemma-base-change-Rf-star-colim}
+replacing reference to
+Lemma \ref{lemma-relative-colimit-general}
+by a reference to
+Lemma \ref{lemma-relative-colimit-general-complexes}.
+\end{proof}
+
+\begin{lemma}
 \label{lemma-base-change-f-star-general-stalks}
 Consider a cartesian diagram of schemes
 $$
@@ -14714,13 +15457,21 @@ It follows that
 \Spec(\mathcal{O}^{sh}_{S, \overline{s}})
 \times_S \Spec(K)\right) \\
 & =
-\colim_{i \in I} \coprod\nolimits_{a \in A_i}
+\lim_{i \in I} \coprod\nolimits_{a \in A_i}
 \Spec(\mathcal{O}^{sh}_{X, \overline{x}})
 \times_{\Spec(\mathcal{O}^{sh}_{S, \overline{s}})} \Spec(K)
 \end{align*}
 Since taking cohomology in our setting commutes with limits
 of schemes (Theorem \ref{theorem-colimit}) we conclude.
 \end{proof}
+
+
+
+
+
+
+
+
 
 
 
@@ -15686,9 +16437,9 @@ then the theorem holds for the original diagram. To see this we consider the
 diagram
 $$
 \xymatrix{
-f^{-1}R^{q - 1}c_*\mathcal{F}|_{W \cap W'} \ar[d]_{\cong} \ar[r] &
+f^{-1}R^{q - 1}c_*\mathcal{F}|_{W \cap W'} \ar[d]^{\cong} \ar[r] &
 f^{-1}R^qg_*\mathcal{F} \ar[d] \ar[r] &
-f^{-1}R^qa_*\mathcal{F}|_W \ar[d] \oplus
+f^{-1}R^qa_*\mathcal{F}|_W \oplus
 f^{-1}R^qb_*\mathcal{F}|_{W'} \ar[d]_{\cong} \\
 R^qk_*e^{-1}\mathcal{F}|_{e^{-1}(W \cap W')} \ar[r] &
 R^qh_*e^{-1}\mathcal{F} \ar[r] &
@@ -16111,7 +16862,7 @@ theorem is what is often used in practice.
 \label{lemma-smooth-base-change-general}
 Let $S$ be a scheme. Let $S' = \lim S_i$ be a directed inverse
 limit of schemes $S_i$ smooth over $S$ with affine transition
-morphisms. Let $f : X \to S$ be quas-compact and quasi-separated
+morphisms. Let $f : X \to S$ be quasi-compact and quasi-separated
 and form the fibre square
 $$
 \xymatrix{
@@ -16281,8 +17032,6 @@ we use that $n$ is invertible on $S$.
 Thus $Rh'_*\mathbf{Z}/d\mathbf{Z} = Rh_*\mathbf{Z}/d\mathbf{Z}$
 by the relative Leray spectral sequence. This finishes the proof.
 \end{proof}
-
-
 
 
 
@@ -16878,7 +17627,8 @@ be a geometric point.
 $(R^nf_*\mathcal{F})_{\overline{y}} =
 H^n_\etale(X_{\overline{y}}, \mathcal{F}_{\overline{y}})$.
 \item For $E \in D^+(X_\etale)$ with torsion cohomology sheaves we have
-$(R^nf_*E)_{\overline{y}} = H^n_\etale(X_{\overline{y}}, E_{\overline{y}})$.
+$(R^nf_*E)_{\overline{y}} =
+H^n_\etale(X_{\overline{y}}, E|_{X_{\overline{y}}})$.
 \end{enumerate}
 \end{lemma}
 
@@ -17185,6 +17935,513 @@ E|_{X_{\overline{y}}}) \otimes_\mathbf{Z}^\mathbf{L} K_{\overline{y}}
 $$
 This is shown in Lemma \ref{lemma-pull-out-constant}.
 \end{proof}
+
+
+
+
+
+
+
+
+\section{Local acyclicity}
+\label{section-local-acyclicity}
+
+\noindent
+In this section we deduce local acyclicity of smooth morphisms
+from the smooth base change theorem. In SGA 4 or SGA 4.5 the authors
+first prove a version of local acyclicity for smooth morphisms
+and then deduce the smooth base change theorem.
+
+\medskip\noindent
+We will use the formulation of local acyclicity given by
+Deligne \cite[Definition 2.12, page 242]{SGA4.5}.
+Let $f : X \to S$ be a morphism of schemes.
+Let $\overline{x}$ be a geometric point of $X$ with image
+$\overline{s} = f(\overline{x})$ in $S$.
+Let $\overline{t}$ be a geometric point of
+$\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$.
+We obtain a commutative diagram
+$$
+\xymatrix{
+F_{\overline{x}, \overline{t}} =
+\overline{t} \times_{\Spec(\mathcal{O}^{sh}_{S, \overline{s}})}
+\Spec(\mathcal{O}^{sh}_{X, \overline{x}}) \ar[r] \ar[d] &
+\Spec(\mathcal{O}^{sh}_{X, \overline{x}}) \ar[r] \ar[d] &
+X \ar[d] \\
+\overline{t} \ar[r] &
+\Spec(\mathcal{O}^{sh}_{S, \overline{s}}) \ar[r] &
+S
+}
+$$
+The scheme $F_{\overline{x}, \overline{t}}$ is called
+a {\it variety of vanishing cycles of $f$ at $\overline{x}$}.
+Let $K$ be an object of $D(X_\etale)$. For any morphism of schemes
+$g : Y\to X$ we write $R\Gamma(Y, K)$ instead of
+$R\Gamma(Y_\etale, g_{small}^{-1}K)$. Since
+$\mathcal{O}^{sh}_{X, \overline{x}}$ is strictly henselian
+we have
+$K_{\overline{x}} = R\Gamma(\Spec(\mathcal{O}^{sh}_{X, \overline{x}}), K)$.
+Thus we obtain a canonical map
+\begin{equation}
+\label{equation-alpha-K}
+\alpha_{K, \overline{x}, \overline{t}} :
+K_{\overline{x}}
+\longrightarrow
+R\Gamma(F_{\overline{x}, \overline{t}}, K)
+\end{equation}
+by pulling back cohomology along
+$F_{\overline{x}, \overline{t}} \to \Spec(\mathcal{O}^{sh}_{X, \overline{x}})$.
+
+\begin{definition}
+\label{definition-locally-acyclic}
+\begin{reference}
+\cite[Definition 2.12, page 242]{SGA4.5} and
+\cite[Definition (1.3), page 54]{SGA4.5}
+\end{reference}
+Let $f : X \to S$ be a morphism of schemes.
+Let $K$ be an object of $D(X_\etale)$.
+\begin{enumerate}
+\item
+Let $\overline{x}$ be a geometric point of $X$ with image
+$\overline{s} = f(\overline{x})$.
+We say $f$ is {\it locally acyclic at $\overline{x}$ relative to $K$}
+if for every geometric point $\overline{t}$ of
+$\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$ the
+map (\ref{equation-alpha-K}) is an isomorphism\footnote{We do not
+assume $\overline{t}$ is an algebraic geometric point of
+$\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$. Often using
+Lemma \ref{lemma-smooth-base-change-separably-closed}
+one may reduce to this case.}.
+\item We say $f$ is {\it locally acyclic relative to $K$}
+if $f$ is locally acyclic at $\overline{x}$ relative to $K$
+for every geometric point $\overline{x}$ of $X$.
+\item We say $f$ is {\it universally locally acyclic relative to $K$}
+if for any morphism $S' \to S$ of schemes the base change $f' : X' \to S'$
+is locally acyclic relative to the pullback of $K$ to $X'$.
+\item We say $f$ is {\it locally acyclic} if for all geometric
+points $\overline{x}$ of $X$ and any integer $n$ prime to the characteristic
+of $\kappa(\overline{x})$, the morphism $f$ is locally acyclic
+at $\overline{x}$ relative to the constant sheaf with value
+$\mathbf{Z}/n\mathbf{Z}$.
+\item We say $f$ is {\it universally locally acyclic} if
+for any morphism $S' \to S$ of schemes the base change $f' : X' \to S'$
+is locally acyclic.
+\end{enumerate}
+\end{definition}
+
+\noindent
+Let $M$ be an abelian group. Then local acyclicity of $f : X \to S$
+with respect to the constant sheaf $\underline{M}$ boils down
+to the requirement that
+$$
+H^q(F_{\overline{x}, \overline{t}}, \underline{M}) =
+\left\{
+\begin{matrix}
+M & \text{if} & q = 0 \\
+0 & \text{if} & q \not = 0
+\end{matrix}
+\right.
+$$
+for any geometric point $\overline{x}$ of $X$ and any geometric
+point $\overline{t}$ of $\Spec(\mathcal{O}^{sh}_{S, f(\overline{x})})$.
+In this way we see that being locally acyclic corresponds to the
+vanishing of the higher cohomology groups of the geometric fibres
+$F_{\overline{x}, \overline{t}}$ of the maps between the
+strict henselizations at $\overline{x}$ and $\overline{s}$.
+
+\begin{proposition}
+\label{proposition-smooth-locally-acyclic}
+Let $f : X \to S$ be a smooth morphism of schemes.
+Then $f$ is universally locally acyclic.
+\end{proposition}
+
+\begin{proof}
+Since the base change of a smooth morphism is smooth, it suffices
+to show that smooth morphisms are locally acyclic.
+Let $\overline{x}$ be a geometric point of $X$ with image
+$\overline{s} = f(\overline{x})$. Let
+$\overline{t}$ be a geometric point of
+$\Spec(\mathcal{O}^{sh}_{S, f(\overline{x})})$.
+Since we are trying to prove a property of the ring map
+$\mathcal{O}^{sh}_{S, \overline{s}} \to \mathcal{O}^{sh}_{X, \overline{x}}$
+(see discussion following Definition \ref{definition-locally-acyclic})
+we may and do replace $f : X \to S$ by the base change
+$X \times_S \Spec(\mathcal{O}^{sh}_{S, \overline{s}}) \to
+\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$.
+Thus we may and do assume that $S$ is the spectrum of a strictly
+henselian local ring and that $\overline{s}$ lies over
+the closed point of $S$.
+
+\medskip\noindent
+We will apply Lemma \ref{lemma-base-change-f-star-general-stalks}
+to the diagram
+$$
+\xymatrix{
+X \ar[d]_f & X_{\overline{t}} \ar[l]^h \ar[d]^e \\
+S & \overline{t} \ar[l]_g
+}
+$$
+and the sheaf $\mathcal{F} = \underline{M}$ where $M = \mathbf{Z}/n\mathbf{Z}$
+for some integer $n$ prime to the characteristic of the residue field of
+$\overline{x}$. We know that the map
+$f^{-1}R^qg_*\mathcal{F} \to R^qh_*e^{-1}\mathcal{F}$
+is an isomorphism by smooth base change, see
+Theorem \ref{theorem-smooth-base-change} (the assumption
+on torsion holds by our choice of $n$).
+Thus Lemma \ref{lemma-base-change-f-star-general-stalks}
+gives us the middle equality in
+$$
+H^q(F_{\overline{x}, \overline{t}}, \underline{M}) =
+H^q(\Spec(\mathcal{O}^{sh}_{X, \overline{x}}) \times_S \overline{t},
+\underline{M})
+=
+H^q(\Spec(\mathcal{O}^{sh}_{S, \overline{s}}) \times_S \overline{t},
+\underline{M}) =
+H^q(\overline{t}, \underline{M})
+$$
+For the outer two equalities we use that
+$S = \Spec(\mathcal{O}^{sh}_{S, \overline{s}})$.
+Since $\overline{t}$ is the spectrum of a separably
+closed field we conclude that
+$$
+H^q(F_{\overline{x}, \overline{t}}, \underline{M}) =
+\left\{
+\begin{matrix}
+M & \text{if} & q = 0 \\
+0 & \text{if} & q \not = 0
+\end{matrix}
+\right.
+$$
+which is what we had to show (see discussion following
+Definition \ref{definition-locally-acyclic}).
+\end{proof}
+
+\begin{lemma}
+\label{lemma-locally-acyclic-locally-constant}
+Let $f : X \to S$ be a morphism of schemes. Let $\mathcal{F}$ be a finite
+locally constant abelian sheaf on $X_\etale$ such that for every geometric
+point $\overline{x}$ of $X$ the finite abelian group
+$\mathcal{F}_{\overline{x}}$ has order prime to the characteristic of the
+residue field of $\overline{x}$. If $f$ is locally acyclic, then $f$ is
+locally acyclic relative to $\mathcal{F}$.
+\end{lemma}
+
+\begin{proof}
+Namely, let $\overline{x}$ be a geometric point of $X$.
+Since $\mathcal{F}$ is finite locally constant we see that
+the restriction of $\mathcal{F}$ to $\Spec(\mathcal{O}^{sh}_{X, \overline{x}})$
+is isomorphic to the constant sheaf $\underline{M}$ with
+$M = \mathcal{F}_{\overline{x}}$. By assumption we can write
+$M = \bigoplus \mathbf{Z}/n_i\mathbf{Z}$ for some integers $n_i$
+prime to the characteristic of the residue field of $\overline{x}$.
+Since $f$ is locally acyclic we see that
+$$
+H^q(F_{\overline{x}, \overline{t}}, \underline{\mathbf{Z}/n_i\mathbf{Z}}) =
+\left\{
+\begin{matrix}
+\mathbf{Z}/n_i\mathbf{Z} & \text{if} & q = 0 \\
+0 & \text{if} & q \not = 0
+\end{matrix}
+\right.
+$$
+for any geometric point $\overline{t}$ of
+$\Spec(\mathcal{O}^{sh}_{S, f(\overline{x})})$.
+See discussion following Definition \ref{definition-locally-acyclic}.
+Taking direct sums we conclude that
+$$
+H^q(F_{\overline{x}, \overline{t}}, \underline{M}) =
+\left\{
+\begin{matrix}
+M & \text{if} & q = 0 \\
+0 & \text{if} & q \not = 0
+\end{matrix}
+\right.
+$$
+and we win.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-locally-acyclic-quasi-finite-base-change}
+Let
+$$
+\xymatrix{
+X' \ar[r]_{g'} \ar[d]_{f'} & X \ar[d]^f \\
+S' \ar[r]^g & S
+}
+$$
+be a cartesian diagram of schemes. Let $K$ be an object of $D(X_\etale)$.
+Let $\overline{x}'$ be a geometric point of $X'$ with image $\overline{x}$
+in $X$. If
+\begin{enumerate}
+\item $f$ is locally acyclic at $\overline{x}$ relative to $K$ and
+\item $g$ is locally quasi-finite, or $S' = \lim S_i$
+is a directed inverse limit of schemes locally quasi-finite over $S$
+with affine transition morphisms, or $g : S' \to S$ is integral,
+\end{enumerate}
+then $f'$ locally acyclic at $\overline{x}'$ relative to $(g')^{-1}K$.
+\end{lemma}
+
+\begin{proof}
+Denote $\overline{s}'$ and $\overline{s}$ the images of
+$\overline{x}'$ and $\overline{x}$ in $S'$ and $S$.
+Let $\overline{t}'$ be a geometric point of the spectrum of
+$\Spec(\mathcal{O}^{sh}_{S', \overline{s}'})$ and denote
+$\overline{t}$ the image in $\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$.
+By Algebra, Lemma
+\ref{algebra-lemma-base-change-strict-henselization-quasi-finite}
+and our assumptions on $g$ we have
+$$
+\mathcal{O}^{sh}_{X, \overline{x}}
+\otimes_{\mathcal{O}^{sh}_{S, \overline{s}}}
+\mathcal{O}^{sh}_{S', \overline{s}'}
+\longrightarrow
+\mathcal{O}^{sh}_{X', \overline{x}'}
+$$
+is an isomorphism. Since by our conventions
+$\kappa(\overline{t}) = \kappa(\overline{t}')$
+we conclude that
+$$
+F_{\overline{x}', \overline{t}'} =
+\Spec\left(
+\mathcal{O}^{sh}_{X', \overline{x}'}
+\otimes_{\mathcal{O}^{sh}_{S', \overline{s}'}}
+\kappa(\overline{t}')\right) =
+\Spec\left(
+\mathcal{O}^{sh}_{X, \overline{x}}
+\otimes_{\mathcal{O}^{sh}_{S, \overline{s}}}
+\kappa(\overline{t})\right) =
+F_{\overline{x}, \overline{t}}
+$$
+In other words, the varieties of vanishing cycles
+of $f'$ at $\overline{x}'$ are examples of varieties of vanishing
+cycles of $f$ at $\overline{x}$. The lemma follows
+immediately from this and the definitions.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+\section{The cospecialization map}
+\label{section-cospecialization}
+
+\noindent
+Let $f : X \to S$ be a morphism of schemes. Let $\overline{x}$ be a
+geometric point of $X$ with image $\overline{s} = f(\overline{x})$ in $S$.
+Let $\overline{t}$ be a geometric point of
+$\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$.
+Let $K \in D(X_\etale)$. For any morphism $g : Y \to X$ of schemes
+we write $K|_Y$ instead of $g_{small}^{-1}K$ and $R\Gamma(Y, K)$
+instead of $R\Gamma(Y_\etale, g_{small}^{-1}K)$.
+We claim that if
+\begin{enumerate}
+\item $K$ is bounded below, i.e., $K \in D^+(X_\etale)$,
+\item $f$ is locally acyclic relative to $K$
+\end{enumerate}
+then there is a {\it cospecialization map}
+$$
+cosp :
+R\Gamma(X_{\overline{t}}, K)
+\longrightarrow
+R\Gamma(X_{\overline{s}}, K)
+$$
+which will be closely related to the specialization map
+considered in Section \ref{section-specialization} and especially
+Remark \ref{remark-specialization-map-and-fibres}.
+
+\medskip\noindent
+To construct the map we consider the morphisms
+$$
+X_{\overline{t}}
+\xrightarrow{h}
+X \times_S \Spec(\mathcal{O}^{sh}_{S, \overline{s}})
+\xleftarrow{i}
+X_{\overline{s}}
+$$
+The unit of the adjunction between $h^{-1}$ and $Rh_*$ gives a map
+$$
+\beta_{K, \overline{s}, \overline{t}} :
+K|_{X \times_S \Spec(\mathcal{O}^{sh}_{S, \overline{s}})}
+\longrightarrow
+Rh_*(K|_{X_{\overline{t}}})
+$$
+in $D((X \times_S \Spec(\mathcal{O}^{sh}_{S, \overline{s}}))_\etale)$.
+Lemma \ref{lemma-beta-is-isomorphism} below shows that the pullback
+$i^{-1}\beta_{K, \overline{s}, \overline{t}}$
+is an isomorphism under the assumptions above.
+Thus we can define the cospecialization map as the composition
+\begin{align*}
+R\Gamma(X_{\overline{t}}, K)
+& =
+R\Gamma(X \times_S \Spec(\mathcal{O}^{sh}_{S, \overline{s}}),
+Rh_*(K|_{X_{\overline{t}}})) \\
+&
+\xrightarrow{i^{-1}}
+R\Gamma(X_{\overline{s}}, i^{-1}Rh_*(K|_{X_{\overline{t}}})) \\
+&
+\xrightarrow{(i^{-1}\beta_{K, \overline{s}, \overline{t}})^{-1}}
+R\Gamma(X_{\overline{s}},
+i^{-1}(K|_{X \times_S \Spec(\mathcal{O}^{sh}_{S, \overline{s}})})) \\
+& =
+R\Gamma(X_{\overline{s}}, K)
+\end{align*}
+
+\begin{lemma}
+\label{lemma-beta-is-isomorphism}
+The map $i^{-1}\beta_{K, \overline{s}, \overline{t}}$ is an isomorphism.
+\end{lemma}
+
+\begin{proof}
+The construction of the maps $h$, $i$, $\beta_{K, \overline{s}, \overline{t}}$
+only depends on the
+base change of $X$ and $K$ to $\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$.
+Thus we may and do assume that $S$ is a strictly henselian scheme
+with closed point $\overline{s}$. Observe that the local acyclicity
+of $f$ relative to $K$ is preserved by this base change (for example
+by Lemma \ref{lemma-locally-acyclic-quasi-finite-base-change} or just
+directly by comparing strictly henselian rings in this very special case).
+
+\medskip\noindent
+Let $\overline{x}$ be a geometric point of $X_{\overline{s}}$.
+Or equivalently, let $\overline{x}$ be a geometric point whose image
+by $f$ is $\overline{s}$. Let us compute the stalk of
+$i^{-1}\beta_{K, \overline{s}, \overline{t}}$
+at $\overline{x}$. First, we have
+$$
+(i^{-1}\beta_{K, \overline{s}, \overline{t}})_{\overline{x}} =
+(\beta_{K, \overline{s}, \overline{t}})_{\overline{x}}
+$$
+since pullback preserves stalks, see Lemma \ref{lemma-stalk-pullback}.
+Since we are in the situation $S = \Spec(\mathcal{O}^{sh}_{S, \overline{s}})$
+we see that $h : X_{\overline{t}} \to X$ has the property that
+$X_{\overline{t}} \times_X \Spec(\mathcal{O}^{sh}_{X, \overline{x}})
+= F_{\overline{x}, \overline{t}}$. Thus we see that
+$$
+(\beta_{K, \overline{s}, \overline{t}})_{\overline{x}} :
+K_{\overline{x}}
+\longrightarrow
+Rh_*(K|_{X_{\overline{t}}})_{\overline{x}} =
+R\Gamma(F_{\overline{x}, \overline{t}}, K)
+$$
+where the equal sign is Theorem \ref{theorem-higher-direct-images}.
+It follows that the map $(\beta_{K, \overline{s}, \overline{t}})_{\overline{x}}$
+is none other than the map $\alpha_{K, \overline{x}, \overline{t}}$ used
+in Definition \ref{definition-locally-acyclic}. The result follows as we may
+check whether a map is an isomorphism in stalks by
+Theorem \ref{theorem-exactness-stalks}.
+\end{proof}
+
+\noindent
+The cospecialization map when it exists is trying to be the inverse
+of the specialization map.
+
+\begin{lemma}
+\label{lemma-specialization-cospecialization}
+In the situation above, if in addition
+$f$ is quasi-compact and quasi-separated, then the diagram
+$$
+\xymatrix{
+(Rf_*K)_{\overline{s}} \ar[r] \ar[d]_{sp} &
+R\Gamma(X_{\overline{s}}, K) \\
+(Rf_*K)_{\overline{t}} \ar[r] &
+R\Gamma(X_{\overline{t}}, K) \ar[u]_{cosp}
+}
+$$
+is commutative.
+\end{lemma}
+
+\begin{proof}
+As in the proof of Lemma \ref{lemma-beta-is-isomorphism}
+we may replace $S$ by $\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$.
+Then our maps simplify to $h : X_{\overline{t}} \to X$,
+$i : X_{\overline{s}} \to X$, and
+$\beta_{K, \overline{s}, \overline{t}} : K \to Rh_*(K|_{X_{\overline{t}}})$.
+Using that $(Rf_*K)_{\overline{s}} = R\Gamma(X, K)$ by
+Theorem \ref{theorem-higher-direct-images}
+the composition of $sp$ with the base change map
+$(Rf_*K)_{\overline{t}} \to R\Gamma(X_{\overline{t}}, K)$
+is just pullback of cohomology along $h$.
+This is the same as the map
+$$
+R\Gamma(X, K) \xrightarrow{\beta_{K, \overline{s}, \overline{t}}}
+R\Gamma(X, Rh_*(K|_{X_{\overline{t}}})) =
+R\Gamma(X_{\overline{t}}, K)
+$$
+Now the map $cosp$ first inverts the $=$ sign in this displayed
+formula, then pulls back along $i$, and finally applies
+the inverse of $i^{-1}\beta_{K, \overline{s}, \overline{t}}$.
+Hence we get the desired commutativity.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-sp-isom-proper-torsion-loc-ac}
+Let $f : X \to S$ be a morphism of schemes. Let $K \in D(X_\etale)$.
+Assume
+\begin{enumerate}
+\item $K$ is bounded below, i.e., $K \in D^+(X_\etale)$,
+\item $f$ is locally acyclic relative to $K$,
+\item $f$ is proper, and
+\item $K$ has torsion cohomology sheaves.
+\end{enumerate}
+Then for every geometric point $\overline{s}$ of $S$ and every geometric
+point $\overline{t}$ of $\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$
+both the specialization map
+$sp : (Rf_*K)_{\overline{s}} \to (Rf_*K)_{\overline{t}}$
+and the cospecialization map
+$cosp : R\Gamma(X_{\overline{t}}, K) \to R\Gamma(X_{\overline{s}}, K)$
+are isomorphisms.
+\end{lemma}
+
+\begin{proof}
+By the proper base change theorem (in the form of
+Lemma \ref{lemma-proper-base-change-stalk}) we have
+$(Rf_*K)_{\overline{s}} = R\Gamma(X_{\overline{s}}, K)$
+and similarly for $\overline{t}$. The ``correct'' proof would be
+to show that the argument in
+Lemma \ref{lemma-specialization-cospecialization}
+shows that $sp$ and $cosp$ are inverse isomorphisms in this case.
+Instead we will show directly that $cosp$ is an isomorphism.
+From the discussion above we see that $cosp$ is an isomorphism
+if and only if pullback by $i$
+$$
+R\Gamma(X \times_S \Spec(\mathcal{O}^{sh}_{S, \overline{s}}),
+Rh_*(K|_{X_{\overline{t}}}))
+\longrightarrow
+R\Gamma(X_{\overline{s}}, i^{-1}Rh_*(K|_{X_{\overline{t}}}))
+$$
+is an isomorphism in $D^+(\textit{Ab})$. This is true by the proper
+base change theorem for the proper morphism
+$f' : X \times_S \Spec(\mathcal{O}^{sh}_{S, \overline{s}}) \to
+\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$
+by the morphism $\overline{s} \to \Spec(\mathcal{O}^{sh}_{S, \overline{s}})$
+and the complex $K' = Rh_*(K|_{X_{\overline{t}}})$. The complex
+$K'$ is bounded below and has torsion cohomology sheaves
+by Lemma \ref{lemma-torsion-direct-image}.
+Since $\Spec(\mathcal{O}^{sh}_{S, \overline{s}})$ is strictly henselian
+with $\overline{s}$ lying over the closed point,
+we see that the source of the displayed arrow equals
+$(Rf'_*K')_{\overline{s}}$ and the target equals
+$R\Gamma(X_{\overline{s}}, K')$ and the displayed map is an isomorphism
+by the already used
+Lemma \ref{lemma-proper-base-change-stalk}.
+Thus we see that three out of the four arrows in the diagram
+of Lemma \ref{lemma-specialization-cospecialization} are isomorphisms
+and we conclude.
+\end{proof}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -20332,6 +21589,467 @@ $H^q_\etale(X, \underline{A}) = H^q_h(X, \underline{A})$.
 This follows from Lemma \ref{lemma-cohomological-descent-etale-h}
 by Cohomology on Sites, Remark \ref{sites-cohomology-remark-before-Leray}.
 \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+\section{Descending \'etale sheaves}
+\label{section-glueing-etale}
+
+\noindent
+We prove that \'etale sheaves ``glue'' in the fppf and h topology
+and related results. We have already shown the following related
+results
+\begin{enumerate}
+\item Lemma \ref{lemma-describe-pullback} tells us that a sheaf
+on the small \'etale site of a scheme $S$ determines a sheaf on the
+big \'etale site of $S$ satisfying the sheaf condition for
+fpqc coverings (and a fortiori for Zariski, \'etale, smooth, syntomic,
+and fppf coverings),
+\item Lemma \ref{lemma-describe-pullback-pi-fppf} is a restatement of
+the previous point for the fppf topology,
+\item Lemma \ref{lemma-describe-pullback-pi-ph} proves the same for the
+ph topology,
+\item Lemma \ref{lemma-describe-pullback-pi-h} proves the same for the
+h topology,
+\item Lemma \ref{lemma-descent-sheaf-fppf-etale} is a version of
+fppf descent for \'etale sheaves, and
+\item Remark \ref{remark-cohomological-descent-finite} tells us that
+we have descent of \'etale sheaves for finite surjective morphisms
+(we will clarify and strengthen this below).
+\end{enumerate}
+In the chapter on simplicial spaces we will prove some additional
+results on this, see for example
+Simplicial Spaces, Sections \ref{spaces-simplicial-section-fppf-hypercovering}
+and \ref{spaces-simplicial-section-proper-hypercovering-spaces}.
+
+\medskip\noindent
+In order to conveniently express our results we need some notation.
+Let $\mathcal{U} = \{f_i : X_i \to X\}$
+be a family of morphisms of schemes with fixed target.
+A {\it descent datum} for \'etale sheaves with respect to
+$\mathcal{U}$ is a family
+$((\mathcal{F}_i)_{i \in I}, (\varphi_{ij})_{i, j \in I})$ where
+\begin{enumerate}
+\item $\mathcal{F}_i$ is in $\Sh(X_{i, \etale})$, and
+\item $\varphi_{ij} :
+\text{pr}_{0, small}^{-1} \mathcal{F}_i
+\longrightarrow
+\text{pr}_{1, small}^{-1} \mathcal{F}_j$
+is an isomorphism in $\Sh((X_i \times_X X_j)_\etale)$
+\end{enumerate}
+such that the {\it cocycle condition} holds: the diagrams
+$$
+\xymatrix{
+\text{pr}_{0, small}^{-1}\mathcal{F}_i
+\ar[dr]_{\text{pr}_{02, small}^{-1}\varphi_{ik}}
+\ar[rr]^{\text{pr}_{01, small}^{-1}\varphi_{ij}} & &
+\text{pr}_{1, small}^{-1}\mathcal{F}_j
+\ar[dl]^{\text{pr}_{12, small}^{-1}\varphi_{jk}} \\
+& \text{pr}_{2, small}^{-1}\mathcal{F}_k
+}
+$$
+commute in $\Sh((X_i \times_X X_j \times_X X_k)_\etale)$.
+There is an obvious notion of {\it morphisms of descent data}
+and we obtain a category of descent data.
+A descent datum
+$((\mathcal{F}_i)_{i \in I}, (\varphi_{ij})_{i, j \in I})$
+is called {\it effective} if there exist a
+$\mathcal{F}$ in $\Sh(X_\etale)$ and isomorphisms
+$\varphi_i : f_{i, small}^{-1} \mathcal{F} \to \mathcal{F}_i$
+in $\Sh(X_{i, \etale})$ compatible with the $\varphi_{ij}$, i.e.,
+such that
+$$
+\varphi_{ij} =
+\text{pr}_{1, small}^{-1} (\varphi_j) \circ
+\text{pr}_{0, small}^{-1} (\varphi_i^{-1})
+$$
+Another way to say this is the following. Given an object $\mathcal{F}$
+of $\Sh(X_\etale)$ we obtain the {\it canonical descent datum}
+$(f_{i, small}^{-1}\mathcal{F}_i, c_{ij})$ where $c_{ij}$
+is the canonical isomorphism
+$$
+c_{ij} : \text{pr}_{0, small}^{-1} f_{i, small}^{-1}\mathcal{F}
+\longrightarrow
+\text{pr}_{1, small}^{-1} f_{j, small}^{-1}\mathcal{F}
+$$
+The descent datum
+$((\mathcal{F}_i)_{i \in I}, (\varphi_{ij})_{i, j \in I})$
+is effective if and only if it is isomorphic to the canonical
+descent datum associated to some $\mathcal{F}$ in $\Sh(X_\etale)$.
+
+\medskip\noindent
+If the family consists of a single morphism $\{X \to Y\}$,
+then we think of a descent datum as a pair $(\mathcal{F}, \varphi)$
+where $\mathcal{F}$ is an object of $\Sh(X_\etale)$ and
+$\varphi$ is an isomorphism
+$$
+\text{pr}_{0, small}^{-1} \mathcal{F}
+\longrightarrow
+\text{pr}_{1, small}^{-1} \mathcal{F}
+$$
+in $\Sh((X \times_Y X)_\etale)$ such that the cocycle condition holds:
+$$
+\xymatrix{
+\text{pr}_{0, small}^{-1}\mathcal{F}
+\ar[dr]_{\text{pr}_{02, small}^{-1}\varphi}
+\ar[rr]^{\text{pr}_{01, small}^{-1}\varphi} & &
+\text{pr}_{1, small}^{-1}\mathcal{F}
+\ar[dl]^{\text{pr}_{12, small}^{-1}\varphi} \\
+& \text{pr}_{2, small}^{-1}\mathcal{F}
+}
+$$
+commutes in $\Sh((X \times_Y X \times_Y X)_\etale)$.
+There is a notion of morphisms of descent data and effectivity
+exactly as before.
+
+\medskip\noindent
+We first prove effective descent for surjective integral morphisms.
+
+\begin{lemma}
+\label{lemma-glue-etale-sheaf-section}
+Let $f : X \to Y$ be a morphism of schemes which has a section. Then the
+functor
+$$
+\Sh(Y_\etale)
+\longrightarrow
+\text{descent data for \'etale sheaves wrt }\{X \to Y\}
+$$
+sending $\mathcal{G}$ in $\Sh(Y_\etale)$ to the canonical descent datum
+is an equivalence of categories.
+\end{lemma}
+
+\begin{proof}
+This is formal and depends only on functoriality of the pullback
+functors. We omit the details. Hint: If $s : Y \to X$ is a section,
+then a quasi-inverse is the functor sending $(\mathcal{F}, \varphi)$
+to $s_{small}^{-1}\mathcal{F}$.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-glue-etale-sheaf-integral-surjective}
+Let $f : X \to Y$ be a surjective integral morphism of schemes.
+The functor
+$$
+\Sh(Y_\etale)
+\longrightarrow
+\text{descent data for \'etale sheaves wrt }\{X \to Y\}
+$$
+is an equivalence of categories.
+\end{lemma}
+
+\begin{proof}
+In this proof we drop the subscript ${}_{small}$ from our pullback
+and pushforward functors.
+Denote $X_1 = X \times_Y X$ and denote $f_1 : X_1 \to Y$ the
+morphism $f \circ \text{pr}_0 = f \circ \text{pr}_1$.
+Let $(\mathcal{F}, \varphi)$ be a descent datum for $\{X \to Y\}$.
+Let us set $\mathcal{F}_1 = \text{pr}_0^{-1}\mathcal{F}$.
+We may think of $\varphi$ as defining an isomorphism
+$\mathcal{F}_1 \to \text{pr}_1^{-1}\mathcal{F}$.
+We claim that the rule which sends a descent datum
+$(\mathcal{F}, \varphi)$
+to the sheaf
+$$
+\mathcal{G} =
+\text{Equalizer}\left(
+\xymatrix{
+f_*\mathcal{F}
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+f_{1, *}\mathcal{F}_1
+}
+\right)
+$$
+is a quasi-inverse to the functor in the statement of the lemma.
+The first of the two arrows comes from the map
+$$
+f_*\mathcal{F} \to
+f_*\text{pr}_{0, *}\text{pr}_0^{-1}\mathcal{F} =
+f_{1, *}\mathcal{F}_1
+$$
+and the second arrow comes from the map
+$$
+f_*\mathcal{F} \to
+f_* \text{pr}_{1, *}\text{pr}_1^{-1}\mathcal{F}
+\xleftarrow{\varphi}
+f_* \text{pr}_{0, *} \text{pr}_0^{-1}\mathcal{F} =
+f_{1, *}\mathcal{F}_1
+$$
+where the arrow pointing left is invertible.
+To prove this works we have to show
+that the canonical map $f^{-1}\mathcal{G} \to \mathcal{F}$
+is an isomorphism; details omitted. In order to prove this it
+suffices to check after pulling back by any collection of morphisms
+$\Spec(k) \to Y$ where $k$ is an algebraically closed field.
+Namely, the corresponing base changes $X_k \to X$ are jointly
+surjective and we can check whether a map of sheaves on $X_\etale$
+is an isomorphism by looking at stalks on geometric points, see
+Theorem \ref{theorem-exactness-stalks}.
+By Lemma \ref{lemma-integral-pushforward-commutes-with-base-change}
+the construction of $\mathcal{G}$ from the descent datum
+$(\mathcal{F}, \varphi)$ commutes with any base change.
+Thus we may assume $Y$ is the spectrum of an algebraically
+closed point (note that base change preserves the properties
+of the morphism $f$, see
+Morphisms, Lemma \ref{morphisms-lemma-base-change-surjective}
+and \ref{morphisms-lemma-base-change-finite}).
+In this case the morphism $X \to Y$ has a section, so we
+know that the functor is an equivalence by
+Lemma \ref{lemma-glue-etale-sheaf-section}.
+However, the reader may show that the functor is an equivalence
+if and only if the construction above is a quasi-inverse;
+details omitted. This finishes the proof.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-glue-etale-sheaf-proper-surjective}
+Let $f : X \to Y$ be a surjective proper morphism of schemes.
+The functor
+$$
+\Sh(Y_\etale)
+\longrightarrow
+\text{descent data for \'etale sheaves wrt }\{X \to Y\}
+$$
+is an equivalence of categories.
+\end{lemma}
+
+\begin{proof}
+The exact same proof as given in
+Lemma \ref{lemma-glue-etale-sheaf-integral-surjective}
+works, except the appeal to
+Lemma \ref{lemma-integral-pushforward-commutes-with-base-change}
+should be replaced by an appeal to
+Lemma \ref{lemma-proper-base-change-f-star}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-glue-etale-sheaf-check-after-base-change}
+Let $f : X \to Y$ be a morphism of schemes. Let $Z \to Y$ be a surjective
+integral morphism of schemes or a surjective proper morphism of schemes.
+If the functors
+$$
+\Sh(Z_\etale)
+\longrightarrow
+\text{descent data for \'etale sheaves wrt }\{X \times_Y Z \to Z\}
+$$
+and
+$$
+\Sh((Z \times_Y Z)_\etale)
+\longrightarrow
+\text{descent data for \'etale sheaves wrt }
+\{X \times_Y (Z \times_Y Z) \to Z \times_Y Z\}
+$$
+are equivalences of categories, then
+$$
+\Sh(Y_\etale)
+\longrightarrow
+\text{descent data for \'etale sheaves wrt }\{X \to Y\}
+$$
+is an equivalence.
+\end{lemma}
+
+\begin{proof}
+Formal consequence of the definitions and
+Lemmas \ref{lemma-glue-etale-sheaf-integral-surjective} and
+\ref{lemma-glue-etale-sheaf-proper-surjective}. Details omitted.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-glue-etale-sheaf-fppf-cover}
+Let $f : X \to Y$ be a morphism of schemes which is
+surjective, flat, locally of finite presentation.
+The functor
+$$
+\Sh(Y_\etale)
+\longrightarrow
+\text{descent data for \'etale sheaves wrt }\{X \to Y\}
+$$
+is an equivalence of categories.
+\end{lemma}
+
+\begin{proof}
+Exactly as in the proof of
+Lemma \ref{lemma-glue-etale-sheaf-integral-surjective}
+we claim a quasi-inverse is given by the functor sending
+$(\mathcal{F}, \varphi)$ to
+$$
+\mathcal{G} =
+\text{Equalizer}\left(
+\xymatrix{
+f_*\mathcal{F}
+\ar@<1ex>[r] \ar@<-1ex>[r] &
+f_{1, *}\mathcal{F}_1
+}
+\right)
+$$
+and in order to prove this it suffices to show that
+$f^{-1}\mathcal{G} \to \mathcal{F}$ is an isomorphism.
+This we may check locally, hence we may and do assume $Y$
+is affine. Then we can find a finite surjective morphism
+$Z \to Y$ such that there exists an open covering
+$Z = \bigcup W_i$ such that $W_i \to Y$ factors through $X$.
+See
+More on Morphisms, Lemma \ref{more-morphisms-lemma-dominate-fppf-finite}.
+Applying Lemma
+\ref{lemma-glue-etale-sheaf-check-after-base-change}
+we see that it suffices to prove
+the lemma after replacing $Y$ by $Z$ and $Z \times_Y Z$ and $f$
+by its base change. Thus we may assume $f$ has sections Zariski locally.
+Of course, using that the problem is local on $Y$ we reduce
+to the case where we have a section which is
+Lemma \ref{lemma-glue-etale-sheaf-section}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-glue-etale-sheaf-fppf}
+Let $\{f_i : X_i \to X\}$ be an fppf covering of schemes.
+The functor
+$$
+\Sh(X_\etale)
+\longrightarrow
+\text{descent data for \'etale sheaves wrt }\{f_i : X_i \to X\}
+$$
+is an equivalence of categories.
+\end{lemma}
+
+\begin{proof}
+We have Lemma \ref{lemma-glue-etale-sheaf-fppf-cover}
+for the morphism $f : \coprod X_i \to X$.
+Then a formal argument shows that descent data for $f$
+are the same thing as descent data for the covering, compare
+with Descent, Lemma \ref{descent-lemma-family-is-one}.
+Details omitted.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-glue-etale-sheaf-modification}
+Let $f : X' \to X$ be a proper morphism of schemes. Let $i : Z \to X$
+be a closed immersion. Set $E = Z \times_X X'$. Picture
+$$
+\xymatrix{
+E \ar[d]_g \ar[r]_j & X' \ar[d]^f \\
+Z \ar[r]^i & X
+}
+$$
+If $f$ is an isomorphism over $X \setminus Z$, then the functor
+$$
+\Sh(X_\etale)
+\longrightarrow
+\Sh(X'_\etale) \times_{\Sh(E_\etale)} \Sh(Z_\etale)
+$$
+is an equivalence of categories.
+\end{lemma}
+
+\begin{proof}
+We will work with the $2$-fibre product category as constructed in
+Categories, Example \ref{categories-example-2-fibre-product-categories}.
+The functor sends $\mathcal{F}$ to the triple
+$(f^{-1}\mathcal{F}, i^{-1}\mathcal{F}, c)$ where
+$c : j^{-1}f^{-1}\mathcal{F} \to g^{-1}i^{-1}\mathcal{F}$
+is the canonical isomorphism. We will construct a quasi-inverse functor. Let
+$(\mathcal{F}', \mathcal{G}, \alpha)$ be an object
+of the right hand side of the arrow.
+We obtain an isomorphism
+$$
+i^{-1}f_*\mathcal{F}' = g_*j^{-1}\mathcal{F}'
+\xrightarrow{g_*\alpha}
+g_*g^{-1}\mathcal{G}
+$$
+The first equality is Lemma \ref{lemma-proper-base-change-f-star}.
+Using this we obtain maps
+$i_*\mathcal{G} \to i_*g_*g^{-1}\mathcal{G}$
+and $f'_*\mathcal{F}' \to i_*g_*g^{-1}\mathcal{G}$. We set
+$$
+\mathcal{F} = f_*\mathcal{F}' \times_{i_*g_*g^{-1}\mathcal{G}} i_*\mathcal{G}
+$$
+and we claim that $\mathcal{F}$ is an object of the left hand side
+of the arrow whose image in the right hand side is isomorphic to
+the triple we started out with. Let us compute the stalk of $\mathcal{F}$
+at a geometric point $\overline{x}$ of $X$.
+
+\medskip\noindent
+If $\overline{x}$ is not
+in $Z$, then on the one hand $\overline{x}$ comes from a unique
+geometric point $\overline{x}'$ of $X'$ and
+$\mathcal{F}'_{\overline{x}'} = (f_*\mathcal{F}')_{\overline{x}}$
+and on the other hand we have $(i_*\mathcal{G})_{\overline{x}}$
+and $(i_*g_*g^{-1}\mathcal{G})_{\overline{x}}$ are singletons.
+Hence we see that $\mathcal{F}_{\overline{x}}$ equals
+$\mathcal{F}'_{\overline{x}'}$.
+
+\medskip\noindent
+If $\overline{x}$ is in $Z$, i.e., $\overline{x}$ is the image of
+a geometric point $\overline{z}$ of $Z$, then we obtain
+$(i_*\mathcal{G})_{\overline{x}} = \mathcal{G}_{\overline{z}}$
+and
+$$
+(i_*g_*g^{-1}\mathcal{G})_{\overline{x}} =
+(g_*g^{-1}\mathcal{G})_{\overline{z}} =
+\Gamma(E_{\overline{z}}, g^{-1}\mathcal{G}|_{E_{\overline{z}}})
+$$
+(by the proper base change for pushforward used above)
+and similarly
+$$
+(f_*\mathcal{F}')_{\overline{x}} =
+\Gamma(X'_{\overline{x}}, \mathcal{F}'|_{X'_{\overline{x}}})
+$$
+Since we have the identification
+$E_{\overline{z}} = X'_{\overline{x}}$ and since $\alpha$
+defines an isomorphism between the sheaves
+$\mathcal{F}'|_{X'_{\overline{x}}}$ and
+$g^{-1}\mathcal{G}|_{E_{\overline{z}}}$
+we conclude that we get
+$$
+\mathcal{F}_{\overline{x}} = \mathcal{G}_{\overline{z}}
+$$
+in this case.
+
+\medskip\noindent
+To finish the proof, we observe that there are canonical maps
+$i^{-1}\mathcal{F} \to \mathcal{G}$ and $f^{-1}\mathcal{F} \to \mathcal{F}'$
+compatible with $\alpha$ which on stalks produce the isomorphisms
+we saw above. We omit the careful construction of these maps.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-h-descent-etale-sheaves}
+Let $S$ be a scheme. Then the category fibred in groupoids
+$$
+p : \mathcal{S} \longrightarrow (\Sch/S)_h
+$$
+whose fibre category over $U$ is the category $\Sh(U_\etale)$
+of sheaves on the small \'etale site of $U$ is a stack in groupoids.
+\end{lemma}
+
+\begin{proof}
+To prove the lemma we will check conditions (1), (2), and (3) of
+More on Flatness, Lemma \ref{flat-lemma-refine-check-h-stack}.
+
+\medskip\noindent
+Condition (1) holds because we have glueing for sheaves (and
+Zariski coverings are \'etale coverings). See
+Sites, Lemma \ref{sites-lemma-glue-sheaves}.
+
+\medskip\noindent
+To see condition (2), suppose that $f : X \to Y$ is a surjective,
+flat, proper morphism of finite presentation over $S$ with $Y$ affine.
+Then we have descent for $\{X \to Y\}$ by either
+Lemma \ref{lemma-glue-etale-sheaf-fppf-cover} or
+Lemma \ref{lemma-glue-etale-sheaf-proper-surjective}.
+
+\medskip\noindent
+Condition (3) follows immediately from the more general
+Lemma \ref{lemma-glue-etale-sheaf-modification}.
+\end{proof}
+
+
 
 
 

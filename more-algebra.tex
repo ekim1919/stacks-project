@@ -562,14 +562,15 @@ Topology, Section \ref{topology-section-colimits}).
 
 \medskip\noindent
 To show the map $can$ is surjective, let $\mathfrak q' \subset B'$ be a prime
-ideal. If $\mathfrak q' \cap I = 0$ (here and below we take the liberty
-of considering $I$ as an ideal of $B'$ as well as an ideal of $A$),
+ideal. If $I \subset \mathfrak q'$ (here and below we take the liberty
+of considering $I$ as an ideal of $B'$ as well as an ideal of $A'$),
 then $\mathfrak q'$ corresponds to a prime ideal of $B$ and is in the image.
-If not, then pick $h \in I \cap \mathfrak q'$. In this case $B_h = A_h = 0$
+If not, then pick $h \in I$, $h \not \in \mathfrak q'$.
+In this case $B_h = A_h = 0$
 and the ring map $B'_h \to A'_h$ is an isomorphism, see
 Lemma \ref{lemma-diagram-localize}. Thus we see that
 $\mathfrak q'$ corresponds to a unique prime ideal $\mathfrak p' \subset A'$
-which meets $I$.
+which does not contain $I$.
 
 \medskip\noindent
 Since $B' \to B$ is surjective, we see that $can$ is injective on
@@ -589,15 +590,15 @@ $D(f') \cap U' \cap V(I) = D(f') \cap V(I)$.
 Hence $V(I) \cap D(f')$ and $D(f') \cap (U')^c$ are disjoint closed
 subsets of $D(f') = \Spec(A'_{f'})$. Write $(U')^c = V(J)$
 for some ideal $J \subset A'$. Since
-$A'_{f'} \to'_{f'}/IA'_{f'} \times A'_{f'}/J'A'_{f'}$
+$A'_{f'} \to A'_{f'}/IA'_{f'} \times A'_{f'}/JA'_{f'}$
 is surjective by the disjointness just shown, we can find an $a'' \in A'_{f'}$
 mapping to $1$ in $A'_{f'}/IA'_{f'}$ and mapping to zero in
-$A'_{f'}/J'A'_{f'}$. Clearing denominators, we find an element
+$A'_{f'}/JA'_{f'}$. Clearing denominators, we find an element
 $a' \in J$ mapping to $f^n$ in $A$. Then $D(a'f') \subset U'$.
-Let $h' = (g^n, a'f') \in B'$.
-Since $B'_{h'} = B_{g^n} \times_{A_{f^n}} A'_{a'f'}$ by a previously
-cited lemma, we see that $D(h)$ pulls back to an open neighbourhood
-of $v$ in the pushout, i.e., the image of $V \amalg U$ contains
+Let $h' = (g^{n + 1}, a'f') \in B'$.
+Since $B'_{h'} = B_{g^{n + 1}} \times_{A_{f^{n + 1}}} A'_{a'f'}$ by a previously
+cited lemma, we see that $D(h')$ pulls back to an open neighbourhood
+of $v$ in the pushout, i.e., the image of $V \amalg U'$ contains
 an open neighbourhood of the image of $v$. We omit the (easier) proof that
 the same thing is true for $u' \in U'$ with $u' \not \in V(I)$.
 \end{proof}
@@ -2343,6 +2344,30 @@ On the other hand, the induced map on spectra is open
 previous lemma referenced) and the image
 contains $V(I)$. Since $I$ is contained in the Jacobson radical of $A$
 we conclude.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-noetherian-zariski-jacobson-complement}
+Let $(A, I)$ be a Zariski pair with $A$ Noetherian. Let $f \in I$.
+Then $A_f$ is a Jacobson ring.
+\end{lemma}
+
+\begin{proof}
+We will use the criterion of
+Algebra, Lemma \ref{algebra-lemma-noetherian-dim-1-Jacobson}.
+Let $\mathfrak p \subset A$ be a prime ideal such that
+$\mathfrak p_f = \mathfrak p A_f$ is prime and not maximal. We have to
+show that $A_f/\mathfrak p_f = (A/\mathfrak p)_f$
+has infinitely many prime ideals. After replacing $A$ by $A/\mathfrak p$
+we may assume $A$ is a domain, $\dim A_f > 0$, and our goal is to
+show that $\Spec(A_f)$ is infinite. Since $\dim A_f > 0$ we can
+find a nonzero prime ideal $\mathfrak q \subset A$ not containing $f$.
+Choose a maximal ideal $\mathfrak m \subset A$ containing $\mathfrak q$.
+Since $(A, I)$ is a Zariski pair, we see $I \subset \mathfrak m$.
+Hence $\mathfrak m \not = \mathfrak q$ and $\dim(A_\mathfrak m) > 1$.
+Hence $\Spec((A_\mathfrak m)_f) \subset \Spec(A_f)$ is infinite by
+Algebra, Lemma \ref{algebra-lemma-Noetherian-local-domain-dim-2-infinite-opens}
+and we win.
 \end{proof}
 
 
@@ -8059,11 +8084,9 @@ Hence we have $IA[x_s, y_j] \cap K^2 = IK$ by
 Lemma \ref{lemma-conormal-sequence-H1-regular-ideal}.
 This means that the kernel of $K/K^2 \to J/J^2$ is
 isomorphic to $IA[x_s, y_j]/IK$. Since
-$I/I^2 \otimes_A C = IA[x_s, y_j]/IK$
-this provides us with the desired injectivity of
-$I/I^2 \otimes_A C \to K/K^2$ so that the result
-follows from the snake lemma, see
-Homology, Lemma \ref{homology-lemma-snake}.
+$I/I^2 \otimes_A C = IA[x_s, y_j]/IK$ by right exactness
+of tensor product, this provides us with the desired injectivity of
+$I/I^2 \otimes_A C \to K/K^2$.
 \end{proof}
 
 \begin{lemma}
@@ -11331,6 +11354,33 @@ to prove that $f \not \in \mathfrak m^2$, see
 Algebra, Lemma \ref{algebra-lemma-regular-ring-CM}.
 However, if $f \in \mathfrak m^2$ then $D(f) \in \mathfrak m$
 by the Leibniz rule, a contradiction.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quotient-sequence-regular}
+Let $(R, \mathfrak m, \kappa)$ be a regular local ring. Let $m \geq 1$. Let
+$f_1, \ldots, f_m \in \mathfrak m$. Assume there exist derivations
+$D_1, \ldots, D_m : R \to R$ such that
+$\det_{1 \leq i, j \leq m}(D_i(f_j))$ is a unit of $R$.
+Then $R/(f_1, \ldots, f_m)$ is regular and $f_1, \ldots, f_m$
+is a regular sequence.
+\end{lemma}
+
+\begin{proof}
+It suffices to prove that $f_1, \ldots, f_m$ are $\kappa$-linearly
+independent in $\mathfrak m/\mathfrak m^2$, see
+Algebra, Lemma \ref{algebra-lemma-regular-ring-CM}.
+However, if there is a nontrivial linear relation the we get
+$\sum a_i f_i \in \mathfrak m^2$ for some $a_i \in R$
+but not all $a_i \in \mathfrak m$. Observe that
+$D_i(\mathfrak m^2) \subset \mathfrak m$ and
+$D_i(a_j f_j) \equiv a_j D_i(f_j) \bmod \mathfrak m$
+by the Leibniz rule for derivations. Hence
+this would imply
+$$
+\sum a_j D_i(f_j) \in \mathfrak m
+$$
+which would contradict the assumption on the determinant.
 \end{proof}
 
 \begin{lemma}
@@ -16001,7 +16051,7 @@ and the stupid truncations.
 Let $R$ be a ring. Let $a, b \in \mathbf{Z}$. Let $K^\bullet \in D^b(R)$
 such that $H^i(K^\bullet)$ has tor amplitude in $[a - i, b - i]$
 for all $i$. Then $K^\bullet$ has tor amplitude in $[a, b]$. In particular
-if $K^\bullet \in D^{-}(R)$ and all its cohomology groups have finite tor
+if $K^\bullet \in D^b(R)$ and all its cohomology groups have finite tor
 dimension then $K^\bullet$ has finite tor dimension.
 \end{lemma}
 
@@ -18843,7 +18893,7 @@ Some lemmas that allow us to prove certain complexes are perfect.
 \begin{lemma}
 \label{lemma-lift-bounded-pseudo-coherent-to-perfect}
 Let $R$ be a ring and let $\mathfrak p \subset R$ be a prime.
-Let $K \in D^-(R)$ be pseudo-coherent. Set
+Let $K$ be pseudo-coherent and bounded below. Set
 $d_i = \dim_{\kappa(\mathfrak p)}
 H^i(K \otimes_R^\mathbf{L} \kappa(\mathfrak p))$.
 If there exists an $a \in \mathbf{Z}$ such that $d_i = 0$ for $i < a$,
@@ -18926,7 +18976,7 @@ $$
 (1) \Rightarrow (2) \Leftrightarrow (3) \Leftrightarrow (3)
 \Leftrightarrow (4) \Leftrightarrow (5)
 $$
-If $K^\bullet$ is in $D^{-}(R)$, then all conditions are equivalent.
+If $K^\bullet$ is bounded below, then all conditions are equivalent.
 \end{lemma}
 
 \begin{proof}
@@ -18967,7 +19017,7 @@ is nonzero which is a contradiction.
 
 \medskip\noindent
 Assume the equivalent conditions (2) -- (5) hold and that
-$K^\bullet$ is in $D^{-}(R)$. Say $H^i(K^\bullet) = 0$ for
+$K^\bullet$ is bounded below. Say $H^i(K^\bullet) = 0$ for
 $i < a$. Pick a maximal ideal $\mathfrak m$ of $R$.
 It suffices to show there exists an $f \in R$, $f \not \in \mathfrak m$
 such that $K^\bullet \otimes_R^\mathbf{L} R_f$ is perfect
@@ -20093,8 +20143,9 @@ for pseudo-coherence.
 
 \begin{lemma}
 \label{lemma-pull-push}
-Let $R$ be a ring. Let $K^\bullet$ be an object of $D^{-}(R)$.
-Consider the $R$-algebra map $R[x] \to R$ which maps $x$ to zero. Then
+Let $R$ be a ring. Let $K^\bullet$ be a complex of $R$-modules.
+Consider the $R$-algebra map $R[x] \to R$ which maps $x$ to zero.
+Then
 $$
 K^\bullet \otimes_{R[x]}^{\mathbf{L}} R \cong K^\bullet \oplus K^\bullet[1]
 $$
@@ -20102,13 +20153,24 @@ in $D(R)$.
 \end{lemma}
 
 \begin{proof}
-Choose a projective resolution $P^\bullet \to K^\bullet$ over $R$.
-Then
+Choose a K-flat resolution $P^\bullet \to K^\bullet$ over $R$
+such that $P^n$ is a flat $R$-module for all $n$, see
+Lemma \ref{lemma-K-flat-resolution}. Then $P^\bullet \otimes_R R[x]$
+is a K-flat complex of $R[x]$-modules whose terms are flat $R[x]$-modules, see
+Lemma \ref{lemma-base-change-K-flat} and
+Algebra, Lemma \ref{algebra-lemma-flat-base-change}.
+In particular $x : P^n \otimes_R R[x] \to P^n \otimes_R R[x]$
+is injective with cokernel isomorphic to $P^n$. Thus
 $$
 P^\bullet \otimes_R R[x] \xrightarrow{x} P^\bullet \otimes_R R[x]
 $$
-is a double complex of projective $R[x]$-modules whose associated
-total complex is quasi-isomorphic to $P^\bullet$. Hence
+is a double complex of $R[x]$-modules whose associated
+total complex is quasi-isomorphic to $P^\bullet$ and hence $K^\bullet$.
+Moreover, this associated total complex is a K-flat complex
+of $R[x]$-modules for example by
+Lemma \ref{lemma-tensor-product-K-flat} or by
+Lemma \ref{lemma-K-flat-two-out-of-three}.
+Hence
 \begin{align*}
 K^\bullet \otimes_{R[x]}^{\mathbf{L}} R
 & \cong
@@ -21080,7 +21142,7 @@ desired bound on the tor amplitude of $K'$.
 \end{proof}
 
 \begin{lemma}
-\label{lemma-lift-from-fibre-relativelu-perfect}
+\label{lemma-lift-from-fibre-relatively-perfect}
 Let $R$ be a ring. Let $A = R[x_1, \ldots, x_d]/I$
 be flat and of finite presentation over $R$.
 Let $\mathfrak q \subset A$ be a prime ideal lying over
@@ -21101,6 +21163,49 @@ using our assumption, we find that $K_\mathfrak q$ is perfect
 in $D(A_\mathfrak q)$ with tor amplitude in $[a - d, b]$.
 Since $R_\mathfrak p \to A_\mathfrak q$ is flat, we conclude
 by Lemma \ref{lemma-flat-push-tor-amplitude}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-bounded-on-fibres-relatively-perfect}
+Let $R \to A$ be a ring map which is flat and of finite presentation.
+Let $K \in D(A)$ be pseudo-coherent. The following are equivalent
+\begin{enumerate}
+\item $K$ is $R$-perfect, and
+\item $K$ is bounded below and for every prime ideal $\mathfrak p \subset R$
+the object $K \otimes_R^\mathbf{L} \kappa(\mathfrak p)$ is bounded below.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Observe that (1) implies (2) as an $R$-perfect complex has bounded
+tor dimension as a complex of $R$-modules by definition. Let us prove
+the other implication.
+
+\medskip\noindent
+Write $A = R[x_1, \ldots, x_d]/I$. Denote $L$ in $D(R[x_1, \ldots, x_d])$
+the restriction of $K$. By
+Lemma \ref{lemma-more-relative-pseudo-coherent-is-moot}
+we see that $L$ is pseudo-coherent.
+Since $L$ and $K$ have the same image in $D(R)$ we see that
+$L$ is $R$-perfect if and only if $K$ is $R$-perfect.
+Also $L \otimes_R^\mathbf{L} \kappa(\mathfrak p)$
+and $K \otimes_R^\mathbf{L} \kappa(\mathfrak p)$ are the same objects of
+$D(\kappa(\mathfrak p))$. This reduces us to the case
+$A = R[x_1, \ldots, x_d]$.
+
+\medskip\noindent
+Say $A = R[x_1, \ldots, x_d]$ and $K$ satisfies (2).
+Let $\mathfrak q \subset A$ be a prime lying over a
+prime $\mathfrak p \subset R$. By
+Lemma \ref{lemma-perfect-over-regular-local-ring} applied
+to $R_\mathfrak p \to A_\mathfrak q$ and the complex $K_\mathfrak q$
+using our assumption, we find that $K_\mathfrak q$ is perfect
+in $D(A_\mathfrak q)$. Since $K$ is bounded below, we see that
+$K$ is perfect in $D(A)$ by 
+Lemma \ref{lemma-check-perfect-stalks}.
+This implies that $K$ is $R$-perfect by
+Lemma \ref{lemma-perfect-relatively-perfect}
+and the proof is complete.
 \end{proof}
 
 
@@ -28642,33 +28747,6 @@ Of course, then $\kappa(\mathfrak m_B)$ is separably algebraically
 closed and $B$ is strictly henselian.
 \end{proof}
 
-\begin{lemma}
-\label{lemma-local-tensor-with-integral}
-Let $A \to B$ and $A \to C$ be local homomorphisms of local rings.
-If $A \to C$ is integral and either
-$\kappa(\mathfrak m_A) \subset \kappa(\mathfrak m_C)$ or
-$\kappa(\mathfrak m_A) \subset \kappa(\mathfrak m_B)$ is purely
-inseparable, then $D = B \otimes_A C$ is a local ring and
-$B \to D$ and $C \to D$ are local.
-\end{lemma}
-
-\begin{proof}
-Any maximal ideal of $D$ lies over the maximal ideal of $B$ by
-going up for the integral ring map
-$B \to D$ (Algebra, Lemma \ref{algebra-lemma-integral-going-up}).
-Now $D/\mathfrak m_B D = \kappa(\mathfrak m_B) \otimes_A C =
-\kappa(\mathfrak m_B) \otimes_{\kappa(\mathfrak m_A)} C/\mathfrak m_A C$.
-The spectrum of $C/\mathfrak m_A C$ consists of a
-single point, namely $\mathfrak m_C$. Thus the spectrum of
-$D/\mathfrak m_B D$ is the same as the spectrum of
-$\kappa(\mathfrak m_B) \otimes_{\kappa(\mathfrak m_A)} \kappa(\mathfrak m_C)$
-which is a single point by our assumption that either
-$\kappa(\mathfrak m_A) \subset \kappa(\mathfrak m_C)$ or
-$\kappa(\mathfrak m_A) \subset \kappa(\mathfrak m_B)$ is purely
-inseparable. This proves that $D$ is local and that the ring maps
-$B \to D$ and $C \to D$ are local.
-\end{proof}
-
 \begin{theorem}[Olivier]
 \label{theorem-olivier}
 Let $A \to B$ be a local homomorphism of local rings.
@@ -28705,7 +28783,7 @@ By Lemma \ref{lemma-integral-over-henselian}
 we see that $A'$ is a strictly henselian local ring
 whose residue field is a purely inseparable extension of the residue
 field of $A$. Thus $B \otimes_A A'$ is a local ring by
-Lemma \ref{lemma-local-tensor-with-integral}.
+Algebra, Lemma \ref{algebra-lemma-local-tensor-with-integral}.
 On the other hand, $B \otimes_A A'$ is integrally closed in
 $B \otimes_A L$ by Lemma \ref{lemma-normality-goes-up}.
 Since $B \otimes_A A'$ is local, it follows that the ring
@@ -29051,7 +29129,7 @@ where $(A')^h = A' \otimes_A A^h$. Then
 \item the left arrow is bijective on maximal ideals,
 \item the right arrow is bijective on minimal primes,
 \item every minimal prime of $(A')^h$ is contained in a unique
-maximal ideal and every maximal ideal contains exact one minimal prime.
+maximal ideal and every maximal ideal contains exactly one minimal prime.
 \end{enumerate}
 \end{lemma}
 
@@ -29200,7 +29278,8 @@ inducing an isomorphism of residue fields which is a
 localization of an \'etale $A$-algebra. In particular $\mathfrak m_B$
 is the unique prime containing $\mathfrak m B$. Then $B' = A' \otimes_A B$
 is integral over $B$ and the assumption that $A \to A'$ is local
-implies that $B'$ is local (Lemma \ref{lemma-local-tensor-with-integral}).
+implies that $B'$ is local
+(Algebra, Lemma \ref{algebra-lemma-local-tensor-with-integral}).
 On the other hand, $A' \to B'$ is the localization
 of an \'etale ring map, hence $B'$ is normal, see
 Algebra, Lemma \ref{algebra-lemma-normal-goes-up}.
@@ -29414,7 +29493,7 @@ localization of an \'etale $A$-algebra. In particular $\mathfrak m_B$
 is the unique prime containing $\mathfrak m_AB$. Then $B' = A' \otimes_A B$
 is integral over $B$ and the assumption that $A \to A'$ is local
 with purely inseparable residue field extension implies that $B'$
-is local (Lemma \ref{lemma-local-tensor-with-integral}).
+is local (Algebra, Lemma \ref{algebra-lemma-local-tensor-with-integral}).
 On the other hand, $A' \to B'$ is the localization
 of an \'etale ring map, hence $B'$ is normal, see
 Algebra, Lemma \ref{algebra-lemma-normal-goes-up}.
@@ -29528,7 +29607,7 @@ we see that $A' \otimes_A B^h$ is a normal ring
 (the lemma just gives it for $A' \otimes_A B$, to go up to
 $A' \otimes_A B^h$ use that $B^h$ is a colimit of \'etale
 $B$-algebras and use Algebra, Lemma \ref{algebra-lemma-colimit-normal-ring}).
-By Lemma \ref{lemma-local-tensor-with-integral}
+By Algebra, Lemma \ref{algebra-lemma-local-tensor-with-integral}
 we see that $A' \otimes_A B^h$ is local (this is where we
 use the assumption on the residue fields of $A$ and $B$).
 Hence $A' \otimes_A B^h$ is a local normal ring, hence a local domain.
@@ -29561,7 +29640,7 @@ we see that $A' \otimes_A B^{sh}$ is a normal ring
 (the lemma just gives it for $A' \otimes_A B$, to go up to
 $A' \otimes_A B^{sh}$ use that $B^{sh}$ is a colimit of \'etale
 $B$-algebras and use Algebra, Lemma \ref{algebra-lemma-colimit-normal-ring}).
-By Lemma \ref{lemma-local-tensor-with-integral}
+By Algebra, Lemma \ref{algebra-lemma-local-tensor-with-integral}
 we see that $A' \otimes_A B^{sh}$ is local (since $A \subset A'$
 induces a purely inseparable residue field extension).
 Hence $A' \otimes_A B^{sh}$ is a local normal ring, hence a local domain.
@@ -29747,7 +29826,7 @@ at $f_1, \ldots, f_r$.
 Lemma \ref{lemma-quotient-by-idempotent} can be used to construct
 finite type extensions from given finite type extensions of the
 formal completion. We will
-generalize this lemma in Restricted Power Series, Lemma
+generalize this lemma in Algebraization of Formal Spaces, Lemma
 \ref{restricted-lemma-approximate-by-etale-over-complement}.
 
 \begin{lemma}
@@ -34171,43 +34250,38 @@ such that
 \item $K^n$, $L^n$ are finite projective $R$-modules, nonzero only for
 $n \in \{-1, 0\}$.
 \end{enumerate}
-Then we construct an isomorphism
+In this situation we will construct an isomorphism
 $$
 \det(a^\bullet) : \det(K^\bullet) \longrightarrow \det(L^\bullet)
 $$
-as follows. Using the exact sequences
-$$
-0 \to \Ker(a^i) \to K^i \to L^i \to 0
-$$
+Using the exact sequences $0 \to \Ker(a^i) \to K^i \to L^i \to 0$
 we obtain isomorphisms
-$\gamma^i : \det(\Ker(a^i)) \otimes \det(L^i) \to \det(K^i)$
-by Lemma \ref{lemma-det-ses}. Since $a^\bullet$ is a quasi-isomorphism
-the complex $\Ker(a^\bullet)$ is acyclic, has rank $0$, and the
-canonical section defines a trivialization of the
-invertible $R$-module $\det(\Ker(a^\bullet)) =
-\det(\Ker(a^0)) \otimes \det(\Ker(a^{-1}))^{\otimes -1}$, see above.
-Then we define $\det(a^\bullet)$ as the map
-\begin{align*}
-\det(L^\bullet)
-& =
-\det(L^0) \otimes_R \det(L^{-1})^{\otimes -1} \\
-& \to
-\det(\Ker(a^0)) \otimes_R \det(L^0) \otimes_R
-\left(\det(\Ker(a^{-1}) \otimes_R \det(L^{-1})\right)^{\otimes -1} \\
-& \to
-\det(K^0) \otimes_R \det(K^{-1})^{\otimes -1} \\
-& =
-\det(K^\bullet)
-\end{align*}
-where the first arrow uses the trivialization of $\det(\Ker(a^\bullet))$
-and the second arrow uses the isomorphisms $\gamma^i$.
+$$
+\gamma^i : \det(\Ker(a^i)) \otimes \det(L^i) \to \det(K^i)
+$$
+for $i = -1, 0$ by Lemma \ref{lemma-det-ses}. Since $a^\bullet$
+is a quasi-isomorphism the complex $\Ker(a^\bullet)$ is acyclic
+and has rank $0$. Hence the canonical element $\delta(\Ker(a^\bullet))$
+is a trivialization of the invertible $R$-module
+$\det(\Ker(a^\bullet))$, see above. We define
+$\det(a^\bullet) : \det(K^\bullet) \to \det(L^\bullet)$ as the
+unique isomorphism such that the diagram
+$$
+\xymatrix{
+\det(K^\bullet) \ar[rr]_{\det(a^\bullet)} \ar[dr]_{\delta(\Ker(a^\bullet))} & &
+\det(L^\bullet) \\
+& \det(K^\bullet) \otimes \det(\Ker(a^\bullet))
+\ar[ru]_{\gamma^0 \otimes (\gamma^{-1})^{\otimes -1}}
+}
+$$
+commutes.
 
 \begin{lemma}
 \label{lemma-canonical-element-well-defined}
 Let $R$ be a ring. Let $a^\bullet : K^\bullet \to L^\bullet$ be a map of
 complexes of $R$-modules satisfying (1), (2), (3) above. If $L^\bullet$
 has rank $0$, then $\det(a^\bullet)$ maps the
-canonical element $\delta(L^\bullet)$ to $\delta(K^\bullet)$.
+canonical element $\delta(K^\bullet)$ to $\delta(L^\bullet)$.
 \end{lemma}
 
 \begin{proof}
@@ -34240,7 +34314,7 @@ complexes of $R$-modules satisfying (1), (2), (3) above.
 Let $h : K^0 \to L^{-1}$ be a map such that
 $b^0 = a^0 + d \circ h$ and $b^{-1} = a^{-1} + h \circ d$ are surjective.
 Then $\det(a^\bullet) = \det(b^\bullet)$ as maps
-$\det(L^\bullet) \to \det(K^\bullet)$.
+$\det(K^\bullet) \to \det(L^\bullet)$.
 \end{lemma}
 
 \begin{proof}
@@ -34275,7 +34349,7 @@ $$
 }
 $$
 commutes. Since $\det(c^\bullet)$ maps the canonical trivialization
-of $\det(\Ker(a^\bullet))$ to the same for $b^\bullet$
+of $\det(\Ker(a^\bullet))$ to the canonical trivializatio of $\Ker(b^\bullet)$
 (Lemma \ref{lemma-canonical-element-well-defined})
 we see that we conclude if (and only if)
 $$
@@ -34330,7 +34404,7 @@ to a solution over the local ring $R$. Some details omitted.
 Let $R$ be a ring. Let $a^\bullet : K^\bullet \to L^\bullet$
 and $b^\bullet : L^\bullet \to M^\bullet$ be maps of
 complexes of $R$-modules satisfying (1), (2), (3) above.
-Then we have $\det(a^\bullet) \circ \det(b^\bullet) = 
+Then we have $\det(b^\bullet) \circ \det(a^\bullet) = 
 \det(b^\bullet \circ a^\bullet)$ as maps
 $\det(M^\bullet) \to \det(K^\bullet)$.
 \end{lemma}
@@ -34395,7 +34469,7 @@ is a good diagram if it commutes up to homotopy and $b^\bullet$
 and $c^\bullet$ satisfy conditions (1), (2), (3) above. Whenever
 we have such a diagram it makes sense to define
 $$
-\det(a^\bullet) = \det(c^\bullet)^{-1} \circ \det(b^\bullet)
+\det(a^\bullet) = \det(c^\bullet) \circ \det(b^\bullet)^{-1}
 $$
 where $\det(c^\bullet)$ and $\det(b^\bullet)$ are the isomorphisms
 constructed in the text above. We will show that good diagrams always
@@ -34471,14 +34545,13 @@ where $M_{123}^\bullet \to M_{12}^\bullet$ and
 $M_{123}^\bullet \to M_{23}^\bullet$ have properties (1), (2), (3)
 and the square in the diagram commutes: we can just take
 $M_{123}^n = M_{12}^n \times_{L_2^n} M_{23}^n$.
-Then Lemma \ref{lemma-compose-surjections}
-shows that
+Then Lemma \ref{lemma-compose-surjections} shows that
 $$
 \xymatrix{
-\det(L_2^\bullet) \ar[r] \ar[d] &
-\det(M_{23}^\bullet) \ar[d] \\
-\det(M_{12}^\bullet) \ar[r] &
-\det(M_{123}^\bullet)
+\det(L_2^\bullet) &
+\det(M_{23}^\bullet) \ar[l] \\
+\det(M_{12}^\bullet) \ar[u] &
+\det(M_{123}^\bullet) \ar[l] \ar[u]
 }
 $$
 commutes. A diagram chase shows that the composition

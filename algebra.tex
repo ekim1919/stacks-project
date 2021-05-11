@@ -1593,7 +1593,7 @@ Let $R$ be a ring. Let $N$ be an $R$-module. The following are equivalent
 \begin{enumerate}
 \item $N$ is a finite $R$-module,
 \item for any filtered colimit $M = \colim M_i$ of $R$-modules the map
-$\colim \Hom_R(N, M_i) \to \Hom_R(K, M)$ is injective.
+$\colim \Hom_R(N, M_i) \to \Hom_R(N, M)$ is injective.
 \end{enumerate}
 \end{lemma}
 
@@ -1663,7 +1663,7 @@ Let $R$ be a ring. Let $N$ be an $R$-module. The following are equivalent
 \begin{enumerate}
 \item $N$ is a finitely presented $R$-module,
 \item for any filtered colimit $M = \colim M_i$ of $R$-modules the map
-$\colim \Hom_R(N, M_i) \to \Hom_R(K, M)$ is bijective.
+$\colim \Hom_R(N, M_i) \to \Hom_R(N, M)$ is bijective.
 \end{enumerate}
 \end{lemma}
 
@@ -1949,8 +1949,9 @@ commutes with all colimits, see
 Categories, Lemma \ref{categories-lemma-adjoint-exact}.
 
 \medskip\noindent
-Second direct proof. Let $P = \colim (M_i \otimes N)$, $M = \colim M_i$.
-Then for all $i\leq j$, the following diagram commutes:
+Second direct proof. Let $P = \colim (M_i \otimes N)$ with coprojections
+$\lambda_i : M_i \otimes N \to P$. Let $M = \colim M_i$ with coprojections
+$\mu_i : M_i \to M$. Then for all $i\leq j$, the following diagram commutes:
 $$
 \xymatrix{
 M_i \otimes N \ar[r]_{\mu_i \otimes 1} \ar[d]_{\mu_{ij} \otimes 1} &
@@ -1959,10 +1960,9 @@ M_j \otimes N \ar[r]^{\mu_j \otimes 1} &
 M \otimes N
 }
 $$
-By Lemma \ref{lemma-homomorphism-limit},
-these maps induce a unique homomorphism
-$\psi : P \to M \otimes N$, with $\lambda_i : M_i \otimes N \to P$ given by
-$\lambda_i = \pi \circ (\iota_i \otimes 1)$.
+By Lemma \ref{lemma-homomorphism-limit} these maps induce a unique homomorphism
+$\psi : P \to M \otimes N$ such that
+$\lambda_i = \psi \circ (\mu_i \otimes 1)$.
 
 \medskip\noindent
 To construct the inverse map, for each $i\in I$, there is the canonical
@@ -6416,10 +6416,16 @@ assumption that $k[x_1, \ldots, x_n]/\mathfrak m$ is
 a field (and hence has a spectrum consisting of one point).
 
 \medskip\noindent
-To prove part (\ref{item-polynomial-ring-Jacobson}) let
+Proof of (\ref{item-polynomial-ring-Jacobson}). Let
 $I \subset R$ be a radical ideal, with $R$ of finite type over $k$.
-Let $f \in R$, $f \not \in I$. Pick a maximal ideal $\mathfrak m'$
-in the nonzero ring $R_f/IR_f = (R/I)_f$. Let $\mathfrak m \subset R$
+Let $f \in R$, $f \not \in I$. We have to find a maximal ideal
+$\mathfrak m \subset R$ with $I \subset \mathfrak m$ and
+$f \not \in \mathfrak m$. The ring $(R/I)_f$ is nonzero, since
+$1 = 0$ in this ring would mean $f^n \in I$ and since $I$ is
+radical this would mean $f \in I$ contrary to our assumption on $f$.
+Thus we may choose a maximal ideal $\mathfrak m'$
+in $(R/I)_f$, see Lemma \ref{lemma-Zariski-topology}.
+Let $\mathfrak m \subset R$
 be the inverse image of $\mathfrak m'$ in $R$. We see that
 $I \subset \mathfrak m$
 and $f \not \in \mathfrak m$. If we show that $\mathfrak m$ is a maximal
@@ -8758,23 +8764,30 @@ is exact.
 
 \begin{lemma}
 \label{lemma-flatness-descends-more-general}
-Let $R$ be a ring.
-Let $S \to S'$ be a faithfully flat map of $R$-algebras.
+Let $R$ be a ring. Let $S \to S'$ be a flat map of $R$-algebras.
 Let $M$ be a module over $S$, and set $M' = S' \otimes_S M$.
-Then $M$ is flat over $R$ if and only if $M'$ is flat over $R$.
+\begin{enumerate}
+\item If $M$ is flat over $R$, then $M'$ is flat over $R$.
+\item If $S \to S'$ is faithfully flat, then $M$ is flat
+over $R$ if and only if $M'$ is flat over $R$.
+\end{enumerate}
 \end{lemma}
 
 \begin{proof}
-Let $N \to N'$ be an injection of $R$-modules. By the faithful flatness
+Let $N \to N'$ be an injection of $R$-modules. By the flatness
 of $S \to S'$ we have
 $$
 \Ker(N \otimes_R M \to N' \otimes_R M) \otimes_S S'
 =
 \Ker(N \otimes_R M' \to N' \otimes_R M')
 $$
-Hence the equivalence of the lemma follows from the second characterization
-of flatness in
-Lemma \ref{lemma-flat}.
+If $M$ is flat over $R$, then the left hand side is zero and
+we find that $M'$ is flat over $R$ by the second characterization
+of flatness in Lemma \ref{lemma-flat}.
+If $M'$ is flat over $R$ then we have the vanishing of the right hand side
+and if in addition $S \to S'$ is faithfully flat, this implies that
+$\Ker(N \otimes_R M \to N' \otimes_R M)$ is zero which in turn
+shows that $M$ is flat over $R$.
 \end{proof}
 
 \begin{lemma}
@@ -9802,7 +9815,7 @@ We will use induction on $d = [K : K_{sep}]$.
 \medskip\noindent
 Assume that $d > 1$. Choose a $\beta \in K$ with
 $\alpha = \beta^p \in K_{sep}$ and $\beta \not \in K_{sep}$.
-Let $P = T^d + a_1T^{d - 1} + \ldots + a_d$
+Let $P = T^n + a_1T^{n - 1} + \ldots + a_n$
 be the minimal polynomial of $\alpha$ over $k(x_1, \ldots, x_r)$.
 Let $k \subset k'$ be a finite purely inseparable extension
 obtained by adjoining $p$th roots such that each $a_i$ is a
@@ -14086,13 +14099,31 @@ is zero. We omit the proof in these special cases.
 \section{Dimension}
 \label{section-dimension}
 
+\noindent
+Please compare with
+Topology, Section \ref{topology-section-krull-dimension}.
+
+\begin{definition}
+\label{definition-chain-primes}
+Let $R$ be a ring. A {\it chain of prime ideals} is a sequence
+$\mathfrak p_0 \subset \mathfrak p_1 \subset \ldots \subset \mathfrak p_n$
+of prime ideals of $R$ such that $\mathfrak p_i \not = \mathfrak p_{i + 1}$
+for $i = 0, \ldots, n - 1$. The {\it length} of this chain of prime
+ideals is $n$.
+\end{definition}
+
+\noindent
+Recall that we have an inclusion reversing bijection between prime
+ideals of a ring $R$ and irreducible closed subsets of $\Spec(R)$,
+see Lemma \ref{lemma-irreducible}.
+
 \begin{definition}
 \label{definition-Krull}
 The {\it Krull dimension} of the ring $R$ is the
 Krull dimension of the topological space $\Spec(R)$, see
 Topology, Definition \ref{topology-definition-Krull}.
 In other words it is the supremum of the integers $n\geq 0$
-such that there exists a chain of prime ideals of length $n$:
+such that $R$ has a chain of prime ideals
 $$
 \mathfrak p_0
 \subset
@@ -14103,6 +14134,7 @@ $$
 \mathfrak p_n, \quad
 \mathfrak p_i \not = \mathfrak p_{i + 1}.
 $$
+of length $n$.
 \end{definition}
 
 \begin{definition}
@@ -14775,7 +14807,8 @@ The result follows since $\kappa(\mathfrak p)$ has length $1$.
 \label{lemma-support-dimension-d}
 Let $R$ be a Noetherian local ring.
 Let $M$ be a finite $R$-module.
-Then $d(M) = \dim(\text{Supp}(M))$.
+Then $d(M) = \dim(\text{Supp}(M))$ where $d(M)$ is as in
+Definition \ref{definition-d}.
 \end{lemma}
 
 \begin{proof}
@@ -17581,7 +17614,7 @@ $\delta(M)$ finishes the proof.
 \begin{lemma}
 \label{lemma-depth-in-ses}
 Let $R$ be a local Noetherian ring. Let $0 \to N' \to N \to N'' \to 0$
-be a short exact sequence of finite $R$-modules.
+be a short exact sequence of nonzero finite $R$-modules.
 \begin{enumerate}
 \item
 $\text{depth}(N) \geq \min\{\text{depth}(N'), \text{depth}(N'')\}$
@@ -23728,6 +23761,46 @@ we conclude that this maps injectively into $M'$.
 This concludes the proof of (2), and hence (4) is true as well.
 \end{proof}
 
+\noindent
+Here is yet another application of the local criterion of flatness.
+
+\begin{lemma}
+\label{lemma-yet-another-variant-local-criterion-flatness}
+Consider a commutative diagram of local rings and local homomorphisms
+$$
+\xymatrix{
+S \ar[r] & S' \\
+R \ar[r] \ar[u] & R' \ar[u]
+}
+$$
+Let $M$ be a finite $S$-module. Assume that
+\begin{enumerate}
+\item the horizontal arrows are flat ring maps
+\item $M$ is flat over $R$,
+\item $\mathfrak m_R R' = \mathfrak m_{R'}$,
+\item $R'$ and $S'$ are Noetherian.
+\end{enumerate}
+Then $M' = M \otimes_S S'$ is flat over $R'$.
+\end{lemma}
+
+\begin{proof}
+Since $\mathfrak m_R \subset R$ and $R \to R'$ is flat, we get
+$\mathfrak m_R \otimes_R R' = \mathfrak m_R R' = \mathfrak m_{R'}$
+by assumption (3). Observe that $M'$ is a finite $S'$-module
+which is flat over $R$ by Lemma \ref{lemma-flatness-descends-more-general}.
+Thus $\mathfrak m_R \otimes_R M' \to M'$ is injective.
+Then we get
+$$
+\mathfrak m_R \otimes_R M' =
+\mathfrak m_R \otimes_R R' \otimes_{R'} M' =
+\mathfrak m_{R'} \otimes_{R'} M'
+$$
+Thus $\mathfrak m_{R'} \otimes_{R'} M' \to M'$ is injective.
+This shows that $\text{Tor}_1^{R'}(\kappa_{R'}, M') = 0$
+(Remark \ref{remark-Tor-ring-mod-ideal}).
+Thus $M'$ is flat over $R'$ by
+Lemma \ref{lemma-local-criterion-flatness}.
+\end{proof}
 
 
 
@@ -24883,12 +24956,16 @@ Lemma \ref{lemma-silly}.
 \section{Catenary rings}
 \label{section-catenary}
 
+\noindent
+Compare with Topology, Section \ref{topology-section-catenary-spaces}.
+
 \begin{definition}
 \label{definition-catenary}
 A ring $R$ is said to be {\it catenary} if for any pair of prime ideals
-$\mathfrak p \subset \mathfrak q$, all maximal chains of primes
+$\mathfrak p \subset \mathfrak q$, there exists an integer bounding the
+lengths of all finite chains of prime ideals
 $\mathfrak p = \mathfrak p_0 \subset \mathfrak p_1 \subset \ldots \subset
-\mathfrak p_e = \mathfrak q$ have the same (finite) length.
+\mathfrak p_e = \mathfrak q$ and all maximal such chains have the same length.
 \end{definition}
 
 \begin{lemma}
@@ -28468,7 +28545,7 @@ here).
 Let $A$ be a ring. The following are equivalent.
 \begin{enumerate}
 \item The ring $A$ is a discrete valuation ring.
-\item The ring $A$ is a valuation ring and Noetherian.
+\item The ring $A$ is a valuation ring and Noetherian but not a field.
 \item The ring $A$ is a regular local ring of dimension $1$.
 \item The ring $A$ is a Noetherian local domain with maximal ideal
 $\mathfrak m$ generated by a single nonzero element.
@@ -32970,6 +33047,51 @@ has dimension zero and hence is Cohen-Macaulay.
 \end{proof}
 
 \begin{lemma}
+\label{lemma-dim-not-zero-exists-nonzerodivisor-nonunit}
+Let $k$ be a field. Let $S$ be a finite type $k$ algebra.
+If $\dim(S) > 0$, then there exists an element $f \in S$
+which is a nonzerodivisor and a nonunit.
+\end{lemma}
+
+\begin{proof}
+Let $I \subset S$ be the radical ideal such that $V(I) \subset \Spec(S)$
+is the set of primes $\mathfrak q \subset S$ with $S_\mathfrak q$
+not Cohen-Macaulay. See Lemma \ref{lemma-generic-CM} which also
+tells us that $V(I)$ is nowhere dense in $\Spec(S)$.
+Let $\mathfrak m \subset S$ be a maximal ideal such that
+$\dim(S_\mathfrak m) > 0$ and $\mathfrak m \not \in V(I)$.
+Such a maximal ideal exists as $\dim(S) > 0$ using the
+Hilbert Nullstellensatz (Theorem \ref{theorem-nullstellensatz}) and
+Lemma \ref{lemma-dimension-at-a-point-finite-type-over-field}
+which implies that any dense open of
+$\Spec(S)$ has the same dimension as $\Spec(S)$.
+Finally, let $\mathfrak q_1, \ldots, \mathfrak q_m$ be the minimal
+primes of $S$. Choose $f \in S$ with
+$$
+f \equiv 1 \bmod I,\quad
+f \in \mathfrak m,\quad
+f \not \in \bigcup \mathfrak q_i
+$$
+This is possible by Lemma \ref{lemma-silly-silly}. Namely, we have
+$S/(I \cap \mathfrak m) = S/I \times S/\mathfrak m$ by
+Lemma \ref{lemma-chinese-remainder}. Thus we can first choose
+$g \in S$ such that $g \equiv 1 \bmod I$ and $g \in \mathfrak m$.
+Then $g + (I \cap \mathfrak m) \not \subset \mathfrak q_i$
+since $V(I \cap \mathfrak m) \not \supset V(\mathfrak q_i)$.
+Hence the lemma applies. Clearly $f$ is not a unit.
+To show that $f$ is a nonzerodivisor, it suffices to
+prove that $f : S_\mathfrak q \to S_\mathfrak q$ is
+injective for every prime ideal $\mathfrak q \subset S$.
+If $S_\mathfrak q$ is not Cohen-Macaulay, then $\mathfrak q \in V(I)$
+and $f$ maps to a unit of $S_\mathfrak q$. On the other hand, if
+$S_\mathfrak q$ is Cohen-Macaulay, then we use that
+$\dim(S_\mathfrak q/fS_\mathfrak q) < \dim(S_\mathfrak q)$
+by the requirement $f \not \in \mathfrak q_i$ and we conclude
+that $f$ is a nonzerodivisor in $S_\mathfrak q$ by
+Lemma \ref{lemma-reformulate-CM}.
+\end{proof}
+
+\begin{lemma}
 \label{lemma-finite-presentation-flat-CM-locus-open}
 Let $R$ be a ring. Let $R \to S$ be of finite presentation
 and flat. For any $d \geq 0$ the set
@@ -33191,7 +33313,7 @@ by the relations imposed on $\Omega_{S/R}$, in other words
 $$
 \text{d}(a + b) = \text{d}a + \text{d}b, \quad
 \text{d}(fg) = f\text{d}g + g\text{d}f, \quad
-\text{d}r = 0
+\text{d}\varphi(r) = 0
 $$
 where $a,b,f,g \in S$ and $r \in R$.
 
@@ -33228,25 +33350,6 @@ of being an $R$-derivation exactly mean that $[D]$ annihilates
 the image of the map in the displayed presentation of
 $\Omega_{S/R}$ above.
 \end{proof}
-
-\begin{lemma}
-\label{lemma-colimit-differentials}
-Let $I$ be a directed set.
-Let $(R_i \to S_i, \varphi_{ii'})$ be a system of
-ring maps over $I$, see
-Categories, Section \ref{categories-section-posets-limits}.
-Then we have
-$$
-\Omega_{S/R} =
-\colim_i \Omega_{S_i/R_i}.
-$$
-where $R \to S = \colim (R_i \to S_i)$.
-\end{lemma}
-
-\begin{proof}
-This is clear from the presentation of $\Omega_{S/R}$ given above.
-\end{proof}
-
 
 \begin{lemma}
 \label{lemma-trivial-differential-surjective}
@@ -33319,6 +33422,26 @@ $$
 $$
 The result is simply that $f\text{d}g \in \Omega_{S/R}$ is
 mapped to $\varphi(f)\text{d}\varphi(g)$.
+
+
+\begin{lemma}
+\label{lemma-colimit-differentials}
+Let $I$ be a directed set.
+Let $(R_i \to S_i, \varphi_{ii'})$ be a system of
+ring maps over $I$, see
+Categories, Section \ref{categories-section-posets-limits}.
+Then we have
+$$
+\Omega_{S/R} =
+\colim_i \Omega_{S_i/R_i}.
+$$
+where $R \to S = \colim (R_i \to S_i)$.
+\end{lemma}
+
+\begin{proof}
+This is clear from the defining presentation of $\Omega_{S/R}$
+and the functoriality of this described above.
+\end{proof}
 
 \begin{lemma}
 \label{lemma-differential-surjective}
@@ -36761,6 +36884,22 @@ and \ref{lemma-locally-smooth}.
 \end{proof}
 
 \begin{lemma}
+\label{lemma-product-smooth}
+Let $R$ be a ring. Let $S = S' \times S''$ be a product of $R$-algebras.
+Then $S$ is smooth over $R$ if and only if both $S'$ and $S''$ are
+smooth over $R$.
+\end{lemma}
+
+\begin{proof}
+Omitted. Hints: By Lemma \ref{lemma-locally-smooth} we can check smoothness
+one prime at a time. Since $\Spec(S)$ is the disjoint union of
+$\Spec(S')$ and $\Spec(S'')$ by Lemma \ref{lemma-spec-product}
+we find that smoothness of $R \to S$ at $\mathfrak q$ corresponds
+to either smoothness of $R \to S'$ at the corresponding prime or
+smoothness of $R \to S''$ at the corresponding prime.
+\end{proof}
+
+\begin{lemma}
 \label{lemma-relative-global-complete-intersection-smooth}
 Let $R$ be a ring. Let $S = R[x_1, \ldots, x_n]/(f_1, \ldots, f_c)$
 be a relative global complete intersection.
@@ -38433,6 +38572,9 @@ map $A_i \to B_i$ for some $i$ such that $B \cong A \otimes_{A_i} B_i$.
 \item Let $A$ be a ring. Let $S$ be a multiplicative subset of $A$.
 Let $S^{-1}A \to B'$ be \'etale. Then there exists an \'etale ring map
 $A \to B$ such that $B' \cong S^{-1}B$.
+\item Let $A$ be a ring. Let $B = B' \times B''$ be a product of $A$-algebras.
+Then $B$ is \'etale over $A$ if and only if both $B'$ and $B''$ are
+\'etale over $A$.
 \end{enumerate}
 \end{lemma}
 
@@ -38496,6 +38638,12 @@ $A_i$ for some $i$ by Lemma \ref{lemma-characterize-finite-presentation}.
 \medskip\noindent
 Proof of (10). Follows from (9), (1), and (2) since $S^{-1}A$ is a
 filtered colimit of principal localizations of $A$.
+
+\medskip\noindent
+Proof of (11). Use Lemma \ref{lemma-product-smooth} to see the
+result for smoothness and then use that $\Omega_{B/A}$
+is zero if and only if both $\Omega_{B'/A}$ and $\Omega_{B''/A}$
+are zero.
 \end{proof}
 
 \noindent
@@ -38510,40 +38658,37 @@ extensions of $k$.
 \end{lemma}
 
 \begin{proof}
-If $k \to k'$ is a finite separable field extension then we can
+We are going to use without further mention: if
+$S = S_1 \times \ldots \times S_n$ is a finite product
+of $k$-algebras, then $S$ is \'etale over $k$ if and only
+if each $S_i$ is \'etale over $k$. See Lemma \ref{lemma-etale} part (11).
+
+\medskip\noindent
+If $k'/k$ is a finite separable field extension then we can
 write $k' = k(\alpha) \cong k[x]/(f)$. Here $f$ is the minimal
 polynomial of the element $\alpha$. Since $k'$ is separable over $k$
 we have $\gcd(f, f') = 1$. This
 implies that $\text{d} : k'\cdot f \to k' \cdot \text{d}x$
-is an isomorphism. Hence $k \to k'$ is \'etale.
+is an isomorphism. Hence $k \to k'$ is \'etale. Thus if $S$
+is a finite product of finite separable extension of $k$, then
+$S$ is \'etale over $k$.
 
 \medskip\noindent
-Conversely, suppose that $k \to S$ is \'etale. Let $\overline{k}$
-be an algebraic closure of $k$. Then $S \otimes_k \overline{k}$
-is \'etale over $\overline{k}$. Suppose we have the result over $\overline{k}$.
-Then $S \otimes_k \overline{k}$ is reduced and hence $S$ is reduced.
-Also, $S \otimes_k \overline{k}$ is finite over $\overline{k}$
-and hence $S$ is finite over $k$. Hence $S$ is a finite product
-$S = \prod k_i$
-of fields, see
-Lemma \ref{lemma-finite-dimensional-algebra}
-and
-Proposition \ref{proposition-dimension-zero-ring}.
-The result over $\overline{k}$ means $S \otimes_k \overline{k}$
-is isomorphic to a finite product of copies of $\overline{k}$, which
-implies that each $k \subset k_i$ is finite separable, see for example
-Lemmas \ref{lemma-characterize-separable-field-extensions} and
-\ref{lemma-geometrically-reduced-finite-purely-inseparable-extension}.
-Thus we have reduced to the case $k = \overline{k}$.
-In this case
-Lemma \ref{lemma-characterize-smooth-kbar}
-(combined with $\Omega_{S/k} = 0$) we see that $S_{\mathfrak m} \cong k$
-for all maximal ideals $\mathfrak m \subset S$. This implies the result
-because $S$ is the product of the localizations at its maximal ideals by
-Lemma \ref{lemma-finite-dimensional-algebra}
-and
+Conversely, suppose that $k \to S$ is \'etale. Then $S$ is smooth
+over $k$ and $\Omega_{S/k} = 0$. By
+Lemma \ref{lemma-characterize-smooth-over-field}
+we see that $\dim_\mathfrak m \Spec(S) = 0$ for every
+maximal ideal $\mathfrak m$ of $S$. Thus $\dim(S) = 0$. By
 Proposition \ref{proposition-dimension-zero-ring}
-again.
+we find that $S$ is a finite product of Artinian local rings.
+By the already used
+Lemma \ref{lemma-characterize-smooth-over-field}
+these local rings are fields. Hence we may assume $S = k'$ is a field.
+By the Hilbert Nullstellensatz (Theorem \ref{theorem-nullstellensatz})
+we see that the extension $k'/k$ is finite. The smoothness
+of $k \to k'$ implies by Lemma \ref{lemma-smooth-at-generic-point}
+that $k'/k$ is a separable extension and
+the proof is complete.
 \end{proof}
 
 \begin{lemma}
@@ -41154,7 +41299,7 @@ such that $R' \otimes_R S = A'_1 \times \ldots \times A'_n \times B'$
 with $A'_i$ finite over $R'$ having exactly one prime over $\mathfrak m'$
 and $B'$ not quasi-finite over $R'$ at any prime lying over $\mathfrak m'$.
 Apply (8) to get a section $\tau : R' \to R$ with
-$\mathfrak m = \tau^{-1}(\mathfrak m')$. Then we obtain
+$\mathfrak m' = \tau^{-1}(\mathfrak m)$. Then we obtain
 \begin{align*}
 S & = (S \otimes_R R') \otimes_{R', \tau} R \\
 & = (A'_1 \times \ldots \times A'_n \times B') \otimes_{R', \tau} R \\
@@ -41292,30 +41437,33 @@ some $h$. This finishes the proof.
 \label{lemma-finite-over-henselian}
 Let $(R, \mathfrak m, \kappa)$ be a henselian local ring.
 \begin{enumerate}
-\item If $R \subset S$ is a finite ring extension then $S$ is
-a finite product of henselian local rings.
-\item If $R \subset S$ is a finite local homomorphism of local rings,
-then $S$ is a henselian local ring.
+\item If $R \to S$ is a finite ring map then $S$ is
+a finite product of henselian local rings each finite over $R$.
+\item If $R \to S$ is a finite ring map and $S$ is local, then
+$S$ is a henselian local ring and $R \to S$ is a (finite) local ring map.
 \item If $R \to S$ is a finite type ring map, and $\mathfrak q$ is
-a prime of $S$ lying over $\mathfrak m$
-at which $R \to S$ is quasi-finite, then
-$S_{\mathfrak q}$ is henselian.
+a prime of $S$ lying over $\mathfrak m$ at which $R \to S$ is quasi-finite,
+then $S_{\mathfrak q}$ is henselian and finite over $R$.
 \item If $R \to S$ is quasi-finite then $S_{\mathfrak q}$ is henselian
-for every prime $\mathfrak q$ lying over $\mathfrak m$.
+and finite over $R$ for every prime $\mathfrak q$ lying over $\mathfrak m$.
 \end{enumerate}
 \end{lemma}
 
 \begin{proof}
 Part (2) implies part (1) since $S$ as in part (1) is a finite product
-of its localizations at the primes lying over $\mathfrak m$.
-Part (2) follows from
-Lemma \ref{lemma-characterize-henselian} part (10)
-since any finite $S$-algebra is also a finite $R$-algebra.
-If $R \to S$ and $\mathfrak q$ are as in (3), then
-$S_{\mathfrak q}$ is a local ring of a finite $R$-algebra by
+of its localizations at the primes lying over $\mathfrak m$ by
+Lemma \ref{lemma-characterize-henselian} part (10).
+Part (2) also follows from Lemma \ref{lemma-characterize-henselian} part (10)
+since any finite $S$-algebra is also a finite $R$-algebra (of course
+any finite ring map between local rings is local).
+
+\medskip\noindent
+Let $R \to S$ and $\mathfrak q$ be as in (3). Write $S = A \times B$
+with $A$ finite over $R$ and $B$ not quasi-finite over $R$ at any
+prime lying over $\mathfrak m$, see
 Lemma \ref{lemma-characterize-henselian} part (11).
-Hence (3) follows from (1).
-Part (4) follows from part (3).
+Hence $S_\mathfrak q$ is a localization of $A$ at a maximal ideal
+and we deduce (3) from (1). Part (4) follows from part (3).
 \end{proof}
 
 \begin{lemma}
@@ -41739,6 +41887,22 @@ $A = \colim_\mathcal{J} A_j$. Details omitted.
 \end{proof}
 
 \begin{lemma}
+\label{lemma-colimit-colimit-etale-better}
+Let $I$ be a directed set. Let $i \mapsto (R_i \to A_i)$ be a
+system of arrows of rings over $I$. Set $R = \colim R_i$
+and $A = \colim A_i$. If each $A_i$ is a filtered colimit of
+\'etale $R_i$-algebras, then $A$ is a filtered colimit of \'etale
+$R$-algebras.
+\end{lemma}
+
+\begin{proof}
+This is true because $A = A \otimes_R R = \colim A_i \otimes_{R_i} R$
+and hence we can apply Lemma \ref{lemma-colimit-colimit-etale}
+because $R \to A_i \otimes_{R_i} R$ is a filtered colimit of
+\'etale ring maps by Lemma \ref{lemma-base-change-colimit-etale}.
+\end{proof}
+
+\begin{lemma}
 \label{lemma-colimits-of-etale}
 Let $R$ be a ring. Let $A \to B$ be an $R$-algebra homomorphism.
 If $A$ and $B$ are filtered colimits of \'etale $R$-algebras, then
@@ -41759,11 +41923,6 @@ of $A_i \to B$ (this is a directed system; details omitted).
 This is clear because colimits commute with tensor products
 and hence $\colim A \otimes_{A_i} B_j = A \otimes_A B = B$.
 \end{proof}
-
-
-
-
-
 
 \begin{lemma}
 \label{lemma-map-into-henselian-colimit}
@@ -41812,18 +41971,20 @@ ring maps.
 
 \begin{lemma}
 \label{lemma-colimit-henselian}
-A filtered colimit of henselian local rings along local homomorphisms
-is henselian.
+A filtered colimit of (strictly) henselian local rings along local
+homomorphisms is (strictly) henselian.
 \end{lemma}
 
 \begin{proof}
 Categories, Lemma \ref{categories-lemma-directed-category-system}
 says that this is really just a question about a colimit of
-henselian local rings over a directed set.
+(strictly) henselian local rings over a directed set.
 Let $(R_i, \varphi_{ii'})$ be such a system with each $\varphi_{ii'}$
 local. Then $R = \colim_i R_i$ is local, and
 its residue field $\kappa$ is $\colim \kappa_i$
-(argument omitted).
+(argument omitted). It is easy to see that $\colim \kappa_i$
+is separably algebraically closed if each $\kappa_i$ is so;
+thus it suffices to prove $R$ is henselian if each $R_i$ is henselian.
 Suppose that $f \in R[T]$ is monic and that $a_0 \in \kappa$ is
 a simple root of $\overline{f}$. Then for some large enough $i$
 there exists an $f_i \in R_i[T]$ mapping to $f$ and an
@@ -42220,55 +42381,6 @@ result of Lemma \ref{lemma-uniqueness-henselian}.
 \end{proof}
 
 \begin{lemma}
-\label{lemma-quasi-finite-henselization}
-Let $R \to S$ be a ring map.
-Let $\mathfrak q$ be a prime of $S$ lying over $\mathfrak p$ in $R$.
-Assume $R \to S$ is quasi-finite at $\mathfrak q$.
-The commutative diagram
-$$
-\xymatrix{
-R_{\mathfrak p}^h \ar[r] & S_{\mathfrak q}^h \\
-R_{\mathfrak p} \ar[u] \ar[r] & S_{\mathfrak q} \ar[u]
-}
-$$
-of
-Lemma \ref{lemma-henselian-functorial}
-identifies $S_{\mathfrak q}^h$ with the localization of
-$R_{\mathfrak p}^h \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$
-at the prime generated by $\mathfrak q$.
-\end{lemma}
-
-\begin{proof}
-Note that $R_{\mathfrak p}^h \otimes_R S$ is quasi-finite over
-$R_{\mathfrak p}^h$ at the prime ideal corresponding to $\mathfrak q$, see
-Lemma \ref{lemma-four-rings}. Hence the localization $S'$ of
-$R_{\mathfrak p}^h \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$ is henselian, see
-Lemma \ref{lemma-finite-over-henselian}. As a localization $S'$ is a filtered
-colimit of \'etale
-$R_{\mathfrak p}^h \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$-algebras.
-By Lemma \ref{lemma-henselian-functorial-improve} we see that
-$S_\mathfrak q^h$ is the henselization of
-$R_{\mathfrak p}^h \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$.
-Thus $S' = S_\mathfrak q^h$ by the uniqueness
-result of Lemma \ref{lemma-uniqueness-henselian}.
-\end{proof}
-
-\begin{lemma}
-\label{lemma-quotient-henselization}
-\begin{slogan}
-Henselization is compatible with quotients.
-\end{slogan}
-Let $R$ be a local ring with henselization $R^h$.
-Let $I \subset \mathfrak m_R$.
-Then $R^h/IR^h$ is the henselization of $R/I$.
-\end{lemma}
-
-\begin{proof}
-This is a special case of
-Lemma \ref{lemma-quasi-finite-henselization}.
-\end{proof}
-
-\begin{lemma}
 \label{lemma-strictly-henselian-functorial-prepare}
 Let $\varphi : R \to S$ be a local map of local rings.
 Let $S/\mathfrak m_S \subset \kappa^{sep}$ be a separable algebraic closure.
@@ -42472,58 +42584,6 @@ Lemma \ref{lemma-henselization-different}.
 \end{proof}
 
 \begin{lemma}
-\label{lemma-quasi-finite-strict-henselization}
-Let $R \to S$ be a ring map.
-Let $\mathfrak q$ be a prime of $S$ lying over $\mathfrak p$ in $R$.
-Let $\kappa(\mathfrak q) \subset \kappa^{sep}$ be a separable
-algebraic closure. Assume $R \to S$ is quasi-finite at $\mathfrak q$.
-The commutative diagram
-$$
-\xymatrix{
-R_{\mathfrak p}^{sh} \ar[r] & S_{\mathfrak q}^{sh} \\
-R_{\mathfrak p} \ar[u] \ar[r] & S_{\mathfrak q} \ar[u]
-}
-$$
-of
-Lemma \ref{lemma-strictly-henselian-functorial}
-identifies $S_{\mathfrak q}^{sh}$ with a localization of
-$R_{\mathfrak p}^{sh} \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$.
-\end{lemma}
-
-\begin{proof}
-The residue field of $R_{\mathfrak p}^{sh}$ is the separable
-algebraic closure of $\kappa(\mathfrak p)$ in $\kappa^{sep}$.
-Note that $R_{\mathfrak p}^{sh} \otimes_R S$ is quasi-finite over
-$R_{\mathfrak p}^{sh}$ at the prime ideal corresponding to $\mathfrak q$, see
-Lemma \ref{lemma-four-rings}. Hence the localization $S'$ of
-$R_{\mathfrak p}^{sh} \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$
-is henselian, see
-Lemma \ref{lemma-finite-over-henselian}.
-Note that the residue field of $S'$ is $\kappa^{sep}$ since it
-contains both the separable algebraic closure of
-$\kappa(\mathfrak p)$ and $\kappa(\mathfrak q)$.
-Furthermore, as a localization $S'$ is a filtered colimit of \'etale
-$R_{\mathfrak p}^{sh} \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$-algebras.
-By Lemma \ref{lemma-strictly-henselian-functorial-improve}
-we see that $S_{\mathfrak q}^{sh}$ is a strict henselization of
-$R_{\mathfrak p}^{sh} \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$.
-Thus $S' = S_\mathfrak q^{sh}$ by the uniqueness
-result of Lemma \ref{lemma-uniqueness-henselian}.
-\end{proof}
-
-\begin{lemma}
-\label{lemma-quotient-strict-henselization}
-Let $R$ be a local ring with strict henselization $R^{sh}$.
-Let $I \subset \mathfrak m_R$.
-Then $R^{sh}/IR^{sh}$ is a strict henselization of $R/I$.
-\end{lemma}
-
-\begin{proof}
-This is a special case of
-Lemma \ref{lemma-quasi-finite-strict-henselization}.
-\end{proof}
-
-\begin{lemma}
 \label{lemma-sh-from-h-map}
 Let $R \to S$ be a ring map. Let $\mathfrak q \subset S$ be a prime
 lying over $\mathfrak p \subset R$ such that
@@ -42542,6 +42602,304 @@ This follows from the alternative construction of the strict henselization
 of a local ring in Remark \ref{remark-construct-sh-from-h} and the
 fact that the residue fields are equal. Some details omitted.
 \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Henselization and quasi-finite ring maps}
+\label{section-henselization-quasi-finite}
+
+\noindent
+In this section we prove some results concerning the functorial maps
+between (strict) henselizations for quasi-finite ring maps.
+
+\begin{lemma}
+\label{lemma-quasi-finite-henselization}
+Let $R \to S$ be a ring map.
+Let $\mathfrak q$ be a prime of $S$ lying over $\mathfrak p$ in $R$.
+Assume $R \to S$ is quasi-finite at $\mathfrak q$.
+The commutative diagram
+$$
+\xymatrix{
+R_{\mathfrak p}^h \ar[r] & S_{\mathfrak q}^h \\
+R_{\mathfrak p} \ar[u] \ar[r] & S_{\mathfrak q} \ar[u]
+}
+$$
+of
+Lemma \ref{lemma-henselian-functorial}
+identifies $S_{\mathfrak q}^h$ with the localization of
+$R_{\mathfrak p}^h \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$
+at the prime generated by $\mathfrak q$. Moreover, the ring
+map $R_{\mathfrak p}^h \to S_{\mathfrak q}^h$ is finite.
+\end{lemma}
+
+\begin{proof}
+Note that $R_{\mathfrak p}^h \otimes_R S$ is quasi-finite over
+$R_{\mathfrak p}^h$ at the prime ideal corresponding to $\mathfrak q$, see
+Lemma \ref{lemma-four-rings}. Hence the localization $S'$ of
+$R_{\mathfrak p}^h \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$ is henselian
+and finite over $R_{\mathfrak p}^h$, see
+Lemma \ref{lemma-finite-over-henselian}. As a localization $S'$ is a filtered
+colimit of \'etale
+$R_{\mathfrak p}^h \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$-algebras.
+By Lemma \ref{lemma-henselian-functorial-improve} we see that
+$S_\mathfrak q^h$ is the henselization of
+$R_{\mathfrak p}^h \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$.
+Thus $S' = S_\mathfrak q^h$ by the uniqueness
+result of Lemma \ref{lemma-uniqueness-henselian}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quotient-henselization}
+\begin{slogan}
+Henselization is compatible with quotients.
+\end{slogan}
+Let $R$ be a local ring with henselization $R^h$.
+Let $I \subset \mathfrak m_R$.
+Then $R^h/IR^h$ is the henselization of $R/I$.
+\end{lemma}
+
+\begin{proof}
+This is a special case of
+Lemma \ref{lemma-quasi-finite-henselization}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quasi-finite-strict-henselization}
+Let $R \to S$ be a ring map.
+Let $\mathfrak q$ be a prime of $S$ lying over $\mathfrak p$ in $R$.
+Assume $R \to S$ is quasi-finite at $\mathfrak q$.
+Let $\kappa_2^{sep}/\kappa(\mathfrak q)$ be a separable algebraic closure
+and denote $\kappa_1^{sep} \subset \kappa_2^{sep}$ the subfield
+of elements separable algebraic over $\kappa(\mathfrak q)$
+(Fields, Lemma \ref{fields-lemma-separable-first}).
+The commutative diagram
+$$
+\xymatrix{
+R_{\mathfrak p}^{sh} \ar[r] & S_{\mathfrak q}^{sh} \\
+R_{\mathfrak p} \ar[u] \ar[r] & S_{\mathfrak q} \ar[u]
+}
+$$
+of Lemma \ref{lemma-strictly-henselian-functorial}
+identifies $S_{\mathfrak q}^{sh}$ with the localization of
+$R_{\mathfrak p}^{sh} \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$
+at the prime ideal which is the kernel of the map
+$$
+R_{\mathfrak p}^{sh} \otimes_{R_{\mathfrak p}} S_{\mathfrak q}
+\longrightarrow
+\kappa_1^{sep} \otimes_{\kappa(\mathfrak p)} \kappa(\mathfrak q)
+\longrightarrow
+\kappa_2^{sep}
+$$
+Moreover, the ring map $R_{\mathfrak p}^{sh} \to S_{\mathfrak q}^{sh}$
+is a finite local homomorphism of local rings whose residue field extension
+is the extension $\kappa_2^{sep}/\kappa_1^{sep}$ which is both finite and
+purely inseparable.
+\end{lemma}
+
+\begin{proof}
+Since $R \to S$ is quasi-finite at $\mathfrak q$ we see that the extension
+$\kappa(\mathfrak q)/\kappa(\mathfrak p)$ is finite, see
+Definition \ref{definition-quasi-finite} and
+Lemma \ref{lemma-isolated-point-fibre}.
+Hence $\kappa_1^{sep}$ is a separable algebraic closure of
+$\kappa(\mathfrak p)$ (small detail omitted).
+In particular Lemma \ref{lemma-strictly-henselian-functorial}
+does really apply. Next, the compositum of $\kappa(\mathfrak p)$ and
+$\kappa_1^{sep}$ in $\kappa_2^{sep}$ is separably algebraically
+closed and hence equal to $\kappa_2^{sep}$. We conclude that
+$\kappa_2^{sep}/\kappa_1^{sep}$ is finite. By construction
+the extension $\kappa_2^{sep}/\kappa_1^{sep}$ is purely inseparable.
+The ring map $R_{\mathfrak p}^{sh} \to S_{\mathfrak q}^{sh}$ is
+indeed local and induces the residue field extension
+$\kappa_2^{sep}/\kappa_1^{sep}$ which is indeed finite purely inseparable.
+
+\medskip\noindent
+Note that $R_{\mathfrak p}^{sh} \otimes_R S$ is quasi-finite over
+$R_{\mathfrak p}^{sh}$ at the prime ideal $\mathfrak q'$
+given in the statement of the lemma, see
+Lemma \ref{lemma-four-rings}. Hence the localization $S'$ of
+$R_{\mathfrak p}^{sh} \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$
+at $\mathfrak q'$ is henselian and finite over $R_{\mathfrak p}^{sh}$, see
+Lemma \ref{lemma-finite-over-henselian}.
+Note that the residue field of $S'$ is $\kappa_2^{sep}$
+as the map $\kappa_1^{sep} \otimes_{\kappa(\mathfrak p)} \kappa(\mathfrak q)
+\to \kappa_2^{sep}$ is surjective by the discussion in the previous
+paragraph.
+Furthermore, as a localization $S'$ is a filtered colimit of \'etale
+$R_{\mathfrak p}^{sh} \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$-algebras.
+By Lemma \ref{lemma-strictly-henselian-functorial-improve}
+we see that $S_{\mathfrak q}^{sh}$ is the strict henselization of
+$R_{\mathfrak p}^{sh} \otimes_{R_{\mathfrak p}} S_{\mathfrak q}$
+at $\mathfrak q'$. Thus $S' = S_\mathfrak q^{sh}$ by the uniqueness
+result of Lemma \ref{lemma-uniqueness-henselian}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-quotient-strict-henselization}
+Let $R$ be a local ring with strict henselization $R^{sh}$.
+Let $I \subset \mathfrak m_R$.
+Then $R^{sh}/IR^{sh}$ is a strict henselization of $R/I$.
+\end{lemma}
+
+\begin{proof}
+This is a special case of
+Lemma \ref{lemma-quasi-finite-strict-henselization}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-local-tensor-with-integral}
+Let $A \to B$ and $A \to C$ be local homomorphisms of local rings.
+If $A \to C$ is integral and either
+$\kappa(\mathfrak m_C)/\kappa(\mathfrak m_A)$ or
+$\kappa(\mathfrak m_B)/\kappa(\mathfrak m_A)$ is purely
+inseparable, then $D = B \otimes_A C$ is a local ring and
+$B \to D$ and $C \to D$ are local.
+\end{lemma}
+
+\begin{proof}
+Any maximal ideal of $D$ lies over the maximal ideal of $B$ by
+going up for the integral ring map
+$B \to D$ (Lemma \ref{lemma-integral-going-up}).
+Now $D/\mathfrak m_B D = \kappa(\mathfrak m_B) \otimes_A C =
+\kappa(\mathfrak m_B) \otimes_{\kappa(\mathfrak m_A)} C/\mathfrak m_A C$.
+The spectrum of $C/\mathfrak m_A C$ consists of a
+single point, namely $\mathfrak m_C$. Thus the spectrum of
+$D/\mathfrak m_B D$ is the same as the spectrum of
+$\kappa(\mathfrak m_B) \otimes_{\kappa(\mathfrak m_A)} \kappa(\mathfrak m_C)$
+which is a single point by our assumption that either
+$\kappa(\mathfrak m_C)/\kappa(\mathfrak m_A)$ or
+$\kappa(\mathfrak m_B)/\kappa(\mathfrak m_A)$ is purely
+inseparable. This proves that $D$ is local and that the ring maps
+$B \to D$ and $C \to D$ are local.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-strict-henselization-quasi-finite}
+Let $A \to B$ and $A \to C$ be ring maps. Let $\kappa$ be a separably
+algebraically closed field and let $B \otimes_A C \to \kappa$
+be a ring homomorphism. Denote
+$$
+\xymatrix{
+B^{sh} \ar[r] & (B \otimes_A C)^{sh} \\
+A^{sh} \ar[u] \ar[r] & C^{sh} \ar[u]
+}
+$$
+the corresponding maps of strict henselizations (see proof). If
+\begin{enumerate}
+\item $A \to B$ is quasi-finite at the prime
+$\mathfrak p_B = \Ker(B \to \kappa)$, or
+\item $B$ is a filtered colimit of quasi-finite $A$-algebras, or
+\item $B_{\mathfrak p_B}$ is a filtered colimit of quasi-finite
+algebras over $A_{\mathfrak p_A}$, or
+\item $B$ is integral over $A$,
+\end{enumerate}
+then $B^{sh} \otimes_{A^{sh}} C^{sh} \to (B \otimes_A C)^{sh}$
+is an isomorphism.
+\end{lemma}
+
+\begin{proof}
+Write $D = B \otimes_A C$. Denote
+$\mathfrak p_A = \Ker(A \to \kappa)$ and similarly
+for $\mathfrak p_B$, $\mathfrak p_C$, and $\mathfrak p_D$.
+Denote $\kappa_A \subset \kappa$ the separable algebraic
+closure of $\kappa(\mathfrak p_A)$ in $\kappa$
+and similarly for $\kappa_B$, $\kappa_C$, and $\kappa_D$.
+Denote $A^{sh}$ the strict henselization of $A_{\mathfrak p_A}$
+constructed using the separable algebraic closure
+$\kappa_A/\kappa(\mathfrak p_A)$. Similarly for
+$B^{sh}$, $C^{sh}$, and $D^{sh}$. We obtain the commutative
+diagram of the lemma from the functoriality of
+Lemma \ref{lemma-strictly-henselian-functorial}.
+
+\medskip\noindent
+Consider the map
+$$
+c : B^{sh} \otimes_{A^{sh}} C^{sh} \to D^{sh} = (B \otimes_A C)^{sh}
+$$
+we obtain from the commutative diagram. If $A \to B$ is quasi-finite at
+$\mathfrak p_B = \Ker(B \to \kappa)$, then the ring map $C \to D$ is
+quasi-finite at $\mathfrak p_D$ by Lemma \ref{lemma-four-rings}. Hence by
+Lemma \ref{lemma-quasi-finite-strict-henselization}
+(and Lemma \ref{lemma-base-change-integral})
+the ring map $c$ is a homomorphism of finite $C^{sh}$-algebras and
+$$
+B^{sh} = (B \otimes_A A^{sh})_{\mathfrak q}
+\quad\text{and}\quad
+D^{sh} = (D \otimes_C C^{sh})_{\mathfrak r} =
+(B \otimes_A C^{sh})_{\mathfrak r}
+$$
+for some primes $\mathfrak q$ and $\mathfrak r$. Since
+$$
+B^{sh} \otimes_{A^{sh}} C^{sh} =
+(B \otimes_A A^{sh})_{\mathfrak q} \otimes_{A^{sh}} C^{sh} =
+\text{a localization of }
+B \otimes_A C^{sh}
+$$
+we conclude that source and target of $c$ are both
+localizations of $B \otimes_A C^{sh}$ (compatibly with the map).
+Hence it suffices to show that $B^{sh} \otimes_{A^{sh}} C^{sh}$
+is local (small detail omitted). This follows from
+Lemma \ref{lemma-local-tensor-with-integral}
+and the fact that $A^{sh} \to B^{sh}$ is finite with
+purely inseparable residue field extension by the already used
+Lemma \ref{lemma-quasi-finite-strict-henselization}.
+This proves case (1) of the lemma.
+
+\medskip\noindent
+In case (2) write $B = \colim B_i$ as a filtered colimit of
+quasi-finite $A$-algebras. We correspondingly get
+$D = \colim D_i$ with $D_i = B_i \otimes_A C$.
+Observe that $B^{sh} = \colim B_i^{sh}$. Namely, the ring
+$\colim B_i^{sh}$ is a strictly henselian local ring
+by Lemma \ref{lemma-colimit-henselian}.
+Also $\colim B_i^{sh}$ is a filtered colimit of
+\'etale $B$-algebras by Lemma \ref{lemma-colimit-colimit-etale-better}.
+Finally, the residue field of $\colim B_i^{sh}$ is a separable
+algebraic closure of $\kappa(\mathfrak p_B)$ (details omitted).
+Hence we conclude that $B^{sh} = \colim B_i^{sh}$, see
+discussion following Definition \ref{definition-henselization}.
+Similarly, we have $D^{sh} = \colim D_i^{sh}$.
+Then we conclude by case (1) because
+$$
+D^{sh} = \colim D_i^{sh} = \colim B_i^{sh} \otimes_{A^{sh}} C^{sh} =
+B^{sh} \otimes_{A^{sh}} C^{sh}
+$$
+since filtered colimit commute with tensor products.
+
+\medskip\noindent
+Case (3). We may replace $A$, $B$, $C$ by their localizations
+at $\mathfrak p_A$, $\mathfrak p_B$, and $\mathfrak p_C$.
+Thus (3) follows from (2).
+
+\medskip\noindent
+Since an integral ring map is a filtered colimit of finite ring
+maps, we see that (4) follows from (2) as well.
+\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -43246,14 +43604,14 @@ The following lemma is occasionally useful.
 
 \begin{lemma}
 \label{lemma-flat-local-given-residue-field}
-Let $(R, \mathfrak m, k)$ be a local ring. Let $k \subset K$ be a field
+Let $(R, \mathfrak m, k)$ be a local ring. Let $K/k$ be a field
 extension. There exists a local ring $(R', \mathfrak m', k')$, a flat local
 ring map $R \to R'$ such that $\mathfrak m' = \mathfrak mR'$ and such that
-$k \subset k'$ is isomorphic to $k \subset K$.
+$k'$ is isomorphic to $K$ as an extension of $k$.
 \end{lemma}
 
 \begin{proof}
-Suppose that $k \subset k' = k(\alpha)$ is a monogenic extension of fields.
+Suppose that $k' = k(\alpha)$ is a monogenic extension of $k$.
 Then $k'$ is the residue field of a flat local extension $R \subset R'$
 as in the lemma. Namely, if $\alpha$ is transcendental over $k$, then we let
 $R'$ be the localization of $R[x]$ at the prime $\mathfrak mR[x]$.
@@ -43375,6 +43733,76 @@ the image of some $f_i \in R$.
 Then we simply take $S = R[x]/(x^d + \sum f_ix^i)$.
 \end{proof}
 
+\begin{lemma}
+\label{lemma-cofinal-system-flat}
+Let $A$ be a ring. Let $\kappa = \max(|A|, \aleph_0)$. Then every flat
+$A$-algebra $B$ is the filtered colimit of its flat $A$-subalgebras
+$B' \subset B$ of cardinality $|B'| \leq \kappa$. (Observe that $B'$
+is faithfully flat over $A$ if $B$ is faithfully flat over $A$.)
+\end{lemma}
+
+\begin{proof}
+If $B$ has cardinality $\leq \kappa$ then this is true.
+Let $E \subset B$ be an $A$-subalgebra with $|E| \leq \kappa$.
+We will show that $E$ is contained in a flat $A$-subalgebra
+$B'$ with $|B'| \leq \kappa$. The lemma follows because
+(a) every finite subset of $B$ is contained in an $A$-subalgebra of
+cardinality at most $\kappa$ and (b) every pair of $A$-subalgebras
+of $B$ of cardinality at most $\kappa$ is contained in an $A$-subalgebra
+of cardinality at most $\kappa$. Details omitted.
+
+\medskip\noindent
+We will inductively construct a sequence of $A$-subalgebras
+$$
+E = E_0 \subset E_1 \subset E_2 \subset \ldots
+$$
+each having cardinality $\leq \kappa$ and we will show that
+$B' = \bigcup E_k$ is flat over $A$ to finish the proof.
+
+\medskip\noindent
+The construction is as follows. Set $E_0 = E$.
+Given $E_k$ for $k \geq 0$ we consider the set $S_k$ of
+relations between elements of $E_k$ with coefficients in $A$.
+Thus an element $s \in S_k$ is given by an integer $n \geq 1$ and
+$a_1, \ldots, a_n \in A$, and $e_1, \ldots, e_n \in E_k$
+such that $\sum a_i e_i = 0$ in $E_k$.
+The flatness of $A \to B$ implies by Lemma \ref{lemma-flat-eq}
+that for every $s = (n, a_1, \ldots, a_n, e_1, \ldots, e_n) \in S_k$
+we may choose
+$$
+(m_s, b_{s, 1}, \ldots, b_{s, m_s}, a_{s, 11}, \ldots, a_{s, nm_s})
+$$
+where $m_s \geq 0$ is an integer, $b_{s, j} \in B$, $a_{s, ij} \in A$, and
+$$
+e_i = \sum\nolimits_j a_{s, ij} b_{s, j}, \forall i,
+\quad\text{and}\quad
+0 = \sum\nolimits_i a_i a_{s, ij}, \forall j.
+$$
+Given these choicse, we let $E_{k + 1} \subset B$ be the $A$-subalgebra
+generated by
+\begin{enumerate}
+\item $E_k$ and
+\item the elements $b_{s, 1}, \ldots, b_{s, m_s}$
+for every $s \in S_k$.
+\end{enumerate}
+Some set theory (omitted) shows that $E_{k + 1}$ has at most
+cardinality $\kappa$ (this uses that we inductively know
+$|E_k| \leq \kappa$ and consequently the cardinality of $S_k$ is
+also at most $\kappa$).
+
+\medskip\noindent
+To show that $B' = \bigcup E_k$ is flat over $A$ we consider
+a relation $\sum_{i = 1, \ldots, n} a_i b'_i = 0$ in $B'$
+with coefficients in $A$. Choose $k$ large enough so that
+$b'_i \in E_k$ for $i = 1, \ldots, n$. Then
+$(n, a_1, \ldots, a_n, b'_1, \ldots, b'_n) \in S_k$
+and hence we see that the relation is trivial in $E_{k + 1}$
+and a fortiori in $B'$.
+Thus $A \to B'$ is flat by Lemma \ref{lemma-flat-eq}.
+\end{proof}
+
+
+
 
 
 
@@ -43492,8 +43920,17 @@ for $\mathbf{F}_p$. Let $k$ be an arbitrary field of characteristic $p$.
 Let $\mathbf{Z}_p \to R$ be a flat local ring map such that
 $\mathfrak m_R = pR$ and $R/pR = k$, see
 Lemma \ref{lemma-flat-local-given-residue-field}.
-Then clearly $R$ is a discrete valuation ring. Hence its
-completion is a Cohen ring for $k$.
+By Lemma \ref{lemma-completion-Noetherian} the completion
+$\Lambda = R^\wedge$ is Noetherian. It is a complete Noetherian local ring
+with maximal ideal $(p)$ as $\Lambda/p\Lambda = R/pR$ is a field (use
+Lemma \ref{lemma-hathat-finitely-generated}).
+Since $\mathbf{Z}_p \to R \to \Lambda$ is flat
+(by Lemma \ref{lemma-completion-flat}) we see that $p$ is a
+nonzerodivisor in $\Lambda$. Hence $\Lambda$ has dimension $\geq 1$
+(Lemma \ref{lemma-one-equation})
+and we conclude that $\Lambda$ is regular of dimension $1$, i.e.,
+a discrete valuation ring by Lemma \ref{lemma-characterize-dvr}.
+We conclude $\Lambda$ is a Cohen ring for $k$.
 \end{proof}
 
 \begin{lemma}

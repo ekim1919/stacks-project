@@ -811,12 +811,31 @@ We mention here the following interesting case.
 
 \begin{lemma}
 \label{lemma-complement-closed-point-Jacobson}
-Let $R$ be a Noetherian local ring with maximal ideal $\mathfrak m$.
-In this case the scheme $S = \Spec(R) \setminus \{\mathfrak m\}$
-is Jacobson.
+Examples of Noetherian Jacobson schemes.
+\begin{enumerate}
+\item If $(R, \mathfrak m)$ is a Noetherian local ring, then
+the punctured spectrum $\Spec(R) \setminus \{\mathfrak m\}$
+is a Jacobson scheme.
+\item If $R$ is a Noetherian ring with Jacobson radical $\text{rad}(R)$
+then $\Spec(R) \setminus V(\text{rad}(R))$ is a Jacobson scheme.
+\item If $(R, I)$ is a Zariski pair (More on Algebra, Definition
+\ref{more-algebra-definition-zariski-pair})
+with $R$ Noetherian, then $\Spec(R) \setminus V(I)$ is a
+Jacobson scheme.
+\end{enumerate}
 \end{lemma}
 
 \begin{proof}
+Proof of (3). Observe that $\Spec(R) - V(I)$ has a covering by the affine
+opens $\Spec(R_f)$ for $f \in I$. The rings $R_f$ are Jacobson by
+More on Algebra, Lemma
+\ref{more-algebra-lemma-noetherian-zariski-jacobson-complement}.
+Hence $\Spec(R) \setminus V(I)$ is Jacobson by
+Lemma \ref{lemma-locally-jacobson}.
+Parts (1) and (2) are special cases of (3).
+
+\medskip\noindent
+Direct proof of case (1).
 Since $\Spec(R)$ is a Noetherian scheme,
 $S$ is a Noetherian scheme (Lemma \ref{lemma-locally-closed-in-Noetherian}).
 Hence $S$ is a sober, Noetherian topological space (use
@@ -3425,7 +3444,7 @@ Here is the result the title of this section refers to.
 \label{lemma-colimit-kappa}
 Let $X$ be a scheme. There exists a cardinal $\kappa$ such that
 every quasi-coherent module $\mathcal{F}$ is the directed colimit
-of its quasi-coherent $\kappa$-generated quasi-coherent subsheaves.
+of its quasi-coherent $\kappa$-generated submodules.
 \end{lemma}
 
 \begin{proof}
@@ -3462,7 +3481,7 @@ Given a family $\mathcal{S} = (S_i)_{i \in I}$ of subsets
 $S_i \subset M_i$ of cardinality at most $\kappa$ we set
 $\mathcal{S}' = (S'_i)$ where
 $$
-S'_j = \bigcup\nolimits_{(i, j, k, m)\text{ such that }m \in S_i}
+S'_j = \bigcup\nolimits_{(i, k, m)\text{ such that }m \in S_i}
 S(i, j, k, m)
 $$
 Note that $S_i \subset S'_i$. Note that $S'_i$ has cardinality at most

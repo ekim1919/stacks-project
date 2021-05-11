@@ -838,12 +838,10 @@ is not an equality, i.e., $f(X) \subset Z$ is not a dense subset, and
 \item the construction of the scheme theoretic image does not commute with
 restriction to open subschemes to $Y$.
 \end{enumerate}
-Namely, the immersion of Example \ref{example-thibaut} gives
-an example for both phenomena. (If $Z \to U \to X$ is as in
-Example \ref{example-thibaut}, then the scheme theoretic image
-of $Z \to X$ is $X$ and $Z$ is not topologically dense in $X$.
-Also, the scheme theoretic image of $Z = Z \cap U \to U$ is just
-$Z$ which is not equal to $U \cap X = U$.)
+In Examples, Section \ref{examples-section-scheme-theoretic-image}
+the reader finds an example for both phenomena.
+These phenomena can arise even for immersions, see
+Examples, Section \ref{examples-section-strange-immersion}.
 However, the next lemma shows that both disasters are avoided
 when the morphism is quasi-compact.
 
@@ -1716,7 +1714,7 @@ Schemes, Lemma \ref{schemes-lemma-characterize-quasi-separated}
 we see the morphism $f$ is quasi-separated. Hence by
 Schemes, Lemma \ref{schemes-lemma-push-forward-quasi-coherent} the
 sheaf $\mathcal{A} = f_*\mathcal{O}_X$ is a quasi-coherent sheaf
-of $\mathcal{O}_X$-algebras. Thus we have the scheme
+of $\mathcal{O}_S$-algebras. Thus we have the scheme
 $g : Y = \underline{\Spec}_S(\mathcal{A}) \to S$ over $S$.
 The identity map
 $\text{id} : \mathcal{A} = f_*\mathcal{O}_X \to f_*\mathcal{O}_X$
@@ -4088,6 +4086,9 @@ Algebra, Theorem \ref{algebra-theorem-chevalley}.
 
 \begin{theorem}[Chevalley's Theorem]
 \label{theorem-chevalley}
+\begin{reference}
+\cite[IV, Theorem 1.8.4]{EGA}
+\end{reference}
 Let $f : X \to Y$ be a morphism of schemes.
 Assume $f$ is quasi-compact and locally of finite presentation.
 Then the image of every locally constructible subset is locally constructible.
@@ -5745,8 +5746,8 @@ be a commutative diagram of morphisms of schemes. Assume that
 \begin{enumerate}
 \item $f$ is surjective and syntomic,
 \item $p$ is syntomic, and
-\item $q$ is locally of finite presentation\footnote{In fact, if
-$f$ is surjective, flat, and of finite presentation and $p$ is syntomic,
+\item $q$ is locally of finite presentation\footnote{In fact, if $f$ is
+surjective, flat, and locally of finite presentation and $p$ is syntomic,
 then both $q$ and $f$ are syntomic, see
 Descent, Lemma \ref{descent-lemma-syntomic-permanence}.}.
 \end{enumerate}

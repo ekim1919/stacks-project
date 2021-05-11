@@ -85,10 +85,11 @@ property (3).
 
 \medskip\noindent
 In the final Section \ref{section-c1} we detail an alternative approach
-to Weil cohomology theories, namely, using a first Chern class map
-instead of cycles classes. It will be this approach that will be most
-suited for proving that certain cohomoly theories are Weil cohomology
-theories in later chapters (insert future references here).
+to Weil cohomology theories, using a first Chern class map
+instead of cycle classes. It is this approach that will be most
+suited for proving that certain cohomology theories are Weil cohomology
+theories in later chapters, see
+de Rham Cohomology, Section \ref{derham-section-weil}.
 
 
 
@@ -446,7 +447,7 @@ Let $[\Gamma_f] \in \text{Corr}^0(X, Y)$ be as in
 Example \ref{example-graph-correspondence}. Then
 \begin{enumerate}
 \item pushforward of cycles by the correspondence $[\Gamma_f]$
-agrees with the gysin map $f^! : \CH^*(Y) \to \CH^*(X)$,
+agrees with the gysin map $f^! : \CH^*(X) \to \CH^*(Y)$,
 \item pullback of cycles by the correspondence $[\Gamma_f]$
 agrees with the pushforward map $f_* : \CH_*(Y) \to \CH_*(X)$,
 \item if $X$ and $Y$ are equidimensional of dimensions $d$ and $e$,
@@ -3787,6 +3788,33 @@ $$
 $$
 are independent of $F$ and the Weil cohomology theory $H^*$?
 \end{remark}
+
+\begin{proposition}
+\label{proposition-weil-cohomology-theory-again}
+Let $k$ be a field. Let $F$ be a field of characteristic $0$.
+A Weil cohomology theory is the same thing as a $\mathbf{Q}$-linear
+symmetric monoidal functor
+$$
+G : M_k \longrightarrow \text{graded }F\text{-vector spaces}
+$$
+such that
+\begin{enumerate}
+\item $G(\mathbf{1}(1))$ is nonzero only in degree $-2$, and
+\item for every smooth projective scheme $X$ over $k$ with
+$k' = \Gamma(X, \mathcal{O}_X)$ the homomorphism
+$G(h(\Spec(k'))) \to G(h(X))$ of graded $F$-vector spaces
+is an isomorphism in degree $0$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Immediate consequence of Proposition \ref{proposition-weil-cohomology-theory}
+and Definition \ref{definition-weil-cohomology-theory}. Of course we could
+replace (2) by the condition that $G(h(X)) \to \bigoplus G(h(x_i))$
+is injective in degree $0$ for some choice of closed points
+$x_1, \ldots, x_r \in X$ whose residue fields are separable over $k$.
+\end{proof}
+
 
 
 

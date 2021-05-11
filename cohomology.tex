@@ -1251,7 +1251,7 @@ $$
 h(s)_{i_0 \ldots i_{p + 1}} =
 \left\{
 \begin{matrix}
-0 & \text{if} & i_0 \not = i \\
+0 & \text{if} & i_0 \not = i_{\text{fix}} \\
 s_{i_1 \ldots i_{p + 1}} & \text{if} & i_0 = i_{\text{fix}}
 \end{matrix}
 \right.
@@ -2458,7 +2458,7 @@ $h : \check{\mathcal{C}}^{p + 1}(\mathcal{V}, \mathcal{F}) \to
 \check{\mathcal{C}}^p(\mathcal{U}, \mathcal{F})$
 given by the rule
 $$
-h(\xi)_{i_0 \ldots i_p} =
+h(\alpha)_{i_0 \ldots i_p} =
 \sum\nolimits_{a = 0}^{p}
 (-1)^a
 \alpha_{c(i_0)\ldots c(i_a) c'(i_a) \ldots c'(i_p)}
@@ -2666,7 +2666,7 @@ all $n$.
 \end{lemma}
 
 \begin{proof}
-We already know that $\check{H}^n(X, -) \to H^p(X, -)$
+We already know that $\check{H}^n(X, -) \to H^n(X, -)$
 is an isomorphism of functors for $n = 0, 1$, see
 Lemma \ref{lemma-cech-always}.
 The functors $H^n(X, -)$ form a universal $\delta$-functor, see
@@ -3206,7 +3206,7 @@ is an isomorphism for every $q \geq 0$.
 \begin{proof}
 It is important in this proof to argue for all quasi-compact opens
 $U \subset X$ at the same time.
-The result is true for $i = 0$ and any quasi-compact open $U \subset X$ by
+The result is true for $q = 0$ and any quasi-compact open $U \subset X$ by
 Sheaves, Lemma \ref{sheaves-lemma-directed-colimits-sections}
 (combined with
 Topology, Lemma \ref{topology-lemma-topology-quasi-separated-scheme}).
@@ -3689,13 +3689,13 @@ Since $Z'$ and $Z$ have fewer irreducible components we indeed
 reduce to the case of an irreducible $X$.
 
 \medskip\noindent
-If $d = 0$ and $X = \{*\}$, then every sheaf is constant and
-higher cohomology
+If $d = 0$ and $X$ is irreducible, then $X$ is the only nonempty
+open subset of $X$. Hence every sheaf is constant and higher cohomology
 groups vanish (for example by
 Lemma \ref{lemma-irreducible-constant-cohomology-zero}).
 
 \medskip\noindent
-Suppose $X$ is irreducible of dimension $d$.
+Suppose $X$ is irreducible of dimension $d > 0$.
 By Lemma \ref{lemma-vanishing-generated-one-section}
 we reduce to the case where
 $\mathcal{F} = j_!\underline{\mathbf{Z}}_U$ for some open $U \subset X$.
@@ -7037,7 +7037,7 @@ Let $(X, \mathcal{O}_X)$ be a ringed space. Let
 $\mathcal{F}^\bullet$ be a bounded below complex of
 $\mathcal{O}_X$-modules. There exists a quasi-isomorphism
 $\mathcal{F}^\bullet \to \mathcal{G}^\bullet$
-where $\mathcal{F}^\bullet$ be a bounded below complex of flasque
+where $\mathcal{G}^\bullet$ be a bounded below complex of flasque
 $\mathcal{O}_X$-modules and for all $x \in X$ the
 map $\mathcal{F}^\bullet_x \to \mathcal{G}^\bullet_x$
 is a homotopy equivalence in the category of complexes

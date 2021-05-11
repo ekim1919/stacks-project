@@ -669,7 +669,7 @@ of neighbourhoods of $0$ in $R$ consisting of ideals.
 \begin{example}
 \label{example-what-does-it-mean}
 Let $R$ be a linearly topologized ring and let $M$ be a linearly
-topologized $A$-module. Let $I_\lambda$ be a fundamental system of
+topologized $R$-module. Let $I_\lambda$ be a fundamental system of
 open ideals in $R$ and let $M_\mu$ be a fundamental system of
 open submodules of $M$. The continuity of $+ : M \times M \to M$
 is automatic and the continuity of $R \times M \to M$ signifies
@@ -720,7 +720,7 @@ $x \not \in N + M_\lambda$. This proves the lemma.
 Unless otherwise mentioned we endow submodules and quotient modules
 with the induced topology. Let $M$ be a linearly topologized module
 over a topological ring $R$, and let $0 \to N \to M \to Q \to 0$
-is a short exact sequence of $R$-modules. If $M_\lambda$ is a
+be a short exact sequence of $R$-modules. If $M_\lambda$ is a
 fundamental system of open submodules of $M$, then
 $N \cap M_\lambda$ is a fundamental system of open submodules of $N$.
 If $\pi : M \to Q$ is the quotient map, then $\pi(M_\lambda)$ is a
@@ -762,7 +762,7 @@ $M/N$ is complete and the map $M \to M/N$ is open.
 \begin{proof}
 Let $M_n$, $n \in \mathbf{N}$ be a fundamental system of open submodules of $M$.
 We may assume $M_{n + 1} \subset M_n$
-for all $n$. The $(M_n + N)/N$ is a fundamental system in $M/N$.
+for all $n$. The system $(M_n + N)/N$ is a fundamental system in $M/N$.
 Hence we have to show that $M/N = \lim M/(M_n + N)$. Consider
 the short exact sequences
 $$
@@ -2118,6 +2118,20 @@ Then the univeral property of reduction shows that the canonical morphism
 $X_{red} \to X \times_Y Y_{red}$ is an isomorphism.
 \end{proof}
 
+\begin{lemma}
+\label{lemma-reduction-surjective}
+Let $S$ be a scheme. Let $f : X \to Y$ be a morphism of
+formal algebraic spaces over $S$ which is representable by
+algebraic spaces. Then $f$ is surjective in the sense of
+Bootstrap, Definition \ref{bootstrap-definition-property-transformation}
+if and only if $f_{red} : X_{red} \to Y_{red}$ is a
+surjective morphism of algebraic spaces.
+\end{lemma}
+
+\begin{proof}
+Omitted.
+\end{proof}
+
 
 
 
@@ -2394,18 +2408,80 @@ between the completions.
 
 \begin{lemma}
 \label{lemma-map-completions-representable}
-Let $S$ be a scheme. Let $f : X \to Y$ be a morphism
-of algebraic spaces over $S$. Let $T \subset |Y|$
-be a closed subset and let $T' = |f|^{-1}(T) \subset |X|$.
-Then $X_{/T'} \to Y_{/T}$ is representable by algebraic spaces.
+Let $S$ be a scheme. Let $f : X' \to X$ be a morphism
+of algebraic spaces over $S$. Let $T \subset |X|$
+be a closed subset and let $T' = |f|^{-1}(T) \subset |X'|$.
+Then
+$$
+\xymatrix{
+X'_{/T'} \ar[r] \ar[d] & X' \ar[d]^f \\
+X_{/T} \ar[r] & X
+}
+$$
+is a cartesian diagram of sheaves. In particular, the morphism
+$X'_{/T'} \to X_{/T}$ is representable by algebraic spaces.
 \end{lemma}
 
 \begin{proof}
-Namely, suppose that $V \to Y$ is a morphism from a scheme into $Y$ such
-that $|V|$ maps into $T$. Then $V \times_Y X \to X$ is a morphism of
-algebraic spaces such that $|V \times_Y X|$ maps into $T'$. Hence the
-functor $V \times_{Y_{/T'}} X_{/T}$ is represented by $V \times_Y X$
+Namely, suppose that $Y \to X$ is a morphism from a scheme into $X$ such
+that $|Y|$ maps into $T$. Then $Y \times_X X' \to X$ is a morphism of
+algebraic spaces such that $|Y \times_X X'|$ maps into $T'$. Hence the
+functor $Y \times_{X_{/T}} X'_{/T'}$ is represented by $Y \times_X X'$
 and we see that the lemma holds.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-reduction-completion}
+Let $S$ be a scheme. Let $X$ be an algebraic space over $S$.
+Let $T \subset |X|$ be a closed subset. The reduction $(X_{/T})_{red}$
+of the completion $X_{/T}$ of $X$ along $T$ is
+the reduced induced closed subspace $Z$ of $X$ corresponding to $T$.
+\end{lemma}
+
+\begin{proof}
+It follows from Lemma \ref{lemma-reduction-formal-algebraic-space},
+Properties of Spaces, Definition
+\ref{spaces-properties-definition-reduced-induced-space}
+(which uses Properties of Spaces, Lemma
+\ref{spaces-properties-lemma-reduced-closed-subspace} to construct $Z$),
+and the definition of $X_{/T}$ that
+$Z$ and $(X_{/T})_{red}$ are reduced algebraic spaces
+characterized the same mapping property:
+a morphism $g : Y \to X$ whose source is a reduced algebraic space
+factors through them if and only if $|Y|$ maps into $T \subset |X|$.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-affine-formal-completion-types}
+Let $S$ be a scheme. Let $X = \Spec(A)$ be an affine scheme over $S$.
+Let $T \subset X$ be a closed subset. Let $X_{/T}$ be the
+formal completion of $X$ along $T$.
+\begin{enumerate}
+\item If $X \setminus T$ is quasi-compact, i.e., $T$ is constructible,
+then $X_{/T}$ is adic*.
+\item If $T = V(I)$ for some finitely generated ideal $I \subset A$,
+then $X_{/T} = \text{Spf}(A^\wedge)$ where $A^\wedge$ is the
+$I$-adic completion of $A$.
+\item If $X$ is Noetherian, then $X_{/T}$ is Noetherian.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+By Algebra, Lemma \ref{algebra-lemma-qc-open} if (1) holds, then
+we can find an ideal $I \subset A$ as in (2). If (3) holds then
+we can find an ideal $I \subset A$ as in (2). Moreover, completions
+of Noetherian rings are Noetherian by
+Algebra, Lemma \ref{algebra-lemma-completion-Noetherian-Noetherian}.
+All in all we see that it suffices to prove (2).
+
+\medskip\noindent
+Proof of (2).
+Let $I = (f_1, \ldots, f_r) \subset A$ cut out $T$.
+If $Z = \Spec(B)$ is an affine scheme and $g : Z \to X$ is
+a morphism with $g(Z) \subset T$ (set theoretically), then
+$g^\sharp(f_i)$ is nilpotent in $B$ for each $i$. Thus
+$I^n$ maps to zero in $B$ for some $n$. Hence we see that
+$X_{/T} = \colim \Spec(A/I^n) = \text{Spf}(A^\wedge)$.
 \end{proof}
 
 \noindent
@@ -3914,31 +3990,14 @@ Choose a surjective \'etale morphism $U \to X$ with $U = \coprod U_i$
 a disjoint union of affine schemes, see Properties of Spaces, Lemma
 \ref{spaces-properties-lemma-cover-by-union-affines}.
 Let $T_i \subset U_i$ be the inverse image of $T$.
-We have $X_{/T} \times_X U_i = (U_i)_{/T_i}$ (small detail omitted).
+We have $X_{/T} \times_X U_i = (U_i)_{/T_i}$
+(Lemma \ref{lemma-map-completions-representable}).
 Hence $\{(U_i)_{/T_i} \to X_{/T}\}$ is a covering as in
 Definition \ref{definition-formal-algebraic-space}.
 Moreover, if $X \setminus T \to X$ is quasi-compact, so is
 $U_i \setminus T_i \to U_i$ and if $X$ is locally Noetherian, so is
-$U_i$. Thus it suffices to prove the lemma in case $X$ is affine.
-
-\medskip\noindent
-Assume $X = \Spec(A)$ is affine and $X \setminus T \to X$ is quasi-compact.
-Then there exists a finitely generated ideal
-$I = (f_1, \ldots, f_r) \subset A$ cutting out $T$
-(Algebra, Lemma \ref{algebra-lemma-qc-open}).
-If $Z = \Spec(B)$ is an affine scheme and $g : Z \to X$ is
-a morphism with $g(Z) \subset T$ (set theoretically), then
-$g^\sharp(f_i)$ is nilpotent in $B$ for each $i$. Thus
-$I^n$ maps to zero in $B$ for some $n$. Hence we see that
-$X_{/T} = \colim \Spec(A/I^n)$ and $X$ is adic*.
-
-\medskip\noindent
-Assume $X = \Spec(A)$ is affine with $A$ Noetherian. By the above
-we see that $X_{/T} = \text{Spf}(A^\wedge)$ where $A^\wedge$
-is the $I$-adic completion of $A$ with respect to some ideal
-$I \subset A$. Then $X_{/T}$ is Noetherian because
-$A^\wedge$ is so, see
-Algebra, Lemma \ref{algebra-lemma-completion-Noetherian-Noetherian}.
+$U_i$. Thus the lemma follows from the affine case which is
+Lemma \ref{lemma-affine-formal-completion-types}.
 \end{proof}
 
 \begin{remark}[Warning]
@@ -4029,6 +4088,32 @@ the vertical morphisms are \'etale. Namely, we have
 $(X_{ji})_{red} = X_{ij} \times_X X_{red}$ and
 $(Y_j)_{red} = Y_j \times_Y Y_{red}$
 by Lemma \ref{lemma-reduction-smooth}.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-structure-locally-noetherian}
+Let $S$ be a scheme. Let $X$ be a locally Noetherian formal algebraic space
+over $S$. Then $X = \colim X_n$ for a system $X_1 \to X_2 \to X_3 \to \ldots$
+of finite order thickenings of locally Noetherian algebraic spaces over $S$
+where $X_1 = X_{red}$ and $X_n$ is the $n$th infinitesimal neighbourhood of
+$X_1$ in $X_m$ for all $m \geq n$.
+\end{lemma}
+
+\begin{proof}
+We only sketch the proof and omit some of the details.
+Set $X_1 = X_{red}$. Define $X_n \subset X$ as the subfunctor
+defined by the rule: a morphism $f : T \to X$ where $T$ is a scheme factors
+through $X_n$ if and only if the $n$th power of the ideal sheaf
+of the closed immersion $X_1 \times_X T \to T$ is zero. Then $X_n \subset X$
+is a subsheaf as vanishing of quasi-coherent modules can be checked
+fppf locally. We claim that $X_n \to X$ is representable by schemes,
+a closed immersion, and that $X = \colim X_n$ (as fppf sheaves).
+To check this we may work \'etale locally on $X$. Hence we may assume
+$X = \text{Spf}(A)$ is a Noetherian affine formal algebraic space.
+Then $X_1 = \Spec(A/\mathfrak a)$ where $\mathfrak a \subset A$
+is the ideal of topologically nilpotent elements of the Noetherian
+adic topological ring $A$. Then $X_n = \Spec(A/\mathfrak a^n)$
+and we obtain what we want.
 \end{proof}
 
 
@@ -5013,24 +5098,74 @@ Lemma \ref{lemma-base-change-finite-type}. Hence this follows
 from Lemma \ref{lemma-locally-finite-type-locally-noetherian}.
 \end{proof}
 
+
+
+
+
+
+
+
+\section{Surjective morphisms}
+\label{section-surjective}
+
+\noindent
+By Lemma \ref{lemma-reduction-surjective} the following definition does
+not clash with the already existing definitions for morphisms of algebraic
+spaces or morphisms of formal algebraic spaces which are representable
+by algebraic spaces.
+
+\begin{definition}
+\label{definition-surjective}
+Let $S$ be a scheme. A morphism $f : X \to Y$ of formal algebraic spaces
+over $S$ is said to be {\it surjective} if it induces a surjective morphism
+$X_{red} \to Y_{red}$ on underlying reduced algebraic spaces.
+\end{definition}
+
 \begin{lemma}
-\label{lemma-map-completions-finite-type}
-Let $S$ be a scheme. Let $f : X \to Y$ be a morphism
-of algebraic spaces over $S$ which is locally of finite type.
-Let $T \subset |Y|$ be a closed subset and let $T' = |f|^{-1}(T) \subset |X|$.
-Then $X_{/T'} \to Y_{/T}$ is locally of finite type.
+\label{lemma-composition-surjective}
+The composition of two surjective morphisms is a surjective morphism.
 \end{lemma}
 
 \begin{proof}
-Namely, suppose that $V \to Y$ is a morphism from a scheme into $Y$ such
-that $|V|$ maps into $T$. In the proof of
-Lemma \ref{lemma-map-completions-representable}
-we have seen that $V \times_Y X \to X$ is an algebraic space
-representing $V \times_{Y_{/T}} X_{/T'}$.
-Since $V \times_Y X \to V$ is locally of finite type
-(by Morphisms of Spaces, Lemma
-\ref{spaces-morphisms-lemma-base-change-finite-type}) we conclude.
+Omitted.
 \end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-surjective}
+A base change of a surjective morphism is a surjective morphism.
+\end{lemma}
+
+\begin{proof}
+Omitted.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-surjective}
+Let $S$ be a scheme. Let $f : X \to Y$ be a morphism of formal algebraic
+spaces over $S$. The following are equivalent
+\begin{enumerate}
+\item $f$ is surjective,
+\item for every scheme $T$ and morphism $T \to Y$
+the projection $X \times_Y T \to T$ is a surjective morphism
+of formal algebraic spaces,
+\item for every affine scheme $T$ and morphism $T \to Y$
+the projection $X \times_Y T \to T$ is a surjective morphism of formal
+algebraic spaces,
+\item there exists a covering $\{Y_j \to Y\}$ as in
+Definition \ref{definition-formal-algebraic-space}
+such that each $X \times_Y Y_j \to Y_j$ is a surjective morphism of
+formal algebraic spaces,
+\item there exists a surjective morphism $Z \to Y$
+of formal algebraic spaces such that $X \times_Y Z \to Z$ is surjective, and
+\item add more here.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Omitted.
+\end{proof}
+
+
 
 
 
@@ -5056,6 +5191,57 @@ $X_{/T} \to X$ from the formal completion of $X$ along $T$ to $X$
 is a monomorphism. In particular, monomorphisms of formal algebraic
 spaces are in general not representable.
 
+\begin{lemma}
+\label{lemma-composition-monomorphism}
+The composition of two monomorphisms is a monomorphism.
+\end{lemma}
+
+\begin{proof}
+Omitted.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-monomorphism}
+A base change of a monomorphism is a monomorphism.
+\end{lemma}
+
+\begin{proof}
+Omitted.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-monomorphisms}
+Let $S$ be a scheme. Let $f : X \to Y$ be a morphism of formal algebraic
+spaces over $S$. The following are equivalent
+\begin{enumerate}
+\item $f$ is a monomorphism,
+\item for every scheme $T$ and morphism $T \to Y$
+the projection $X \times_Y T \to T$ is a monomorphism
+of formal algebraic spaces,
+\item for every affine scheme $T$ and morphism $T \to Y$
+the projection $X \times_Y T \to T$ is a monomorphism of formal
+algebraic spaces,
+\item there exists a covering $\{Y_j \to Y\}$ as in
+Definition \ref{definition-formal-algebraic-space}
+such that each $X \times_Y Y_j \to Y_j$ is a monomorphism of
+formal algebraic spaces, and
+\item there exists a family of morphisms $\{Y_j \to Y\}$ such
+that $\coprod Y_j \to Y$ is a surjection of sheaves on
+$(\Sch/S)_{fppf}$ such that each $X \times_Y Y_j \to Y_j$ is a
+monomorphism for all $j$,
+\item there exists a morphism $Z \to Y$ of formal algebraic spaces
+which is representable by algebraic spaces, surjective, flat, and locally
+of finite presentation such that $X \times_Y Z \to X$ is a monomorphism, and
+\item add more here.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Omitted.
+\end{proof}
+
+
+
 
 
 \section{Closed immersions}
@@ -5072,6 +5258,52 @@ if $f$ is representable by algebraic spaces and a closed immersion
 in the sense of
 Bootstrap, Definition \ref{bootstrap-definition-property-transformation}.
 \end{definition}
+
+\noindent
+Please skip the initial the obligatory lemmas when reading this section.
+
+\begin{lemma}
+\label{lemma-composition-closed-immersion}
+The composition of two closed immersions is a closed immersion.
+\end{lemma}
+
+\begin{proof}
+Omitted.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-base-change-closed-immersion}
+A base change of a closed immersion is a closed immersion.
+\end{lemma}
+
+\begin{proof}
+Omitted.
+\end{proof}
+
+\begin{lemma}
+\label{lemma-characterize-closed-immersion}
+Let $S$ be a scheme. Let $f : X \to Y$ be a morphism of formal algebraic
+spaces over $S$. The following are equivalent
+\begin{enumerate}
+\item $f$ is a closed immersion,
+\item for every scheme $T$ and morphism $T \to Y$ the projection
+$X \times_Y T \to T$ is a closed immersion,
+\item for every affine scheme $T$ and morphism $T \to Y$
+the projection $X \times_Y T \to T$ is a closed immersion,
+\item there exists a covering $\{Y_j \to Y\}$ as in
+Definition \ref{definition-formal-algebraic-space}
+such that each $X \times_Y Y_j \to Y_j$ is a closed immersion, and
+\item there exists a morphism $Z \to Y$ of formal algebraic spaces
+which is representable by algebraic spaces, surjective, flat, and locally
+of finite presentation such that $X \times_Y Z \to X$ is a
+closed immersion, and
+\item add more here.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Omitted.
+\end{proof}
 
 \begin{lemma}
 \label{lemma-closed-immersion-into-McQuillan}
@@ -5128,6 +5360,64 @@ The kernel of $A \to B$ is $K$ as $K$ is closed, but
 beware that in general the ring map $A \to B = (A/K)^\wedge$
 need not be surjective.
 \end{example}
+
+\begin{lemma}
+\label{lemma-monomorphism-iso-over-red}
+Let $S$ be a scheme. Let $f : X \to Y$ be a morphism of formal algebraic
+spaces. Assume
+\begin{enumerate}
+\item $f$ is representable by algebraic spaces,
+\item $f$ is a monomorphism,
+\item the inclusion $Y_{red} \to Y$ factors through $f$, and
+\item $f$ is locally of finite type or $Y$ is locally Noetherian.
+\end{enumerate}
+Then $f$ is a closed immersion.
+\end{lemma}
+
+\begin{proof}
+Assumptions (2) and (3) imply that
+$X_{red} = X \times_Y Y_{red} = Y_{red}$.
+We will use this without further mention.
+
+\medskip\noindent
+If $Y' \to Y$ is an \'etale morphism of formal algebraic spaces over $S$,
+then the base change $f' : X \times_Y Y' \to Y'$ satisfies conditions
+(1) -- (4). Hence by Lemma \ref{lemma-characterize-closed-immersion}
+we may assume $Y$ is an affine formal algebraic space.
+
+\medskip\noindent
+Say $Y = \colim_{\lambda \in \Lambda} Y_\lambda$ as in
+Definition \ref{definition-affine-formal-algebraic-space}.
+Then $X_\lambda = X \times_Y Y_\lambda$ is an algebraic space
+endowed with a monomorphism $f_\lambda : X_\lambda \to Y_\lambda$
+which induces an isomorphism $X_{\lambda, red} \to Y_{\lambda, red}$.
+Thus $X_\lambda$ is an affine scheme by
+Limits of Spaces, Proposition \ref{spaces-limits-proposition-affine}
+(as $X_{\lambda, red} \to X_\lambda$ is surjective and integral).
+To finish the proof it suffices to show that
+$X_\lambda \to Y_\lambda$ is a closed immersion
+which we will do in the next paragraph.
+
+\medskip\noindent
+Let $X \to Y$ be a monomorphism of affine schemes such that
+$X_{red} = X \times_Y Y_{red} = Y_{red}$. In general, this does
+not imply that $X \to Y$ is a closed immersion, see
+Examples, Section \ref{examples-section-epimorphism-not-surjective}.
+However, under our assumption (4) we know that in the previous parapgrah
+either $X_\lambda \to Y_\lambda$ is of finite type or $Y_\lambda$
+is Noetherian. This means that
+$X \to Y$ corresponds to a ring map $R \to A$ such that
+$R/I \to A/IA$ is an isomorphism where $I \subset R$ is the
+nil radical (ie., the maximal locally nilpotent ideal of $R$)
+and either $R \to A$ is of finite type or $R$ is Noetherian.
+In the first case $R \to A$ is surjective by
+Algebra, Lemma \ref{algebra-lemma-surjective-mod-locally-nilpotent}
+and in the second case $I$ is finitely generated, hence
+nilpotent, hence $R \to A$ is surjective by Nakayama's lemma, see
+Algebra, Lemma \ref{algebra-lemma-NAK} part (11).
+\end{proof}
+
+
 
 
 
@@ -5212,9 +5502,13 @@ image is dense in $B$.
 \noindent
 If $A$ is a complete, linearly topologized ring, then the restricted
 power series ring $A\{x_1, \ldots, x_r\}$ is topologically of finite
-type over $A$. For continuous taut maps of weakly admissible topological rings,
-this notion corresponds exactly to morphisms of finite type
-between the associated affine formal algebraic spaces.
+type over $A$. If $k$ is a field, then the power series ring
+$k[[x_1, \ldots, x_r]]$ is topologically of finite type over $k$.
+
+\medskip\noindent
+For continuous taut maps of weakly admissible topological rings,
+being topologically of finite type corresponds exactly to morphisms
+of finite type between the associated affine formal algebraic spaces.
 
 \begin{lemma}
 \label{lemma-topologically-finite-type-finite-type}
@@ -5902,6 +6196,18 @@ such that the base change $Y_j \times_Y X \to Y_j$ is proper for all $j$.
 Omitted.
 \end{proof}
 
+\begin{lemma}
+\label{lemma-base-change-proper}
+Proper morphisms of formal algebraic spaces are preserved by base change.
+\end{lemma}
+
+\begin{proof}
+This is an immediate consequence of Lemma \ref{lemma-proper-local}
+and transitivity of base change.
+\end{proof}
+
+
+
 
 
 
@@ -6175,6 +6481,46 @@ that $x'$ descends to a morphism $x : \Spec(R) \to X$.
 We omit the proof that $x_n$ is the restriction of $x$ to
 $\Spec(R/\mathfrak m^n)$.
 \end{proof}
+
+\begin{lemma}
+\label{lemma-adic-into-completion}
+Let $S$ be a scheme. Let $X$ be an algebraic space over $S$.
+Let $T \subset |X|$ be a closed subset such that
+$X \setminus T \to X$ is quasi-compact. Let $R$ be a complete local
+Noetherian $S$-algebra. Then an adic morphism $p : \text{Spf}(R) \to X_{/T}$
+corresponds to a unique morphism $g : \Spec(R) \to X$ such
+that $g^{-1}(T) = \{\mathfrak m_R\}$. 
+\end{lemma}
+
+\begin{proof}
+The statement makes sense because $X_{/T}$ is adic* by
+Lemma \ref{lemma-formal-completion-types} (and hence we're
+allowed to use the terminology adic for morphisms, see
+Definition \ref{definition-adic-morphism}).
+Let $p$ be given. By Lemma \ref{lemma-map-into-algebraic-space}
+we get a unique morphism $g : \Spec(R) \to X$ corresponding to
+the composition $\text{Spf}(R) \to X_{/T} \to X$.
+Let $Z \subset X$ be the reduced induced closed subspace structure
+on $T$. The incusion morphism $Z \to X$ corresponds to a morphism
+$Z \to X_{/T}$. Since $p$ is adic it is representable by algebraic
+spaces and we find
+$$
+\text{Spf}(R) \times_{X_{/T}} Z = \text{Spf}(R) \times_X Z
+$$
+is an algebraic space endowed with a closed immersion to $\text{Spf}(R)$.
+(Equality holds because $X_{/T} \to X$ is a monomorphism.)
+Thus this fibre product is equal to $\Spec(R/J)$ for some
+ideal $J \subset R$ wich contains $\mathfrak m_R^{n_0}$ for some
+$n_0 \geq 1$. This implies that $\Spec(R) \times_X Z$
+is a closed subscheme of $\Spec(R)$,
+say $\Spec(R) \times_X Z = \Spec(R/I)$, whose intersection with
+$\Spec(R/\mathfrak m_R^n)$ for $n \geq n_0$ is equal to $\Spec(R/J)$.
+In algebraic terms this says
+$I + \mathfrak m_R^n = J + \mathfrak m_R^n = J$ for all $n \geq n_0$.
+By Krull's intersection theorem
+this implies $I = J$ and we conclude.
+\end{proof}
+
 
 
 
