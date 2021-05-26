@@ -187,7 +187,7 @@ defined in an obvious manner.
 Let $F : \mathcal{A} \to \mathcal{B}$ be a functor.
 \begin{enumerate}
 \item We say $F$ is {\it faithful} if
-for any objects $x, y$ of $\Ob(\mathcal{A})$ the map
+for any objects $x, y \in \Ob(\mathcal{A})$ the map
 $$
 F : \Mor_\mathcal{A}(x, y) \to \Mor_\mathcal{B}(F(x), F(y))
 $$
@@ -801,7 +801,7 @@ we describe them.
 
 \medskip\noindent
 As a really trivial first example we observe
-that the category of sets has fibred products and hence every
+that the category of sets has fibre products and hence every
 morphism is representable. Namely, if $f : X \to Y$
 and $g : Z \to Y$ are maps of sets then we define
 $X \times_Y Z$ as the subset of $X \times Z$ consisting
@@ -1052,7 +1052,7 @@ a unique morphism $s : W \to Z$ such that $t = e \circ s$.
 \end{definition}
 
 \noindent
-As in the case of the fibre product above, equalizers when
+As in the case of the fibre products above, equalizers when
 they exist are unique up to unique isomorphism. There is a
 straightforward generalization of this definition to the
 case where we have more than $2$ morphisms.
@@ -1167,7 +1167,7 @@ together with morphisms $p_i : \lim_\mathcal{I} M \to M_i$ such that
 \item for $\phi : i \to i'$ a morphism
 in $\mathcal{I}$ we have $p_{i'} =  M(\phi) \circ p_i$, and
 \item for any object $W$ in $\mathcal{C}$ and any family of
-morphisms $q_i : W \to M_i$ (indexed by $i \in \mathcal{I}$)
+morphisms $q_i : W \to M_i$ (indexed by $i \in \Ob(\mathcal{I})$)
 such that for all $\phi : i \to i'$
 in $\mathcal{I}$ we have $q_{i'} = M(\phi) \circ q_i$ there
 exists a unique morphism $q : W \to \lim_\mathcal{I} M$ such that
@@ -1179,7 +1179,7 @@ $q_i = p_i \circ q$ for every object $i$ of $\mathcal{I}$.
 Limits $(\lim_\mathcal{I} M, (p_i)_{i\in \Ob(\mathcal{I})})$ are
 (if they exist)
 unique up to unique isomorphism by the uniqueness requirement
-in the definition. Products of pairs, fibred products, and equalizers are
+in the definition. Products of pairs, fibre products, and equalizers are
 examples of limits. The limit over the empty diagram is a final object
 of $\mathcal{C}$.
 In the category of sets all limits exist.
@@ -1194,7 +1194,7 @@ together with morphisms $s_i : M_i \to \colim_\mathcal{I} M$ such that
 \item for $\phi : i \to i'$ a morphism
 in $\mathcal{I}$ we have $s_i = s_{i'} \circ M(\phi)$, and
 \item for any object $W$ in $\mathcal{C}$ and any family of
-morphisms $t_i : M_i \to W$ (indexed by $i \in \mathcal{I}$)
+morphisms $t_i : M_i \to W$ (indexed by $i \in \Ob(\mathcal{I})$)
 such that for all $\phi : i \to i'$
 in $\mathcal{I}$ we have $t_i = t_{i'} \circ M(\phi)$ there
 exists a unique morphism $t : \colim_\mathcal{I} M \to W$ such that
@@ -1919,7 +1919,7 @@ The following are equivalent:
 \begin{enumerate}
 \item Finite limits exist in $\mathcal{C}$.
 \item Finite products and equalizers exist.
-\item The category has a final object and fibred products exist.
+\item The category has a final object and fibre products exist.
 \end{enumerate}
 \end{lemma}
 
@@ -2354,7 +2354,7 @@ we may write $\mathcal{I} = \coprod \mathcal{I}_j$ with each $\mathcal{I}_j$
 filtered. By
 Lemma \ref{lemma-directed-commutes}
 we see that colimits of $\mathcal{I}_j$ commute with equalizers and
-fibred products. Thus it suffices to show that equalizers and fibre products
+fibre products. Thus it suffices to show that equalizers and fibre products
 commute with coproducts in the category of sets (including empty coproducts).
 In other words, given a set $J$ and sets $A_j, B_j, C_j$ and set maps
 $A_j \to B_j$, $C_j \to B_j$ for $j \in J$ we have to show that
@@ -5568,7 +5568,7 @@ if you know what I mean.
 \end{proof}
 
 \noindent
-Henceforth we do not write the parentheses when dealing with fibred products
+Henceforth we do not write the parentheses when dealing with fibre products
 of more than 2 categories.
 
 \begin{lemma}
@@ -8486,7 +8486,7 @@ we know what it means to say that it has a final object (see
 Definition \ref{definition-final-object-2-category}). And it has
 a final object namely $\text{id} : \mathcal{C} \to \mathcal{C}$.
 Thus we define {\it $2$-products} of categories fibred in groupoids
-over $\mathcal{C}$ as the $2$-fibred products
+over $\mathcal{C}$ as the $2$-fibre products
 $$
 \mathcal{X} \times \mathcal{Y} :=
 \mathcal{X} \times_\mathcal{C} \mathcal{Y}.
